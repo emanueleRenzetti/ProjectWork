@@ -40,10 +40,10 @@
             position: relative;
     
             img {
-                height: 80vh;
+                height: calc(100vh - 4rem);
                 object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
+                position: relative;
             }
-            position: relative;
     
             &::before {
                 content: "";
@@ -69,7 +69,7 @@
     
     // hero
     #map { height: 40vh; 
-        width: 90vh;
+        width: 50vh;
         margin: 2rem;}
 
 
