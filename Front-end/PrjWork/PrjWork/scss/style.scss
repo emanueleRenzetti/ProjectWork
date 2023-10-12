@@ -1,0 +1,43 @@
+
+
+
+
+    @import "../node_modules/bootstrap/scss/bootstrap";
+
+    body {
+        font-family: sans-serif;
+    }
+    
+    #logo{
+        width: 3rem;
+        height: auto;
+    }
+
+
+    #map { height: 40vh; 
+        width: 90vh;
+        margin: 2rem;}
+
+
+    #formLogIn{
+        margin-top: 2rem;
+        padding: 1rem;
+
+        @include media-breakpoint-up(md){
+            height: 23vh;
+            width: 30vh;
+        }
+
+        @include media-breakpoint-up(lg){
+            width: 50vh;
+            height: auto;
+        }
+
+
+    }
+
+    
+
+
+
+
