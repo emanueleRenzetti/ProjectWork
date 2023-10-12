@@ -67,10 +67,9 @@
         let eventi_trascorsi = document.querySelector("#eventi_trascorsi");
 
         function createRow() {
-            // CAMBIARE LA PORTA DEGLI ENDPOINT
 
             // POPOLO LA TABELLA DEGLI EVENTI IN ARRIVO
-            fetch("http://localhost:9003/api/eventiArrivo")
+            fetch("http://localhost:9007/api/eventiArrivo")
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(evento => {
@@ -97,7 +96,7 @@
 
 
             // POPOLO LA TABELLA DEGLI EVENTI TRASCORSI
-            fetch("http://localhost:9003/api/eventiTrascorsi")
+            fetch("http://localhost:9007/api/eventiTrascorsi")
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(evento => {
