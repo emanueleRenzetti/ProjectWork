@@ -72,6 +72,15 @@
             fetch("http://localhost:9007/api/eventiArrivo")
                 .then(response => response.json())
                 .then(data => {
+
+                    // ordino l'array di eventi in arrivo sulla base della data evento
+
+                    data.sort(function(evenoA, eventoB){
+                        return eventoB.data - evenoA.data;
+                    })
+
+                    // ciclo l'array con gli eventi ordinati e per ogni oggetto evento creo una riga nella tabella 
+
                     data.forEach(evento => {
                         
                         const TR = document.createElement('tr'); // riga evento
