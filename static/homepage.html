@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventi</title>
+    <title>Home</title>
 
     <link rel="stylesheet" href="./css/style.css">
 
@@ -14,29 +14,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
 </head>
 
 <body>
-
-
 
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
 
             <div class="container-fluid">
 
-                
                     <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                    <a class="navbar-brand" href="#"> Ticket2you</a>
-                
+                    <a class="navbar-brand" href="#"> Ticket2you</a>                
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
@@ -49,14 +43,12 @@
                             <a class="nav-link" href="#">Pannello admin</a>
                         </li>
 
-
                         <li class="nav-item dropdown">
                             <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
                                 id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
                             <button class="btn btn-link text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
-
                             
                             <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
                                 <li>
@@ -80,7 +72,6 @@
             </div>
         </nav>
     </header>
-
 
 
     <main>
@@ -251,10 +242,10 @@
         function accedi() {
             let email = document.querySelector("#email").value;
             let password = document.querySelector("#password").value;
-            if (email == "" && password == "") {
+            if (email.trim() == "" && password.trim() == "") {
                 alert("Non hai inserito nulla!");
                 event.preventDefault();
-            } else if (email == "" || password == "") {
+            } else if (email.trim() == "" || password.trim() == "") {
                 alert("Hai dimenticato di compilare qualcosa!");
                 event.preventDefault();
             } else {
