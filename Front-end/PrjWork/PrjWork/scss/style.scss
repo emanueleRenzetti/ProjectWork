@@ -34,7 +34,7 @@
 
 
     #hero {
-        position: relative;
+        
     
         .swiper-slide {
             position: relative;
@@ -43,7 +43,7 @@
                 height: 80vh;
                 object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
             }
-    
+            position: relative;
     
             &::before {
                 content: "";
@@ -60,7 +60,7 @@
                 z-index: 2;
     
                 h2 {
-                    font-weight: 500;
+                    
                     font-size: 2rem;
                 }
             }
