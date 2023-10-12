@@ -21,9 +21,6 @@ public class PrenotazioneDettaglio {
 	private int quantita;
 	private double prezzo_totale;
 	
-	@OneToMany(mappedBy = "Evento")
-	private List<Evento> eventi;
-	
 	
 	public int getId() {
 		return id;

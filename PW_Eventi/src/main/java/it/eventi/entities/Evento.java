@@ -27,10 +27,6 @@ public class Evento {
 	private String locandina;
 	private int utenti_id;
 	
-	@OneToMany
-	@JoinColumn(name = "evento_id")
-	private PrenotazioneDettaglio dettaglio;
-	
 	
 	public int getId() {
 		return id;
