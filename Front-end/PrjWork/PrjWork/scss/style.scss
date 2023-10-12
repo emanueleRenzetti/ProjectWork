@@ -8,15 +8,11 @@
         font-family: sans-serif;
     }
     
+
     #logo{
         width: 3rem;
         height: auto;
     }
-
-
-    #map { height: 40vh; 
-        width: 90vh;
-        margin: 2rem;}
 
 
     #formLogIn{
@@ -35,6 +31,48 @@
 
 
     }
+
+
+    #hero {
+        position: relative;
+    
+        .swiper-slide {
+            position: relative;
+    
+            img {
+                height: 80vh;
+                object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
+            }
+    
+    
+            &::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.659);
+                pointer-events: none;
+                z-index: 1; // memo : funziona come lo spazio cartesiano
+            }
+    
+            .slideInfo {
+                position: absolute;
+                z-index: 2;
+    
+                h2 {
+                    font-weight: 500;
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+    
+    // hero
+    #map { height: 40vh; 
+        width: 90vh;
+        margin: 2rem;}
+
+
 
     
 

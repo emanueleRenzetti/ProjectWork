@@ -19,6 +19,8 @@
 
 <body>
 
+
+
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
 
@@ -50,8 +52,12 @@
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
-                                id="btnLogInOut"><i class="bi bi-person-circle"></i> Accedi</button>
-                            <!--  <i class="bi bi-box-arrow-in-left"> </i>  --><!--esci-->
+                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+
+                            <button class="btn btn-link text-decoration-none d-none" type="button"
+                                id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
+
+                            
                             <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
                                 <li>
                                     <form class="form" method="post" accept-charset="UTF-8">
@@ -62,7 +68,7 @@
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
-                                        <input class="btn btn-primary" type="submit" name="submit" value="Log-in" />
+                                        <input class="btn btn-primary  mt-3" type="submit" name="submit" value="Log-in" />
                                     </form>
                                 </li>
                             </ul>
