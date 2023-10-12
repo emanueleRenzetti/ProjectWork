@@ -1,0 +1,9 @@
+{
+    "utenti":[
+        {
+            "email": "maurodecostanzo@gmail.com",
+            "password": "abcdefg",
+            "id": 1
+          }
+    ]
+}

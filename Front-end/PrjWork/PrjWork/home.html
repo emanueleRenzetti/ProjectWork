@@ -54,8 +54,8 @@
                             <!--  <i class="bi bi-box-arrow-in-left"> </i>  --><!--esci-->
                             <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
                                 <li>
-                                    <form class="form" method="post" accept-charset="UTF-8">
-                                        <input class="form-control login" type="text" placeholder="E-mail" id="E-mail"
+                                    <form id="form" class="form" method="post" accept-charset="UTF-8">
+                                        <input class="form-control login" type="text" placeholder="E-mail" id="email"
                                             required /><br>
                                         <input class="form-control login" type="password" placeholder="Password"
                                             id="password" required />
@@ -214,6 +214,66 @@
 
 
 
+    </script>
+    <!-- SCRIPT PER IL LOGIN  -->
+    <script>
+        let form = document.querySelector("#form");
+
+        function utenteObj(email, password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        function getUtenti() {
+            let URL = "http://localhost:3000/utenti";
+            fetch(URL).then(data => data.json())
+                .then(res => {
+                    let utentiDB = [];
+                    let i = 0;
+                    do {
+                        if (res[i] != undefined) {
+                            utentiDB.push(res[i]);
+                        }
+                        i++;
+                        localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
+                    } while (i < utentiDB.length);
+                })
+        }
+
+        function accedi() {
+            let email = document.querySelector("#email").value;
+            let password = document.querySelector("#password").value;
+            if (email == "" && password == "") {
+                alert("Non hai inserito nulla!");
+                event.preventDefault();
+            } else if (email == "" || password == "") {
+                alert("Hai dimenticato di compilare qualcosa!");
+                event.preventDefault();
+            } else {
+                let utenteForm = new utenteObj(email, password);
+                let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
+                // console.log(utentiDB);
+                let utente = utentiDB.find(function (res) {
+                    return res.email == this.email;
+                }, utenteForm);
+                // console.log(utente);
+                if (utente != undefined) {
+                    if(utente.password!=utenteForm.password){
+                        alert("password errata!");
+                        event.preventDefault();
+                    }else{
+                        alert("accesso effettuato!")
+                        localStorage.setItem("utente", JSON.stringify(utente));
+                    }
+                } else {
+                    alert("utente non trovato");
+                    event.preventDefault();
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", getUtenti);
+        form.addEventListener("submit", accedi);
     </script>
 </body>
 
