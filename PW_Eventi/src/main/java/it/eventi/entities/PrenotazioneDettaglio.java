@@ -1,9 +1,12 @@
 package it.eventi.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +21,8 @@ public class PrenotazioneDettaglio {
 	private int quantita;
 	private double prezzo_totale;
 	
+	@OneToMany(mappedBy = "Evento")
+	private List<Evento> eventi;
 	
 	
 	public int getId() {

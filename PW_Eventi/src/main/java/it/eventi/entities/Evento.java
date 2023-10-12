@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +27,9 @@ public class Evento {
 	private String locandina;
 	private int utenti_id;
 	
+	@OneToMany
+	@JoinColumn(name = "evento_id")
+	private PrenotazioneDettaglio dettaglio;
 	
 	
 	public int getId() {
