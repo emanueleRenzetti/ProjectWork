@@ -149,11 +149,13 @@
 
 
 
-        <section id="mappeEventi">
+        <section id="mappeEventi" class="mb-5">
             <div class="container d-flex flex-column align-items-center">
                 <div id="map">aaa</div>
-                <input type="text" id="indirizzo" placeholder="Inserisci l'indirizzo">
-                <button type="button" onclick="trovaCoordinate()">Trova Coordinate</button>
+                <div>
+                    <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
+                    <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
+                </div>
             </div>
         </section><!--mappeEventi-->
     </main>
@@ -193,7 +195,7 @@
         var marker; // Dichiarazione globale della variabile marker
 
         // Creazione della mappa
-        var map = L.map('map').setView([51.505, -0.09], 13); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+        var map = L.map('map').setView([43.178865128124244, 12.310475342504484], 4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
