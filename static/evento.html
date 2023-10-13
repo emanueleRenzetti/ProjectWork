@@ -68,7 +68,14 @@
         </nav>
     </header>
     <main>
-        
+        <section id="hero">
+            <div class="container">
+            <img id="imgEvento" class="img-fluid" src="" alt="">
+            <h1 id="titolo"></h1>
+                <div id="info" class="col-md-6 ">
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -150,6 +157,18 @@ document.addEventListener("DOMContentLoaded", getUtenti);
 document.addEventListener("DOMContentLoaded",verificaLog);
 form.addEventListener("submit", accedi);
 btnLogout.addEventListener("click", logOut);
+    </script>
+    <script>
+        function trovaEvento(){
+            let evento = JSON.parse(localStorage.getItem("evento"));
+                let imgTag = document.querySelector("#imgEvento");
+                let info = document.querySelector("#info");
+                imgTag.setAttribute("src", evento.locandina);
+                let desc = `<p>${evento.caratteristiche}</p><p>${evento.descrizione}</p><p>DATA: ${evento.data_evento}</p><p>${evento.luogo_evento}</p><p>${evento.prezzo} $</p><p>ancora ${evento.disponibilita} posti rimasti!</p>`;
+                info.innerHTML = desc;
+        }
+
+        document.addEventListener("DOMContentLoaded", trovaEvento);
     </script>
 </body>
 </html>
