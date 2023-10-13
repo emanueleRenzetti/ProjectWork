@@ -41,7 +41,7 @@
                             <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
                                 id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
-                            <button class="btn btn-link text-decoration-none d-none" type="button"
+                            <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
 
                             
@@ -55,7 +55,7 @@
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
-                                        <input class="btn btn-primary  mt-3" type="submit" name="submit" value="Log-in" />
+                                        <input class="btn btn-outline-primary  mt-3" type="submit" name="submit" value="Log-in" />
                                     </form>
                                 </li>
                             </ul>
@@ -137,7 +137,7 @@ function verificaLog(){
     let utente =JSON.parse(localStorage.getItem("utente"));
     if(utente!=undefined){
         btnLogIn.setAttribute("class","btn btn-link text-decoration-none d-none");
-        btnLogout.setAttribute("class", "btn btn-link text-decoration-none");
+        btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
     }
 }
 
