@@ -39,7 +39,7 @@
                             <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none"><a class="nav-link linkPannello" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
@@ -304,20 +304,22 @@
         function verificaLog() {
             let utente = JSON.parse(localStorage.getItem("utente"));
             
-            let linkPannello = document.querySelector(".linkPannello");
             
             if (utente != undefined) {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
                 btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
-
+                
                 if (utente.tipo == 'A') {  // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
-            
-                let navItemPannello = linkPannello.parentElement;
-                navItemPannello.setAttribute("class", "nav-item");
+                    let liPannello = document.querySelector(".linkPannello");
+                    
+                    liPannello.setAttribute("class", "nav-item linkPannello");
 
+                    let linkPannello = liPannello.querySelector("a");
 
-                linkPannello.addEventListener("click", function(){
-                    location.href = "pannello.html";
+                    console.log(linkPannello);
+
+                    linkPannello.addEventListener("click", function(){
+                        location.href = "pannello.html";
                 });    
             }
             
