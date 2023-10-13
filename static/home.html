@@ -61,7 +61,8 @@
                                         <div class="mt-3 d-flex justify-content-between">
                                             <input class=" btn btn-outline-primary" type="submit" name="submit"
                                                 value="Log-in" />
-                                            <button class="btn btn-outline-primary"><a href="registrati.html" class="text-decoration-none">Registrati</a></button>
+                                            <button class="btn btn-outline-primary"><a href="registrati.html"
+                                                    class="text-decoration-none">Registrati</a></button>
                                         </div>
                                     </form>
                                 </li>
@@ -84,54 +85,24 @@
 
 
                     <!-- Slides -->
-                    <div class="swiper-slide position-relative">
-                        <div class="sfumatura">
-                            <img class="img-fluid" src="./img/concerto.png" alt="Immagine 1">
-                        </div>
-                        <div
-                            class="slideInfo position-absolute top-50 start-50 translate-middle text-light text-center">
-                            <h2>Lorem Ipsum</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore aliquam
-                                placeat repellendus, optio ut.</p>
-                            <button class="btn btn-primary">Prenota</button>
-                        </div>
+                    <div class="swiper-slide">
+                        <img class="img-fluid" src="./img/concerto.png" alt="Immagine 1">
                     </div><!--Fine slide-->
 
 
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/highway.png" alt="Immagine 2">
-                        <div
-                            class="slideInfo position-absolute top-50 start-50 translate-middle text-light text-center">
-                            <h2>Lorem Ipsum</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore aliquam
-                                placeat repellendus, optio ut.</p>
-                            <button class="btn btn-primary">Prenota</button>
-                        </div>
                     </div><!--Fine slide-->
 
 
                     <div class="swiper-slide">
-                        <img class="img-fluid" src="./img/rassegna.png" alt="Immagine 3">
-                        <div
-                            class="slideInfo position-absolute top-50 start-50 translate-middle text-light text-center">
-                            <h2>Lorem Ipsum</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore aliquam
-                                placeat repellendus, optio ut.</p>
-                            <button class="btn btn-primary">Prenota</button>
-                        </div>
+                        <img class="img-fluid" src="./img/rassegna.png" alt="Immagine 2">
                     </div><!--Fine slide-->
 
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/ted.png" alt="Immagine 3">
-                        <div
-                            class="slideInfo position-absolute top-50 start-50 translate-middle text-light text-center">
-                            <h2>Lorem Ipsum</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore aliquam
-                                placeat repellendus, optio ut.</p>
-                            <button class="btn btn-primary">Prenota</button>
-                        </div>
                     </div><!--Fine slide-->
 
 
@@ -150,15 +121,66 @@
         </section> <!-- HERO -->
 
 
+        <section id="servizi" class="my-5">
+            <div class="container">
+                <div class="row">
 
-        <section id="mappeEventi" class="mb-5">
-            <div class="container d-flex flex-column align-items-center">
-                <div id="map">aaa</div>
-                <div>
-                    <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
-                    <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova
-                        Coordinate</button>
+                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
+                    </div>
+
+                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
+                    </div>
+                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
+                    </div>
+                    
+
                 </div>
+            </div>
+        </section>
+
+
+
+
+
+
+        <section id="mappeEventi" class="m-5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-6">
+                        <div id="map"></div>
+
+                        <div class="d-flex gap-3 justify-content-center">
+
+                            <select class="form-select w-25" aria-label="Default select example">
+                                <option selected>Seleziona</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra</button>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <div class="d-flex flex-column align-items-center">
+
+                            <p>Calendario</p>
+                            <img src="./img/logo.svg" alt="" style="width: 10rem;">
+                        </div>
+                    </div>
+
+
+
+
+                </div><!--row-->
+
+
             </div>
         </section><!--mappeEventi-->
     </main>
@@ -167,6 +189,45 @@
 
 
 
+
+
+    <footer class="bg-secondary text-light mt-7" id="fine">
+        <div class="container">
+            <div class="row">
+
+                <div class="py-4 col-lg-9">
+                    <h3><strong>Napoli</strong></h3>
+                    <p>Via S.Domenico 18</p>
+                    <p><strong>Telefono: </strong> 081 718 4444</p>
+                    <p><strong>Email: </strong>Ticket2you@gmail.com</p>
+                    <div id="socials" class="d-flex">
+                        <i class="ri-twitter-fill"></i>
+                        <i class="ri-facebook-fill"></i>
+                        <i class="ri-instagram-line"></i>
+                        <i class="ri-skype-fill"></i>
+                        <i class="ri-linkedin-box-fill"></i>
+                    </div>
+                </div>
+
+    
+
+                <div class="py-4 col-lg-3">
+
+                    <p><strong>La nostra newsletter</strong></p>
+                    <div class="d-flex">
+                        <input class="form-control" type="email" id="emailFake">
+                        <button class="btn btn-primary" type="submit">Iscriviti</button>
+                    </div>
+                    <label for="emailFake">Iscriverti per non perdere i prossimi eventi, sconti e tanto altro!</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p id="copyright" class="m-1 text-center">© Copyright Ticket2you</p>
+    </footer>
 
 
 
