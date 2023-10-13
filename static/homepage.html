@@ -248,7 +248,7 @@ function utenteObj(email, password) {
 }
 
 function getUtenti() {
-    let URL = "http://localhost:9007/utenti";
+    let URL = "http://localhost:9007/u/utenti";
     fetch(URL).then(data => data.json())
         .then(res => {
             let utentiDB = [];
