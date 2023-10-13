@@ -69,27 +69,84 @@
     </header>
 
 
-
     
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let form = document.querySelector("#form");
         let btnLogout = document.querySelector("#btnLogOut");
         let btnLogIn = document.querySelector("#btnLogIn");
 
-        function verificaLog(){
-            let utente =JSON.parse(localStorage.getItem("utente"));
-            if(utente!=undefined){
-                btnLogIn.setAttribute("class","btn btn-link text-decoration-none d-none");
-                btnLogout.setAttribute("class", "btn btn-link text-decoration-none");
+function utenteObj(email, password) {
+    this.email = email;
+    this.password = password;
+}
+
+function getUtenti() {
+    let URL = "http://localhost:9007/utenti";
+    fetch(URL).then(data => data.json())
+        .then(res => {
+            let utentiDB = [];
+            let i = 0;
+            do {
+                if (res[i] != undefined) {
+                    utentiDB.push(res[i]);
+                }
+                i++;
+                localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
+            } while (i < utentiDB.length);
+        })
+}
+
+function accedi() {
+    let email = document.querySelector("#email").value;
+    let password = document.querySelector("#password").value;
+    if (email.trim() == "" && password.trim() == "") {
+        alert("Non hai inserito nulla!");
+        event.preventDefault();
+    } else if (email.trim() == "" || password.trim() == "") {
+        alert("Hai dimenticato di compilare qualcosa!");
+        event.preventDefault();
+    } else {
+        let utenteForm = new utenteObj(email, password);
+        let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
+        // console.log(utentiDB);
+        let utente = utentiDB.find(function (res) {
+            return res.email == this.email;
+        }, utenteForm);
+        // console.log(utente);
+        if (utente != undefined) {
+            if(utente.password!=utenteForm.password){
+                alert("password errata!");
+                event.preventDefault();
+            }else{
+                alert("accesso effettuato!")
+                localStorage.setItem("utente", JSON.stringify(utente));
             }
+        } else {
+            alert("utente non trovato");
+            event.preventDefault();
         }
+    }
+}
 
-        function logOut(){
-            localStorage.removeItem("utente");
-            location.reload();
-        }
 
-        btnLogout.addEventListener("click", logOut);
-        document.addEventListener("DOMContentLoaded",verificaLog);
+function verificaLog(){
+    let utente =JSON.parse(localStorage.getItem("utente"));
+    if(utente!=undefined){
+        btnLogIn.setAttribute("class","btn btn-link text-decoration-none d-none");
+        btnLogout.setAttribute("class", "btn btn-link text-decoration-none");
+    }
+}
+
+function logOut(){
+    localStorage.removeItem("utente");
+    location.reload();
+}
+
+document.addEventListener("DOMContentLoaded", getUtenti);
+document.addEventListener("DOMContentLoaded",verificaLog);
+form.addEventListener("submit", accedi);
+btnLogout.addEventListener("click", logOut);
     </script>
 </body>
 </html>
