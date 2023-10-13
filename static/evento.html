@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>evento</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
@@ -69,18 +70,71 @@
     </header>
     <main>
         <section id="hero">
-            <div class="container">
+            <div class="row">
             <img id="imgEvento" class="img-fluid" src="" alt="">
             <h1 id="titolo"></h1>
                 <div id="info" class="col-md-6 ">
                 </div>
+                <section id="mappeEventi" class="col-md-6">
+                    <div class="container d-flex flex-column align-items-center">
+                        <div id="map" class="float-end"></div>
+                        <!-- <div>
+                            <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
+                            <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
+                        </div> -->
+                    </div>
+                </section><!--mappeEventi-->
             </div>
         </section>
 
     </main>
 
-    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    var marker; // Dichiarazione globale della variabile marker
+
+// Creazione della mappa
+var map = L.map('map').setView([43.178865128124244, 12.310475342504484], 12); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+
+// Aggiungi una mappa di base
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+function trovaCoordinate() {
+    let latitude = "";
+    let longitude = "";
+
+    // const address = document.getElementById('indirizzo').value;
+    let evento = JSON.parse(localStorage.getItem("evento"));
+    console.log(evento);
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${evento.luogo_evento}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const result = data[0];
+                const latitude = result.lat;
+                const longitude = result.lon;
+
+                // Aggiorna la mappa con le coordinate trovate
+                map.setView([latitude, longitude]);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+
+                marker = L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup(`latitude: ${latitude}<br>longitude: ${longitude}`).openPopup();
+
+                // Ottieni il meteo per le coordinate
+                getWeatherData(latitude, longitude);
+            } else {
+                alert('Indirizzo non trovato.');
+            }
+        });
+}
+document.addEventListener("DOMContentLoaded",trovaCoordinate);
+    </script>
     <script>
         let form = document.querySelector("#form");
         let btnLogout = document.querySelector("#btnLogOut");
