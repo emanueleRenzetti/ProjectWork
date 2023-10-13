@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>pannello lavoro</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="./css/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <header class="mb-5">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+
+                    <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
+                    <a class="navbar-brand" href="#"> Ticket2you</a>                
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
+
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active linkPannello" href="#">Pannello admin</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
+                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+
+                            <button class="btn btn-link text-decoration-none d-none" type="button"
+                                id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
+                            
+                            <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
+                                <li>
+                                    <form id="form" class="form" accept-charset="UTF-8" >
+                                        <input class="form-control login" type="text" placeholder="E-mail" id="email"
+                                            required /><br>
+                                        <input class="form-control login" type="password" placeholder="Password"
+                                            id="password" required />
+                                        <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
+                                                la password?</a></label> <br>
+
+                                        <input class="btn btn-primary  mt-3" type="submit" name="submit" value="Log-in" />
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+  <main>
+    <div class="row justify-content-center align-items-center mt-5">
+        <div class="col-lg-3">
+            <div class="card text-center">
+                <div class="card-header bg-warning text-light">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <i class="bi bi-gear" style="font-size: 5rem;"></i>
+                        </div>
+                        <div class="col-lg-12">
+                            <h4>Inserisci un nuovo evento</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer p-0">
+                    <button id="btnGoINS" class="btn btn-light" style="width: 100%; height: 100%">
+                        Vai all'inserimento
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card text-center">
+                <div class="card-header bg-secondary text-white">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <i class="bi bi-list" style="font-size: 5rem;"></i>
+                        </div>
+                        <div class="col-lg-12">
+                            <h4>Elenco eventi amministrabili</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer p-0">
+                    <button id="btnGoVIEW" class="btn btn-light" style="width: 100%; height: 100%">
+                        Vai all'elenco
+                    </button>
+                </div>
+            </div>
+        </div>
+  </main>
+  
+  
+
+
+
+  <script>
+    let btnGoINS = document.querySelector("#btnGoINS");
+    let btnGoVIEW = document.querySelector("#btnGoVIEW");
+
+    // btnGoINS.addEventListener("click", function(){
+    //     location.href = "inserisci.html";
+    // })
+    // btnGoVIEW.addEventListener("click", function(){
+    //     location.href = "view.html";
+    // })
+
+  </script>
+</body>
+
+</html>
