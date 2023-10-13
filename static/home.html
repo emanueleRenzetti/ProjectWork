@@ -23,8 +23,8 @@
 
             <div class="container-fluid">
 
-                    <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                    <a class="navbar-brand" href="#"> Ticket2you</a>                
+                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
+                <a class="navbar-brand" href="#"> Ticket2you</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -49,10 +49,10 @@
 
                             <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
-                            
+
                             <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
                                 <li>
-                                    <form id="form" class="form" accept-charset="UTF-8" >
+                                    <form id="form" class="form" accept-charset="UTF-8">
                                         <input class="form-control login" type="text" placeholder="E-mail" id="email"
                                             required /><br>
                                         <input class="form-control login" type="password" placeholder="Password"
@@ -60,7 +60,11 @@
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
-                                        <input class="btn btn-outline-primary  mt-3" type="submit" name="submit" value="Log-in" />
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <input class=" btn btn-outline-primary" type="submit" name="submit"
+                                                value="Log-in" />
+                                            <button class="btn btn-outline-primary"><a href="registrati.html" class="text-decoration-none">Registrati</a></button>
+                                        </div>
                                     </form>
                                 </li>
                             </ul>
@@ -107,7 +111,7 @@
                             <button class="btn btn-primary">Prenota</button>
                         </div>
                     </div><!--Fine slide-->
-                    
+
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/rassegna.png" alt="Immagine 3">
@@ -132,7 +136,7 @@
                         </div>
                     </div><!--Fine slide-->
 
-                    
+
                 </div>
 
                 <div class="swiper-pagination"></div>
@@ -144,7 +148,7 @@
                 <!-- If we need scrollbar -->
                 <div class="swiper-scrollbar"></div>
             </div>
-        
+
         </section> <!-- HERO -->
 
 
@@ -154,7 +158,8 @@
                 <div id="map">aaa</div>
                 <div>
                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
-                    <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
+                    <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova
+                        Coordinate</button>
                 </div>
             </div>
         </section><!--mappeEventi-->
@@ -238,81 +243,81 @@
     </script>
     <!-- SCRIPT PER IL LOGIN/LOGOUT  -->
     <script>
-                let form = document.querySelector("#form");
+        let form = document.querySelector("#form");
         let btnLogout = document.querySelector("#btnLogOut");
         let btnLogIn = document.querySelector("#btnLogIn");
 
-function utenteObj(email, password) {
-    this.email = email;
-    this.password = password;
-}
-
-function getUtenti() {
-    let URL = "http://localhost:9007/u/utenti";
-    fetch(URL).then(data => data.json())
-        .then(res => {
-            let utentiDB = [];
-            let i = 0;
-            do {
-                if (res[i] != undefined) {
-                    utentiDB.push(res[i]);
-                }
-                i++;
-                localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
-            } while (i < utentiDB.length);
-        })
-}
-
-function accedi() {
-    let email = document.querySelector("#email").value;
-    let password = document.querySelector("#password").value;
-    if (email.trim() == "" && password.trim() == "") {
-        alert("Non hai inserito nulla!");
-        event.preventDefault();
-    } else if (email.trim() == "" || password.trim() == "") {
-        alert("Hai dimenticato di compilare qualcosa!");
-        event.preventDefault();
-    } else {
-        let utenteForm = new utenteObj(email, password);
-        let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
-        // console.log(utentiDB);
-        let utente = utentiDB.find(function (res) {
-            return res.email == this.email;
-        }, utenteForm);
-        // console.log(utente);
-        if (utente != undefined) {
-            if(utente.password!=utenteForm.password){
-                alert("password errata!");
-                event.preventDefault();
-            }else{
-                alert("accesso effettuato!")
-                localStorage.setItem("utente", JSON.stringify(utente));
-            }
-        } else {
-            alert("utente non trovato");
-            event.preventDefault();
+        function utenteObj(email, password) {
+            this.email = email;
+            this.password = password;
         }
-    }
-}
+
+        function getUtenti() {
+            let URL = "http://localhost:9007/u/utenti";
+            fetch(URL).then(data => data.json())
+                .then(res => {
+                    let utentiDB = [];
+                    let i = 0;
+                    do {
+                        if (res[i] != undefined) {
+                            utentiDB.push(res[i]);
+                        }
+                        i++;
+                        localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
+                    } while (i < utentiDB.length);
+                })
+        }
+
+        function accedi() {
+            let email = document.querySelector("#email").value;
+            let password = document.querySelector("#password").value;
+            if (email.trim() == "" && password.trim() == "") {
+                alert("Non hai inserito nulla!");
+                event.preventDefault();
+            } else if (email.trim() == "" || password.trim() == "") {
+                alert("Hai dimenticato di compilare qualcosa!");
+                event.preventDefault();
+            } else {
+                let utenteForm = new utenteObj(email, password);
+                let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
+                // console.log(utentiDB);
+                let utente = utentiDB.find(function (res) {
+                    return res.email == this.email;
+                }, utenteForm);
+                // console.log(utente);
+                if (utente != undefined) {
+                    if (utente.password != utenteForm.password) {
+                        alert("password errata!");
+                        event.preventDefault();
+                    } else {
+                        alert("accesso effettuato!")
+                        localStorage.setItem("utente", JSON.stringify(utente));
+                    }
+                } else {
+                    alert("utente non trovato");
+                    event.preventDefault();
+                }
+            }
+        }
 
 
-function verificaLog(){
-    let utente =JSON.parse(localStorage.getItem("utente"));
-    if(utente!=undefined){
-        btnLogIn.setAttribute("class","btn btn-link text-decoration-none d-none");
-        btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
-    }
-}
+        function verificaLog() {
+            let utente = JSON.parse(localStorage.getItem("utente"));
+            if (utente != undefined) {
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
+                btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
+            }
+        }
 
-function logOut(){
-    localStorage.removeItem("utente");
-    location.reload();
-}
+        function logOut() {
+            localStorage.removeItem("utente");
+            location.reload();
+        }
 
-document.addEventListener("DOMContentLoaded", getUtenti);
-document.addEventListener("DOMContentLoaded",verificaLog);
-form.addEventListener("submit", accedi);
-btnLogout.addEventListener("click", logOut);
+        document.addEventListener("DOMContentLoaded", getUtenti);
+        document.addEventListener("DOMContentLoaded", verificaLog);
+        form.addEventListener("submit", accedi);
+        btnLogout.addEventListener("click", logOut);
     </script>
 </body>
 
