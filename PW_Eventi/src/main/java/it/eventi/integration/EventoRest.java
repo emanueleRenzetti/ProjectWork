@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.eventi.entities.Evento;
-import it.eventi.entities.Prenotazione;
 import it.eventi.service.EventoService;
 
 @RestController
