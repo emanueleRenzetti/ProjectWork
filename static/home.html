@@ -144,7 +144,6 @@
 
 
 
-
         <section id="mappeEventi" class="m-5">
             <div class="container">
                 <div class="row">
@@ -308,6 +307,9 @@
         let btnLogout = document.querySelector("#btnLogOut");
         let btnLogIn = document.querySelector("#btnLogIn");
 
+        let porta = location.port;
+        let blockedURL = `http://127.0.0.1:${porta}/pannello.html`;
+
         function utenteObj(email, password) {
             this.email = email;
             this.password = password;
@@ -381,19 +383,32 @@
 
                     linkPannello.addEventListener("click", function(){
                         location.href = "pannello.html";
-                });    
-            }
-            
-            if (utente.tipo == 'B' && location.href == 'pannello.html') {
-                location.href = "errore.html";            
-            }
-            if (utente.tipo == 'C' && location.href == 'pannello.html') {
-                location.href = "errore.html";            
-            }
-
-            // la pagina di errore ha un messaggio che dice che l’utente non dispone di diritti sufficienti alla modifica e un link per il logout
+                    });    
+                }
             }
         }
+
+
+        function controllaURL(){
+            console.log("l'URL è stato cambiato manualmente");
+
+            let utente = JSON.parse(localStorage.getItem("utente"));
+
+            if (utente != null) {
+                if (utente.tipo == 'B' || utente.tipo == 'C') {
+
+                    let currentURL = window.location.href;
+
+                    if (currentURL === blockedURL) {
+                        location.href = "404.html";
+                    }
+                }
+                // la pagina di errore deve avere messaggio che dice che l’utente non ha i diritti sufficienti alla modifica
+            }
+        }
+        window.addEventListener("popstate", controllaURL);
+
+
 
         function logOut() {
             localStorage.removeItem("utente");
