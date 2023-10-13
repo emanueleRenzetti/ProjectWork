@@ -39,9 +39,7 @@
                             <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none">
-                            <a class="nav-link linkPannello" href="#">Pannello admin</a>
-                        </li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
@@ -180,6 +178,8 @@
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
+    <!-- MAPPA  -->
     <script>
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
@@ -237,10 +237,10 @@
                     }
                 });
         }
-
-
-
     </script>
+
+
+
     <!-- SCRIPT PER IL LOGIN/LOGOUT  -->
     <script>
         let form = document.querySelector("#form");
@@ -303,9 +303,34 @@
 
         function verificaLog() {
             let utente = JSON.parse(localStorage.getItem("utente"));
+            
+            
             if (utente != undefined) {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
                 btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
+                
+                if (utente.tipo == 'A') {  // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
+                    let liPannello = document.querySelector(".linkPannello");
+                    
+                    liPannello.setAttribute("class", "nav-item linkPannello");
+
+                    let linkPannello = liPannello.querySelector("a");
+
+                    console.log(linkPannello);
+
+                    linkPannello.addEventListener("click", function(){
+                        location.href = "pannello.html";
+                });    
+            }
+            
+            if (utente.tipo == 'B' && location.href == 'pannello.html') {
+                location.href = "errore.html";            
+            }
+            if (utente.tipo == 'C' && location.href == 'pannello.html') {
+                location.href = "errore.html";            
+            }
+
+            // la pagina di errore ha un messaggio che dice che l’utente non dispone di diritti sufficienti alla modifica e un link per il logout
             }
         }
 
@@ -318,6 +343,8 @@
         document.addEventListener("DOMContentLoaded", verificaLog);
         form.addEventListener("submit", accedi);
         btnLogout.addEventListener("click", logOut);
+
+
     </script>
 </body>
 
