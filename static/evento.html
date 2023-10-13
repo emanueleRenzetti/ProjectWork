@@ -70,11 +70,12 @@
 
 
 
-
+    
     <script>
+        let btnLogout = document.querySelector("#btnLogOut");
+        let btnLogIn = document.querySelector("#btnLogIn");
+
         function verificaLog(){
-            let btnLogIn = document.querySelector("#btnLogIn");
-            let btnLogout = document.querySelector("#btnLogOut");
             let utente =JSON.parse(localStorage.getItem("utente"));
             if(utente!=undefined){
                 btnLogIn.setAttribute("class","btn btn-link text-decoration-none d-none");
@@ -82,6 +83,12 @@
             }
         }
 
+        function logOut(){
+            localStorage.removeItem("utente");
+            location.reload();
+        }
+
+        btnLogout.addEventListener("click", logOut);
         document.addEventListener("DOMContentLoaded",verificaLog);
     </script>
 </body>
