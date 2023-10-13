@@ -15,7 +15,7 @@ import it.eventi.entities.Prenotazione;
 import it.eventi.service.EventoService;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("e")
 @CrossOrigin
 public class EventoRest {
 

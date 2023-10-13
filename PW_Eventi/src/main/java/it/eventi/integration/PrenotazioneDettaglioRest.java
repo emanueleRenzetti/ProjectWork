@@ -27,7 +27,11 @@ public class PrenotazioneDettaglioRest {
 	}
 	
 	@GetMapping("prenotazioni_dettaglio/{id}")
+<<<<<<< HEAD
 	PrenotazioneDettaglio get(@PathVariable int id) {
+=======
+	PrenotazioneDettaglio get(@PathVariable int id) {
+>>>>>>> 9de6e9259dc51a9e9aaeb22b7db3c590afca393d
 		return service.get(id);
 	}
 	
