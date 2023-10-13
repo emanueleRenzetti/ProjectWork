@@ -8,29 +8,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.eventi.entities.Evento;
 import it.eventi.entities.Prenotazione;
-import it.eventi.service.EventoService;
+import it.eventi.service.PrenotazioneService;
 
 @RestController
-@RequestMapping("api")
-public class EventoRest {
+@RequestMapping("p")
+public class PrenotazioneRest {
 
 	@Autowired
-	EventoService service;
+	PrenotazioneService service;
 	
-	@GetMapping("eventi")
-	List<Evento> getEvento(){
+	@GetMapping("prenotazioni")
+	List<Prenotazione> getPrenotazione(){
 		return service.getAll();
 	}
 	
-	@GetMapping("eventi/{id}")
-	Evento get(int id){
+	@GetMapping("prenotazioni/{id}")
+	Prenotazione get(int id){
 		return service.get(id);
 	}
 	
-	@PostMapping("eventi")
-	Evento add(Evento e) {
-		return service.add(e);
+	@PostMapping("prenotazioni")
+	Prenotazione add(Prenotazione p) {
+		return service.add(p);
 	}
 }
