@@ -7,6 +7,8 @@
     body {
         font-family: sans-serif;
     }
+
+
     
 
     #logo{
@@ -34,15 +36,20 @@
 
 
     #hero {
+
+        
         
     
         .swiper-slide {
             position: relative;
+
+            
     
             img {
-                height: calc(100vh - 4rem);
+                /*height: calc(100vh - 4rem);*/
                 object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
                 position: relative;
+                /*width: 100vh;*/
             }
     
             &::before {
