@@ -73,22 +73,40 @@
     </header>
     <main>
         <section id="hero">
-            <div class="row">
-                <img id="imgEvento" class="img-fluid" src="" alt="">
-                <h1 id="titolo"></h1>
-                <div id="info" class="col-md-6 ">
-                </div>
-                <section id="mappeEventi" class="col-md-6">
-                    <div class="container d-flex flex-column align-items-center">
-                        <div id="map" class="float-end"></div>
-                        <!-- <div>
+
+            <img id="imgEvento" class="img-fluid" src="" alt="">
+            
+            <div>
+            </div>
+
+            <div class="card m-5" style="max-width: 90%;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <section id="mappeEventi" class="col-md-6">
+                            <div class="container d-flex flex-column align-items-center">
+                                <div id="map" class="float-end"></div>
+                                <!-- <div>
                             <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
                             <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
                         </div> -->
+                            </div>
+                        </section>
                     </div>
-                </section>
-                <!--mappeEventi-->
+                    <div class="col-md-8">
+                        <div class="card-body" id="info">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural
+                                lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+            <!--mappeEventi-->
+
         </section>
 
     </main>
@@ -100,7 +118,7 @@
 
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
-        12); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+            12); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
