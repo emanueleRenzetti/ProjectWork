@@ -36,6 +36,8 @@
 
                         <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
 
+                        
+
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
                                 type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
@@ -189,7 +191,7 @@
         function createRow() {
 
             // POPOLO LA TABELLA DEGLI EVENTI IN ARRIVO
-            fetch("http://localhost:9007/api/eventiArrivo")
+            fetch("http://localhost:9007/e/eventi/eventiArrivo")
                 .then(response => response.json())
                 .then(data => {
 
@@ -211,11 +213,11 @@
                         const TD3 = document.createElement('td')
                         TD3.textContent = evento.luogo_evento
 
-                        // la pagina del singolo evento pagina viene prodotta dinamicamente in funzione dell’ID dell’evento ricevuto come parametro di una GET
+                        // la pagina del singolo evento viene prodotta dinamicamente in funzione dell’ID evento ricevuto come parametro della GET
 
                         const TD4 = document.createElement('td')
 
-                        TD4.innerHTML = `<a href="http://localhost:9003/api/eventiArrivo/${evento.id}">Vai alla pagina evento</a>`;
+                        TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
 
                         TR.append(TD1, TD2, TD3, TD4)
 
@@ -225,7 +227,7 @@
 
 
             // POPOLO LA TABELLA DEGLI EVENTI TRASCORSI
-            fetch("http://localhost:9007/api/eventiTrascorsi")
+            fetch("http://localhost:9007/e/eventi/eventiTrascorsi")
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(evento => {
@@ -242,7 +244,7 @@
 
                         const TD4 = document.createElement('td')
 
-                        TD4.innerHTML = `<a href="http://localhost:9003/api/eventiTrascorsi/${evento.id}">Vai alla pagina evento</a>`;
+                        TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
 
                         TR.append(TD1, TD2, TD3, TD4)
 

@@ -11,27 +11,33 @@
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navBarR">
+   
+  <header class="mainHeader">
+    <nav class="navbar navbar-expand-lg bg-secondary">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand" href="#"> Ticket2you</a>
+            <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
+            <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
+            <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                        </li>
-                    </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
-                </div>
+                    <li class="nav-item">
+                        <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
+                    </li>
 
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
 
 
@@ -45,18 +51,18 @@
 
             <div class="mb-3">
                 <label for="nomeReg" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nomeReg">
+                <input type="text" class="form-control" id="nomeReg" required>
               </div>
 
               <div class="mb-3">
                 <label for="cognomeReg" class="form-label">Cognome</label>
-                <input type="text" class="form-control" id="cognomeReg">
+                <input type="text" class="form-control" id="cognomeReg" required>
               </div>
 
 
             <div class="mb-3">
               <label for="emailReg" class="form-label">Email</label>
-              <input type="email" class="form-control" id="emailReg" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="emailReg" aria-describedby="emailHelp" required>
 
               <div id="emailHelp" class="form-text">Non condivideremo mai la tua e-mail con nessuno.</div>
             </div>
@@ -64,7 +70,7 @@
 
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 form-check">
