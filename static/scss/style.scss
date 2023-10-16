@@ -1,135 +1,196 @@
+/*$primary:  #B9D6F2;
+$secondary: #397367;
+$blu: #061A40;
+$warning: #ffda33;
+$danger: #FA0F32;
 
-$scondary: #9ddbad63;
-$danger: #570000;
-$info: #007FFF;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "blu" : $blu
+);
 
 
 $spacer: 1rem;
 
 $spacers: (
-  0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-  6: $spacer * 6,
-  7: $spacer * 9
-
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+    6: $spacer * 6,
+    7: $spacer * 9
 );
-@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "../node_modules/bootstrap/scss/bootstrap";  */
+
+
+
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+$primary:  #6290E4;
+$secondary: #061A40;
+$verde: #397367;
+$accent: #ffda33;
+$danger: #FA0F32;
+
+
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";    
+
+// 4. Include any default map overrides here
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "verde" : $verde,
+  "accent" : $accent
+); 
+
+// 5. Include remainder of required parts
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/tables";
+@import "../node_modules/bootstrap/scss/forms";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/transitions";
+@import "../node_modules/bootstrap/scss/dropdown";
+@import "../node_modules/bootstrap/scss/button-group";
+@import "../node_modules/bootstrap/scss/nav";
+@import "../node_modules/bootstrap/scss/navbar";
+@import "../node_modules/bootstrap/scss/card";
+@import "../node_modules/bootstrap/scss/accordion";
+@import "../node_modules/bootstrap/scss/breadcrumb";
+@import "../node_modules/bootstrap/scss/pagination";
+@import "../node_modules/bootstrap/scss/badge";
+@import "../node_modules/bootstrap/scss/alert";
+@import "../node_modules/bootstrap/scss/progress";
+@import "../node_modules/bootstrap/scss/list-group";
+@import "../node_modules/bootstrap/scss/close";
+@import "../node_modules/bootstrap/scss/toasts";
+@import "../node_modules/bootstrap/scss/modal";
+@import "../node_modules/bootstrap/scss/tooltip";
+@import "../node_modules/bootstrap/scss/popover";
+// @import "../node_modules/bootstrap/scss/carousel";
+@import "../node_modules/bootstrap/scss/spinners";
+@import "../node_modules/bootstrap/scss/offcanvas";
+@import "../node_modules/bootstrap/scss/placeholders";
+
+// Helpers
+@import "../node_modules/bootstrap/scss/helpers";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "../node_modules/bootstrap/scss/utilities/api";
 
 
 
 
+body {
+    font-family: sans-serif;
+    nav{
+        color: $warning
+    }
+}
 
 
-    @import "../node_modules/bootstrap/scss/bootstrap";
 
-    body {
-        font-family: sans-serif;
+
+#logo {
+    width: 3rem;
+    height: auto;
+}
+
+
+
+#formLogIn {
+    margin-top: 2rem;
+    padding: 1rem;
+
+    @include media-breakpoint-up(md) {
+        height: 23vh;
+        width: 30vh;
     }
 
-
-    
-
-    #logo{
-        width: 3rem;
+    @include media-breakpoint-up(lg) {
+        width: 50vh;
         height: auto;
     }
 
 
-    #formLogIn{
-        margin-top: 2rem;
-        padding: 1rem;
-
-        @include media-breakpoint-up(md){
-            height: 23vh;
-            width: 30vh;
-        }
-
-        @include media-breakpoint-up(lg){
-            width: 50vh;
-            height: auto;
-        }
+}
 
 
-<<<<<<< Updated upstream
-    }
-
-
-    #hero {
-
-        
-        
-    
-        .swiper-slide {
-=======
 #hero {
+
     .swiper-slide {
         position: relative;
-
+         
+        
         img {
-            height: calc(100vh - 4rem);
-            width: 100%;
-            object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
->>>>>>> Stashed changes
-            position: relative;
-
-<<<<<<< Updated upstream
             
-    
-            img {
-                /*height: calc(100vh - 4rem);*/
-                object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
-                position: relative;
-                /*width: 100vh;*/
-            }
-    
-            &::before {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.659);
-                pointer-events: none;
-                z-index: 1; // memo : funziona come lo spazio cartesiano
-            }
-    
-            .slideInfo {
-                position: absolute;
-                z-index: 2;
-    
-                h2 {
-                    
-                    font-size: 2rem;
-                }
-            }
+            object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
+            height: calc(100vh - 4rem);
+            width: 100%; 
+            
         }
-    }
-    
-    // hero
-    #map { height: 40vh; 
-        width: 50vh;
-        margin: 2rem;}
 
-
-
-    
-
-=======
         &::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.159);
+            background: rgba(0, 0, 0, 0.074);
             pointer-events: none;
             z-index: 1; // memo : funziona come lo spazio cartesiano
         }
+
+        .slideInfo {
+            position: absolute;
+            z-index: 2;
+
+            h2 {
+
+                font-size: 2rem;
+            }
         }
     }
->>>>>>> Stashed changes
+}
 
-
+// hero
+#map {
+    height: 40vh;
+    width: 50vh;
+    margin: 2rem;
+}
 
