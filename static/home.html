@@ -40,21 +40,21 @@
                             <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello admin</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
                                 id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
-                            <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
+                            <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
 
                             <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="form-control login" type="text" placeholder="E-mail" id="email"
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail" id="email"
                                             required /><br>
-                                        <input class="form-control login" type="password" placeholder="Password"
+                                        <input class="shadow form-control login" type="password" placeholder="Password"
                                             id="password" required />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
@@ -109,7 +109,7 @@
 
                 </div>
 
-                <div class="swiper-pagination"></div>
+                <!-- <div class="swiper-pagination"></div> -->
 
                 <!-- If we need navigation buttons -->
                 <div class="swiper-button-prev"></div>
@@ -310,14 +310,10 @@
             fetch(URL).then(data => data.json())
                 .then(res => {
                     let utentiDB = [];
-                    let i = 0;
-                    do {
-                        if (res[i] != undefined) {
-                            utentiDB.push(res[i]);
-                        }
-                        i++;
-                        localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
-                    } while (i < utentiDB.length);
+                    res.forEach(utente => {
+                        utentiDB.push(utente);
+                    });
+                    localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
                 })
         }
 
@@ -345,6 +341,7 @@
                     } else {
                         alert("accesso effettuato!")
                         localStorage.setItem("utente", JSON.stringify(utente));
+                        //location.reload();
                     }
                 } else {
                     alert("utente non trovato");
@@ -360,7 +357,7 @@
 
             if (utente != undefined) {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
-                btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
+                btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none");
 
                 if (utente.tipo == 'A') {  // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                     let liPannello = document.querySelector(".linkPannello");
@@ -376,6 +373,8 @@
                     });
                 }
             }
+
+            
         }
 
 
@@ -463,6 +462,7 @@
             document.addEventListener("DOMContentLoaded", verificaLog);
             form.addEventListener("submit", accedi);
             btnLogout.addEventListener("click", logOut);
+        
 
 
 
