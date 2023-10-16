@@ -83,37 +83,16 @@
 
             <hr> 
 
-            <ul class="list-group pt-2">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Evento 1</span>                
-                    <span class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    </span>
-                </li> 
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Evento 2</span>                
-                    <span class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    </span>
-                </li>  
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Evento 3</span>                
-                    <span class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    </span>
-                </li>                 
-
-                
-
+            <ul class="list-group pt-2" id="ul">
 
             </ul>
             
             <button id="modifica" class="btn text-secondary">
-                <i class="bi bi-gear-fill"></i>
+                <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
             </button>
             <span>|</span>
             <button id="cancella" class="btn text-secondary">
-                <i class="bi bi-trash-fill"></i>
+                <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
             </button>
         </div>
         
@@ -177,6 +156,63 @@
             location.href = "home.html";
         }
         btnLogOut.addEventListener("click", logOut);
+
+        
+        function getPrenotazioni() {
+            let URL = "http://localhost:9007/p/prenotazioni";
+            fetch(URL)
+            .then(data => data.json())
+            .then(res => {
+                let prenotazioniDB = [];
+                
+                res.forEach(prenotazione => {
+                    prenotazioniDB.push(prenotazione);
+                });
+                localStorage.setItem("prenotazioniRegistrate", JSON.stringify(prenotazioniDB));
+            })
+        }
+
+        let ul = document.querySelector("#ul");
+
+        function creaLista() {
+            
+            let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"))
+
+            prenotazioniRegistrate.forEach(prenotazione => {
+                
+                let li = document.createElement("li");
+                li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center")
+           
+                li.innerHTML = 
+                `
+                    <span>
+                        <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
+                        <strong>ORA</strong>:   ${prenotazione.ora} <br>
+                        <strong>POSTI</strong>: ${prenotazione.posti}
+                    </span>                
+                    <span class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </span>
+                `
+                ul.appendChild(li);
+            });
+
+
+        }
+
+        document.addEventListener("DOMContentLoaded", getPrenotazioni);
+        document.addEventListener("DOMContentLoaded", creaLista);
+
+        // <span>${prenotazione.id} | ${prenotazione.data_evento} | ${prenotazione.ora} | ${prenotazione.posti}</span> 
+
+       /* 
+       <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Evento 1</span>                
+                    <span class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </span>
+            </li>
+              */
 
     </script>
 
