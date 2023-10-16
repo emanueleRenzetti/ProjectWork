@@ -1,4 +1,3 @@
-
 $scondary: #9ddbad63;
 $danger: #570000;
 $info: #007FFF;
@@ -7,15 +6,14 @@ $info: #007FFF;
 $spacer: 1rem;
 
 $spacers: (
-  0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-  6: $spacer * 6,
-  7: $spacer * 9
-
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+    6: $spacer * 6,
+    7: $spacer * 9
 );
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -24,112 +22,82 @@ $spacers: (
 
 
 
-    @import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-    body {
-        font-family: sans-serif;
+body {
+    font-family: sans-serif;
+}
+
+
+
+
+#logo {
+    width: 3rem;
+    height: auto;
+}
+
+
+#formLogIn {
+    margin-top: 2rem;
+    padding: 1rem;
+
+    @include media-breakpoint-up(md) {
+        height: 23vh;
+        width: 30vh;
     }
 
-
-    
-
-    #logo{
-        width: 3rem;
+    @include media-breakpoint-up(lg) {
+        width: 50vh;
         height: auto;
     }
 
 
-    #formLogIn{
-        margin-top: 2rem;
-        padding: 1rem;
-
-        @include media-breakpoint-up(md){
-            height: 23vh;
-            width: 30vh;
-        }
-
-        @include media-breakpoint-up(lg){
-            width: 50vh;
-            height: auto;
-        }
+}
 
 
-<<<<<<< Updated upstream
-    }
-
-
-    #hero {
-
-        
-        
-    
-        .swiper-slide {
-=======
 #hero {
+
+
+
+
     .swiper-slide {
         position: relative;
 
+
+
         img {
-            height: calc(100vh - 4rem);
-            width: 100%;
+            /*height: calc(100vh - 4rem);*/
             object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
->>>>>>> Stashed changes
             position: relative;
-
-<<<<<<< Updated upstream
-            
-    
-            img {
-                /*height: calc(100vh - 4rem);*/
-                object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
-                position: relative;
-                /*width: 100vh;*/
-            }
-    
-            &::before {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.659);
-                pointer-events: none;
-                z-index: 1; // memo : funziona come lo spazio cartesiano
-            }
-    
-            .slideInfo {
-                position: absolute;
-                z-index: 2;
-    
-                h2 {
-                    
-                    font-size: 2rem;
-                }
-            }
+            /*width: 100vh;*/
         }
-    }
-    
-    // hero
-    #map { height: 40vh; 
-        width: 50vh;
-        margin: 2rem;}
 
-
-
-    
-
-=======
         &::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.159);
+            background: rgba(0, 0, 0, 0.659);
             pointer-events: none;
             z-index: 1; // memo : funziona come lo spazio cartesiano
         }
+
+        .slideInfo {
+            position: absolute;
+            z-index: 2;
+
+            h2 {
+
+                font-size: 2rem;
+            }
         }
     }
->>>>>>> Stashed changes
+}
 
-
+// hero
+#map {
+    height: 40vh;
+    width: 50vh;
+    margin: 2rem;
+}
 
