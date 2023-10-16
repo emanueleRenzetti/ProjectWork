@@ -42,7 +42,7 @@
 
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello admin</a></li>
 
-                        <li class="nav-item"><a class="nav-link text-accent" href="#"> | Prenotazioni</a></li>
+                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent" href="#">Prenotazioni</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
@@ -372,6 +372,17 @@
 
                     linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
+                    });
+                }
+                if (utente.tipo == 'B') {  // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                    let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+
+                    linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+
+                    let liPrenotazioni = linkPrenotazioni.querySelector("a");
+
+                    liPrenotazioni.addEventListener("click", function () {
+                        location.href = "prenotazioni.html";
                     });
                 }
             }
