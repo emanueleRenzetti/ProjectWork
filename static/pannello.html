@@ -171,6 +171,7 @@
                                     </button>
 
                                     <!-- MODAL MODIFICA EVENTO -->
+                                    
                                 </div>
     
 
@@ -183,10 +184,30 @@
                                     </button>
 
                                     <!-- MODAL ELIMINA EVENTO -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-danger" id="deleteModalLabel">Cancella evento</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Sei sicuro di voler cancellare l'evento ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" id="btnDeleteEvent" class="btn btn-outline-danger">Elimina definitivamente</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+
+                            </div>  <!-- chiusura row -->
+                        </div>  <!-- chiusura table-title -->
     
+
+
                         <table class="table table-striped tabel-hover">
                             <thead>
                                 <tr>
@@ -253,7 +274,10 @@
 
 
         let addModal = document.querySelector("#addModal");
-        let formAddModal = addModal.querySelector("form");
+        let formAddModal = addModal.querySelector("form");  // FORM PER AGGIUNGERE UN EVENTO
+
+        let btnDeleteEvent = document.querySelector("#btnDeleteEvent");  // BTN ELIMINA DEFINITIVAMENTE
+
 
         let adminTable = document.querySelector("#adminTable"); // tbody
 
@@ -348,6 +372,13 @@
             // rcarico la pagina in modo da vedere nella tabella il nuovo evento inserito
         }
         formAddModal.addEventListener("submit", addEvent);
+
+
+
+        function deleteEvent(){
+            
+        }
+        btnDeleteEvent.addEventListener("click", deleteEvent);
 
     </script>
 </body>
