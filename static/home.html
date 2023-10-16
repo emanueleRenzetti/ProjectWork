@@ -430,7 +430,7 @@
                 eventiRegistrati.forEach(evento => {
 
                     let card = document.createElement("div");
-                    card.classList.add("card");
+                    card.classList.add("card", "col-3");
 
                     let img = document.createElement("img");
                     img.classList.add("card-img-top");
@@ -440,9 +440,12 @@
                     let cardBody = document.createElement("div");
                     cardBody.classList.add("card-body");
 
-                    let descrizione = document.createElement("p");
+                    let descrizione = document.createElement("div");
                     descrizione.classList.add("card-text");
-                    descrizione.innerHTML = `${evento.descrizione}`
+                    descrizione.innerHTML = `<h3 class="fw-bold">${evento.descrizione}</h3>
+                    <p class="fw-bold">${evento.tipologia}</p>
+                    <p>${evento.caratteristiche}</p>
+                    <p>${evento.data_evento}</p>`
 
                     cardBody.appendChild(descrizione);
                     card.appendChild(img);
