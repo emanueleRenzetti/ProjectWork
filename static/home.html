@@ -121,20 +121,9 @@
         </section> <!-- HERO -->
 
 
-        <section id="servizi" class="my-5">
+        <section class="my-5">
             <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
-                    </div>
-                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
-                    </div>
-
-                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
-                    </div>
-                    <div class="col-lg-6 my-3"><img src="./img/logo.svg" style="width: 3rem;"> Lorem ipsum dolor sit amet.
-                    </div>
-                    
+                <div class="row" id="cards">
 
                 </div>
             </div>
@@ -148,7 +137,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <div id="map"></div>
 
                         <div class="d-flex gap-3 justify-content-center">
@@ -166,7 +155,7 @@
                     </div>
 
 
-                    <div class="col-6">
+                    <div class="col-lg-6 mt-5 mt-lg-0">
                         <div class="d-flex flex-column align-items-center">
 
                             <p>Calendario</p>
@@ -208,7 +197,7 @@
                     </div>
                 </div>
 
-    
+
 
                 <div class="py-4 col-lg-3">
 
@@ -366,30 +355,30 @@
 
         function verificaLog() {
             let utente = JSON.parse(localStorage.getItem("utente"));
-            
-            
+
+
             if (utente != undefined) {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
                 btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
-                
+
                 if (utente.tipo == 'A') {  // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                     let liPannello = document.querySelector(".linkPannello");
-                    
+
                     liPannello.setAttribute("class", "nav-item linkPannello");
 
                     let linkPannello = liPannello.querySelector("a");
 
                     console.log(linkPannello);
 
-                    linkPannello.addEventListener("click", function(){
+                    linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
-                    });    
+                    });
                 }
             }
         }
 
 
-        function controllaURL(){
+        function controllaURL() {
             console.log("l'URL è stato cambiato manualmente");
 
             let utente = JSON.parse(localStorage.getItem("utente"));
@@ -415,10 +404,63 @@
             location.reload();
         }
 
-        document.addEventListener("DOMContentLoaded", getUtenti);
-        document.addEventListener("DOMContentLoaded", verificaLog);
-        form.addEventListener("submit", accedi);
-        btnLogout.addEventListener("click", logOut);
+        function getCards() {
+            let URL = "http://localhost:9007/e/eventi";
+            fetch(URL).then(data => data.json())
+                .then(res => {
+                    let eventiDB = [];
+
+                    res.forEach(evento => {
+                        eventiDB.push(evento);
+                    });
+                    console.log(eventiDB);
+                    localStorage.setItem("eventiRegistrati", JSON.stringify(eventiDB));
+                }
+                )}
+
+
+
+                
+        let cards = document.querySelector("#cards");
+
+            function creaCards() {
+
+                let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"))
+
+                eventiRegistrati.forEach(evento => {
+
+                    let card = document.createElement("div");
+                    card.classList.add("card");
+
+                    let img = document.createElement("img");
+                    img.classList.add("card-img-top");
+                    img.setAttribute("src", "./img/" + evento.locandina);
+
+
+                    let cardBody = document.createElement("div");
+                    cardBody.classList.add("card-body");
+
+                    let descrizione = document.createElement("p");
+                    descrizione.classList.add("card-text");
+                    descrizione.innerHTML = `${evento.descrizione}`
+
+                    cardBody.appendChild(descrizione);
+                    card.appendChild(img);
+                    card.appendChild(cardBody);
+                    cards.appendChild(card);
+
+                });
+
+            }
+
+            document.addEventListener("DOMContentLoaded", getCards);
+            document.addEventListener("DOMContentLoaded", creaCards);
+            document.addEventListener("DOMContentLoaded", getUtenti);
+            document.addEventListener("DOMContentLoaded", verificaLog);
+            form.addEventListener("submit", accedi);
+            btnLogout.addEventListener("click", logOut);
+
+
 
 
     </script>

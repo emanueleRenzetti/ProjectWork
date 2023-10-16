@@ -173,14 +173,10 @@
             fetch(URL).then(data => data.json())
                 .then(res => {
                     let utentiDB = [];
-                    let i = 0;
-                    do {
-                        if (res[i] != undefined) {
-                            utentiDB.push(res[i]);
-                        }
-                        i++;
-                        localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
-                    } while (i < utentiDB.length);
+                    res.forEach(utente => {
+                        utentiDB.push(utente);
+                    });
+                    localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
                 })
         }
 
