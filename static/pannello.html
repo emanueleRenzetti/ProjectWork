@@ -12,15 +12,15 @@
 </head>
 
 <body>
-    <header class="mb-5">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <header class="mainHeader">
+        <nav class="navbar navbar-expand-lg bg-secondary">
 
             <div class="container-fluid">
 
                 <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand" href="#"> Ticket2you</a>
+                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,19 +30,26 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item linkPannello"><a class="nav-link active" href="#">Pannello admin</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-accent" aria-current="page" href="inserisci.html">Inserisci Evento</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active text-accent" aria-current="page" href="calendario.html">Calendario</a>
+                        </li>
+            
 
                         <li class="nav-item dropdown">
-                            <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
+                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
                                 id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
                             <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
 
-                            <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
+                            <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
                                         <input class="form-control login" type="text" placeholder="E-mail" id="email"
@@ -129,6 +136,19 @@
     // btnGoVIEW.addEventListener("click", function(){
     //     location.href = "view.html";
     // })
+
+
+    function controllaUtente(){
+
+       let utente = JSON.parse(localStorage.getItem("utente"));
+       if(utente == null || utente.tipo != "A"){
+            location.href = "404.html";
+       }
+    }
+
+
+    window.addEventListener("DOMContentLoaded", controllaUtente);
+
 
   </script>
 </body>
