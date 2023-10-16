@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <!-- Option 1: Include in HTML -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -40,13 +40,14 @@
                             <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
+                                admin</a></li>
 
-                        <li class="nav-item"><a class="nav-link text-accent" href="#"> | Prenotazioni</a></li>
+                        <li class="nav-item"><a class="nav-link text-accent" href="#">Prenotazioni</a></li>
 
                         <li class="nav-item dropdown">
-                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
-                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
+                                type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
                             <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
@@ -54,8 +55,8 @@
                             <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="shadow form-control login" type="text" placeholder="E-mail" id="email"
-                                            required /><br>
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail"
+                                            id="email" required /><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
                                             id="password" required />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
@@ -81,7 +82,7 @@
 
 
     <main>
-        <section id="hero">
+        <section id="hero" class="pb-5">
             <div class="swiper">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
@@ -114,8 +115,8 @@
                 <!-- <div class="swiper-pagination"></div> -->
 
                 <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev text-accent"></div>
+                <div class="swiper-button-next text-accent"></div>
 
                 <!-- If we need scrollbar -->
                 <div class="swiper-scrollbar"></div>
@@ -124,9 +125,19 @@
         </section> <!-- HERO -->
 
 
-        <section class="my-5">
+        <div class="container">
+            <hr class="shadow">
+        </div>
+
+
+
+
+
+
+        <section class="py-4"> <!--idea Eventi Passati - zac-->
             <div class="container">
-                <div class="row" id="cards">
+                <div class="text-center pb-5"><h2 class="fw-bold">Più info</h2></div>
+                <div class="row row-cols-lg-2 g-5 py-3" id="cards">
 
                 </div>
             </div>
@@ -136,9 +147,29 @@
 
 
 
-        <section id="mappeEventi" class="m-5">
+
+
+
+        <div class="container py-3">
+            <hr class="shadow">
+        </div>
+
+
+
+
+
+
+
+
+
+        <section id="mappeEventi" class="p-3">
             <div class="container">
-                <div class="row">
+                <div class="text-center py-3">
+                    <h3>Cerca vicino a te</h3>
+                </div>
+
+                <div class="row pt-3">
+
 
                     <div class="col-lg-6">
                         <div id="map" class="rounded-5"></div>
@@ -182,7 +213,7 @@
 
 
 
-    <footer class="bg-secondary text-light mt-7" id="fine">
+    <footer class="bg-secondary text-light mt-5" id="fine">
         <div class="container">
             <div class="row">
 
@@ -192,11 +223,16 @@
                     <p><strong>Telefono: </strong> 081 718 4444</p>
                     <p><strong>Email: </strong>Ticket2you@gmail.com</p>
                     <div id="socials" class="d-flex">
-                        <button class="ri-twitter-fill btn bg-secondary text-white" onclick="window.location.href='https://www.twitter.com/'"></button>
-                        <button class="ri-facebook-fill btn bg-secondary text-white" onclick="window.location.href='https://www.facebook.com/'"></button>
-                        <button class="ri-instagram-line btn bg-secondary text-white" onclick="window.location.href='https://www.instagram.com/'"></button>
-                        <button class="ri-skype-fill btn bg-secondary text-white" onclick="window.location.href='https://www.skype.com/'"></button>
-                        <button class="ri-linkedin-box-fill btn bg-secondary text-white" onclick="window.location.href='https://www.linkedin.com/'"></button>
+                        <button class="ri-twitter-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.twitter.com/'"></button>
+                        <button class="ri-facebook-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.facebook.com/'"></button>
+                        <button class="ri-instagram-line btn bg-secondary"
+                            onclick="window.location.href='https://www.instagram.com/'"></button>
+                        <button class="ri-skype-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.skype.com/'"></button>
+                        <button class="ri-linkedin-box-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.linkedin.com/'"></button>
                     </div>
                 </div>
 
@@ -207,9 +243,10 @@
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
                         <input class="form-control" type="email" id="emailFake">
-                        <button class="btn btn-primary" type="submit">Iscriviti</button>
+                        <button class="btn btn-primary text-light" type="submit">Iscriviti</button>
                     </div>
-                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi, sconti e tanto altro!</label>
+                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
+                        sconti e tanto altro!</label>
                 </div>
 
             </div>
@@ -376,7 +413,7 @@
                 }
             }
 
-            
+
         }
 
 
@@ -419,53 +456,59 @@
                     console.log(eventiDB);
                     localStorage.setItem("eventiRegistrati", JSON.stringify(eventiDB));
                 }
-                )}
+                )
+        }
 
 
 
-                
+
         let cards = document.querySelector("#cards");
 
-            function creaCards() {
+        function creaCards() {
 
-                let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"))
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"))
 
-                eventiRegistrati.forEach(evento => {
+            eventiRegistrati.forEach(evento => {
 
-                    let card = document.createElement("div");
-                    card.classList.add("card", "col-3");
+                let col = document.createElement("div");
+                col.classList.add("col");
 
-                    let img = document.createElement("img");
-                    img.classList.add("card-img-top");
-                    img.setAttribute("src", "./img/" + evento.locandina);
+                let card = document.createElement("div");
+                card.classList.add("card", "h-100");
+
+                let img = document.createElement("img");
+                img.classList.add("card-img-top");
+                img.setAttribute("src", "./img/" + evento.locandina);
 
 
-                    let cardBody = document.createElement("div");
-                    cardBody.classList.add("card-body");
+                let cardBody = document.createElement("div");
+                cardBody.classList.add("card-body");
 
-                    let descrizione = document.createElement("div");
-                    descrizione.classList.add("card-text");
-                    descrizione.innerHTML = `<h3 class="fw-bold">${evento.descrizione}</h3>
+                let descrizione = document.createElement("div");
+                descrizione.classList.add("card-text");
+                descrizione.innerHTML = `<h3 class="fw-bold">${evento.descrizione}</h3>
                     <p class="fw-bold">${evento.tipologia}</p>
                     <p>${evento.caratteristiche}</p>
                     <p>${evento.data_evento}</p>`
 
-                    cardBody.appendChild(descrizione);
-                    card.appendChild(img);
-                    card.appendChild(cardBody);
-                    cards.appendChild(card);
 
-                });
+                cardBody.appendChild(descrizione);
+                card.appendChild(img);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                cards.appendChild(col);
 
-            }
+            });
 
-            document.addEventListener("DOMContentLoaded", getCards);
-            document.addEventListener("DOMContentLoaded", creaCards);
-            document.addEventListener("DOMContentLoaded", getUtenti);
-            document.addEventListener("DOMContentLoaded", verificaLog);
-            form.addEventListener("submit", accedi);
-            btnLogout.addEventListener("click", logOut);
-        
+        }
+
+        document.addEventListener("DOMContentLoaded", getCards);
+        document.addEventListener("DOMContentLoaded", creaCards);
+        document.addEventListener("DOMContentLoaded", getUtenti);
+        document.addEventListener("DOMContentLoaded", verificaLog);
+        form.addEventListener("submit", accedi);
+        btnLogout.addEventListener("click", logOut);
+
 
 
 
