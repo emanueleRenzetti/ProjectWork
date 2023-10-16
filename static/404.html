@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
         @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
@@ -16,7 +17,7 @@
         --white: #fff;
         --green: #27DEBF;
         }
-        section {
+        main {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -127,7 +128,7 @@
         </nav>
     </header>
 
-    <section>
+    <main>
         <div class="d-flex p-5">
         
                 <img src="./img/404.svg" alt="" class="img-fluid" style="width: 60%;">
@@ -143,7 +144,43 @@
                 <button href="home.html" class="btn green" id="button">HOME</button>
             </div>
         </div>
-    </section>
+    </main>
+
+    <footer class="bg-secondary text-light" id="fine">
+        <div class="container">
+            <div class="row">
+
+                <div class="py-4 col-lg-9">
+                    <h3><strong>Napoli</strong></h3>
+                    <p>Via S.Domenico 18</p>
+                    <p><strong>Telefono: </strong> 081 718 4444</p>
+                    <p><strong>Email: </strong>Ticket2you@gmail.com</p>
+                    <div id="socials" class="d-flex">
+                        <button class="ri-twitter-fill btn bg-secondary text-white" onclick="window.location.href='https://www.twitter.com/'"></button>
+                        <button class="ri-facebook-fill btn bg-secondary text-white" onclick="window.location.href='https://www.facebook.com/'"></button>
+                        <button class="ri-instagram-line btn bg-secondary text-white" onclick="window.location.href='https://www.instagram.com/'"></button>
+                        <button class="ri-skype-fill btn bg-secondary text-white" onclick="window.location.href='https://www.skype.com/'"></button>
+                        <button class="ri-linkedin-box-fill btn bg-secondary text-white" onclick="window.location.href='https://www.linkedin.com/'"></button>
+                    </div>
+                </div>
+
+                <div class="py-4 col-lg-3">
+
+                    <p><strong>La nostra newsletter</strong></p>
+                    <div class="d-flex">
+                        <input class="form-control" type="email" id="emailFake">
+                        <button class="btn btn-primary" type="submit">Iscriviti</button>
+                    </div>
+                    <label for="emailFake">Iscriverti per non perdere i prossimi eventi, sconti e tanto altro!</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p id="copyright" class="m-1 text-center">© Copyright Ticket2you</p>
+    </footer>
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
