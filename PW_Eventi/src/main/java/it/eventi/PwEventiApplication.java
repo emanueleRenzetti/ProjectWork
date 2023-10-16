@@ -9,5 +9,4 @@ public class PwEventiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PwEventiApplication.class, args);
 	}
-
 }
