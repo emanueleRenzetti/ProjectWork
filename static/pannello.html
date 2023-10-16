@@ -106,48 +106,48 @@
                                                 <!-- tipo -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="tipo">Tipo</label>
-                                                    <input type="text" id="tipo" name="tipo" class="form-control" />
+                                                    <input type="text" id="tipo" name="tipo" class="form-control" required title="Inserisci la tipologia evento"/>
                                                 </div>
                                     
                                                 <!-- caratteristiche -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="caratteristiche">Caratteristiche</label>
-                                                    <input type="text" id="caratteristiche" name="caratteristiche" class="form-control"/>
+                                                    <input type="text" id="caratteristiche" name="caratteristiche" class="form-control" required title="Inserisci le caratteristiche"/>
                                                 </div>
     
                                                 <!-- descrizione -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="descrizione">Descrizione</label>
-                                                    <input type="text" id="descrizione" name="descrizione" class="form-control"/>
+                                                    <input type="text" id="descrizione" name="descrizione" class="form-control" required title="Inserisci la descrizione"/>
                                                 </div>
     
                                                 <!-- luogo -->
                                                 <div class="form-outline mb-4">
-                                                    <label class="form-label" for="luogo">Luogo</label>
-                                                    <input type="text" id="luogo" name="luogo" class="form-control"/>
+                                                    <label class="form-label" for="luogo_evento">Luogo</label>
+                                                    <input type="text" id="luogo_evento" name="luogo_evento" class="form-control" required title="Inserisci l'indirizzo evento"/>
                                                 </div>
     
                                                 <!-- prezzo -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="prezzo">Prezzo</label>
-                                                    <input type="number" step="0.01" id="prezzo" name="prezzo" class="form-control"/>
+                                                    <input type="number" step="0.01" id="prezzo" name="prezzo" class="form-control" required/>
                                                 </div>
     
                                                 <!-- posti disponibili-->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="posti">Posti</label>
-                                                    <input type="number" id="posti" name="posti" class="form-control"/>
+                                                    <input type="number" id="posti" name="posti" class="form-control" required/>
                                                 </div>
     
                                                 <!-- data evento -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="data_evento">Data</label>
-                                                    <input type="date" id="data_evento" name="data_evento" class="form-control"/>
+                                                    <input type="date" id="data_evento" name="data_evento" class="form-control" required/>
                                                 </div>
     
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
-                                                    <label class="form-label" for="prezzo">Locandina</label>
+                                                    <label class="form-label" for="locandina">Locandina</label>
                                                     <!-- UPLOAD FILE -->
                                                 </div>
                                     
@@ -311,8 +311,41 @@
         document.addEventListener("DOMContentLoaded", createAdminTable);
 
 
+        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento){
+            this.tipologia = tipologia;
+            this.caratteristiche = caratteristiche;
+            this.descrizione = descrizione;
+            this.luogo_evento = luogo_evento;
+            this.prezzo = prezzo;
+            this.disponibilita = disponibilita;
+            this.data_evento = data_evento;
+        }
+
         function addEvent(){
-            
+            if (formAddModal.tipo.value.trim() != "" &&
+            formAddModal.caratteristiche.value.trim() != "" && 
+            formAddModal.descrizione.value.trim() != "" &&
+            formAddModal.luogo_evento.value.trim() != "" &&
+            formAddModal.prezzo.value.trim() != "" &&
+            formAddModal.posti.value.trim() != "" &&
+            formAddModal.data_evento.value.trim() != "") {
+
+
+                let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value);
+
+                fetch("http://localhost:9007/e/eventi", {
+    
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(nuovoEvento)
+                })
+                .then(data => {return data.json()})
+            }
+
+            location.reload();
+            // rcarico la pagina in modo da vedere nella tabella il nuovo evento inserito
         }
         formAddModal.addEventListener("submit", addEvent);
 
