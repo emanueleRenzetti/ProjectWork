@@ -11,4 +11,5 @@ public interface PrenotazioneService {
 	Prenotazione add(Prenotazione p);
 	Prenotazione update(Prenotazione p);
 	void delete(int id);
+	List<Prenotazione> getByUtenteId(int utente_id);
 }

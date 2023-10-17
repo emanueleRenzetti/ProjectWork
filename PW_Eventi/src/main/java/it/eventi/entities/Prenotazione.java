@@ -16,31 +16,16 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nome_evento;
-	private LocalDate data_evento;
 	private LocalTime ora;
 	private int posti;
 	private int utenti_id;
-	
-	
-	
-	public String getNome_evento() {
-		return nome_evento;
-	}
-	public void setNome_evento(String nome_evento) {
-		this.nome_evento = nome_evento;
-	}
+	private int evento_id;
+	private double prezzo;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public LocalDate getData_evento() {
-		return data_evento;
-	}
-	public void setData_evento(LocalDate data_evento) {
-		this.data_evento = data_evento;
 	}
 	public LocalTime getOra() {
 		return ora;
@@ -60,6 +45,21 @@ public class Prenotazione {
 	public void setUtenti_id(int utenti_id) {
 		this.utenti_id = utenti_id;
 	}
+	public int getEvento_id() {
+		return evento_id;
+	}
+	public void setEvento_id(int evento_id) {
+		this.evento_id = evento_id;
+	}
+	public double getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
+	}
+	
+	
+
 	
 	
 	
