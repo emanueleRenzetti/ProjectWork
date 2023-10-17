@@ -42,13 +42,13 @@ $spacers: (
 @import "../node_modules/bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
-$primary:  #6290E4;
+$primary: #6290E4;
 $secondary: #061A40;
 $verde: #397367;
 $accent: #ffda33;
 $danger: #FA0F32;
 
-$white:    #fefefe;
+$white: #fefefe;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -58,37 +58,40 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
-$black:    #000;
+$black: #000;
 
-$blue:    #1d72f1;
-$indigo:  #6610f2;
-$purple:  #6f42c1;
-$pink:    #d63384;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #198754;
-$teal:    #20c997;
-$cyan:    #0dcaf0;
+$blue: #1d72f1;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+
+$border: 1px;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
 @import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";    
+@import "../node_modules/bootstrap/scss/variables-dark";
 
 // 4. Include any default map overrides here
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark,
-  "verde" : $verde,
-  "accent" : $accent
-); 
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark,
+    "verde" : $verde,
+    "accent" : $accent
+);
+
 
 // 5. Include remainder of required parts
 @import "../node_modules/bootstrap/scss/maps";
@@ -175,14 +178,14 @@ body {
 
     .swiper-slide {
         position: relative;
-         
-        
+
+
         img {
-            
+
             object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
             height: calc(100vh - 4rem);
-            width: 100%; 
-            
+            width: 100%;
+
         }
 
         &::before {
@@ -208,31 +211,41 @@ body {
 }
 
 
-#cards{
-    div{
-        .card{
-        background-color: $gray-300;
+#cards {
+    div {
+        .card {
+            background-color: $gray-300;
         }
     }
 }
 
 // hero
-#map {
+
+#mappeEventi{
+    #map{
     height: 40vh;
     width: 60%;
     margin: 2rem;
+    }
 }
 
-#calendarIcon{
+#hero {
+    #map {
+        height: 50vh;
+        width: 100%;
+    }
+}
+
+#calendarIcon {
     height: 40vh;
     width: auto;
     margin: 2rem;
 }
 
-#fine{
-    #socials{
-    button{
-        color: $accent;
+#fine {
+    #socials {
+        button {
+            color: $accent;
+        }
     }
-}
 }
