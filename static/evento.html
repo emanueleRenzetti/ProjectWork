@@ -236,7 +236,11 @@
             let evento = JSON.parse(localStorage.getItem("evento"));
             let imgTag = document.querySelector("#imgEvento");
             let info = document.querySelector("#info");
+<<<<<<< Updated upstream
             imgTag.setAttribute("src", "./img/"+ evento.locandina);
+=======
+            imgTag.setAttribute("src", "./img/"+evento.locandina);
+>>>>>>> Stashed changes
             let desc =
                 `<p>${evento.caratteristiche}</p><p>${evento.descrizione}</p><p>DATA: ${evento.data_evento}</p><p>${evento.luogo_evento}</p><p>${evento.prezzo} $</p><p>ancora ${evento.disponibilita} posti rimasti!</p>`;
             info.innerHTML = desc;
