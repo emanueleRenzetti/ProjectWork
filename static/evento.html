@@ -11,55 +11,56 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <header class="mainHeader">
+        <nav class="navbar navbar-expand-lg bg-secondary">
 
             <div class="container-fluid">
 
-
                 <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand" href="#"> Ticket2you</a>
+                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
 
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pannello admin</a>
-                        </li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
+                                admin</a></li>
 
+                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent"
+                                href="#">Prenotazioni</a></li>
 
                         <li class="nav-item dropdown">
-                            <button class="btn btn-link text-decoration-none" data-bs-toggle="dropdown" type="button"
-                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
+                                type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
-                            <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
+                            <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
 
-
-                            <ul class="dropdown-menu dropdown-menu-end" id="formLogIn">
+                            <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="form-control login" type="text" placeholder="E-mail" id="email"
-                                            required /><br>
-                                        <input class="form-control login" type="password" placeholder="Password"
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail"
+                                            id="email" required /><br>
+                                        <input class="shadow form-control login" type="password" placeholder="Password"
                                             id="password" required />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
-                                        <input class="btn btn-outline-primary  mt-3" type="submit" name="submit"
-                                            value="Log-in" />
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <input class=" btn btn-outline-primary" type="submit" name="submit"
+                                                value="Log-in" />
+                                            <button class="btn btn-primary"><a href="registrati.html"
+                                                    class="text-decoration-none text-light">Registrati</a></button>
+                                        </div>
                                     </form>
                                 </li>
                             </ul>
@@ -71,43 +72,47 @@
             </div>
         </nav>
     </header>
+
+
+
+
     <main>
+
+
         <section id="hero">
 
-            <img id="imgEvento" class="img-fluid" src="" alt="">
+            <div class="container">
 
-            <div>
-            </div>
+                <div class="card text-bg-warning mt-5 mb-5">
+                    <div class="row g-3">
 
-            <div class="card m-5" style="max-width: 90%;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <section id="mappeEventi" class="col-md-6">
-                            <div class="container d-flex flex-column align-items-center">
-                                <div id="map" class="float-end"></div>
-                                <!-- <div>
-                            <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
-                            <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
-                        </div> -->
-                            </div>
-                        </section>
-                    </div>
+                        <div class="col-md-6">
+                            <img id="imgEvento" class="img-fluid" src="" alt="">
+                            <!-- <div>
+                                    <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
+                                    <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
+                                </div> -->
 
-                    <div class="col-md-8">
-                        <div class="card-body" id="info">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
-                            </p>
                         </div>
-                    </div>
+
+
+                        <div class="col-md-6">
+                            <div class="card-header" id="nomeEvento"></div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="citta"></h5>
+                                <ul class="list-group list-group-flush" id="descEvento"></ul>
+                            </div>
+                        </div>
+
+
+                    </div><!--row-->
+
+                    <div id="map" class="w-100"></div>
                 </div>
+
+
+                <!--container-->
             </div>
-
-
-            <!--mappeEventi-->
-
         </section>
 
     </main>
@@ -132,6 +137,7 @@
 
             // const address = document.getElementById('indirizzo').value;
             let evento = JSON.parse(localStorage.getItem("evento"));
+
             console.log(evento);
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${evento.luogo_evento}`)
                 .then(response => response.json())
@@ -148,7 +154,7 @@
                         }
 
                         marker = L.marker([latitude, longitude]).addTo(map)
-                            .bindPopup(`latitude: ${latitude}<br>longitude: ${longitude}`).openPopup();
+                            .bindPopup(`${evento.luogo_evento}`).openPopup();
 
                         // Ottieni il meteo per le coordinate
                         getWeatherData(latitude, longitude);
@@ -159,6 +165,7 @@
         }
         document.addEventListener("DOMContentLoaded", trovaCoordinate);
     </script>
+
     <script>
         let form = document.querySelector("#form");
         let btnLogout = document.querySelector("#btnLogOut");
@@ -236,15 +243,25 @@
         function trovaEvento() {
             let evento = JSON.parse(localStorage.getItem("evento"));
             let imgTag = document.querySelector("#imgEvento");
-            let info = document.querySelector("#info");
+            let nomeEvento = document.querySelector("#nomeEvento");
+            let citta = document.querySelector("#citta");
+            let descEvento = document.querySelector("#descEvento");
 
-            imgTag.setAttribute("src", "./img/"+ evento.locandina);
+            imgTag.setAttribute("src", "./img/" + evento.locandina);
 
 
-            let desc =
-                `<p>${evento.caratteristiche}</p><p>${evento.descrizione}</p><p>DATA: ${evento.data_evento}</p><p>${evento.luogo_evento}</p><p>${evento.prezzo} $</p><p>ancora ${evento.disponibilita} posti rimasti!</p>`;
-            info.innerHTML = desc;
+            let nome =`<h3>${evento.descrizione}</h3>`
+            nomeEvento.innerHTML = nome;
+            
+            citta.innerHTML = `<p><strong>${evento.luogo_evento}</strong></p>`;
+
+            descEvento.innerHTML = `<li class="list-group-item text-bg-warning">${evento.caratteristiche}</li>
+                <li class="list-group-item text-bg-warning">Data: ${evento.data_evento}</li>
+                <li class="list-group-item text-bg-warning">Prezzo:  € ${evento.prezzo}.00</li>
+                <li class="list-group-item text-bg-warning">Ancora ${evento.disponibilita} posti rimasti!</li>`;
         }
+                
+
 
         document.addEventListener("DOMContentLoaded", trovaEvento);
     </script>
