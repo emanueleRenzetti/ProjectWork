@@ -43,7 +43,8 @@
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
                                 admin</a></li>
 
-                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent" href="#">Prenotazioni</a></li>
+                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent"
+                                href="#">Prenotazioni</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
@@ -136,7 +137,9 @@
 
         <section class="py-4"> <!--idea Eventi Passati - zac-->
             <div class="container">
-                <div class="text-center pb-5"><h2 class="fw-bold">Più info</h2></div>
+                <div class="text-center pb-5">
+                    <h2 class="fw-bold">Più info</h2>
+                </div>
                 <div class="row row-cols-lg-2 g-5 py-3" id="cards">
 
                 </div>
@@ -175,7 +178,7 @@
                         <div class="d-flex gap-3 justify-content-center">
 
                             <select class="form-select" id="selectEventi">
-                                
+
                             </select>
 
                             <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra</button>
@@ -186,18 +189,21 @@
 
                     <div class="col-lg-6 d-flex flex-column align-items-center">
                         <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
-                        <div class="d-flex flex-column align-items-center">
+                        
+                        <a href="calendario.html" class="text-decoration-none">
+                            <div class="d-flex flex-column align-items-center">
 
-                            <img src="./img/calendar.svg" alt="" id="calendarIcon">
+                                <img src="./img/calendar.svg" alt="" id="calendarIcon">
 
-                            <p>Clicca per essere reindirizzato al calendario</p>
-                        </div>
+                                <p>Clicca per essere reindirizzato al calendario</p>
+                        </a>
                     </div>
+                </div>
 
 
 
 
-                </div><!--row-->
+            </div><!--row-->
 
 
             </div>
@@ -306,7 +312,7 @@
 
 
             let address = mioEvento.luogo_evento;
-            
+
 
 
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
@@ -318,7 +324,7 @@
                         const longitude = result.lon;
 
                         // Aggiorna la mappa con le coordinate trovate
-                        map.setView([latitude, longitude],12);
+                        map.setView([latitude, longitude], 12);
                         if (marker) {
                             map.removeLayer(marker);
                         }
@@ -326,7 +332,7 @@
                         marker = L.marker([latitude, longitude]).addTo(map)
                             .bindPopup(`La posizione del tuo evento`).openPopup();
 
-                        
+
                     } else {
                         alert('Indirizzo non trovato.');
                     }
@@ -522,8 +528,8 @@
 
         let selectEventi = document.querySelector("#selectEventi");
 
-        function getSelect(){
-             let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
+        function getSelect() {
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
 
             eventiRegistrati.forEach(evento => {
                 let option = document.createElement("option");
@@ -533,7 +539,7 @@
                 selectEventi.appendChild(option);
             })
         }
-    
+
 
 
         document.addEventListener("DOMContentLoaded", getSelect);
