@@ -256,7 +256,14 @@
 
                 const TD5 = document.createElement('td')
 
-                TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+                let btn = document.createElement("button");
+
+                btn.addEventListener("click", function(evento){
+                    localStorage.setItem("evento", JSON.stringify(evento));
+                    location.href = "evento.html";
+                })
+
+                // TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
 
                 TR.append(TD1, TD2, TD3, TD4, TD5)
 
