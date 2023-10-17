@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
-    <header class="mainHeader">
+    <header class="mainHeader shadow">
         <nav class="navbar navbar-expand-lg bg-secondary">
 
             <div class="container-fluid">
@@ -78,44 +79,151 @@
 
     <main>
 
+        <h1 class="text-center py-5" id="nomeEvento"></h1>
 
         <section id="hero">
 
-            <div class="container">
 
-                <div class="card text-bg-warning mt-5 mb-5">
-                    <div class="row g-3">
 
-                        <div class="col-md-6">
-                            <img id="imgEvento" class="img-fluid" src="" alt="">
-                            <!-- <div>
+            <div class="mb-5">
+                <div class="row g-3">
+
+                    <div class="col-md-3">
+                        <img id="imgEvento" class="img-fluid shadow" src="" alt="">
+                        <!-- <div>
                                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
                                     <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
                                 </div> -->
 
-                        </div>
+                    </div>
 
 
-                        <div class="col-md-6">
-                            <div class="card-header" id="nomeEvento"></div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="citta"></h5>
-                                <ul class="list-group list-group-flush" id="descEvento"></ul>
+
+
+                
+
+                    <div class="col-4"></div>
+
+
+                    <!--side menu-->
+                    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-2 mt-0 shadow">
+
+                        <p class="d-flex align-items-center flex-shrink-0 p-3 border-bottom fs-5 fw-semibold">
+                            Dettagli evento
+                        </p>
+
+
+
+                        <div class="list-group list-group-flush border-bottom">
+                            <div class="row w-100 align-items-center p-2">
+      
+                                <i class="bi bi-map fw-bolder fs-2 col-3"></i>
+                                
+                                <div class="d-flex flex-column justify-content-center col-6">
+                                    <div class="fw-semibold">Città</div>
+                                    <p id="citta" class="mb-0"></p>
+                                </div>
                             </div>
                         </div>
 
 
-                    </div><!--row-->
 
-                    <div id="map" class="w-100"></div>
-                </div>
+                        <div class="list-group list-group-flush border-bottom p-2">
+                            <div class="row w-100 align-items-center">
+      
+                                <i class="bi bi-calendar-day fs-1 col-3"></i>
+                                
+                                <div class="d-flex flex-column justify-content-center col-6">
+                                    <div class="fw-semibold">Data</div>
+                                    <p id="data" class="mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
 
 
-                <!--container-->
+                        <div class="list-group list-group-flush border-bottom p-2">
+                            <div class="row w-100 align-items-center">
+      
+    
+                                <i class="bi bi-people-fill fs-1 col-3"></i>
+                                
+                                <div class="d-flex flex-column justify-content-center col-9">
+                                    <div class="fw-semibold">Posti rimasti</div>
+                                    <p id="disponibilita" class="mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="list-group list-group-flush border-bottom p-2">
+                            <div class="row w-100 align-items-center">
+      
+                                <i class="bi bi-tag fs-1 col-3"></i>
+                                
+                                <div class="d-flex flex-column justify-content-center col-9">
+                                    <div class="fw-semibold">Prezzo</div>
+                                    <p id="prezzo" class="mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--lareale-->
+
+
+
+                </div><!--row-->
+
+                <div id="map" class="w-100"></div>
             </div>
+
+
+
         </section>
 
     </main>
+
+    <footer class="bg-secondary text-light mt-5" id="fine">
+        <div class="container">
+            <div class="row">
+
+                <div class="py-4 col-lg-8">
+                    <h3><strong>Napoli</strong></h3>
+                    <p>Via S.Domenico 18</p>
+                    <p><strong>Telefono: </strong> 081 718 4444</p>
+                    <p><strong>Email: </strong>Ticket2you@gmail.com</p>
+                    <div id="socials" class="d-flex">
+                        <button class="ri-twitter-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.twitter.com/'"></button>
+                        <button class="ri-facebook-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.facebook.com/'"></button>
+                        <button class="ri-instagram-line btn bg-secondary"
+                            onclick="window.location.href='https://www.instagram.com/'"></button>
+                        <button class="ri-skype-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.skype.com/'"></button>
+                        <button class="ri-linkedin-box-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.linkedin.com/'"></button>
+                    </div>
+                </div>
+
+
+
+                <div class="py-4 col-lg-4">
+
+                    <p><strong>La nostra newsletter</strong></p>
+                    <div class="d-flex gap-3">
+                        <input class="form-control" type="email" id="emailFake">
+                        <button class="btn btn-primary text-light" type="submit">Iscriviti</button>
+                    </div>
+                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
+                        sconti e tanto altro!</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
+    </footer>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -245,22 +353,26 @@
             let imgTag = document.querySelector("#imgEvento");
             let nomeEvento = document.querySelector("#nomeEvento");
             let citta = document.querySelector("#citta");
-            let descEvento = document.querySelector("#descEvento");
+            let data = document.querySelector("#data");
+            let disponibilita = document.querySelector("#disponibilita");
+            let prezzo = document.querySelector("#prezzo");
+            
 
             imgTag.setAttribute("src", "./img/" + evento.locandina);
 
 
-            let nome =`<h3>${evento.descrizione}</h3>`
-            nomeEvento.innerHTML = nome;
+            let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
+            let caratteristiche = `${evento.caratteristiche}`
+            data.innerHTML = `${evento.data_evento}`;
+            prezzo.innerHTML = `${evento.prezzo}.00`;
+            disponibilita.innerHTML = `Ancora ${evento.disponibilita} posti rimasti!`;
+            citta.innerHTML = `${evento.luogo_evento}`;
             
-            citta.innerHTML = `<p><strong>${evento.luogo_evento}</strong></p>`;
+            nomeEvento.innerHTML = nome;
 
-            descEvento.innerHTML = `<li class="list-group-item text-bg-warning">${evento.caratteristiche}</li>
-                <li class="list-group-item text-bg-warning">Data: ${evento.data_evento}</li>
-                <li class="list-group-item text-bg-warning">Prezzo:  € ${evento.prezzo}.00</li>
-                <li class="list-group-item text-bg-warning">Ancora ${evento.disponibilita} posti rimasti!</li>`;
+
         }
-                
+
 
 
         document.addEventListener("DOMContentLoaded", trovaEvento);
