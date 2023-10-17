@@ -243,10 +243,17 @@
 
 
     <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            let utente = JSON.parse(localStorage.getItem("utente"));
+
+            if (utente.tipo != 'A') {
+                location.href = "404.html";
+            }
+        })
+
         let btnLogIn = document.querySelector("#btnLogIn");
         let btnLogOut = document.querySelector("#btnLogOut");
         
-
 
         function controllaUtente() {
 
@@ -254,7 +261,7 @@
             if (utente == null || utente.tipo != "A") {
                 location.href = "404.html";
             } else {
-                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); //
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); 
                 btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
             }
         }
