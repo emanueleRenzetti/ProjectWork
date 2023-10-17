@@ -108,7 +108,8 @@
                     <tr>
                         <th>Tipologia</th>
                         <th>Descrizione</th>
-                        <th>Posizione</th>
+                        <th>Luogo</th>
+                        <th>Data</th>
                         <th>Pagina evento</th>
                     </tr>
                 </thead>
@@ -188,77 +189,172 @@
         let eventi_arrivo = document.querySelector("#eventi_arrivo");
         let eventi_trascorsi = document.querySelector("#eventi_trascorsi");
 
-        function recuperaEventi(){
-            // da finire
+        function separaEventi(){  // funzione che separa gli eventi trascorsi dagli eventi in arrivo e li piazza in due array diversi
+
+            let eventi = JSON.parse(localStorage.getItem("eventiRegistrati"));
+
+            let fullDate = new Date();
+
+            let giorno = dataOdierna.getDate(); 
+            let mese = dataOdierna.getMonth() + 1; 
+            let anno = dataOdierna.getFullYear(); 
+
+            let dataCorrente = anno+"-"+mese+"-"+giorno;
+            console.log(dataCorrente);
+
+            let eventiArrivoArray = [];
+            let eventiTrascorsiArray = [];
+
+            eventi.forEach(evento => {
+
+                if (dataCorrente > evento.data_evento) {
+                    
+                    eventiTrascorsiArray.push(evento);
+
+                }else if (dataCorrente <= evento.data_evento) {
+                    
+                    eventiArrivoArray.push(evento);
+                }
+            })
+
+            localStorage.setItem("eventiArrivoArray", JSON.stringify(eventiArrivoArray));
+            localStorage.setItem("eventiTrascorsiArray", JSON.stringify(eventiTrascorsiArray));
         }
 
         function createRow() {
 
             // POPOLO LA TABELLA DEGLI EVENTI IN ARRIVO
-            fetch("http://localhost:9007/e/eventi/eventiArrivo")
-                .then(response => response.json())
-                .then(data => {
 
-                    // ordino l'array di eventi in arrivo sulla base della data evento
+            let eventiInArrivo = JSON.parse(localStorage.getItem("eventiArrivoArray"));
+            let eventiTrascorsi = JSON.parse(localStorage.getItem("eventiTrascorsiArray"));
 
-                    data.sort(function (evenoA, eventoB) {
-                        return eventoB.data - evenoA.data;
-                    })
+            // ordino l'array di eventi in arrivo sulla base della data evento
 
-                    // ciclo l'array con gli eventi ordinati e per ogni oggetto evento creo una riga nella tabella 
+            eventiInArrivo.sort(function (evenoA, eventoB) {
+                return eventoB.data - evenoA.data;
+            })
 
-                    data.forEach(evento => {
+            // ciclo l'array con gli eventi ordinati e per ogni oggetto evento creo una riga nella tabella 
+            eventiInArrivo.forEach(evento => {
 
-                        const TR = document.createElement('tr'); // riga evento
-                        const TD1 = document.createElement('td')
-                        TD1.textContent = evento.tipologia
-                        const TD2 = document.createElement('td')
-                        TD2.textContent = evento.descrizione
-                        const TD3 = document.createElement('td')
-                        TD3.textContent = evento.luogo_evento
+                const TR = document.createElement('tr'); // riga evento
 
-                        // la pagina del singolo evento viene prodotta dinamicamente in funzione dell’ID evento ricevuto come parametro della GET
+                const TD1 = document.createElement('td')
+                TD1.textContent = evento.tipologia
 
-                        const TD4 = document.createElement('td')
+                const TD2 = document.createElement('td')
+                TD2.textContent = evento.descrizione
 
-                        TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+                const TD3 = document.createElement('td')
+                TD3.textContent = evento.luogo_evento
 
-                        TR.append(TD1, TD2, TD3, TD4)
+                const TD4 = document.createElement('td')
+                TD4.textContent = evento.data_evento
 
-                        eventi_arrivo.append(TR)
-                    });
-                })
+                // la pagina del singolo evento viene prodotta dinamicamente in funzione dell’ID evento ricevuto come parametro della GET
+
+                const TD5 = document.createElement('td')
+
+                TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+                TR.append(TD1, TD2, TD3, TD4, TD5)
+
+                eventi_arrivo.append(TR)
+            })
+
+
 
 
             // POPOLO LA TABELLA DEGLI EVENTI TRASCORSI
-            fetch("http://localhost:9007/e/eventi/eventiTrascorsi")
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(evento => {
 
-                        const TR = document.createElement('tr'); // riga evento
-                        const TD1 = document.createElement('td')
-                        TD1.textContent = evento.tipologia
-                        const TD2 = document.createElement('td')
-                        TD2.textContent = evento.descrizione
-                        const TD3 = document.createElement('td')
-                        TD3.textContent = evento.luogo_evento
+            eventiTrascorsi.forEach(evento => {
 
-                        // la pagina del singolo evento pagina viene prodotta dinamicamente in funzione dell’ID dell’evento ricevuto come parametro di una GET
+                const TR = document.createElement('tr'); // riga evento
 
-                        const TD4 = document.createElement('td')
+                const TD1 = document.createElement('td')
+                TD1.textContent = evento.tipologia
 
-                        TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+                const TD2 = document.createElement('td')
+                TD2.textContent = evento.descrizione
 
-                        TR.append(TD1, TD2, TD3, TD4)
+                const TD3 = document.createElement('td')
+                TD3.textContent = evento.luogo_evento
 
-                        eventi_arrivo.append(TR)
-                    });
+                const TD4 = document.createElement('td')
+                TD4.textContent = evento.data_evento
+
+                const TD5 = document.createElement('td')
+                TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+                TR.append(TD1, TD2, TD3, TD4, TD5)
+
+                eventi_trascorsi.append(TR)
                 })
         }
 
-        // al caricamento del dom vengono create le righe delle tabelle eventi
         document.addEventListener("DOMContentLoaded", createRow);
+
+            // fetch("http://localhost:9007/e/eventi/eventiArrivo")
+            //     .then(response => response.json())
+            //     .then(data => {
+
+            //         // ordino l'array di eventi in arrivo sulla base della data evento
+
+            //         data.sort(function (evenoA, eventoB) {
+            //             return eventoB.data - evenoA.data;
+            //         })
+
+            //         // ciclo l'array con gli eventi ordinati e per ogni oggetto evento creo una riga nella tabella 
+
+            //         data.forEach(evento => {
+
+            //             const TR = document.createElement('tr'); // riga evento
+            //             const TD1 = document.createElement('td')
+            //             TD1.textContent = evento.tipologia
+            //             const TD2 = document.createElement('td')
+            //             TD2.textContent = evento.descrizione
+            //             const TD3 = document.createElement('td')
+            //             TD3.textContent = evento.luogo_evento
+
+            //             // la pagina del singolo evento viene prodotta dinamicamente in funzione dell’ID evento ricevuto come parametro della GET
+
+            //             const TD4 = document.createElement('td')
+
+            //             TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+            //             TR.append(TD1, TD2, TD3, TD4)
+
+            //             eventi_arrivo.append(TR)
+            //         });
+            //     })
+
+            
+
+            // fetch("http://localhost:9007/e/eventi/eventiTrascorsi")
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         data.forEach(evento => {
+
+            //             const TR = document.createElement('tr'); // riga evento
+            //             const TD1 = document.createElement('td')
+            //             TD1.textContent = evento.tipologia
+            //             const TD2 = document.createElement('td')
+            //             TD2.textContent = evento.descrizione
+            //             const TD3 = document.createElement('td')
+            //             TD3.textContent = evento.luogo_evento
+
+            //             // la pagina del singolo evento pagina viene prodotta dinamicamente in funzione dell’ID dell’evento ricevuto come parametro di una GET
+
+            //             const TD4 = document.createElement('td')
+
+            //             TD4.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+            //             TR.append(TD1, TD2, TD3, TD4)
+
+            //             eventi_arrivo.append(TR)
+            //         });
+            //     })
+        
 
     </script>
 </body>
