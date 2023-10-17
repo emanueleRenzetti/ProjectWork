@@ -6,13 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="./css/style.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        #btnDeleteEvent:hover, #btnAggiungi:hover {
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
-    <header class="mainHeader">
+    <header class="mb-5">
         <nav class="navbar navbar-expand-lg bg-secondary">
 
             <div class="container-fluid">
@@ -30,10 +34,10 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link text-accent" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello admin</a></li>
+                        <li class="nav-item linkPannello"><a class="nav-link active text-accent" aria-current="page" href="#">Pannello admin</a></li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
@@ -87,7 +91,7 @@
                                 </div>
     
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
-                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <button type="button" id="btnAggiungi" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="bi bi-calendar2-plus"></i>
                                         <span class="ms-1">Aggiungi</span>
                                     </button>
@@ -165,7 +169,7 @@
                                 
                                 
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
-                                    <button id="btnUpdateEvent" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                    <button id="btnUpdateEvent" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal">
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
                                     </button>
@@ -178,7 +182,7 @@
 
 
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-3">
-                                    <button id="btnDeleteEvent" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <button id="btnDeleteEvent" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <i class="bi bi-trash"></i>
                                         <span class="ms-1">Elimina</span>
                                     </button>
@@ -195,7 +199,7 @@
                                                 <p>Sei sicuro di voler cancellare l'evento ?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                                 <button type="button" id="btnDeleteEvent" class="btn btn-outline-danger">Elimina definitivamente</button>
                                             </div>
                                         </div>
@@ -220,6 +224,7 @@
                                     <th>Posti</th>
                                     <th>Data Evento</th>
                                     <th>Locandina</th>
+                                    <th class="text-primary text-center">seleziona evento</th>
                                 </tr>
                             </thead>
     
@@ -239,15 +244,17 @@
 
 
     <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            let utente = JSON.parse(localStorage.getItem("utente"));
+
+            if (utente.tipo != 'A') {
+                location.href = "404.html";
+            }
+        })
+
         let btnLogIn = document.querySelector("#btnLogIn");
         let btnLogOut = document.querySelector("#btnLogOut");
-        let btnGoINS = document.querySelector("#btnGoINS");
-        let btnGoVIEW = document.querySelector("#btnGoVIEW");
-
-        btnGoINS.addEventListener("click", function () {
-            location.href = "inserisci.html";
-        });
-
+        
 
         function controllaUtente() {
 
@@ -255,7 +262,7 @@
             if (utente == null || utente.tipo != "A") {
                 location.href = "404.html";
             } else {
-                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); //
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); 
                 btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
             }
         }
@@ -279,7 +286,7 @@
         let btnDeleteEvent = document.querySelector("#btnDeleteEvent");  // BTN ELIMINA DEFINITIVAMENTE
 
 
-        let adminTable = document.querySelector("#adminTable"); // tbody
+        let adminTable = document.querySelector("#adminTable"); // tbody tabella admin
 
         function createAdminTable(){
 
@@ -287,54 +294,81 @@
             .then(response => response.json())
             .then(data => data.forEach(evento => {
 
-                const TR = document.createElement('tr'); // riga evento
+                let TR = document.createElement('tr'); // riga evento
 
-                // radio button della singola riga
-                const TD0 = document.createElement('td')
+                const idEvento = document.createElement('td')
+                idEvento.textContent = evento.id;
 
-                let radioButton = document.createElement("input");
-                radioButton.setAttribute("class", "form-check-input");
-                radioButton.setAttribute("type", "radio");
-                radioButton.setAttribute("name", "flexRadioDefault");
+                let tipoEvento = document.createElement('td')
+                tipoEvento.textContent = evento.tipologia
 
-                TD0.innerHTML = radioButton;
-                TD0.setAttribute("class", "ms-lg-2");
+                let caratteristicheEvento = document.createElement('td')
+                caratteristicheEvento.textContent = evento.caratteristiche
 
-                const TD1 = document.createElement('td')
-                TD1.textContent = evento.id;
+                let descrizioneEvento = document.createElement('td')
+                descrizioneEvento.textContent = evento.descrizione
 
-                const TD2 = document.createElement('td')
-                TD2.textContent = evento.tipologia
+                let luogoEvento = document.createElement('td')
+                luogoEvento.textContent = evento.luogo_evento
 
-                const TD3 = document.createElement('td')
-                TD3.textContent = evento.caratteristiche
+                let prezzoEvento = document.createElement('td')
+                prezzoEvento.textContent = evento.prezzo
 
-                const TD4 = document.createElement('td')
-                TD4.textContent = evento.descrizione
+                let dataEvento = document.createElement('td')
+                dataEvento.textContent = evento.data_evento
 
-                const TD5 = document.createElement('td')
-                TD5.textContent = evento.luogo_evento
+                let postiEvento = document.createElement('td')
+                postiEvento.textContent = evento.disponibilita
 
-                const TD6 = document.createElement('td')
-                TD6.textContent = evento.prezzo
+                let locandinaEvento = document.createElement('td')
+                locandinaEvento.textContent = evento.locandina
 
-                const TD7 = document.createElement('td')
-                TD7.textContent = evento.data_evento
+                // redio button della singola riga
+                let tdRadioEvento = document.createElement('td')
 
-                const TD8 = document.createElement('td')
-                TD8.textContent = evento.disponibilita
+                // let radio = document.createElement("input");
+                // radio.setAttribute("class", "form-check-input radioButton");
+                // radio.setAttribute("type", "radio");
+                // radio.setAttribute("name", "flexRadioDefault");
 
-                const TD9 = document.createElement('td')
-                TD9.textContent = evento.locandina
+                let radioStructure = `<input class="form-check-input" type="radio" name="flexRadioDefault">`;
+                tdRadioEvento.innerHTML = radioStructure;
+                tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
+                console.log(tdRadioEvento);
 
-                TR.append(TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9);
+                TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, prezzoEvento, dataEvento, postiEvento, locandinaEvento, tdRadioEvento);
 
-                adminTable.append(TR)
+                adminTable.append(TR);
             }));
         }
         document.addEventListener("DOMContentLoaded", createAdminTable);
 
 
+        let radioButtons = document.querySelectorAll(".radioButton");
+        [...radioButtons].forEach(radio => {
+            radio.addEventListener("input", trovaSelezione);
+        })
+
+        // TROVA QUALE RADIO BUTTON E' STATO SELEZIONATO
+        // la funzione parte ogni volta che lo stato di uno dei radio button cambia
+        function trovaSelezione(){
+            radioButtons.forEach(radio => {
+                if (radio.checked) {
+                    let tdRadio = radio.parentElement;
+                    let trow = tdRadio.parentElement;
+                    let td = document.querySelectorAll("td")  // nodelist con tutti i td della riga dell'evento selezionato
+                    let id = td[0].textContent;  // id dell'evento selezionato
+
+                    console.log("id evento selezionato: " + id);
+
+                    sessionStorage.setItem("idEventoSelezionato", id);
+                }
+            });
+        }
+
+        
+        
+        
         function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento){
             this.tipologia = tipologia;
             this.caratteristiche = caratteristiche;
@@ -369,14 +403,21 @@
             }
 
             location.reload();
-            // rcarico la pagina in modo da vedere nella tabella il nuovo evento inserito
+            // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito
         }
         formAddModal.addEventListener("submit", addEvent);
 
 
 
-        function deleteEvent(){
-            
+        function deleteEvent(){  // delete by id (da aggiungere su spring)
+
+            let idDaEliminare = sessionStorage.getItem("idEventoSelezionato");
+
+            fetch(`http://localhost:9007/e/eventi/${idDaEliminare}`, {
+    
+                method: "DELETE"
+            })
+            .then(response => response.json());
         }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 

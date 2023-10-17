@@ -16,6 +16,7 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private String nome_evento;
 	private LocalDate data_evento;
 	private LocalTime ora;
 	private int posti;
@@ -23,6 +24,12 @@ public class Prenotazione {
 	
 	
 	
+	public String getNome_evento() {
+		return nome_evento;
+	}
+	public void setNome_evento(String nome_evento) {
+		this.nome_evento = nome_evento;
+	}
 	public int getId() {
 		return id;
 	}
