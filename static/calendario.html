@@ -89,7 +89,8 @@
                     <tr>
                         <th>Tipologia</th>
                         <th>Descrizione</th>
-                        <th>Posizione</th>
+                        <th>Luogo</th>
+                        <th>Data</th>
                         <th>Pagina evento</th>
                     </tr>
                 </thead>
@@ -256,7 +257,16 @@
 
                 const TD5 = document.createElement('td')
 
-                TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+                let btnEvento1 = document.createElement("button");
+                btnEvento1.textContent = "Vai alla pagina evento";
+                btnEvento1.setAttribute("class", "btn btn-outline-secondary"); 
+
+                btnEvento1.addEventListener("click", function(){
+                    localStorage.setItem("evento", JSON.stringify(evento));
+                    location.href = "evento.html";
+                })
+
+                TD5.append(btnEvento1);
 
                 TR.append(TD1, TD2, TD3, TD4, TD5)
 
@@ -285,7 +295,19 @@
                 TD4.textContent = evento.data_evento
 
                 const TD5 = document.createElement('td')
-                TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+                // TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
+
+                let btnEvento2 = document.createElement("button");
+                btnEvento2.textContent = "Vai alla pagina evento";
+                btnEvento2.setAttribute("class", "btn btn-outline-secondary"); 
+
+                btnEvento2.addEventListener("click", function(){
+                    localStorage.setItem("evento", JSON.stringify(evento));
+                    location.href = "evento.html";
+                })
+
+                TD5.append(btnEvento2);
 
                 TR.append(TD1, TD2, TD3, TD4, TD5)
 
