@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elenco Eventi e Prenotazioni</title>
 
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <style>        
+    <style>
 
     </style>
 
 </head>
+
 <body>
 
     <header class="mainHeader">
@@ -38,11 +40,12 @@
                             <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
+                                admin</a></li>
 
                         <li class="nav-item dropdown">
-                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
-                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
+                                type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
                             <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
@@ -50,8 +53,8 @@
                             <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="shadow form-control login" type="text" placeholder="E-mail" id="email"
-                                            required /><br>
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail"
+                                            id="email" required /><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
                                             id="password" required />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
@@ -81,21 +84,21 @@
 
             <h1 class="m-0 pt-1">LISTA EVENTI E PARTECIPAZIONI</h1>
 
-            <hr> 
+            <hr>
 
             <ul class="list-group pt-2" id="ul">
 
             </ul>
-            
-            <button id="modifica" class="btn text-secondary">
+
+            <!-- <button id="modifica" class="btn text-secondary">
                 <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
             </button>
             <span>|</span>
             <button id="cancella" class="btn text-secondary">
                 <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
-            </button>
+            </button> -->
         </div>
-        
+
     </main>
 
     <footer class="bg-secondary text-light mt-7" id="fine">
@@ -126,27 +129,28 @@
                         <input class="form-control" type="email" id="emailFake">
                         <button class="btn btn-primary" type="submit">Iscriviti</button>
                     </div>
-                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi, sconti e
+                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
+                        sconti e
                         tanto altro!</label>
                 </div>
             </div>
         </div>
         <p id="copyright" class="mb-0 pb-3 text-center">© Copyright Ticket2you</p>
     </footer>
-    
+
     <script>
 
         let btnLogOut = document.querySelector("#btnLogOut");
 
         function controllaUtente() {
 
-        let utente = JSON.parse(localStorage.getItem("utente"));
-        if (utente == null || utente.tipo != "B") {
-            location.href = "404.html";
-        } else {
-            btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); //
-            btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
-        }
+            let utente = JSON.parse(localStorage.getItem("utente"));
+            if (utente == null || utente.tipo != "B") {
+                location.href = "404.html";
+            } else {
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); //
+                btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
+            }
         }
         window.addEventListener("DOMContentLoaded", controllaUtente);
 
@@ -157,45 +161,70 @@
         }
         btnLogOut.addEventListener("click", logOut);
 
-        
+
         function getPrenotazioni() {
             let URL = "http://localhost:9007/p/prenotazioni";
             fetch(URL)
-            .then(data => data.json())
-            .then(res => {
-                let prenotazioniDB = [];
-                
-                res.forEach(prenotazione => {
-                    prenotazioniDB.push(prenotazione);
-                });
-                localStorage.setItem("prenotazioniRegistrate", JSON.stringify(prenotazioniDB));
-            })
+                .then(data => data.json())
+                .then(res => {
+                    let prenotazioniDB = [];
+
+                    res.forEach(prenotazione => {
+                        prenotazioniDB.push(prenotazione);
+                    });
+                    localStorage.setItem("prenotazioniRegistrate", JSON.stringify(prenotazioniDB));
+                })
         }
 
         let ul = document.querySelector("#ul");
 
         function creaLista() {
-            
+
             let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"))
 
             prenotazioniRegistrate.forEach(prenotazione => {
-                
+
                 let li = document.createElement("li");
                 li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center")
-           
-                li.innerHTML = 
-                `
+
+                li.innerHTML =
+                    `
                     <span>
                         <strong>NOME</strong>:  ${prenotazione.nome_evento} <br>
                         <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
                         <strong>ORA</strong>:   ${prenotazione.ora} <br>
                         <strong>POSTI</strong>: ${prenotazione.posti}
-                    </span>                
-                    <span class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </span> 
+                    <div id="form"></div>               
+                    <span>
+                        <button id="modifica" class="btn text-secondary">
+                        <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
+                        </button>
+                        
+                        <button id="cancella" class="btn text-secondary">
+                            <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
+                        </button>
                     </span>
                 `
                 ul.appendChild(li);
+
+                let div = document.querySelector("#form");
+                let modifica = document.querySelector("#modifica");
+
+                modifica.addEventListener("click", function () {
+
+                    let form = document.createElement("form");
+
+                    form.innerHTML =
+                        `
+                    <input type="number" class="w-25" id="postiForm" aria-describedby="posti">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    
+                    `
+
+                    div.appendChild(form);
+
+                })
             });
 
 
@@ -206,16 +235,17 @@
 
         // <span>${prenotazione.id} | ${prenotazione.data_evento} | ${prenotazione.ora} | ${prenotazione.posti}</span> 
 
-       /* 
-       <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Evento 1</span>                
-                    <span class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    </span>
-            </li>
-              */
+        /*
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+                     <span>Evento 1</span>                
+                     <span class="form-check">
+                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                     </span>
+             </li>
+               */
 
     </script>
 
 </body>
+
 </html>
