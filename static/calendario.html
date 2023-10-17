@@ -195,9 +195,9 @@
 
             let fullDate = new Date();
 
-            let giorno = dataOdierna.getDate(); 
-            let mese = dataOdierna.getMonth() + 1; 
-            let anno = dataOdierna.getFullYear(); 
+            let giorno = fullDate.getDate(); 
+            let mese = fullDate.getMonth() + 1; 
+            let anno = fullDate.getFullYear(); 
 
             let dataCorrente = anno+"-"+mese+"-"+giorno;
             console.log(dataCorrente);
@@ -221,6 +221,7 @@
             localStorage.setItem("eventiTrascorsiArray", JSON.stringify(eventiTrascorsiArray));
         }
 
+
         function createRow() {
 
             // POPOLO LA TABELLA DEGLI EVENTI IN ARRIVO
@@ -230,9 +231,9 @@
 
             // ordino l'array di eventi in arrivo sulla base della data evento
 
-            // eventiInArrivo.sort(function (evenoA, eventoB) {
-            //     return eventoB.data - evenoA.data;
-            // })
+            eventiInArrivo.sort(function (evenoA, eventoB) {
+                return eventoB.data - evenoA.data;
+            })
 
             // ciclo l'array con gli eventi ordinati e per ogni oggetto evento creo una riga nella tabella 
             eventiInArrivo.forEach(evento => {
@@ -292,7 +293,11 @@
                 })
         }
 
-        document.addEventListener("DOMContentLoaded", createRow);
+        document.addEventListener("DOMContentLoaded", function(){
+
+            separaEventi();
+            createRow();
+        });
 
             // fetch("http://localhost:9007/e/eventi/eventiArrivo")
             //     .then(response => response.json())
