@@ -182,53 +182,87 @@
 
             let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"))
 
+            let id = 0;
+
             prenotazioniRegistrate.forEach(prenotazione => {
 
-                let li = document.createElement("li");
-                li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center")
+                id++;                
 
-                li.innerHTML =
-                    `
+                let li = document.createElement("li");
+                li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
+
+                li.innerHTML = 
+                `
                     <span>
                         <strong>NOME</strong>:  ${prenotazione.nome_evento} <br>
                         <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
                         <strong>ORA</strong>:   ${prenotazione.ora} <br>
-                        <strong>POSTI</strong>: ${prenotazione.posti}
+                        <strong>POSTI</strong>: <span id="posti${id}">${prenotazione.posti}</span>
                     </span> 
-                    <div id="form"></div>               
+                    <div class="form"></div>
                     <span>
-                        <button id="modifica" class="btn text-secondary">
-                        <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
+                        <button data-id="posti${id}" class="modifica btn text-secondary">
+                            <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
                         </button>
                         
-                        <button id="cancella" class="btn text-secondary">
+                        <button class="cancella btn text-secondary">
                             <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
                         </button>
                     </span>
-                `
+                `;
+
                 ul.appendChild(li);
 
-                let div = document.querySelector("#form");
-                let modifica = document.querySelector("#modifica");
+               
 
-                modifica.addEventListener("click", function () {
+                let formDiv = li.querySelector(".form");
+                let modificaButton = li.querySelector(".modifica");
+                modificaButton.getAttribute("data-id");
+                console.log(modificaButton.getAttribute("data-id"));
 
-                    let form = document.createElement("form");
-
-                    form.innerHTML =
-                        `
-                    <input type="number" class="w-25" id="postiForm" aria-describedby="posti">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                 modificaButton.addEventListener("click", function () {
                     
-                    `
+                    //  let form = document.createElement("form");
 
-                    div.appendChild(form);
+                    //  let inputMod = document.createElement("input");
+                    //  inputMod.value = prenotazione.posti;
+                    //  inputMod.setAttribute("id", "mio" + this.getAttribute("data-id"))
+                    //  let btnMod = document.createElement("button");
+                    //  btnMod.innerHTML = "salva";
 
-                })
-            });
+                    //  form.appendChild(inputMod);
+                    //  form.appendChild(btnMod);
+
+                    //  btnMod.addEventListener("click", function() {
+                    //  //document.querySelector("#" + modificaButton.getAttribute("data-id")).innerHTML = document.querySelector("#" + inputMod.getAttribute("data-id")).value
+                    //  console.log(modificaButton.getAttribute("data-id"));
+                    //  console.log(modificaButton.getAttribute("data-id"));
+
+                       
+                    //  })
+                
+
+                            console.log(this.getAttribute("data-id"));
+                // formDiv.appendChild(form);
+                  });
+                })}
+                    // let btnSubmit = document.querySelector(".btnSubmit");
+
+                    // btnSubmit.addEventListener("click", function() {
+
+                    //     if(postiForm.value != null){
+                    //         document.querySelector("#posti" + id).innerHTML = document.querySelector("#postiForm").value;
+                    //     }
+                    // })
+
+            
+
+                
+           
 
 
-        }
+
+        
 
         document.addEventListener("DOMContentLoaded", getPrenotazioni);
         document.addEventListener("DOMContentLoaded", creaLista);
