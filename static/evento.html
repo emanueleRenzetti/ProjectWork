@@ -405,7 +405,7 @@
             let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
             let caratteristiche = `${evento.caratteristiche}`
             data.innerHTML = `${evento.data_evento}`;
-            prezzo.innerHTML = `€ ${evento.prezzo}.00`;
+            prezzo.innerHTML = `€ ${evento.prezzo}`;
             if(postiRimanenti<=0){
                 disponibilita.innerHTML = "Posti esauriti!";
                 let btnCompra = document.querySelector("#compra");
