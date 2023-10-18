@@ -23,6 +23,8 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
+	
+	
 
 	@Override
 	public Prenotazione get(int id) {
