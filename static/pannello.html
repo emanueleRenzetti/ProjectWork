@@ -152,7 +152,7 @@
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="locandina">Locandina</label>
-                                                    <!-- UPLOAD FILE -->
+                                                    <input type="text" id="locandina" name="locandina" class="form-control"/>
                                                 </div>
                                     
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -241,7 +241,7 @@
 
 
 
-
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function(){
@@ -369,7 +369,7 @@
         
         
         
-        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento){
+        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
             this.tipologia = tipologia;
             this.caratteristiche = caratteristiche;
             this.descrizione = descrizione;
@@ -377,6 +377,7 @@
             this.prezzo = prezzo;
             this.disponibilita = disponibilita;
             this.data_evento = data_evento;
+            this.locandina = locandina;
         }
 
         function addEvent(){
@@ -389,7 +390,9 @@
             formAddModal.data_evento.value.trim() != "") {
 
 
-                let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value);
+                let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value, null);
+
+                localStorage.setItem("nuovoEvento", JSON.stringify(nuovoEvento));
 
                 fetch("http://localhost:9007/e/eventi", {
     
@@ -400,10 +403,10 @@
                     body: JSON.stringify(nuovoEvento)
                 })
                 .then(data => {return data.json()})
-            }
 
-            location.reload();
-            // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito
+                location.reload();
+                // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito
+            }
         }
         formAddModal.addEventListener("submit", addEvent);
 
