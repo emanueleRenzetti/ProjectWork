@@ -533,17 +533,18 @@
                 let idEventoDaModificare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
                 // creo un oggetto con costruttore Evento2() con i valori attuali del form di modifica
-                let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogoUpdate.value, prezzoUpdate.value, postiUpdate.value, dataUpdate.value, locandinaUpdate.value);
+                let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogo_eventoUpdate.value, prezzoUpdate.value, postiUpdate.value, data_eventoUpdate.value, locandinaUpdate.value);
                 
                 fetch("http://localhost:9007/e/eventi", {
     
-                    method: "PATCH",
+                    method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(eventoDaModificare)
                 })
                 .then(data => {return data.json()})
+                .then(location.reload());
             })
         }
         btnAggiorna.addEventListener("click", updateEvent);  
@@ -584,7 +585,7 @@
 
         function deleteEvent(){  
 
-            let idDaEliminare = localStorage.getItem("idEventoSelezionato");
+            let idDaEliminare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
             fetch(`http://localhost:9007/e/eventi/` + idDaEliminare, {
     
