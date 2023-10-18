@@ -573,13 +573,10 @@
                     body: JSON.stringify(nuovoEvento)
                 })
                 .then(data => {return data.json()})
+                .then(location.reload());
             }
         }
-        formAddModal.addEventListener("submit", function(){
-            addEvent();
-            location.reload();
-            // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito nel db
-        });
+        formAddModal.addEventListener("submit", addEvent)
 
 
 
