@@ -493,7 +493,7 @@
         
         
         
-        function updateEvent(){
+        function updateEvent(event){
             let eventoSelezionato = JSON.parse(localStorage.getItem("eventoSelezionato"));
 
             let tipoUpdate = formUpdateModal.querySelector("#tipoUpdate");
@@ -506,6 +506,8 @@
             let locandinaUpdate = formUpdateModal.querySelector("#locandinaUpdate");
 
             if (eventoSelezionato != null) {
+
+                // per settare i campi del form di modifica con le info dell'evento selezionato
                 
                 tipoUpdate.value = eventoSelezionato.tipologia;
                 caratteristicheUpdate.value = eventoSelezionato.caratteristiche;
@@ -516,16 +518,12 @@
                 data_eventoUpdate.value = eventoSelezionato.data_evento;
                 locandinaUpdate.value = eventoSelezionato.locandina;
             }else{
-                // btnAggiorna.addEventListener('show.bs.modal', function(event){
-                //     event.stopPropagation();
-                // })
-
                 // se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
-                btnAggiorna.removeAttribute("data-bs-toggle");
-                btnAggiorna.removeAttribute("data-bs-target");
-            
-                console.log(btnAggiorna.getAttribute("data-bs-target"));
 
+                updateModal.addEventListener('show.bs.modal', function (event) {
+                    event.preventDefault(); 
+                });
+            
                 alert("Devi prima selezionare l'evento da modificare");
             }
 
@@ -548,7 +546,6 @@
                 .then(data => {return data.json()})
             })
         }
-        // per settare i campi del form di modifica con i le info dell'evento selezionatp selezionato
         btnAggiorna.addEventListener("click", updateEvent);  
         
         
