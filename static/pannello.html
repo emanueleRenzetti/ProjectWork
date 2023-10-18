@@ -12,6 +12,10 @@
         #btnDeleteEvent:hover, #btnAggiungi:hover {
             color: #fff;
         }
+
+        .table-striped #adminTable tr td{
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -212,19 +216,19 @@
     
 
 
-                        <table class="table table-striped tabel-hover">
+                        <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>eventoID</th>
-                                    <th>Tipo Evento</th>
-                                    <th>Caratteristiche</th>
-                                    <th>Descrizione</th>
-                                    <th>Luogo</th>
-                                    <th>Prezzo</th>
-                                    <th>Posti</th>
-                                    <th>Data Evento</th>
-                                    <th>Locandina</th>
-                                    <th class="text-primary text-center">seleziona evento</th>
+                                    <th scope="col">eventoID</th>
+                                    <th scope="col">Tipo Evento</th>
+                                    <th scope="col">Caratteristiche</th>
+                                    <th scope="col">Descrizione</th>
+                                    <th scope="col">Luogo</th>
+                                    <th scope="col">Posti</th>
+                                    <th scope="col">Data Evento</th>
+                                    <th scope="col">Locandina</th>
+                                    <th scope="col">Prezzo €</th>
+                                    <th scope="col" class="text-primary text-center">seleziona evento</th>
                                 </tr>
                             </thead>
     
@@ -310,18 +314,19 @@
 
                 let luogoEvento = document.createElement('td')
                 luogoEvento.textContent = evento.luogo_evento
+                
+                let postiEvento = document.createElement('td')
+                postiEvento.textContent = evento.disponibilita
+                
+                let dataEvento = document.createElement('td')
+                dataEvento.textContent = evento.data_evento
+                // dataEvento.setAttribute("colspan", "2")
+                
+                let locandinaEvento = document.createElement('td')
+                locandinaEvento.textContent = evento.locandina
 
                 let prezzoEvento = document.createElement('td')
                 prezzoEvento.textContent = evento.prezzo
-
-                let dataEvento = document.createElement('td')
-                dataEvento.textContent = evento.data_evento
-
-                let postiEvento = document.createElement('td')
-                postiEvento.textContent = evento.disponibilita
-
-                let locandinaEvento = document.createElement('td')
-                locandinaEvento.textContent = evento.locandina
 
                 // redio button della singola riga
                 let tdRadioEvento = document.createElement('td')
@@ -336,7 +341,7 @@
                 tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
                 console.log(tdRadioEvento);
 
-                TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, prezzoEvento, dataEvento, postiEvento, locandinaEvento, tdRadioEvento);
+                TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
 
                 adminTable.append(TR);
             }));
@@ -387,10 +392,11 @@
             formAddModal.luogo_evento.value.trim() != "" &&
             formAddModal.prezzo.value.trim() != "" &&
             formAddModal.posti.value.trim() != "" &&
-            formAddModal.data_evento.value.trim() != "") {
+            formAddModal.data_evento.value.trim() != "" && 
+            formAddModal.locandina.value.trim() != "") {
 
 
-                let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value, null);
+                let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value, formAddModal.locandina.value);
 
                 localStorage.setItem("nuovoEvento", JSON.stringify(nuovoEvento));
 
@@ -403,12 +409,13 @@
                     body: JSON.stringify(nuovoEvento)
                 })
                 .then(data => {return data.json()})
-
-                location.reload();
-                // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito
             }
         }
-        formAddModal.addEventListener("submit", addEvent);
+        formAddModal.addEventListener("submit", function(){
+            addEvent();
+            location.reload();
+            // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito nel db
+        });
 
 
 
