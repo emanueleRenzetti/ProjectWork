@@ -577,7 +577,7 @@
     const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
 
     const monthYearLabel = document.getElementById("month-year");
-    monthYearLabel.textContent = new Date(currentYear, currentMonth).toLocaleString('it-it', { month: 'long', year: 'numeric' }).toLocaleUpperCase();
+    monthYearLabel.innerHTML = new Date(currentYear, currentMonth).toLocaleString('it-it', { month: 'long', year: 'numeric' }).toLocaleUpperCase();
 
     for (let i = 0; i < firstDay; i++) {
       const emptyDay = document.createElement("li");
@@ -591,6 +591,8 @@
     }
   }
 
+  
+
   function previousMonth() {
     if (currentMonth === 0) {
       currentMonth = 11;
@@ -599,6 +601,7 @@
       currentMonth--;
     }
     generateCalendar();
+    updateCalendar();
   }
 
   function nextMonth() {
@@ -609,6 +612,7 @@
       currentMonth++;
     }
     generateCalendar();
+    updateCalendar();
   }
 
   generateCalendar(); 
@@ -618,29 +622,38 @@
   //eventi su calendario
 
   function updateCalendar() {
-      const daysUl = document.getElementById("days");
+  const daysUl = document.getElementById("days");
+  const mese = document.getElementById("month-year");
 
-      // Clear previous highlighting
-      let eventiCalendar = document.querySelectorAll(".available");
-      eventiCalendar.forEach((date) => date.classList.remove("available"));
+  // Clear previous highlighting
+  let eventiCalendar = document.querySelectorAll(".available");
+  eventiCalendar.forEach((date) => date.classList.remove("available"));
 
-      // Highlight event dates
-      eventiRegistrati.forEach((evento) => {
-        const dataEvento = new Date(evento.data_evento);
-        const day = dataEvento.getDate();
+  // Highlight event dates
+  eventiRegistrati.forEach((evento) => {
 
+    // Iterate through the date elements and compare with the event date
+    const dateElements = daysUl.getElementsByTagName("li");
+    for (let i = 0; i < dateElements.length; i++) {
 
-        const dateLi = daysUl.querySelector(`li:nth-child(${day + 7})`); // Adding 7 to skip weekdays
-        if (dateLi) {
-          dateLi.classList.add("available");
-          dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
-        }
-      });
+      const dateLi = dateElements[i];
+      const day = parseInt(dateLi.textContent.trim(), 10);
+      const month = mese.getMonth() + 1; // JavaScript months are 0-based
+
+      if (day == evento.getDate() && month == (evento.getMonth() + 1)) {
+        dateLi.classList.add("available");
+        dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
+        break; // Exit the loop once a match is found
+      }
     }
+  });
+}
+
 
     
     function saveEventToLocalStorage(evento) {
       localStorage.setItem("evento", JSON.stringify(evento));
+
       location.href ="evento.html";
     }
 
