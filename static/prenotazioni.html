@@ -80,6 +80,8 @@
 
     <main>
 
+        
+
         <div class="container" id="list">
 
             <h1 class="m-0 pt-1">LISTA EVENTI E PARTECIPAZIONI</h1>
@@ -309,6 +311,7 @@
         function modificaPosti() {
 
             let nPosti = document.querySelector("#nPosti");
+            
 
             fetch("http://localhost:9007/p/prenotazioni/" + prenotId)
                 .then(resp => resp.json())
@@ -328,9 +331,11 @@
                                 return data.json()
                             })
                             .then(response => {
+
                                 alert("preotazione modificata");
-                                location.reload();
+                                 location.reload();
                             })
+                           
                 })
 
         }
