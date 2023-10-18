@@ -124,6 +124,24 @@
                 </div>
             </div>
         </div>
+        <div class="modal" tabindex="-1" id="modalElimina">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Elimina prenotazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sei sicuro di voler eliminare la prenotazione?</p>
+                        <p>Non è previsto alcuno rimborso</p>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-outline-danger" id="saveDelete">Conferma</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </main>
@@ -170,6 +188,14 @@
     <script>
         let btnLogOut = document.querySelector("#btnLogOut");
 
+        function logOut() {
+            localStorage.removeItem("utente");
+            location.reload();
+            location.href = "home.html";
+        }
+
+        btnLogOut.addEventListener("click", logOut);
+
         function controllaUtente() {
 
             let utente = JSON.parse(localStorage.getItem("utente"));
@@ -182,14 +208,6 @@
         }
         window.addEventListener("DOMContentLoaded", controllaUtente);
 
-        function logOut() {
-            localStorage.removeItem("utente");
-            location.reload();
-            location.href = "home.html";
-        }
-        btnLogOut.addEventListener("click", logOut);
-
-
         function getPrenotazioni() {
             let URL = "http://localhost:9007/p/prenotazioni";
             fetch(URL)
@@ -201,47 +219,56 @@
                         prenotazioniDB.push(prenotazione);
                     });
                     localStorage.setItem("prenotazioniRegistrate", JSON.stringify(prenotazioniDB));
+
+                    creaLista();
                 })
         }
 
-        let ul = document.querySelector("#ul");
 
-        function Prenotazione(data_evento, ora, posti, utenti_id, nome_evento) {
-            this.data_evento = data_evento;
+
+        function Prenotazione(ora, posti, utenti_id, evento_id, prezzo) {
+
             this.ora = ora;
             this.posti = posti;
             this.utenti_id = utenti_id;
-            this.nome_evento = nome_evento;
+            this.evento_id = evento_id;
+            this.prezzo = prezzo;
         }
 
         function creaLista() {
 
-            let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"))
+            let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"));
+
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
 
 
 
             prenotazioniRegistrate.forEach(prenotazione => {
 
+                let evento = eventiRegistrati.find(function (res) {
+                    return res.id == this.evento_id
+                }, prenotazione);
 
+                let ul = document.querySelector("#ul");
 
                 let li = document.createElement("li");
                 li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
-
+                //                 // console.log(evento);
                 li.innerHTML =
                     `
                         <span>
-                            <strong>NOME</strong>:  ${prenotazione.nome_evento} <br>
-                            <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
+                            <strong>NOME</strong>:  ${evento.descrizione} <br>
+                            <strong>DATA</strong>:  ${evento.data_evento} <br> 
                             <strong>ORA</strong>:   ${prenotazione.ora} <br>
                             <strong>POSTI</strong>: ${prenotazione.posti}
                         </span> 
                         
                         <span>
-                            <button  class="modifica btn text-secondary" data-bs-toggle="modal" data-bs-target="#modal" type="button">
+                            <button  class="modifica btn text-secondary" data-bs-toggle="modal" data-bs-target="#modal" type="button" onclick="salvaId(${prenotazione.id})">
                                 <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
                             </button>
                             
-                            <button class="cancella btn text-secondary">
+                            <button class="cancella btn text-secondary" data-bs-toggle="modal" data-bs-target="#modalElimina" type="button" onclick="salvaId(${prenotazione.id})">
                                 <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
                             </button>
                         </span>
@@ -250,27 +277,69 @@
                 ul.appendChild(li);
 
 
-                let saveChanges = document.querySelector("#saveChanges");
-                let nPosti = document.querySelector("#nPosti");
-
-
-                saveChanges.addEventListener("click", function () {
-
-                    let nuovaPrenotazione = new Prenotazione(prenotazione.data_evento, prenotazione.ora,
-                        nPosti.value, prenotazione.utenti_id, prenotazione.nome_evento)
-
-
-
-
-
-
-                });
             })
         }
 
+        let saveChanges = document.querySelector("#saveChanges");
+        saveChanges.addEventListener("click", modificaPosti);
+
+        let saveDelete = document.querySelector("#saveDelete");
+        saveDelete.addEventListener("click", eliminaPrenotazione);
+
+        let prenotId = 0;
+
+        function salvaId(prenotazioneId) {
+            //console.log(prenotazioneId);
+            prenotId = prenotazioneId
+        }
+
+        function eliminaPrenotazione() {
+
+            alert("Prenotazione eliminata")
+
+            fetch("http://localhost:9007/p/prenotazioni/" + prenotId, {
+                method: "DELETE"
+            })
+            .then(location.reload())
+
+            
+
+
+
+        }
+
+        function modificaPosti() {
+            //console.log("modificaPosti");
+            let nPosti = document.querySelector("#nPosti");
+            // let nuovaPrenotazione = new Prenotazione(prenotazione.ora, nPosti.value, prenotazione.utenti_id, prenotazione.evento_id, prenotazione.prezzo)
+
+            fetch("http://localhost:9007/p/prenotazioni/" + prenotId)
+                .then(resp => resp.json())
+                .then(dati => {
+                    dati.posti = nPosti.value;
+
+                    let URL = "http://localhost:9007/p/prenotazioni";
+                    fetch(URL, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(dati)
+
+                        })
+                        .then(data => {
+                            return data.json()
+                        })
+                        .then(response => {
+                            alert("preotazione modificata");
+                            location.reload();
+                        })
+                })
+
+        }
 
         document.addEventListener("DOMContentLoaded", getPrenotazioni);
-        document.addEventListener("DOMContentLoaded", creaLista);
+        //document.addEventListener("DOMContentLoaded", creaLista);
     </script>
 
 </body>

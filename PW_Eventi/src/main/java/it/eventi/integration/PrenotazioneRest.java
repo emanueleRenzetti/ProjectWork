@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +48,11 @@ public class PrenotazioneRest {
 	@GetMapping("prenotazioni/utente/{id}")
 	List<Prenotazione> getByUtenteId(@PathVariable int id){
 		return service.getByUtenteId(id);
+	}
+	
+	@DeleteMapping("prenotazioni/{id}")
+	void delete(@PathVariable int id) {
+			service.delete(id);
 	}
 	
 }
