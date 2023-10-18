@@ -227,11 +227,66 @@ body {
     width: 60%;
     margin: 2rem;
     }
+
+.month ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $secondary;
+    color: white;
+    padding: 0.3rem;
+    list-style: none;
+  }
+
+  .month ul li {
+    cursor: pointer;
+  }
+
+  .weekdays {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    padding: 5px;
+  }
+
+  .weekdays li {
+    padding: 5px;
+  }
+
+  .days {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .days li {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  .prev, .next {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 3rem;
+  }
+
+  .available{
+    background-color: rgb(86, 255, 109) !important;
+    color: white;
+  }
+
 }
+
+
 
 #hero {
     #map {
-        height: 50vh;
+        height: 70vh;
         width: 100%;
     }
     i{

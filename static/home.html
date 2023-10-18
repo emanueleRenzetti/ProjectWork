@@ -190,13 +190,27 @@
                     <div class="col-lg-6 d-flex flex-column align-items-center">
                         <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
                         
-                        <a href="calendario.html" class="text-decoration-none">
-                            <div class="d-flex flex-column align-items-center">
-
-                                <img src="./img/calendar.svg" alt="" id="calendarIcon">
-
-                                <p>Clicca per essere reindirizzato al calendario</p>
-                        </a>
+                            <div class="month">
+                                <ul>
+                                  <li class="prev" onclick="previousMonth()">&#10094;</li>
+                                  <li id="month-year"></li>
+                                  <li class="next" onclick="nextMonth()">&#10095;</li>
+                                </ul>
+                              </div>
+                              
+                              <ul class="weekdays">
+                                <li>Lun</li>
+                                <li>Mar</li>
+                                <li>Mer</li>
+                                <li>Gio</li>
+                                <li>Ven</li>
+                                <li>Sab</li>
+                                <li>Dom</li>
+                              </ul>
+                              
+                              <ul id="days" class="days">
+                              </ul>
+                        
                     </div>
                 </div>
 
@@ -525,8 +539,8 @@
 
         let selectEventi = document.querySelector("#selectEventi");
 
+        let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
         function getSelect() {
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
 
             eventiRegistrati.forEach(evento => {
                 let option = document.createElement("option");
@@ -546,6 +560,94 @@
         document.addEventListener("DOMContentLoaded", verificaLog);
         form.addEventListener("submit", accedi);
         btnLogout.addEventListener("click", logOut);
+
+
+
+
+        //calendario
+  let currentMonth = 9; // (0-based index)
+  let currentYear = 2023;
+
+
+  function generateCalendar() {
+    const daysUl = document.getElementById("days");
+    daysUl.innerHTML = ''; // Clear the previous month's days
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    const monthYearLabel = document.getElementById("month-year");
+    monthYearLabel.textContent = new Date(currentYear, currentMonth).toLocaleString('it-it', { month: 'long', year: 'numeric' }).toLocaleUpperCase();
+
+    for (let i = 0; i < firstDay; i++) {
+      const emptyDay = document.createElement("li");
+      daysUl.appendChild(emptyDay);
+    }
+
+    for (let day = 1; day <= lastDay; day++) {
+      const dayLi = document.createElement("li");
+      dayLi.textContent = day;
+      daysUl.appendChild(dayLi);
+    }
+  }
+
+  function previousMonth() {
+    if (currentMonth === 0) {
+      currentMonth = 11;
+      currentYear--;
+    } else {
+      currentMonth--;
+    }
+    generateCalendar();
+  }
+
+  function nextMonth() {
+    if (currentMonth === 11) {
+      currentMonth = 0;
+      currentYear++;
+    } else {
+      currentMonth++;
+    }
+    generateCalendar();
+  }
+
+  generateCalendar(); 
+
+
+
+  //eventi su calendario
+
+  function updateCalendar() {
+      const daysUl = document.getElementById("days");
+
+      // Clear previous highlighting
+      let eventiCalendar = document.querySelectorAll(".available");
+      eventiCalendar.forEach((date) => date.classList.remove("available"));
+
+      // Highlight event dates
+      eventiRegistrati.forEach((evento) => {
+        const dataEvento = new Date(evento.data_evento);
+        const day = dataEvento.getDate();
+
+
+        const dateLi = daysUl.querySelector(`li:nth-child(${day + 7})`); // Adding 7 to skip weekdays
+        if (dateLi) {
+          dateLi.classList.add("available");
+          dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
+        }
+      });
+    }
+
+    
+    function saveEventToLocalStorage(evento) {
+      localStorage.setItem("evento", JSON.stringify(evento));
+      location.href ="evento.html";
+    }
+
+    // Initial calendar generation
+    updateCalendar();
+
+  
 
 
 

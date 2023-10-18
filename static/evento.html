@@ -79,16 +79,17 @@
 
     <main>
 
-        <h1 class="text-center py-5" id="nomeEvento"></h1>
+        <h1 class="text-center py-5 fw-bold" id="nomeEvento"></h1>
 
         <section id="hero">
 
 
 
             <div class="mb-5">
-                <div class="row g-3">
+                <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-1"></div>
+                    <div class="col-8">
                         <img id="imgEvento" class="img-fluid shadow" src="" alt="">
                         <!-- <div>
                                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
@@ -100,13 +101,14 @@
 
 
 
-                
 
-                    <div class="col-4"></div>
+
+                    <div class="col-1"></div>
 
 
                     <!--side menu-->
-                    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-2 mt-0 shadow">
+                    <div
+                        class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-2 mt-0 shadow float-end">
 
                         <p class="d-flex align-items-center flex-shrink-0 p-3 border-bottom fs-5 fw-semibold">
                             Dettagli evento
@@ -116,9 +118,9 @@
 
                         <div class="list-group list-group-flush border-bottom">
                             <div class="row w-100 align-items-center p-2">
-      
+
                                 <i class="bi bi-map fw-bolder fs-2 col-3"></i>
-                                
+
                                 <div class="d-flex flex-column justify-content-center col-6">
                                     <div class="fw-semibold">Città</div>
                                     <p id="citta" class="mb-0"></p>
@@ -130,9 +132,9 @@
 
                         <div class="list-group list-group-flush border-bottom p-2">
                             <div class="row w-100 align-items-center">
-      
+
                                 <i class="bi bi-calendar-day fs-1 col-3"></i>
-                                
+
                                 <div class="d-flex flex-column justify-content-center col-6">
                                     <div class="fw-semibold">Data</div>
                                     <p id="data" class="mb-0"></p>
@@ -143,10 +145,10 @@
 
                         <div class="list-group list-group-flush border-bottom p-2">
                             <div class="row w-100 align-items-center">
-      
-    
+
+
                                 <i class="bi bi-people-fill fs-1 col-3"></i>
-                                
+
                                 <div class="d-flex flex-column justify-content-center col-9">
                                     <div class="fw-semibold">Posti rimasti</div>
                                     <p id="disponibilita" class="mb-0"></p>
@@ -157,9 +159,9 @@
 
                         <div class="list-group list-group-flush border-bottom p-2">
                             <div class="row w-100 align-items-center">
-      
+
                                 <i class="bi bi-tag fs-1 col-3"></i>
-                                
+
                                 <div class="d-flex flex-column justify-content-center col-9">
                                     <div class="fw-semibold">Prezzo</div>
                                     <p id="prezzo" class="mb-0"></p>
@@ -171,8 +173,9 @@
 
 
                 </div><!--row-->
-
-                <div id="map" class="w-100"></div>
+                
+                    <div id="map" class="w-100 mt-5 shadow"></div>
+              
             </div>
 
 
@@ -263,9 +266,6 @@
 
                         marker = L.marker([latitude, longitude]).addTo(map)
                             .bindPopup(`${evento.luogo_evento}`).openPopup();
-
-                        // Ottieni il meteo per le coordinate
-                        getWeatherData(latitude, longitude);
                     } else {
                         alert('Indirizzo non trovato.');
                     }
@@ -347,6 +347,7 @@
         form.addEventListener("submit", accedi);
         btnLogout.addEventListener("click", logOut);
     </script>
+
     <script>
         function trovaEvento() {
             let evento = JSON.parse(localStorage.getItem("evento"));
@@ -356,7 +357,7 @@
             let data = document.querySelector("#data");
             let disponibilita = document.querySelector("#disponibilita");
             let prezzo = document.querySelector("#prezzo");
-            
+
 
             imgTag.setAttribute("src", "./img/" + evento.locandina);
 
@@ -364,10 +365,10 @@
             let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
             let caratteristiche = `${evento.caratteristiche}`
             data.innerHTML = `${evento.data_evento}`;
-            prezzo.innerHTML = `${evento.prezzo}.00`;
+            prezzo.innerHTML = `€ ${evento.prezzo}.00`;
             disponibilita.innerHTML = `Ancora ${evento.disponibilita} posti rimasti!`;
             citta.innerHTML = `${evento.luogo_evento}`;
-            
+
             nomeEvento.innerHTML = nome;
 
 
