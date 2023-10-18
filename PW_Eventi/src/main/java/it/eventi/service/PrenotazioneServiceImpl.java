@@ -59,4 +59,12 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 		return dao.cercaPerUtente(utente_id);
 	}
 
+
+
+	@Override
+	public List<Prenotazione> getByEventoId(int evento_id) {
+		// TODO Auto-generated method stub
+		return dao.cercaPerEvento(evento_id);
+	}
+
 }

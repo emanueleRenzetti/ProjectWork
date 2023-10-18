@@ -12,4 +12,5 @@ public interface PrenotazioneService {
 	Prenotazione update(Prenotazione p);
 	void delete(int id);
 	List<Prenotazione> getByUtenteId(int utente_id);
+	List<Prenotazione> getByEventoId(int evento_id);
 }

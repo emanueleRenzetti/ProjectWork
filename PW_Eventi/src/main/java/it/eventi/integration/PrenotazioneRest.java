@@ -50,6 +50,11 @@ public class PrenotazioneRest {
 		return service.getByUtenteId(id);
 	}
 	
+	@GetMapping("prenotazioni/evento/{id}")
+	List<Prenotazione> getByEventoId(@PathVariable int id){
+		return service.getByEventoId(id);
+	}
+	
 	@DeleteMapping("prenotazioni/{id}")
 	void delete(@PathVariable int id) {
 			service.delete(id);

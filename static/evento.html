@@ -276,7 +276,7 @@
             // const address = document.getElementById('indirizzo').value;
             let evento = JSON.parse(localStorage.getItem("evento"));
 
-            console.log(evento);
+            // console.log(evento);
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${evento.luogo_evento}`)
                 .then(response => response.json())
                 .then(data => {
@@ -378,6 +378,18 @@
     <script>
         let evento = JSON.parse(localStorage.getItem("evento"));
 
+        let postiPrenotati = 0;
+        function recuperaPosti(){
+            fetch(`http://localhost:9007/p/prenotazioni/evento/${evento.id}`)
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(prenotazione => {
+                    postiPrenotati += prenotazione.posti;
+                    trovaEvento();
+                });
+            })
+        }
+
         function trovaEvento() {
             let imgTag = document.querySelector("#imgEvento");
             let nomeEvento = document.querySelector("#nomeEvento");
@@ -389,13 +401,22 @@
 
             imgTag.setAttribute("src", "./img/" + evento.locandina);
 
-
+            let postiRimanenti = evento.disponibilita-postiPrenotati;
             let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
             let caratteristiche = `${evento.caratteristiche}`
             data.innerHTML = `${evento.data_evento}`;
             prezzo.innerHTML = `€ ${evento.prezzo}.00`;
-            disponibilita.innerHTML = `Ancora ${evento.disponibilita} posti rimasti!`;
+            if(postiRimanenti<=0){
+                disponibilita.innerHTML = "Posti esauriti!";
+                let btnCompra = document.querySelector("#compra");
+                btnCompra.setAttribute("disabled","");
+                btnCompra.setAttribute("class","btn btn-outline-accent rounded-2 text-dark");
+                btnCompra.textContent="POSTI ESAURITI";
+            }else{
+                disponibilita.innerHTML = `Ancora ${postiRimanenti} posti rimasti!`;
+            }
             citta.innerHTML = `${evento.luogo_evento}`;
+
 
             nomeEvento.innerHTML = nome;
         }
@@ -423,7 +444,7 @@
 
 
 
-        document.addEventListener("DOMContentLoaded", trovaEvento);
+        document.addEventListener("DOMContentLoaded", recuperaPosti);
     </script>
 </body>
 
