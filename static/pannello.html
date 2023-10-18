@@ -105,7 +105,7 @@
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-4 text-dark" id="addModalLabel">Aggiungi un nuovo evento</h1>
+                                                <h1 class="modal-title fs-4 text-success" id="addModalLabel">Aggiungi un nuovo evento</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body p-4">
@@ -159,7 +159,7 @@
                                                     <input type="text" id="locandina" name="locandina" class="form-control"/>
                                                 </div>
                                     
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
                                     
                                                 <!-- Submit button -->
                                                 <button type="submit" id="btnAddEvent" class="btn btn-outline-success">Aggiungi</button>
@@ -237,7 +237,7 @@
                                                     <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control"/>
                                                 </div>
                                     
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
                                     
                                                 <!-- Submit button -->
                                                 <button type="submit" id="btnAddEvent" class="btn btn-outline-success">Modifica</button>
@@ -269,7 +269,7 @@
                                                 <p>Sei sicuro di voler cancellare l'evento ?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
                                                 <button type="button" id="btnDeleteEvent" class="btn btn-outline-danger">Elimina definitivamente</button>
                                             </div>
                                         </div>
@@ -364,6 +364,9 @@
         let addModal = document.querySelector("#addModal");
         let formAddModal = addModal.querySelector("form");  // FORM PER AGGIUNGERE UN EVENTO
 
+        let updateModal = document.querySelector("#updateModal");
+        let formUpdateModal = updateModal.querySelector("form");  // FORM PER MODIFICARE UN EVENTO
+
         let btnDeleteEvent = document.querySelector("#btnDeleteEvent");  // BTN ELIMINA DEFINITIVAMENTE
 
 
@@ -446,7 +449,6 @@
 
                         // l'id del radio button corrisponde all'id dell'evento
                         let idEventoSelezionato = radio.id;
-                        console.log(radio);
                         console.log("id evento selezionato: " + idEventoSelezionato);
 
                         localStorage.setItem("idEventoSelezionato", JSON.stringify(idEventoSelezionato));
@@ -465,7 +467,7 @@
                         let tdLocandinaEvento = trEvento.querySelector(".tdLocandinaEvento").textContent;
                         let tdPrezzoEvento = trEvento.querySelector(".tdPrezzoEvento").textContent;
                         
-                        let eventoSelezionato = new Evento(tdIdEvento, tdTipoEvento, tdCaratteristicheEvento, tdDescrizioneEvento, tdLuogoEvento, tdPostiEvento, tdDataEvento, tdLocandinaEvento, tdPrezzoEvento);
+                        let eventoSelezionato = new Evento(tdTipoEvento, tdCaratteristicheEvento, tdDescrizioneEvento, tdLuogoEvento, tdPrezzoEvento, tdPostiEvento, tdDataEvento, tdLocandinaEvento);
 
                         localStorage.setItem("eventoSelezionato", JSON.stringify(eventoSelezionato));
                     }
@@ -476,7 +478,25 @@
         
         
         function updateEvent(){
+            let tipoUpdate = formUpdateModal.querySelector("#tipoUpdate");
+            let caratteristicheUpdate = formUpdateModal.querySelector("#caratteristicheUpdate");
+            let descrizioneUpdate = formUpdateModal.querySelector("#descrizioneUpdate");
+            let luogoUpdate = formUpdateModal.querySelector("#luogoUpdate");
+            let prezzoUpdate = formUpdateModal.querySelector("#prezzoUpdate");
+            let postiUpdate = formUpdateModal.querySelector("#postiUpdate");
+            let dataUpdate = formUpdateModal.querySelector("#dataUpdate");
+            let locandinaUpdate = formUpdateModal.querySelector("#locandinaUpdate");
 
+            let eventoSelezionato = JSON.parse(localStorage.getItem("eventoSelezionato"));
+
+            tipoUpdate.value = eventoSelezionato.tipologia;
+            caratteristicheUpdate.value = eventoSelezionato.caratteristiche;
+            descrizioneUpdate.value = eventoSelezionato.descrizione;
+            luogoUpdate.value = eventoSelezionato.luogo_evento;
+            prezzoUpdate.value = eventoSelezionato.prezzo;
+            postiUpdate.value = eventoSelezionato.disponibilita;
+            dataUpdate.value = eventoSelezionato.data_evento;
+            locandinaUpdate.value = eventoSelezionato.locandina;
         }
         
         
