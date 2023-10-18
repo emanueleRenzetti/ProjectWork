@@ -311,7 +311,7 @@
 
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
-        4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+            4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -507,8 +507,8 @@
         let cards = document.querySelector("#cards");
 
         function creaCards() {
-
             let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
+
 
             eventiRegistrati.forEach(evento => {
 
@@ -521,12 +521,12 @@
                 card.setAttribute("onclick", `vaiAllaPag(${idEvento})`)
                 card.addEventListener("mouseover", ingrandisci);
                 card.addEventListener("mouseout", restringi);
-                
-                function ingrandisci(){
+
+                function ingrandisci() {
                     card.style.transform = "scale(1.1)";
                 }
-        
-                function restringi(){
+
+                function restringi() {
                     card.style.transform = "scale(1)";
                 }
 
@@ -655,6 +655,7 @@
         //eventi su calendario
 
         function updateCalendar() {
+            let eventiInArrivo = JSON.parse(localStorage.getItem("eventiArrivoArray"));
             const daysUl = document.getElementById("days");
             const mese = document.getElementById("month-year");
 
@@ -663,7 +664,7 @@
             eventiCalendar.forEach((date) => date.classList.remove("available"));
 
             // Highlight event dates
-            eventiRegistrati.forEach((evento) => {
+            eventiInArrivo.forEach((evento) => {
 
                 // Iterate through the date elements and compare with the event date
                 const dateElements = daysUl.getElementsByTagName("li");
@@ -671,12 +672,15 @@
 
                     const dateLi = dateElements[i];
                     const day = parseInt(dateLi.textContent.trim(), 10);
-                    const month = mese.getMonth() + 1; // JavaScript months are 0-based
+                    const month = currentMonth + 1;
 
-                    if (day == evento.getDate() && month == (evento.getMonth() + 1)) {
+
+
+                    let eventDate = new Date(evento.data_evento);
+                    console.log(eventDate);
+                    if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
                         dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
-                        break; // Exit the loop once a match is found
                     }
                 }
             });
@@ -686,7 +690,6 @@
 
         function saveEventToLocalStorage(evento) {
             localStorage.setItem("evento", JSON.stringify(evento));
-
             location.href = "evento.html";
         }
 
