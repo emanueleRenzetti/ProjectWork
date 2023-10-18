@@ -39,6 +39,23 @@
                         <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent"
                                 href="#">Prenotazioni</a></li>
 
+                        
+                               
+                                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+
+                                <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                                  <div class="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                  </div>
+                                  <div class="offcanvas-body">
+                                    <p>Try scrolling the rest of the page to see this option in action.</p>
+                                  </div>
+                                </div>
+                                
+
+
+
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
                                 type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
@@ -89,7 +106,7 @@
                 <div class="row">
 
                     <div class="col-1"></div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <img id="imgEvento" class="img-fluid shadow" src="" alt="">
                         <!-- <div>
                                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
@@ -108,7 +125,7 @@
 
                     <!--side menu-->
                     <div
-                        class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-2 mt-0 shadow float-end">
+                        class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-3 mt-0 shadow float-end">
 
                         <p class="d-flex align-items-center flex-shrink-0 p-3 border-bottom fs-5 fw-semibold">
                             Dettagli evento
@@ -168,14 +185,34 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="list-group list-group-flush border-bottom p-2">
+                            <div class="row w-100 align-items-center">
+
+                                <div class="col-3">
+                                    <i class="bi bi-cart3 fs-1"></i>
+                                </div>
+
+                                <div class="col-9">
+                                    <button id="compra" class="btn btn-accent rounded-2"
+                                        onclick="aggiungiCarrello()">Aggiungi al
+                                        Carrello</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
                     </div> <!--lareale-->
 
 
 
                 </div><!--row-->
-                
-                    <div id="map" class="w-100 mt-5 shadow"></div>
-              
+
+                <div id="map" class="w-100 mt-5 shadow"></div>
+
             </div>
 
 
@@ -349,8 +386,9 @@
     </script>
 
     <script>
+        let evento = JSON.parse(localStorage.getItem("evento"));
+
         function trovaEvento() {
-            let evento = JSON.parse(localStorage.getItem("evento"));
             let imgTag = document.querySelector("#imgEvento");
             let nomeEvento = document.querySelector("#nomeEvento");
             let citta = document.querySelector("#citta");
@@ -370,6 +408,25 @@
             citta.innerHTML = `${evento.luogo_evento}`;
 
             nomeEvento.innerHTML = nome;
+        }
+
+        
+
+        function aggiungiCarrello() {
+            let carrelloUtente = localStorage.getItem("Carrello");
+            let arrCarrello = [];
+            console.log(carrelloUtente);
+
+            if(carrelloUtente == null){
+            arrCarrello.push(evento);
+            localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
+
+            }else{
+                let altriArticoli = JSON.parse(carrelloUtente);
+                arrCarrello.push(altriArticoli);
+                arrCarrello.push(evento);
+                localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
+            }
 
 
         }
