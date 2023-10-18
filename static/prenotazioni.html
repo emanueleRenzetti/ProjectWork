@@ -201,7 +201,7 @@
         function controllaUtente() {
 
             let utente = JSON.parse(localStorage.getItem("utente"));
-            if (utente == null || utente.tipo != "B") {
+            if (utente == null) {
                 location.href = "404.html";
             } else {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); //
