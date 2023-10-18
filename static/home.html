@@ -92,23 +92,27 @@
                     <!-- Slides -->
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/concerto.png" alt="Immagine 1">
-                    </div><!--Fine slide-->
+                    </div>
+                    <!--Fine slide-->
 
 
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/highway.png" alt="Immagine 2">
-                    </div><!--Fine slide-->
+                    </div>
+                    <!--Fine slide-->
 
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/rassegna.png" alt="Immagine 2">
-                    </div><!--Fine slide-->
+                    </div>
+                    <!--Fine slide-->
 
 
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/ted.png" alt="Immagine 3">
-                    </div><!--Fine slide-->
+                    </div>
+                    <!--Fine slide-->
 
 
                 </div>
@@ -135,7 +139,8 @@
 
 
 
-        <section class="py-4"> <!--idea Eventi Passati - zac-->
+        <section class="py-4">
+            <!--idea Eventi Passati - zac-->
             <div class="container">
                 <div class="text-center pb-5">
                     <h2 class="fw-bold">Più info</h2>
@@ -189,39 +194,41 @@
 
                     <div class="col-lg-6 d-flex flex-column align-items-center">
                         <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
-                        
-                            <div class="month">
-                                <ul>
-                                  <li class="prev" onclick="previousMonth()">&#10094;</li>
-                                  <li id="month-year"></li>
-                                  <li class="next" onclick="nextMonth()">&#10095;</li>
-                                </ul>
-                              </div>
-                              
-                              <ul class="weekdays">
-                                <li>Lun</li>
-                                <li>Mar</li>
-                                <li>Mer</li>
-                                <li>Gio</li>
-                                <li>Ven</li>
-                                <li>Sab</li>
-                                <li>Dom</li>
-                              </ul>
-                              
-                              <ul id="days" class="days">
-                              </ul>
-                        
+
+                        <div class="month">
+                            <ul>
+                                <li class="prev" onclick="previousMonth()">&#10094;</li>
+                                <li id="month-year"></li>
+                                <li class="next" onclick="nextMonth()">&#10095;</li>
+                            </ul>
+                        </div>
+
+                        <ul class="weekdays">
+                            <li>Lun</li>
+                            <li>Mar</li>
+                            <li>Mer</li>
+                            <li>Gio</li>
+                            <li>Ven</li>
+                            <li>Sab</li>
+                            <li>Dom</li>
+                        </ul>
+
+                        <ul id="days" class="days">
+                        </ul>
+
                     </div>
                 </div>
 
 
 
 
-            </div><!--row-->
+            </div>
+            <!--row-->
 
 
             </div>
-        </section><!--mappeEventi-->
+        </section>
+        <!--mappeEventi-->
     </main>
 
 
@@ -303,7 +310,8 @@
         var marker; // Dichiarazione globale della variabile marker
 
         // Creazione della mappa
-        var map = L.map('map').setView([43.178865128124244, 12.310475342504484], 4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+        var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
+        4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -421,7 +429,7 @@
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
                 btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none");
 
-                if (utente.tipo == 'A') {  // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
+                if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                     let liPannello = document.querySelector(".linkPannello");
 
                     liPannello.setAttribute("class", "nav-item linkPannello");
@@ -434,7 +442,8 @@
                         location.href = "pannello.html";
                     });
                 }
-                if (utente.tipo == 'B') {  // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                if (utente.tipo ==
+                    'B') { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
                     let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
 
                     linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
@@ -489,8 +498,7 @@
                     });
                     console.log(eventiDB);
                     localStorage.setItem("eventiRegistrati", JSON.stringify(eventiDB));
-                }
-                )
+                })
         }
 
 
@@ -500,7 +508,7 @@
 
         function creaCards() {
 
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"))
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
 
             eventiRegistrati.forEach(evento => {
 
@@ -509,6 +517,8 @@
 
                 let card = document.createElement("div");
                 card.classList.add("card", "h-100");
+                let idEvento = evento.id;
+                card.setAttribute("onclick", `vaiAllaPag(${idEvento})`)
 
                 let img = document.createElement("img");
                 img.classList.add("card-img-top");
@@ -536,10 +546,19 @@
 
         }
 
+        function vaiAllaPag(id) {
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
+            let mioEvento = eventiRegistrati.find(function (res) {
+                return res.id == id;
+            }, id);
+            localStorage.setItem("evento", JSON.stringify(mioEvento));
+            location.href = "evento.html";
+        }
 
         let selectEventi = document.querySelector("#selectEventi");
 
         let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
+
         function getSelect() {
 
             eventiRegistrati.forEach(evento => {
@@ -565,105 +584,103 @@
 
 
         //calendario
-  let currentMonth = 9; // (0-based index)
-  let currentYear = 2023;
+        let currentMonth = 9; // (0-based index)
+        let currentYear = 2023;
 
 
-  function generateCalendar() {
-    const daysUl = document.getElementById("days");
-    daysUl.innerHTML = ''; // Clear the previous month's days
+        function generateCalendar() {
+            const daysUl = document.getElementById("days");
+            daysUl.innerHTML = ''; // Clear the previous month's days
 
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-    const monthYearLabel = document.getElementById("month-year");
-    monthYearLabel.innerHTML = new Date(currentYear, currentMonth).toLocaleString('it-it', { month: 'long', year: 'numeric' }).toLocaleUpperCase();
+            const monthYearLabel = document.getElementById("month-year");
+            monthYearLabel.innerHTML = new Date(currentYear, currentMonth).toLocaleString('it-it', {
+                month: 'long',
+                year: 'numeric'
+            }).toLocaleUpperCase();
 
-    for (let i = 0; i < firstDay; i++) {
-      const emptyDay = document.createElement("li");
-      daysUl.appendChild(emptyDay);
-    }
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement("li");
+                daysUl.appendChild(emptyDay);
+            }
 
-    for (let day = 1; day <= lastDay; day++) {
-      const dayLi = document.createElement("li");
-      dayLi.textContent = day;
-      daysUl.appendChild(dayLi);
-    }
-  }
-
-  
-
-  function previousMonth() {
-    if (currentMonth === 0) {
-      currentMonth = 11;
-      currentYear--;
-    } else {
-      currentMonth--;
-    }
-    generateCalendar();
-    updateCalendar();
-  }
-
-  function nextMonth() {
-    if (currentMonth === 11) {
-      currentMonth = 0;
-      currentYear++;
-    } else {
-      currentMonth++;
-    }
-    generateCalendar();
-    updateCalendar();
-  }
-
-  generateCalendar(); 
+            for (let day = 1; day <= lastDay; day++) {
+                const dayLi = document.createElement("li");
+                dayLi.textContent = day;
+                daysUl.appendChild(dayLi);
+            }
+        }
 
 
 
-  //eventi su calendario
+        function previousMonth() {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            generateCalendar();
+            updateCalendar();
+        }
 
-  function updateCalendar() {
-  const daysUl = document.getElementById("days");
-  const mese = document.getElementById("month-year");
+        function nextMonth() {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            generateCalendar();
+            updateCalendar();
+        }
 
-  // Clear previous highlighting
-  let eventiCalendar = document.querySelectorAll(".available");
-  eventiCalendar.forEach((date) => date.classList.remove("available"));
-
-  // Highlight event dates
-  eventiRegistrati.forEach((evento) => {
-
-    // Iterate through the date elements and compare with the event date
-    const dateElements = daysUl.getElementsByTagName("li");
-    for (let i = 0; i < dateElements.length; i++) {
-
-      const dateLi = dateElements[i];
-      const day = parseInt(dateLi.textContent.trim(), 10);
-      const month = mese.getMonth() + 1; // JavaScript months are 0-based
-
-      if (day == evento.getDate() && month == (evento.getMonth() + 1)) {
-        dateLi.classList.add("available");
-        dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
-        break; // Exit the loop once a match is found
-      }
-    }
-  });
-}
-
-
-    
-    function saveEventToLocalStorage(evento) {
-      localStorage.setItem("evento", JSON.stringify(evento));
-
-      location.href ="evento.html";
-    }
-
-    // Initial calendar generation
-    updateCalendar();
-
-  
+        generateCalendar();
 
 
 
+        //eventi su calendario
+
+        function updateCalendar() {
+            const daysUl = document.getElementById("days");
+            const mese = document.getElementById("month-year");
+
+            // Clear previous highlighting
+            let eventiCalendar = document.querySelectorAll(".available");
+            eventiCalendar.forEach((date) => date.classList.remove("available"));
+
+            // Highlight event dates
+            eventiRegistrati.forEach((evento) => {
+
+                // Iterate through the date elements and compare with the event date
+                const dateElements = daysUl.getElementsByTagName("li");
+                for (let i = 0; i < dateElements.length; i++) {
+
+                    const dateLi = dateElements[i];
+                    const day = parseInt(dateLi.textContent.trim(), 10);
+                    const month = mese.getMonth() + 1; // JavaScript months are 0-based
+
+                    if (day == evento.getDate() && month == (evento.getMonth() + 1)) {
+                        dateLi.classList.add("available");
+                        dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
+                        break; // Exit the loop once a match is found
+                    }
+                }
+            });
+        }
+
+
+
+        function saveEventToLocalStorage(evento) {
+            localStorage.setItem("evento", JSON.stringify(evento));
+
+            location.href = "evento.html";
+        }
+
+        // Initial calendar generation
+        updateCalendar();
     </script>
 </body>
 
