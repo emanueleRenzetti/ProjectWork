@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,5 +42,10 @@ public class EventoRest {
 	@PatchMapping("eventi")
 	Evento update(@RequestBody Evento e) {
 		return service.update(e);
+	}
+	
+	@DeleteMapping("eventi/{id}")
+	void delete(@PathVariable int id) {
+		service.delete(id);
 	}
 }
