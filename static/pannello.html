@@ -302,33 +302,40 @@
 
                 const idEvento = document.createElement('td')
                 idEvento.textContent = evento.id;
+                idEvento.setAttribute("class", "tdIdEvento")
 
                 let tipoEvento = document.createElement('td')
                 tipoEvento.textContent = evento.tipologia
+                tipoEvento.setAttribute("class", "tdTipoEvento")                
 
                 let caratteristicheEvento = document.createElement('td')
                 caratteristicheEvento.textContent = evento.caratteristiche
+                caratteristicheEvento.setAttribute("class", "tdCaratteristicheEvento")
 
                 let descrizioneEvento = document.createElement('td')
                 descrizioneEvento.textContent = evento.descrizione
+                descrizioneEvento.setAttribute("class", "tdDescrizioneEvento")
 
                 let luogoEvento = document.createElement('td')
                 luogoEvento.textContent = evento.luogo_evento
+                luogoEvento.setAttribute("class", "tdLuogoEvento")
                 
                 let postiEvento = document.createElement('td')
                 postiEvento.textContent = evento.disponibilita
+                postiEvento.setAttribute("class", "tdPostiEvento")
                 
                 let dataEvento = document.createElement('td')
                 dataEvento.textContent = evento.data_evento
-                // dataEvento.setAttribute("colspan", "2")
+                dataEvento.setAttribute("class", "tdDataEvento")
                 
                 let locandinaEvento = document.createElement('td')
                 locandinaEvento.textContent = evento.locandina
+                locandinaEvento.setAttribute("class", "tdLocandinaEvento")
 
                 let prezzoEvento = document.createElement('td')
                 prezzoEvento.textContent = evento.prezzo
+                prezzoEvento.setAttribute("class", "tdPrezzoEvento")
 
-                // redio button della singola riga
                 let tdRadioEvento = document.createElement('td')
 
                 // let radio = document.createElement("input");
@@ -336,40 +343,61 @@
                 // radio.setAttribute("type", "radio");
                 // radio.setAttribute("name", "flexRadioDefault");
 
-                let radioStructure = `<input class="form-check-input" type="radio" name="flexRadioDefault">`;
+                let radioStructure = `<input id=${evento.id} class="form-check-input radioButton" type="radio" name="flexRadioDefault">`;
                 tdRadioEvento.innerHTML = radioStructure;
                 tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
-                console.log(tdRadioEvento);
 
                 TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
 
                 adminTable.append(TR);
             }));
         }
-        document.addEventListener("DOMContentLoaded", createAdminTable);
+        
+        
+        function recuperaRadio(){
+            let radioButtons = adminTable.querySelectorAll('.radioButton');
+            console.log(radioButtons);
+            
+            [...radioButtons].forEach(radio => {
+                radio.addEventListener("click", function(){
+                    if(this.checked) {
 
+                        console.log(radio);
 
-        let radioButtons = document.querySelectorAll(".radioButton");
-        [...radioButtons].forEach(radio => {
-            radio.addEventListener("input", trovaSelezione);
-        })
+                        // l'id del radio button corrisponde all'id dell'evento
+                        let idEventoSelezionato = this.id;
+                        console.log(idEventoSelezionato);
 
-        // TROVA QUALE RADIO BUTTON E' STATO SELEZIONATO
-        // la funzione parte ogni volta che lo stato di uno dei radio button cambia
-        function trovaSelezione(){
-            radioButtons.forEach(radio => {
-                if (radio.checked) {
-                    let tdRadio = radio.parentElement;
-                    let trow = tdRadio.parentElement;
-                    let td = document.querySelectorAll("td")  // nodelist con tutti i td della riga dell'evento selezionato
-                    let id = td[0].textContent;  // id dell'evento selezionato
-
-                    console.log("id evento selezionato: " + id);
-
-                    sessionStorage.setItem("idEventoSelezionato", id);
-                }
-            });
+                        localStorage.setItem("idEventoSelezionato", JSON.stringify(idEventoSelezionato));
+                    }
+                    
+                });
+            })
         }
+        
+        document.addEventListener("DOMContentLoaded", function(){
+            createAdminTable();
+            recuperaRadio();
+        });
+        
+
+        // // TROVA QUALE RADIO BUTTON E' STATO SELEZIONATO
+        // function trovaSelezione(){
+        //     [...radioButtons].forEach(radio => {
+        //         if (radio.checked) {
+        //             console.log(radio);
+
+        //             let tdRadio = radio.parentElement;
+        //             let trow = tdRadio.parentElement;
+        //             let td = document.querySelectorAll("td")  // nodelist con tutti i td della riga dell'evento selezionato
+        //             let id = td[0].textContent;  // id dell'evento selezionato
+
+        //             console.log("id evento selezionato: " + id);
+
+        //             localStorage.setItem("idEventoSelezionato", JSON.stringify(id));
+        //         }
+        //     });
+        // }
 
         
         
@@ -398,8 +426,6 @@
 
                 let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value, formAddModal.locandina.value);
 
-                localStorage.setItem("nuovoEvento", JSON.stringify(nuovoEvento));
-
                 fetch("http://localhost:9007/e/eventi", {
     
                     method: "POST",
@@ -421,7 +447,7 @@
 
         function deleteEvent(){  // delete by id (da aggiungere su spring)
 
-            let idDaEliminare = sessionStorage.getItem("idEventoSelezionato");
+            let idDaEliminare = localStorage.getItem("idEventoSelezionato");
 
             fetch(`http://localhost:9007/e/eventi/${idDaEliminare}`, {
     
