@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +34,12 @@ public class PrenotazioneRest {
 	}
 	
 	@PostMapping("prenotazioni")
-	Prenotazione add(Prenotazione p) {
+	Prenotazione add(@RequestBody Prenotazione p) {
 		return service.add(p);
+	}
+	
+	@PatchMapping("prenotazioni/{id}")
+	Prenotazione updatePosti(@RequestBody Prenotazione p) {
+		return service.updatePosti(p);
 	}
 }

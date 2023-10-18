@@ -8,4 +8,5 @@ public interface UtenteService {
 
 	List<Utente> getAll();
 	Utente get(int id);
+	Utente update(Utente u);
 }

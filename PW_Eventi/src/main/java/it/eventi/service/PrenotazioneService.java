@@ -9,6 +9,6 @@ public interface PrenotazioneService {
 	List<Prenotazione> getAll();
 	Prenotazione get(int id);
 	Prenotazione add(Prenotazione p);
-	Prenotazione update(Prenotazione p);
+	Prenotazione updatePosti(Prenotazione p);
 	void delete(int id);
 }

@@ -32,16 +32,23 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 		return dao.save(p);
 	}
 
-	@Override
-	public Prenotazione update(Prenotazione p) {
+	//@Override
+	//public Prenotazione updatePosti(Prenotazione p) {
 		// TODO Auto-generated method stub
-		return dao.save(p);
-	}
+		//dao.findById(id).get().setPosti(p.getPosti());
+		//return dao.;
+	//}
 
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		dao.deleteById(id);
+	}
+
+	@Override
+	public Prenotazione updatePosti(Prenotazione p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

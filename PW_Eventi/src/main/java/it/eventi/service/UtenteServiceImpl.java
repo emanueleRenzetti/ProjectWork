@@ -26,4 +26,10 @@ public class UtenteServiceImpl implements UtenteService {
 		return dao.findById(id).get();
 	}
 
+	@Override
+	public Utente update(Utente u) {
+		// TODO Auto-generated method stub
+		return dao.save(u);
+	}
+
 }

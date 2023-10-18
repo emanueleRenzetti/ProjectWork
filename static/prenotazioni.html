@@ -91,13 +91,40 @@
             </ul>
 
             <!-- <button id="modifica" class="btn text-secondary">
-                <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
-            </button>
-            <span>|</span>
-            <button id="cancella" class="btn text-secondary">
-                <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
-            </button> -->
+                    <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
+                </button>
+                <span>|</span>
+                <button id="cancella" class="btn text-secondary">
+                    <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
+                </button> -->
         </div>
+
+
+        <!-- Vertically centered modal -->
+        <!-- <div class="modal-dialog modal-dialog-centered" id="modal">
+        <label for="posti">Posti</label>
+        <input type="number" name="posti" id="">
+    </div> -->
+
+        <div class="modal" tabindex="-1" id="modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifica numero posti</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="posti">Posti</label><br>
+                        <input type="number" name="posti" id="nPosti">
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary" id="saveChanges">Salva</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </main>
 
@@ -138,8 +165,9 @@
         <p id="copyright" class="mb-0 pb-3 text-center">© Copyright Ticket2you</p>
     </footer>
 
-    <script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
         let btnLogOut = document.querySelector("#btnLogOut");
 
         function controllaUtente() {
@@ -178,106 +206,71 @@
 
         let ul = document.querySelector("#ul");
 
+        function Prenotazione(data_evento, ora, posti, utenti_id, nome_evento) {
+            this.data_evento = data_evento;
+            this.ora = ora;
+            this.posti = posti;
+            this.utenti_id = utenti_id;
+            this.nome_evento = nome_evento;
+        }
+
         function creaLista() {
 
             let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"))
 
-            let id = 0;
+
 
             prenotazioniRegistrate.forEach(prenotazione => {
 
-                id++;                
+
 
                 let li = document.createElement("li");
                 li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
 
-                li.innerHTML = 
-                `
-                    <span>
-                        <strong>NOME</strong>:  ${prenotazione.nome_evento} <br>
-                        <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
-                        <strong>ORA</strong>:   ${prenotazione.ora} <br>
-                        <strong>POSTI</strong>: <span id="posti${id}">${prenotazione.posti}</span>
-                    </span> 
-                    <div class="form"></div>
-                    <span>
-                        <button data-id="posti${id}" class="modifica btn text-secondary">
-                            <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
-                        </button>
+                li.innerHTML =
+                    `
+                        <span>
+                            <strong>NOME</strong>:  ${prenotazione.nome_evento} <br>
+                            <strong>DATA</strong>:  ${prenotazione.data_evento} <br> 
+                            <strong>ORA</strong>:   ${prenotazione.ora} <br>
+                            <strong>POSTI</strong>: ${prenotazione.posti}
+                        </span> 
                         
-                        <button class="cancella btn text-secondary">
-                            <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
-                        </button>
-                    </span>
-                `;
+                        <span>
+                            <button  class="modifica btn text-secondary" data-bs-toggle="modal" data-bs-target="#modal" type="button">
+                                <i class="bi bi-pen text-verde pe-2"></i>MODIFICA
+                            </button>
+                            
+                            <button class="cancella btn text-secondary">
+                                <i class="bi bi-trash text-danger pe-2"></i>ELIMINA
+                            </button>
+                        </span>
+                    `;
 
                 ul.appendChild(li);
 
-               
 
-                let formDiv = li.querySelector(".form");
-                let modificaButton = li.querySelector(".modifica");
-                modificaButton.getAttribute("data-id");
-                console.log(modificaButton.getAttribute("data-id"));
+                let saveChanges = document.querySelector("#saveChanges");
+                let nPosti = document.querySelector("#nPosti");
 
-                 modificaButton.addEventListener("click", function () {
-                    
-                    //  let form = document.createElement("form");
 
-                    //  let inputMod = document.createElement("input");
-                    //  inputMod.value = prenotazione.posti;
-                    //  inputMod.setAttribute("id", "mio" + this.getAttribute("data-id"))
-                    //  let btnMod = document.createElement("button");
-                    //  btnMod.innerHTML = "salva";
+                saveChanges.addEventListener("click", function () {
 
-                    //  form.appendChild(inputMod);
-                    //  form.appendChild(btnMod);
-
-                    //  btnMod.addEventListener("click", function() {
-                    //  //document.querySelector("#" + modificaButton.getAttribute("data-id")).innerHTML = document.querySelector("#" + inputMod.getAttribute("data-id")).value
-                    //  console.log(modificaButton.getAttribute("data-id"));
-                    //  console.log(modificaButton.getAttribute("data-id"));
-
-                       
-                    //  })
-                
-
-                            console.log(this.getAttribute("data-id"));
-                // formDiv.appendChild(form);
-                  });
-                })}
-                    // let btnSubmit = document.querySelector(".btnSubmit");
-
-                    // btnSubmit.addEventListener("click", function() {
-
-                    //     if(postiForm.value != null){
-                    //         document.querySelector("#posti" + id).innerHTML = document.querySelector("#postiForm").value;
-                    //     }
-                    // })
-
-            
-
-                
-           
+                    let nuovaPrenotazione = new Prenotazione(prenotazione.data_evento, prenotazione.ora,
+                        nPosti.value, prenotazione.utenti_id, prenotazione.nome_evento)
 
 
 
-        
+
+
+
+                });
+            })
+        }
+
 
         document.addEventListener("DOMContentLoaded", getPrenotazioni);
         document.addEventListener("DOMContentLoaded", creaLista);
-
-        // <span>${prenotazione.id} | ${prenotazione.data_evento} | ${prenotazione.ora} | ${prenotazione.posti}</span> 
-
-        /*
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-                     <span>Evento 1</span>                
-                     <span class="form-check">
-                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                     </span>
-             </li>
-               */
-
     </script>
 
 </body>
