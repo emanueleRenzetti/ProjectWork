@@ -240,7 +240,7 @@
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
                                     
                                                 <!-- Submit button -->
-                                                <button type="submit" id="btnAddEvent" class="btn btn-outline-success">Modifica</button>
+                                                <button type="submit" id="btnUpdateEvent" class="btn btn-outline-success">Modifica</button>
                                             </form>
                                             </div>
                                         </div>
@@ -349,8 +349,22 @@
         
         
 
-        
+        // COSTRUTTORE SENZA ID - DA USARE PER LA POST
         function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
+            this.tipologia = tipologia;
+            this.caratteristiche = caratteristiche;
+            this.descrizione = descrizione;
+            this.luogo_evento = luogo_evento;
+            this.prezzo = prezzo;
+            this.disponibilita = disponibilita;
+            this.data_evento = data_evento;
+            this.locandina = locandina;
+        }
+
+
+        // COSTRUTTORE CON ID - DA USARE PER LA PATCH
+        function Evento2(id, tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
+            this.id = id;
             this.tipologia = tipologia;
             this.caratteristiche = caratteristiche;
             this.descrizione = descrizione;
@@ -368,6 +382,8 @@
         let formUpdateModal = updateModal.querySelector("form");  // FORM PER MODIFICARE UN EVENTO
 
         let btnDeleteEvent = document.querySelector("#btnDeleteEvent");  // BTN ELIMINA DEFINITIVAMENTE
+
+        let btnAggiorna = document.querySelector("#btnAggiorna");    // BTN CHE APRE IL MODAL CON IL FORM PER LA MODIFICA EVENTO
 
 
         let adminTable = document.querySelector("#adminTable"); // tbody tabella admin
@@ -497,8 +513,27 @@
             postiUpdate.value = eventoSelezionato.disponibilita;
             dataUpdate.value = eventoSelezionato.data_evento;
             locandinaUpdate.value = eventoSelezionato.locandina;
+
+            formUpdateModal.addEventListener("submit", function(){
+
+                let idEventoDaModificare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
+
+                // creo un oggetto Evento con i valori attuali del form di modifica
+                let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogoUpdate.value, prezzoUpdate.value, postiUpdate.value, dataUpdate.value, locandinaUpdate.value);
+                
+                fetch("http://localhost:9007/e/eventi", {
+    
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(eventoDaModificare)
+                })
+                .then(data => {return data.json()})
+            })
         }
-        
+        // per settare i campi del form di modifica con i le info dell'evento selezionatp selezionato
+        btnAggiorna.addEventListener("click", updateEvent);  
         
         
 
@@ -534,15 +569,19 @@
 
 
 
-        function deleteEvent(){  // delete by id (da aggiungere su spring)
+        function deleteEvent(){  
 
             let idDaEliminare = localStorage.getItem("idEventoSelezionato");
 
-            fetch(`http://localhost:9007/e/eventi/${idDaEliminare}`, {
+            fetch(`http://localhost:9007/e/eventi/` + idDaEliminare, {
     
                 method: "DELETE"
             })
-            .then(response => response.json());
+            .then(() => {
+                location.reload();
+            });
+
+            console.log(idDaEliminare);
         }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
