@@ -494,31 +494,47 @@
         
         
         function updateEvent(){
+            let eventoSelezionato = JSON.parse(localStorage.getItem("eventoSelezionato"));
+
             let tipoUpdate = formUpdateModal.querySelector("#tipoUpdate");
             let caratteristicheUpdate = formUpdateModal.querySelector("#caratteristicheUpdate");
             let descrizioneUpdate = formUpdateModal.querySelector("#descrizioneUpdate");
-            let luogoUpdate = formUpdateModal.querySelector("#luogoUpdate");
+            let luogo_eventoUpdate = formUpdateModal.querySelector("#luogo_eventoUpdate");
             let prezzoUpdate = formUpdateModal.querySelector("#prezzoUpdate");
             let postiUpdate = formUpdateModal.querySelector("#postiUpdate");
-            let dataUpdate = formUpdateModal.querySelector("#dataUpdate");
+            let data_eventoUpdate = formUpdateModal.querySelector("#data_eventoUpdate");
             let locandinaUpdate = formUpdateModal.querySelector("#locandinaUpdate");
 
-            let eventoSelezionato = JSON.parse(localStorage.getItem("eventoSelezionato"));
+            if (eventoSelezionato != null) {
+                
+                tipoUpdate.value = eventoSelezionato.tipologia;
+                caratteristicheUpdate.value = eventoSelezionato.caratteristiche;
+                descrizioneUpdate.value = eventoSelezionato.descrizione;
+                luogo_eventoUpdate.value = eventoSelezionato.luogo_evento;
+                prezzoUpdate.value = eventoSelezionato.prezzo;
+                postiUpdate.value = eventoSelezionato.disponibilita;
+                data_eventoUpdate.value = eventoSelezionato.data_evento;
+                locandinaUpdate.value = eventoSelezionato.locandina;
+            }else{
+                // btnAggiorna.addEventListener('show.bs.modal', function(event){
+                //     event.stopPropagation();
+                // })
 
-            tipoUpdate.value = eventoSelezionato.tipologia;
-            caratteristicheUpdate.value = eventoSelezionato.caratteristiche;
-            descrizioneUpdate.value = eventoSelezionato.descrizione;
-            luogoUpdate.value = eventoSelezionato.luogo_evento;
-            prezzoUpdate.value = eventoSelezionato.prezzo;
-            postiUpdate.value = eventoSelezionato.disponibilita;
-            dataUpdate.value = eventoSelezionato.data_evento;
-            locandinaUpdate.value = eventoSelezionato.locandina;
+                // se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
+                btnAggiorna.removeAttribute("data-bs-toggle");
+                btnAggiorna.removeAttribute("data-bs-target");
+            
+                console.log(btnAggiorna.getAttribute("data-bs-target"));
+
+                alert("Devi prima selezionare l'evento da modificare");
+            }
+
 
             formUpdateModal.addEventListener("submit", function(){
 
                 let idEventoDaModificare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
-                // creo un oggetto Evento con i valori attuali del form di modifica
+                // creo un oggetto con costruttore Evento2() con i valori attuali del form di modifica
                 let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogoUpdate.value, prezzoUpdate.value, postiUpdate.value, dataUpdate.value, locandinaUpdate.value);
                 
                 fetch("http://localhost:9007/e/eventi", {
