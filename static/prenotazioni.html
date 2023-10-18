@@ -260,7 +260,9 @@
                             <strong>NOME</strong>:  ${evento.descrizione} <br>
                             <strong>DATA</strong>:  ${evento.data_evento} <br> 
                             <strong>ORA</strong>:   ${prenotazione.ora} <br>
-                            <strong>POSTI</strong>: ${prenotazione.posti}
+                            <strong>POSTI</strong>: ${prenotazione.posti} <br>
+                            <strong>TOTALE</strong>: ${prenotazione.prezzo} €
+
                         </span> 
                         
                         <span>
@@ -302,44 +304,39 @@
             })
             .then(location.reload())
 
-            
-
-
-
         }
 
         function modificaPosti() {
-            //console.log("modificaPosti");
+
             let nPosti = document.querySelector("#nPosti");
-            // let nuovaPrenotazione = new Prenotazione(prenotazione.ora, nPosti.value, prenotazione.utenti_id, prenotazione.evento_id, prenotazione.prezzo)
 
             fetch("http://localhost:9007/p/prenotazioni/" + prenotId)
                 .then(resp => resp.json())
                 .then(dati => {
-                    dati.posti = nPosti.value;
+                        dati.posti = nPosti.value;
 
-                    let URL = "http://localhost:9007/p/prenotazioni";
-                    fetch(URL, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(dati)
+                        let URL = "http://localhost:9007/p/prenotazioni";
+                        fetch(URL, {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(dati)
 
-                        })
-                        .then(data => {
-                            return data.json()
-                        })
-                        .then(response => {
-                            alert("preotazione modificata");
-                            location.reload();
-                        })
+                            })
+                            .then(data => {
+                                return data.json()
+                            })
+                            .then(response => {
+                                alert("preotazione modificata");
+                                location.reload();
+                            })
                 })
 
         }
 
         document.addEventListener("DOMContentLoaded", getPrenotazioni);
-        //document.addEventListener("DOMContentLoaded", creaLista);
+
     </script>
 
 </body>
