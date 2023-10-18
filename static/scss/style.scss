@@ -311,3 +311,20 @@ body {
 main {
     min-height: calc(100vh - 350px);
 }
+
+.nav-link {
+    &.active {
+        border-bottom: 3px solid $accent;
+    } 
+
+    i {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .rounded-pill {
+        top: 5px;
+    }
+
+}
+

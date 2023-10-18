@@ -20,7 +20,7 @@
 <body>
 
     <header class="mainHeader">
-        <nav class="navbar navbar-expand-lg bg-secondary">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
 
             <div class="container-fluid">
 
@@ -43,8 +43,19 @@
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
                                 admin</a></li>
 
-                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent"
-                                href="#">Prenotazioni</a></li>
+                        <li class="nav-item d-none linkPrenotazioni">
+                            <a class="nav-link text-accent" href="#">Prenotazioni</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="position-relative nav-link"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                                aria-controls="offcanvasWithBothOptions" href="#">
+                                <i class="bi bi-cart3 text-accent"></i>
+                                <span
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">11</span>
+                            </a>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
@@ -78,8 +89,26 @@
                     </ul>
                 </div>
             </div>
+
+
         </nav>
+
+
+
     </header>
+
+
+
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Try scrolling the rest of the page to see this option in action.</p>
+        </div>
+    </div>
 
 
     <main>
@@ -427,8 +456,8 @@
 
 
             if (utente != undefined) {
-                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
-                btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none");
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none ms-2");
+                btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none ms-2");
 
                 if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                     let liPannello = document.querySelector(".linkPannello");
@@ -444,7 +473,8 @@
                     });
                 }
                 if (utente.tipo ==
-                    'B' || utente.tipo === 'A') { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                    'B' || utente.tipo === 'A'
+                    ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
                     let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
 
                     linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
