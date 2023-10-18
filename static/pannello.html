@@ -350,10 +350,15 @@
                 TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
 
                 adminTable.append(TR);
-            }));
+            }))
+            .then(() => {
+
+                recuperaRadio();
+            });
         }
+        document.addEventListener("DOMContentLoaded", createAdminTable);
         
-        
+
         function recuperaRadio(){
             let radioButtons = adminTable.querySelectorAll('.radioButton');
             console.log(radioButtons);
@@ -362,11 +367,10 @@
                 radio.addEventListener("click", function(){
                     if(this.checked) {
 
-                        console.log(radio);
-
                         // l'id del radio button corrisponde all'id dell'evento
-                        let idEventoSelezionato = this.id;
-                        console.log(idEventoSelezionato);
+                        let idEventoSelezionato = radio.id;
+                        console.log(radio);
+                        console.log("id evento selezionato: " + idEventoSelezionato);
 
                         localStorage.setItem("idEventoSelezionato", JSON.stringify(idEventoSelezionato));
                     }
@@ -375,10 +379,9 @@
             })
         }
         
-        document.addEventListener("DOMContentLoaded", function(){
-            createAdminTable();
-            recuperaRadio();
-        });
+        
+        
+        
         
 
         // // TROVA QUALE RADIO BUTTON E' STATO SELEZIONATO
