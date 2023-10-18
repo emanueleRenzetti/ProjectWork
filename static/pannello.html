@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/style.css">
     <style>
-        #btnElimina:hover, #btnAggiungi:hover {
+        #btnElimina:hover, #btnAggiungi:hover, #btnAggiorna:hover {
             color: #fff;
         }
 
@@ -173,13 +173,79 @@
                                 
                                 
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
-                                    <button id="btnUpdateEvent" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                    <button id="btnAggiorna" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal">
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
                                     </button>
 
                                     <!-- MODAL MODIFICA EVENTO -->
+                                    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-4 text-secondary" id="updateModalLabel">Modifica evento</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-4">
                                     
+                                            <form>
+                                                <!-- tipo -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="tipoUpdate">Tipo</label>
+                                                    <input type="text" id="tipoUpdate" name="tipoUpdate" class="form-control" required title="Inserisci la tipologia evento"/>
+                                                </div>
+                                    
+                                                <!-- caratteristiche -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="caratteristicheUpdate">Caratteristiche</label>
+                                                    <input type="text" id="caratteristicheUpdate" name="caratteristicheUpdate" class="form-control" required title="Inserisci le caratteristiche"/>
+                                                </div>
+    
+                                                <!-- descrizione -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="descrizioneUpdate">Descrizione</label>
+                                                    <input type="text" id="descrizioneUpdate" name="descrizioneUpdate" class="form-control" required title="Inserisci la descrizione"/>
+                                                </div>
+    
+                                                <!-- luogo -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="luogo_eventoUpdate">Luogo</label>
+                                                    <input type="text" id="luogo_eventoUpdate" name="luogo_eventoUpdate" class="form-control" required title="Inserisci l'indirizzo evento"/>
+                                                </div>
+    
+                                                <!-- prezzo -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="prezzoUpdate">Prezzo</label>
+                                                    <input type="number" step="0.01" id="prezzoUpdate" name="prezzoUpdate" class="form-control" required/>
+                                                </div>
+    
+                                                <!-- posti disponibili-->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="postiUpdate">Posti</label>
+                                                    <input type="number" id="postiUpdate" name="postiUpdate" class="form-control" required/>
+                                                </div>
+    
+                                                <!-- data evento -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="data_eventoUpdate">Data</label>
+                                                    <input type="date" id="data_eventoUpdate" name="data_eventoUpdate" class="form-control" required/>
+                                                </div>
+    
+                                                <!-- locandina -->
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="locandinaUpdate">Locandina</label>
+                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control"/>
+                                                </div>
+                                    
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                    
+                                                <!-- Submit button -->
+                                                <button type="submit" id="btnAddEvent" class="btn btn-outline-success">Modifica</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
     
 
@@ -271,18 +337,29 @@
             }
         }
         window.addEventListener("DOMContentLoaded", controllaUtente);
-
-
+        
+        
         function logOut() {
             localStorage.removeItem("utente");
             location.reload();
             location.href = "home.html";
         }
         btnLogOut.addEventListener("click", logOut);
+        
+        
+        
 
-
-
-
+        
+        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
+            this.tipologia = tipologia;
+            this.caratteristiche = caratteristiche;
+            this.descrizione = descrizione;
+            this.luogo_evento = luogo_evento;
+            this.prezzo = prezzo;
+            this.disponibilita = disponibilita;
+            this.data_evento = data_evento;
+            this.locandina = locandina;
+        }
 
         let addModal = document.querySelector("#addModal");
         let formAddModal = addModal.querySelector("form");  // FORM PER AGGIUNGERE UN EVENTO
@@ -373,48 +450,37 @@
                         console.log("id evento selezionato: " + idEventoSelezionato);
 
                         localStorage.setItem("idEventoSelezionato", JSON.stringify(idEventoSelezionato));
+
+                        tdRadio = radio.parentElement;
+                        trEvento = tdRadio.parentElement;  // tr del singolo evento
+                        console.log(trEvento);  
+
+                        let tdIdEvento = trEvento.querySelector(".tdIdEvento").textContent;
+                        let tdTipoEvento = trEvento.querySelector(".tdTipoEvento").textContent;
+                        let tdCaratteristicheEvento = trEvento.querySelector(".tdCaratteristicheEvento").textContent;
+                        let tdDescrizioneEvento = trEvento.querySelector(".tdDescrizioneEvento").textContent;
+                        let tdLuogoEvento = trEvento.querySelector(".tdLuogoEvento").textContent;
+                        let tdPostiEvento = trEvento.querySelector(".tdPostiEvento").textContent;
+                        let tdDataEvento = trEvento.querySelector(".tdDataEvento").textContent;
+                        let tdLocandinaEvento = trEvento.querySelector(".tdLocandinaEvento").textContent;
+                        let tdPrezzoEvento = trEvento.querySelector(".tdPrezzoEvento").textContent;
+                        
+                        let eventoSelezionato = new Evento(tdIdEvento, tdTipoEvento, tdCaratteristicheEvento, tdDescrizioneEvento, tdLuogoEvento, tdPostiEvento, tdDataEvento, tdLocandinaEvento, tdPrezzoEvento);
+
+                        localStorage.setItem("eventoSelezionato", JSON.stringify(eventoSelezionato));
                     }
-                    
                 });
             })
         }
         
         
         
-        
-        
+        function updateEvent(){
 
-        // // TROVA QUALE RADIO BUTTON E' STATO SELEZIONATO
-        // function trovaSelezione(){
-        //     [...radioButtons].forEach(radio => {
-        //         if (radio.checked) {
-        //             console.log(radio);
-
-        //             let tdRadio = radio.parentElement;
-        //             let trow = tdRadio.parentElement;
-        //             let td = document.querySelectorAll("td")  // nodelist con tutti i td della riga dell'evento selezionato
-        //             let id = td[0].textContent;  // id dell'evento selezionato
-
-        //             console.log("id evento selezionato: " + id);
-
-        //             localStorage.setItem("idEventoSelezionato", JSON.stringify(id));
-        //         }
-        //     });
-        // }
-
-        
-        
-        
-        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
-            this.tipologia = tipologia;
-            this.caratteristiche = caratteristiche;
-            this.descrizione = descrizione;
-            this.luogo_evento = luogo_evento;
-            this.prezzo = prezzo;
-            this.disponibilita = disponibilita;
-            this.data_evento = data_evento;
-            this.locandina = locandina;
         }
+        
+        
+        
 
         function addEvent(){
             if (formAddModal.tipo.value.trim() != "" &&
