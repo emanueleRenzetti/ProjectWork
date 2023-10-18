@@ -519,6 +519,16 @@
                 card.classList.add("card", "h-100");
                 let idEvento = evento.id;
                 card.setAttribute("onclick", `vaiAllaPag(${idEvento})`)
+                card.addEventListener("mouseover", ingrandisci);
+                card.addEventListener("mouseout", restringi);
+                
+                function ingrandisci(){
+                    card.style.transform = "scale(1.1)";
+                }
+        
+                function restringi(){
+                    card.style.transform = "scale(1)";
+                }
 
                 let img = document.createElement("img");
                 img.classList.add("card-img-top");
@@ -545,6 +555,7 @@
             });
 
         }
+
 
         function vaiAllaPag(id) {
             let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
