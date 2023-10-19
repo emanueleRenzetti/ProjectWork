@@ -94,7 +94,7 @@
                                     <h4 class="ms-lg-3">Gestisci eventi</h4>
                                 </div>
     
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
+                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
                                     <button type="button" id="btnAggiungi" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="bi bi-calendar2-plus"></i>
                                         <span class="ms-1">Aggiungi</span>
@@ -172,7 +172,7 @@
     
                                 
                                 
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
+                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
                                     <button id="btnAggiorna" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
@@ -251,7 +251,7 @@
 
 
 
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-3">
+                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
                                     <button id="btnElimina" class="btn btn-outline-danger btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
                                         <i class="bi bi-trash"></i>
                                         <span class="ms-1">Elimina</span>
@@ -516,7 +516,6 @@
 
             if (eventoSelezionato != null) {
                 
-
                 // per settare i campi del form di modifica con le info dell'evento selezionato
                 
                 tipoUpdate.value = eventoSelezionato.tipologia;
@@ -527,15 +526,6 @@
                 postiUpdate.value = eventoSelezionato.disponibilita;
                 data_eventoUpdate.value = eventoSelezionato.data_evento;
                 locandinaUpdate.value = eventoSelezionato.locandina;
-            }else{
-
-                //se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
-
-                // alert("Devi prima selezionare l'evento da modificare");
-
-                // updateModal.addEventListener('show.bs.modal', function(event) {
-                //     event.preventDefault(); 
-                // });
             }
 
             formUpdateModal.addEventListener("submit", function(){
@@ -617,8 +607,8 @@
                     localStorage.removeItem("eventoSelezionato");
                     location.reload();
                 });
+            }
         }
-    }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
     </script>
