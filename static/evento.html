@@ -95,6 +95,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="bodyCart">
+            <hr>
             <p>Try scrolling the rest of the page to see this option in action.</p>
         </div>
     </div>
@@ -268,7 +269,6 @@
             </div>
 
         </div>
-
 
         <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
     </footer>
@@ -478,15 +478,19 @@
             // console.log(carrelloUtente);
 
             if (carrelloUtente == null) {
+                console.log("aggiungiCarrello1");
                 arrCarrello.push(evento);
                 localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
 
             } else {
                 let altriArticoli = JSON.parse(carrelloUtente);
+                arrCarrello = [];
                 // arrCarrello.push(altriArticoli);
                 altriArticoli.forEach(element => {
+                    console.log("aggiungiCarrello");
                     arrCarrello.push(element);
                 });
+                console.log("494");
                 arrCarrello.push(evento);
                 localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
             }
@@ -511,17 +515,44 @@
         });
 
         function verificaArticoli(){
+            // bodyCart.innerHTML="";
             let carrello = JSON.parse(localStorage.getItem("Carrello"));
             let nArticoli = document.querySelector("#nArticoli");
+            let bodyCart = document.querySelector("#bodyCart");
             if(carrello.length<=0){
                 nArticoli.textContent="";
             }else{
                 nArticoli.textContent=carrello.length;
-            }
-            let bodyCart = document.querySelector("#bodyCart");
-
-        }
-        
+                bodyCart.innerHTML="";
+                carrello.forEach(element => {
+                    
+                    bodyCart.innerHTML += `<div class="list-group list-group-flush border-bottom">
+                        <div class="row w-100 align-items-center p-2">
+                            <img class="img-fluid" src="./img/${element.locandina}"></img>
+                            <div class="d-flex flex-column justify-content-center col-6">
+                                <div class="fw-semibold">Evento</div>
+                                <p id="" class="mb-0">${element.descrizione}</p>
+                                
+                                <button class="btn btn-outline-danger" onclick="eliminaEvento(${element.id})">Elimina</button>
+                                <button class="btn btn-outline-primary" onclick="eliminaEvento(${element.id})">Compra</button>
+                                </div>
+                                </div>
+                                </div>`;    
+                            });
+                        }
+                    }
+                    
+                    function eliminaEvento(id){
+                        let carrello = JSON.parse(localStorage.getItem("Carrello"));
+                        let element = carrello.find(function (res) {
+                    return res.id == id;
+                }, id);
+                        let nuovoCarrello = carrello.filter(item => item !== element);
+                        localStorage.setItem("Carrello", JSON.stringify(nuovoCarrello));
+                        let bodyCart = document.querySelector("#bodyCart");
+                        bodyCart.innerHTML="";
+                        verificaArticoli();
+                    }
         document.addEventListener("DOMContentLoaded", verificaArticoli);
         document.addEventListener("DOMContentLoaded", recuperaPosti);
     </script>
