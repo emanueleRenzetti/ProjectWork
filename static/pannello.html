@@ -173,7 +173,7 @@
                                 
                                 
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-2">
-                                    <button id="btnAggiorna" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                    <button id="btnAggiorna" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
                                     </button>
@@ -252,7 +252,7 @@
 
 
                                 <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center mb-3">
-                                    <button id="btnElimina" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <button id="btnElimina" class="btn btn-outline-danger btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
                                         <i class="bi bi-trash"></i>
                                         <span class="ms-1">Elimina</span>
                                     </button>
@@ -385,8 +385,14 @@
 
         let btnAggiorna = document.querySelector("#btnAggiorna");    // BTN CHE APRE IL MODAL CON IL FORM PER LA MODIFICA EVENTO
 
+        let btnElimina = document.querySelector("#btnElimina");
 
         let adminTable = document.querySelector("#adminTable"); // tbody tabella admin
+
+        function cambiaAttributo(){
+            btnAggiorna.removeAttribute("disabled");
+            btnElimina.removeAttribute("disabled");
+        }
 
         function createAdminTable(){
 
@@ -439,7 +445,7 @@
                 // radio.setAttribute("type", "radio");
                 // radio.setAttribute("name", "flexRadioDefault");
 
-                let radioStructure = `<input id=${evento.id} class="form-check-input radioButton" type="radio" name="flexRadioDefault">`;
+                let radioStructure = `<input id=${evento.id} onclick="cambiaAttributo()" class="form-check-input radioButton" type="radio" name="flexRadioDefault">`;
                 tdRadioEvento.innerHTML = radioStructure;
                 tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
 
@@ -509,6 +515,7 @@
             let locandinaUpdate = formUpdateModal.querySelector("#locandinaUpdate");
 
             if (eventoSelezionato != null) {
+                
 
                 // per settare i campi del form di modifica con le info dell'evento selezionato
                 
@@ -521,13 +528,14 @@
                 data_eventoUpdate.value = eventoSelezionato.data_evento;
                 locandinaUpdate.value = eventoSelezionato.locandina;
             }else{
+
                 //se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
 
-                alert("Devi prima selezionare l'evento da modificare");
+                // alert("Devi prima selezionare l'evento da modificare");
 
-                updateModal.addEventListener('show.bs.modal', function (event) {
-                    event.preventDefault(); 
-                });
+                // updateModal.addEventListener('show.bs.modal', function(event) {
+                //     event.preventDefault(); 
+                // });
             }
 
             formUpdateModal.addEventListener("submit", function(){
@@ -609,10 +617,8 @@
                     localStorage.removeItem("eventoSelezionato");
                     location.reload();
                 });
-            }else{
-                alert("Devi prima selezionare l'evento da eliminare");
-            }
         }
+    }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
     </script>
