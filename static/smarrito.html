@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404</title>
+    <title>Qualcosa non va</title>
 
     <link rel="stylesheet" href="./css/style.css">
 
@@ -11,33 +11,28 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
-        @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        
         :root {
-        --blue: #0e0620;
+        --blue: #000000;
         --white: #fff;
         --green: #ffda33;
         }
-        main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Nunito Sans";
-        color: var(--blue);
-        font-size: 1em;
-        }
-        h2 {
-        font-weight: bold;
-        }
+
         #button {
-        font-family: "Nunito Sans";
         z-index: 1;
         overflow: hidden;
         background: transparent;
         position: relative;
-        padding: 8px 50px;
+        padding: 6px 30px;
         border-radius: 30px;
         cursor: pointer;
-        font-size: 1em;
+        font-size: 0.9em;
         letter-spacing: 2px;
         transition: 0.2s ease;
         font-weight: bold;
@@ -67,8 +62,8 @@
         }
         }
 
-
     </style>
+
 </head>
 <body>
 
@@ -130,48 +125,38 @@
         </nav>
     </header>
 
-    
-    <!-- <main>
-        <div class="d-flex p-5">
-        
-                <img src="./img/404.svg" alt="" class="img-fluid" style="width: 60%;">
-        
-        
-            <div class="mx-1 align-self-center">
-        
-                <h2>UH OH! Ti sei perso.</h2>
-                <p>La pagina che stai cercando non esiste.
-                    Come sei arrivato qui è un mistero. Ma puoi fare clic sul pulsante qui sotto
-                    per tornare alla home page.
-                </p>
-                <button href="home.html" class="btn green" id="button">HOME</button>
-            </div>
-        </div>
-    </main> -->
     <main>
+
+
         <div class="row align-items-center justify-content-center">
-        
-                <div class="col-6 d-flex justify-content-end">
-                    <img src="./img/404.svg" alt="" class="img-fluid" style="width: 70%;">
-                </div>
-        
-        
-                <div class="col-6">
-            
-                    <h2>UH OH! Ti sei perso.</h2>
-                    <p>La pagina che stai cercando non esiste.
-                        Come sei arrivato qui è un mistero. Ma puoi fare clic sul pulsante qui sotto
-                        per tornare alla home page.
-                    </p>
-                    <button href="home.html" class="btn green" id="button">HOME</button>
-                </div>
+
+            <div class="col-6 d-flex justify-content-end">
+                <img src="./img/403.svg" alt="" class="img-fluid" style="width: 60%;">
+            </div>
+            <div class="col-6 ">
+                <h2>UH OH! Qualcosa non va.</h2>
+                <h5>Non disponi dei permessi necessari per accedere a questa pagina. </h5>
+                    <h5>Effettua una delle operazioni qui sotto...</h5>
+                <br>
+                <ul class="list-unstyled">
+                    <li>
+                        <button class="btn green" id="button"><a href="home.html">HOME</a></button>
+                    </li>
+                    <br>
+                    <li>
+                        <button class="btn green" id="button"><a href="registrati.html">REGISTRATI</a></button>
+                    </li>
+                    <br>
+                    <li>
+                        <h5>...oppure  effettua il login in alto a destra</h5>
+                    </li>
+                </ul>
+            </div>
+
         </div>
+
+
     </main>
-
-
-
-
-
 
     <footer class="bg-secondary text-light mt-7" id="fine">
         <div class="container">
@@ -208,22 +193,8 @@
         </div>
         <p id="copyright" class="mb-0 pb-3 text-center">© Copyright Ticket2you</p>
     </footer>
-
+    
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script>
-
-        let button = document.querySelector("#button");
-
-        button.addEventListener("click", redirect);
-
-        function redirect() {
-            location.href = "home.html";
-        }
-
-    </script>
-
-
-      </body>
+</body>
 </html>
