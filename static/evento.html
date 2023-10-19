@@ -12,13 +12,13 @@
 </head>
 
 <body>
-    <header class="mainHeader shadow">
-        <nav class="navbar navbar-expand-lg bg-secondary">
+    <header class="mainHeader">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
 
-            <div class="container-fluid">
+            <div class="container-fluid me-3">
 
-                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
+                <a href="home.html"><img src="./img/logo.svg" class="img-fluid me-2" id="logo"></a>
+                <a class="navbar-brand text-white" href="home.html"> Ticket<span class="text-accent">2</span>you</a>
 
                 <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -36,15 +36,19 @@
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
                                 admin</a></li>
 
-                        <li class="nav-item d-none linkPrenotazioni"><a class="nav-link text-accent"
-                                href="#">Prenotazioni</a></li>
+                        <li class="nav-item d-none linkPrenotazioni">
+                            <a class="nav-link text-accent" href="#">Prenotazioni</a>
+                        </li>
 
-                        
-                               
-                                
-                                
-
-
+                        <li class="nav-item" id="liCarrello">
+                            <a class="position-relative nav-link"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                                aria-controls="offcanvasWithBothOptions" href="#">
+                                <i class="bi bi-cart3 text-accent"></i>
+                                <span
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
+                            </a>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
@@ -78,9 +82,13 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
 
+
+        </nav>
+
+
+
+    </header>
 
 
 

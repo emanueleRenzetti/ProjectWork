@@ -244,7 +244,7 @@
 
                         <ul id="days" class="days">
                         </ul>
-
+                            <p class="text-center">Clicca sulle disponibilità per più info</p>
                     </div>
                 </div>
 
@@ -727,8 +727,7 @@
                     console.log(eventDate);
                     if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
-                        dateLi.addEventListener("click", () => saveEventToLocalStorage(evento));
-                        dateLi.addEventListener("mouseover", () => creaPopUp(evento))
+                        dateLi.addEventListener("click", () => creaPopUp(evento))
                     }
                 }
             });
@@ -746,20 +745,12 @@
                 cancelButtonText: 'Chiudi'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    localStorage.setItem("evento", JSON.stringify(evento));
+                    location.href = "evento.html";
                 }
             })
         }
 
-
-        function saveEventToLocalStorage(evento) {
-            localStorage.setItem("evento", JSON.stringify(evento));
-            location.href = "evento.html";
-        }
 
         // Initial calendar generation
         updateCalendar();
