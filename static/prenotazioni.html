@@ -87,7 +87,7 @@
 
         <div class="container" id="list">
 
-            <h1 class="m-0 pt-1">LISTA EVENTI E PARTECIPAZIONI</h1>
+            <h2 class="m-0 pt-3 ms-lg-3 fs-2">Elenco prenotazioni</h2>
 
             <hr>
 
@@ -231,9 +231,9 @@
 
 
 
-        function Prenotazione(ora, posti, utenti_id, evento_id, prezzo) {
+        function Prenotazione(posti, utenti_id, evento_id, prezzo) {
 
-            this.ora = ora;
+            
             this.posti = posti;
             this.utenti_id = utenti_id;
             this.evento_id = evento_id;
@@ -264,7 +264,6 @@
                         <span>
                             <strong>NOME</strong>:  ${evento.descrizione} <br>
                             <strong>DATA</strong>:  ${evento.data_evento} <br> 
-                            <strong>ORA</strong>:   ${prenotazione.ora} <br>
                             <strong>POSTI</strong>: ${prenotazione.posti} <br>
                             <strong>TOTALE</strong>: ${prenotazione.prezzo} €
 

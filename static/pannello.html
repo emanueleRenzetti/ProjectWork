@@ -87,15 +87,15 @@
                 <div class="col-lg-12">
                     <div class="table-wrapper">
     
-                        <div class="table-title mb-5">
+                        <div class="table-title">
                             <div class="row">
-    
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-start justify-content-center mb-3">
-                                    <h4 class="ms-lg-3">Gestisci eventi</h4>
+                            <h4 class="ms-lg-3 fs-2">Gestisci eventi</h4><hr>
+                                <div class="col-lg-6 col-6 p-0 d-flex justify-content-lg-start justify-content-center mb-3">
+                                    
                                 </div>
     
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
-                                    <button type="button" id="btnAggiungi" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <div class="col-lg-2 col-2 p-0 d-flex justify-content-lg-end justify-content-center">
+                                    <button type="button" id="btnAggiungi" class="btn btn-outline-success border-0 fs-5" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="bi bi-calendar2-plus"></i>
                                         <span class="ms-1">Aggiungi</span>
                                     </button>
@@ -172,8 +172,8 @@
     
                                 
                                 
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
-                                    <button id="btnAggiorna" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
+                                <div class="col-lg-2 col-2 p-0 d-flex justify-content-lg-end justify-content-center">
+                                    <button id="btnAggiorna" class="btn btn-outline-secondary border-0 fs-5" data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
                                     </button>
@@ -251,8 +251,8 @@
 
 
 
-                                <div class="col-lg-3 col-6 p-0 d-flex justify-content-lg-end justify-content-center">
-                                    <button id="btnElimina" class="btn btn-outline-danger btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
+                                <div class="col-lg-2 col-2 p-0 d-flex justify-content-lg-end justify-content-center">
+                                    <button id="btnElimina" class="btn btn-outline-danger btn-lg border-0 fs-5" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
                                         <i class="bi bi-trash"></i>
                                         <span class="ms-1">Elimina</span>
                                     </button>
@@ -308,6 +308,49 @@
             </div>
         </div>
       </main>
+      <footer class="bg-secondary text-light mt-5" id="fine">
+        <div class="container">
+            <div class="row">
+
+                <div class="py-4 col-lg-8">
+                    <h3><strong>Napoli</strong></h3>
+                    <p>Via S.Domenico 18</p>
+                    <p><strong>Telefono: </strong> 081 718 4444</p>
+                    <p><strong>Email: </strong>Ticket2you@gmail.com</p>
+                    <div id="socials" class="d-flex">
+                        <button class="ri-twitter-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.twitter.com/'"></button>
+                        <button class="ri-facebook-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.facebook.com/'"></button>
+                        <button class="ri-instagram-line btn bg-secondary"
+                            onclick="window.location.href='https://www.instagram.com/'"></button>
+                        <button class="ri-skype-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.skype.com/'"></button>
+                        <button class="ri-linkedin-box-fill btn bg-secondary"
+                            onclick="window.location.href='https://www.linkedin.com/'"></button>
+                    </div>
+                </div>
+
+
+
+                <div class="py-4 col-lg-4">
+
+                    <p><strong>La nostra newsletter</strong></p>
+                    <div class="d-flex gap-3">
+                        <input class="form-control" type="email" id="emailFake">
+                        <button id="btnIscriviti" class="btn btn-primary text-light" type="submit">Iscriviti</button>
+                    </div>
+                    <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
+                        sconti e tanto altro!</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
+    </footer>
 
 
 

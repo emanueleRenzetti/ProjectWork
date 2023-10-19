@@ -12033,7 +12033,10 @@ body {
 }
 
 #cards div .card {
-  background-color: #dee2e6;
+  background-color: #fefefe;
+  width: 200px; /* Imposta la larghezza desiderata */
+  height: 300px; /* Imposta l'altezza desiderata */
+  border: 1px solid #ccc;
 }
 
 #mappeEventi #map {

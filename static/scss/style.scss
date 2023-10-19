@@ -214,7 +214,11 @@ body {
 #cards {
     div {
         .card {
-            background-color: $gray-300;
+            background-color: $white;
+            width: 200px; /* Imposta la larghezza desiderata */
+            height: 300px; /* Imposta l'altezza desiderata */
+            border: 1px solid #ccc;
+            
         }
     }
 }

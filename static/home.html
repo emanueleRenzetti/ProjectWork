@@ -174,7 +174,7 @@
                 <div class="text-center pb-5">
                     <h2 class="fw-bold">Più info</h2>
                 </div>
-                <div class="row row-cols-lg-2 g-5 py-3" id="cards">
+                <div class="row g-5 py-3" id="cards">
 
                 </div>
             </div>
@@ -298,7 +298,7 @@
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
                         <input class="form-control" type="email" id="emailFake">
-                        <button class="btn btn-primary text-light" type="submit">Iscriviti</button>
+                        <button id="btnIscriviti" class="btn btn-primary text-light" type="submit">Iscriviti</button>
                     </div>
                     <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
                         sconti e tanto altro!</label>
@@ -319,6 +319,16 @@
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- pulisci newsletter -->
+    <script>
+        function pulisci() {
+            let emailFake = document.querySelector("#emailFake");
+            emailFake.value = "";
+        }
+        let btnIscriviti = document.querySelector("#btnIscriviti");
+        btnIscriviti.addEventListener("click", pulisci)
+    </script>
 
 
     <!-- MAPPA  -->
@@ -586,7 +596,7 @@
 
 
                 function ingrandisci() {
-                    card.style.transform = "scale(1.1)";
+                    card.style.transform = "scale(1.2)";
                 }
 
                 function restringi() {
@@ -600,6 +610,8 @@
 
                 let cardBody = document.createElement("div");
                 cardBody.classList.add("card-body");
+                cardBody.classList.add("shadow");
+                
 
                 let descrizione = document.createElement("div");
                 descrizione.classList.add("card-text");
