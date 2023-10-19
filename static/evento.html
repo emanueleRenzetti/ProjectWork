@@ -30,7 +30,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
@@ -41,9 +41,9 @@
                         </li>
 
                         <li class="nav-item" id="liCarrello">
-                            <a class="position-relative nav-link"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-                                aria-controls="offcanvasWithBothOptions" href="#">
+                            <a class="position-relative nav-link" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+                                href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
                                 <span
                                     class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
@@ -86,10 +86,18 @@
 
         </nav>
 
-
-
     </header>
 
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Il tuo carrello</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Try scrolling the rest of the page to see this option in action.</p>
+        </div>
+    </div>
 
 
     <main>
@@ -203,11 +211,13 @@
 
 
 
-                    </div> <!--lareale-->
+                    </div>
+                    <!--lareale-->
 
 
 
-                </div><!--row-->
+                </div>
+                <!--row-->
 
                 <div id="map" class="w-100 mt-5 shadow"></div>
 
@@ -366,9 +376,38 @@
 
         function verificaLog() {
             let utente = JSON.parse(localStorage.getItem("utente"));
+
+
             if (utente != undefined) {
-                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
-                btnLogout.setAttribute("class", "btn btn-outline-danger text-decoration-none");
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none ms-2");
+                btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none ms-2");
+
+                if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
+                    let liPannello = document.querySelector(".linkPannello");
+
+                    liPannello.setAttribute("class", "nav-item linkPannello");
+
+                    let linkPannello = liPannello.querySelector("a");
+
+                    console.log(linkPannello);
+
+                    linkPannello.addEventListener("click", function () {
+                        location.href = "pannello.html";
+                    });
+                }
+                if (utente.tipo ==
+                    'B' || utente.tipo === 'A'
+                ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                    let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+
+                    linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+
+                    let liPrenotazioni = linkPrenotazioni.querySelector("a");
+
+                    liPrenotazioni.addEventListener("click", function () {
+                        location.href = "prenotazioni.html";
+                    });
+                }
             }
         }
 
@@ -387,15 +426,16 @@
         let evento = JSON.parse(localStorage.getItem("evento"));
 
         let postiPrenotati = 0;
-        function recuperaPosti(){
+
+        function recuperaPosti() {
             fetch(`http://localhost:9007/p/prenotazioni/evento/${evento.id}`)
-            .then(res => res.json())
-            .then(data => {
-                data.forEach(prenotazione => {
-                    postiPrenotati += prenotazione.posti;
-                    trovaEvento();
-                });
-            })
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(prenotazione => {
+                        postiPrenotati += prenotazione.posti;
+                        trovaEvento();
+                    });
+                })
         }
 
         function trovaEvento() {
@@ -409,18 +449,18 @@
 
             imgTag.setAttribute("src", "./img/" + evento.locandina);
 
-            let postiRimanenti = evento.disponibilita-postiPrenotati;
+            let postiRimanenti = evento.disponibilita - postiPrenotati;
             let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
             let caratteristiche = `${evento.caratteristiche}`
             data.innerHTML = `${evento.data_evento}`;
             prezzo.innerHTML = `€ ${evento.prezzo}`;
-            if(postiRimanenti<=0){
+            if (postiRimanenti <= 0) {
                 disponibilita.innerHTML = "Posti esauriti!";
                 let btnCompra = document.querySelector("#compra");
-                btnCompra.setAttribute("disabled","");
-                btnCompra.setAttribute("class","btn btn-outline-accent rounded-2 text-dark");
-                btnCompra.textContent="POSTI ESAURITI";
-            }else{
+                btnCompra.setAttribute("disabled", "");
+                btnCompra.setAttribute("class", "btn btn-outline-accent rounded-2 text-dark");
+                btnCompra.textContent = "POSTI ESAURITI";
+            } else {
                 disponibilita.innerHTML = `Ancora ${postiRimanenti} posti rimasti!`;
             }
             citta.innerHTML = `${evento.luogo_evento}`;
@@ -429,18 +469,18 @@
             nomeEvento.innerHTML = nome;
         }
 
-        
+
 
         function aggiungiCarrello() {
             let carrelloUtente = localStorage.getItem("Carrello");
             let arrCarrello = [];
             console.log(carrelloUtente);
 
-            if(carrelloUtente == null){
-            arrCarrello.push(evento);
-            localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
+            if (carrelloUtente == null) {
+                arrCarrello.push(evento);
+                localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
 
-            }else{
+            } else {
                 let altriArticoli = JSON.parse(carrelloUtente);
                 arrCarrello.push(altriArticoli);
                 arrCarrello.push(evento);
@@ -450,6 +490,20 @@
 
         }
 
+        let navItems = document.querySelectorAll(".nav-link");
+
+        navItems.forEach(item => {
+            item.addEventListener("mouseover", ingrandisciLink);
+            item.addEventListener("mouseout", restringiLink);
+
+            function ingrandisciLink() {
+                item.style.transform = "scale(1.2)";
+            }
+
+            function restringiLink() {
+                item.style.transform = "scale(1)";
+            }
+        });
 
 
         document.addEventListener("DOMContentLoaded", recuperaPosti);
