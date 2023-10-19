@@ -45,8 +45,8 @@
                                 data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
                                 href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
-                                <span
-                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary" id="nArticoli"></span>
+                                <span class="position-absolute start-100 translate-middle badge rounded-pill bg-primary"
+                                    id="nArticoli"></span>
                             </a>
                         </li>
 
@@ -102,7 +102,80 @@
 
 
     <main>
-
+<div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-fullscreen">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group list-group-flush border-bottom">
+                            <div class="row w-100 align-items-center p-2">
+                                <img class="img-fluid" src="./img/${element.locandina}"></img>
+                                    <div class="d-flex flex-column justify-content-center col-6">
+                                        <div class="fw-semibold">Evento</div>
+                                        <p id="" class="mb-0"></p>
+                                        <p id="" class="mb-0"></p>
+                                        <p><strong>PREZZO:</strong></p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Vai al pagamento</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog modal-fullscreen">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Pagamento</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h1>Pagina di Pagamento Fittizia</h1>
+                        <form>
+                            <div class="form-group">
+                                <label for="cardholder">Titolare della Carta:</label>
+                                <input type="text" id="cardholder" placeholder="Nome e Cognome">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardnumber">Numero della Carta:</label>
+                                <input type="number" id="cardnumber" placeholder="Numero della Carta">
+                            </div>
+                            <div class="form-group">
+                                <label for="expiration">Data di Scadenza:</label>
+                                <input type="text" id="expiration" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV:</label>
+                                <input type="number" id="cvv" placeholder="CVV">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Importo da Pagare:</label>
+                                <input type="number" id="amount" placeholder="Importo in Euro">
+                            </div>
+                            <div class="form-group">
+                                <label for="payment-method">Metodo di Pagamento:</label>
+                                <select id="payment-method">
+                                    <option value="visa">Carta di Credito Visa</option>
+                                    <option value="mastercard">Carta di Credito MasterCard</option>
+                                    <option value="paypal">PayPal</option>
+                                </select>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">torna al riepilogo</button>
+                      <button type="submit">Paga Ora</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         <h1 class="text-center py-5 fw-bold" id="nomeEvento"></h1>
 
         <section id="hero">
@@ -202,9 +275,37 @@
                                 </div>
 
                                 <div class="col-9">
-                                    <button id="compra" class="btn btn-accent rounded-2"
-                                        onclick="aggiungiCarrello()">Aggiungi al
-                                        Carrello</button>
+                                    <p>
+                                        <button class="btn btn-primary mt-3" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseWidthExample" aria-expanded="false"
+                                            aria-controls="collapseWidthExample">
+                                            Seleziona i posti
+                                        </button>
+                                    </p>
+                                </div>
+                                <div style="min-height: 120px;">
+                                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                        <div class="card card-body" style="width: 300px;">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button id="btnRemove"
+                                                        class="btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0">-</button>
+                                                </div>
+                                                <input min="1" id="nPosti" type="number"
+                                                    class="form-control text-center" value="1" readonly>
+                                                <div class="input-group-append">
+                                                    <button id="btnAdd"
+                                                        class="btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4">+</button>
+                                                </div>
+                                            </div>
+                                            <button id="compra" class="btn btn-accent rounded-2 "
+                                                data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                                aria-expanded="false" aria-controls="collapseWidthExample"
+                                                onclick="aggiungiCarrello()">Aggiungi al
+                                                Carrello</button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -224,7 +325,7 @@
 
             </div>
 
-
+            
 
         </section>
 
@@ -275,8 +376,8 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-   
-   <script>
+
+    <script>
         var marker; // Dichiarazione globale della variabile marker
 
         // Creazione della mappa
@@ -390,7 +491,7 @@
 
                     let linkPannello = liPannello.querySelector("a");
 
-                    console.log(linkPannello);
+                    // console.log(linkPannello);
 
                     linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
@@ -425,21 +526,27 @@
 
     <script>
         let evento = JSON.parse(localStorage.getItem("evento"));
-
+        let nPosti = document.querySelector("#nPosti");
         let postiPrenotati = 0;
 
         function recuperaPosti() {
             fetch(`http://localhost:9007/p/prenotazioni/evento/${evento.id}`)
                 .then(res => res.json())
                 .then(data => {
-                    data.forEach(prenotazione => {
-                        postiPrenotati += prenotazione.posti;
+                    // console.log(data);
+                    if (data.length <= 0) {
                         trovaEvento();
-                    });
+                    } else {
+                        data.forEach(prenotazione => {
+                            postiPrenotati += prenotazione.posti;
+                            trovaEvento();
+                        });
+                    }
                 })
         }
 
         function trovaEvento() {
+
             let imgTag = document.querySelector("#imgEvento");
             let nomeEvento = document.querySelector("#nomeEvento");
             let citta = document.querySelector("#citta");
@@ -471,32 +578,82 @@
         }
 
 
-
-        function aggiungiCarrello() {
-            let arrCarrello = [];
+        function verificaCarrello() {
             let carrelloUtente = localStorage.getItem("Carrello");
             // console.log(carrelloUtente);
+            let btnCompra = document.querySelector("#compra");
+
+            if (carrelloUtente != null) {
+                let oggettoNelCarrello = JSON.parse(carrelloUtente).find(function (res) {
+                    return res.id == this.id;
+                }, evento);
+                // console.log(oggettoNelCarrello);
+                if (oggettoNelCarrello != undefined) {
+                    btnCompra.setAttribute("disabled", "");
+                    btnCompra.textContent = "Già nel carrello!";
+                } else {
+                    btnCompra.removeAttribute("disabled");
+                    btnCompra.textContent = "Aggiungi al carrello";
+                }
+            } else {
+                btnCompra.removeAttribute("disabled");
+                btnCompra.textContent = "Aggiungi al carrello";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", verificaCarrello);
+
+        function Prenotazione(utenti_id, evento_id, posti) {
+            this.utenti_id = utenti_id;
+            this.evento_id = evento_id;
+            this.posti = posti;
+        }
+
+        function aggiungiCarrello() {
+
+            // let utenteOn = JSON.parse(localStorage.getItem("utente"));
+            // let prenotazione = new Prenotazione(utenteOn.id, evento.id, Number(nPosti.value));
+            // localStorage.setItem("prenotazione", JSON.stringify(prenotazione));
+
+
+            let arrCarrello = [];
+            let carrelloUtente = JSON.parse(localStorage.getItem("Carrello"));
+            // console.log(carrelloUtente);
+
+            let btnCompra = document.querySelector("#compra");
+
+
 
             if (carrelloUtente == null) {
-                console.log("aggiungiCarrello1");
+                // console.log("aggiungiCarrello1");
                 arrCarrello.push(evento);
                 localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
 
             } else {
-                let altriArticoli = JSON.parse(carrelloUtente);
+
+                let oggettoNelCarrello = carrelloUtente.find(function (res) {
+                    return res.id == this.id;
+                }, evento);
+                // console.log(oggettoNelCarrello);
+                if (oggettoNelCarrello != undefined) {
+                    btnCompra.setAttribute("disabled", "");
+                    btnCompra.textContent = "Già nel carrello!";
+                }
+
+
+                let altriArticoli = carrelloUtente;
                 arrCarrello = [];
                 // arrCarrello.push(altriArticoli);
                 altriArticoli.forEach(element => {
-                    console.log("aggiungiCarrello");
+                    // console.log("aggiungiCarrello");
                     arrCarrello.push(element);
                 });
-                console.log("494");
                 arrCarrello.push(evento);
                 localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
             }
 
             verificaArticoli();
-
+            verificaCarrello();
         }
 
         let navItems = document.querySelectorAll(".nav-link");
@@ -514,45 +671,91 @@
             }
         });
 
-        function verificaArticoli(){
+        function verificaArticoli() {
             // bodyCart.innerHTML="";
             let carrello = JSON.parse(localStorage.getItem("Carrello"));
             let nArticoli = document.querySelector("#nArticoli");
             let bodyCart = document.querySelector("#bodyCart");
-            if(carrello.length<=0){
-                nArticoli.textContent="";
-            }else{
-                nArticoli.textContent=carrello.length;
-                bodyCart.innerHTML="";
-                carrello.forEach(element => {
-                    
-                    bodyCart.innerHTML += `<div class="list-group list-group-flush border-bottom">
-                        <div class="row w-100 align-items-center p-2">
-                            <img class="img-fluid" src="./img/${element.locandina}"></img>
-                            <div class="d-flex flex-column justify-content-center col-6">
-                                <div class="fw-semibold">Evento</div>
-                                <p id="" class="mb-0">${element.descrizione}</p>
-                                
-                                <button class="btn btn-outline-danger" onclick="eliminaEvento(${element.id})">Elimina</button>
-                                <button class="btn btn-outline-primary" onclick="eliminaEvento(${element.id})">Compra</button>
-                                </div>
-                                </div>
-                                </div>`;    
-                            });
-                        }
-                    }
-                    
-                    function eliminaEvento(id){
-                        let carrello = JSON.parse(localStorage.getItem("Carrello"));
-                        let element = carrello.find(function (res) {
-                    return res.id == id;
-                }, id);
-                        let nuovoCarrello = carrello.filter(item => item !== element);
-                        localStorage.setItem("Carrello", JSON.stringify(nuovoCarrello));
-                        let bodyCart = document.querySelector("#bodyCart");
-                        bodyCart.innerHTML="";
-                        verificaArticoli();
-                    }
+
+            if (carrello != null) {
+
+                if (carrello.length <= 0) {
+                    nArticoli.textContent = "";
+                } else {
+                    nArticoli.textContent = carrello.length;
+                    bodyCart.innerHTML = "";
+
+                    idInput = 0;
+
+                    carrello.forEach(element => {
+
+                        let quantita = Number(nPosti.value);
+                        let tot = element.prezzo* Number(nPosti.value);
+
+                        bodyCart.innerHTML += `<div class="list-group list-group-flush border-bottom">
+                                                    <div class="row w-100 align-items-center p-2">
+                                                        <img class="img-fluid" src="./img/${element.locandina}"></img>
+                                                            <div class="d-flex flex-column justify-content-center col-6">
+                                                                <div class="fw-semibold">Evento</div>
+                                                                <p id="" class="mb-0">${element.descrizione}</p>
+                                                                <p id="" class="mb-0">Posti: ${quantita}</p>
+                                                                <p><strong>PREZZO:</strong> ${tot}</p>
+                                                                <button class="btn btn-outline-danger" onclick="eliminaEvento(${element.id})">Elimina</button>
+                                                                <button type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" class="btn btn-outline-primary" onclick="prenotaEvento(${element.id})">Compra</button>
+                                                            </div>
+                                                    </div>
+                                                </div>`;
+                        // <div class="input-group mb-3">
+                        //                                                                     <div class="input-group-prepend">
+                        //                                                                     <button onclick="document.getElementById('quantita${idInput}').stepDown(1)" class="btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0">-</button>
+                        //                                                                     </div>
+                        //                                                                     <input value="${nPosti.value}" min="1" id="quantita${idInput}" type="number" class="form-control text-center" placeholder="1" readonly>
+                        //                                                                     <div class="input-group-append">
+                        //                                                                     <button onclick="document.getElementById('quantita${idInput}').stepUp(1)" class="btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4">+</button>
+                        //                                                                     </div>
+                        //                                                                     <p><strong>PREZZO:</strong> ${tot}</p>
+                        //                                                                 </div>
+
+                        // let inputPosti = document.querySelector(`#inputPosti${element.id}`);
+                        idInput++;
+                    });
+
+                }
+            } else {
+                nArticoli.textContent = "";
+            }
+        }
+
+        function prenotaEvento() {
+            console.log("funzione vuota");
+        }
+
+        function eliminaEvento(id) {
+            let carrello = JSON.parse(localStorage.getItem("Carrello"));
+            let element = carrello.find(function (res) {
+                return res.id == id;
+            }, id);
+            let nuovoCarrello = carrello.filter(item => item !== element);
+            localStorage.setItem("Carrello", JSON.stringify(nuovoCarrello));
+            let bodyCart = document.querySelector("#bodyCart");
+            bodyCart.innerHTML = "";
+            verificaArticoli();
+            verificaCarrello();
+        }
+
+        let btnAdd = document.querySelector("#btnAdd");
+        let btnRemove = document.querySelector("#btnRemove");
+
+        function addPosti() {
+            nPosti.stepUp();
+        }
+
+        function removePosti() {
+            nPosti.stepDown();
+        }
+
+        btnRemove.addEventListener("click", removePosti);
+        btnAdd.addEventListener("click", addPosti);
         document.addEventListener("DOMContentLoaded", verificaArticoli);
         document.addEventListener("DOMContentLoaded", recuperaPosti);
     </script>

@@ -15,7 +15,6 @@ public class Prenotazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private LocalTime ora;
 	private int posti;
 	private int utenti_id;
 	private int evento_id;
@@ -25,12 +24,6 @@ public class Prenotazione {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public LocalTime getOra() {
-		return ora;
-	}
-	public void setOra(LocalTime ora) {
-		this.ora = ora;
 	}
 	public int getPosti() {
 		return posti;
@@ -56,10 +49,6 @@ public class Prenotazione {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-	
-	
-
-	
 	
 	
 }

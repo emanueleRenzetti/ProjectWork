@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagina di Pagamento Fittizia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pagina di Pagamento Fittizia</h1>
+        <form>
+            <div class="form-group">
+                <label for="cardholder">Titolare della Carta:</label>
+                <input type="text" id="cardholder" placeholder="Nome e Cognome">
+            </div>
+            <div class="form-group">
+                <label for="cardnumber">Numero della Carta:</label>
+                <input type="number" id="cardnumber" placeholder="Numero della Carta">
+            </div>
+            <div class="form-group">
+                <label for="expiration">Data di Scadenza:</label>
+                <input type="text" id="expiration" placeholder="MM/AA">
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="number" id="cvv" placeholder="CVV">
+            </div>
+            <div class="form-group">
+                <label for="amount">Importo da Pagare:</label>
+                <input type="number" id="amount" placeholder="Importo in Euro">
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Metodo di Pagamento:</label>
+                <select id="payment-method">
+                    <option value="visa">Carta di Credito Visa</option>
+                    <option value="mastercard">Carta di Credito MasterCard</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+            <button type="submit">Paga Ora</button>
+        </form>
+    </div>
+</body>
+</html>

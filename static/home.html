@@ -48,9 +48,9 @@
                         </li>
 
                         <li class="nav-item" id="liCarrello">
-                            <a class="position-relative nav-link" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
-                                href="#">
+                            <a class="position-relative nav-link"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                                aria-controls="offcanvasWithBothOptions" href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
                                 <span
                                     class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
@@ -208,16 +208,16 @@
                     <div class="col-lg-6 d-flex flex-column align-items-center">
                         <h3 class="py-3">Cerca vicino a te..</h3>
                         <div id="map" class="rounded-5"></div>
-                        
-                        <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra Eventi</button>
-                      <!--  <div class="d-flex gap-3 justify-content-center">
+
+                        <div class="d-flex gap-3 justify-content-center">
 
                             <select class="form-select" id="selectEventi">
 
                             </select>
 
+                            <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra</button>
 
-                        </div>-->
+                        </div>
                     </div>
 
 
@@ -244,7 +244,7 @@
 
                         <ul id="days" class="days">
                         </ul>
-                        <p class="text-center">Clicca sulle disponibilità per più info</p>
+                            <p class="text-center">Clicca sulle disponibilità per più info</p>
                     </div>
                 </div>
 
@@ -337,9 +337,7 @@
         });
 
 
-
-        //      MAPPA   ///
-
+        var marker; // Dichiarazione globale della variabile marker
 
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
@@ -355,36 +353,39 @@
             let latitude = "";
             let longitude = "";
 
-            // let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-            //let selectEventi = document.querySelector("#selectEventi");
-            //let selezionato = selectEventi.value;
-            // let mioEvent o = eventiRegistrati.find(evento => evento.id == selezionato);
+            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
+            let selectEventi = document.querySelector("#selectEventi");
+            let selezionato = selectEventi.value;
 
-            let arrEventi = JSON.parse(localStorage.getItem("eventiArrivoArray"));
-            arrEventi.forEach(evento => {
-                let address = evento.luogo_evento;
-                let marker;
+            let mioEvento = eventiRegistrati.find(evento => evento.id == selezionato);
 
-                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            const result = data[0];
-                            const latitude = result.lat;
-                            const longitude = result.lon;
 
-                            // Aggiorna la mappa con le coordinate trovate
-                            map.setView([latitude, longitude], 6);
-                            if (marker) {
-                                map.removeLayer(marker);
-                            }
+            let address = mioEvento.luogo_evento;
 
-                            marker = L.marker([latitude, longitude]).addTo(map)
-                                .bindPopup(`${evento.descrizione}`).openPopup();
-                        } 
-                          
-                    });
-            });
+
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const result = data[0];
+                        const latitude = result.lat;
+                        const longitude = result.lon;
+
+                        // Aggiorna la mappa con le coordinate trovate
+                        map.setView([latitude, longitude], 12);
+                        if (marker) {
+                            map.removeLayer(marker);
+                        }
+
+                        marker = L.marker([latitude, longitude]).addTo(map)
+                            .bindPopup(`La posizione del tuo evento`).openPopup();
+
+
+                    } else {
+                        alert('Indirizzo non trovato.');
+                    }
+                });
         }
     </script>
 
@@ -465,13 +466,15 @@
 
                     let linkPannello = liPannello.querySelector("a");
 
+                    console.log(linkPannello);
+
                     linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
                     });
                 }
                 if (utente.tipo ==
                     'B' || utente.tipo === 'A'
-                ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                    ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
                     let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
 
                     linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
@@ -559,12 +562,12 @@
                     function ingrandisciLink() {
                         item.style.transform = "scale(1.2)";
                     }
-
+    
                     function restringiLink() {
                         item.style.transform = "scale(1)";
                     }
                 });
-
+                
 
                 function ingrandisci() {
                     card.style.transform = "scale(1.1)";
@@ -721,7 +724,7 @@
 
 
                     let eventDate = new Date(evento.data_evento);
-
+                    console.log(eventDate);
                     if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
                         dateLi.addEventListener("click", () => creaPopUp(evento))
