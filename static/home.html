@@ -48,9 +48,9 @@
                         </li>
 
                         <li class="nav-item" id="liCarrello">
-                            <a class="position-relative nav-link"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-                                aria-controls="offcanvasWithBothOptions" href="#">
+                            <a class="position-relative nav-link" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+                                href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
                                 <span
                                     class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
@@ -209,7 +209,9 @@
                         <h3 class="py-3">Cerca vicino a te..</h3>
                         <div id="map" class="rounded-5"></div>
 
-                        <div class="d-flex gap-3 justify-content-center">
+                        <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra
+                            Eventi</button>
+                        <!--  <div class="d-flex gap-3 justify-content-center">
 
                             <select class="form-select" id="selectEventi">
 
@@ -255,7 +257,7 @@
             <!--row-->
 
 
-            </div>
+                    </div>
         </section>
         <!--mappeEventi-->
     </main>
@@ -344,9 +346,11 @@
             4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            /*, {
+                       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                   }*/
+        ).addTo(map);
 
 
         function trovaCoordinate() {
@@ -357,36 +361,48 @@
             let selectEventi = document.querySelector("#selectEventi");
             let selezionato = selectEventi.value;
 
-            let mioEvento = eventiRegistrati.find(evento => evento.id == selezionato);
+            let arrEventi = JSON.parse(localStorage.getItem("eventiArrivoArray"));
+            let i = 0;
+
+            arrEventi.forEach(evento => {
+                    let address = evento.luogo_evento;
+                    let marker;
+                    i++;
 
 
-            let address = mioEvento.luogo_evento;
+                    // let address = mioEvento.luogo_evento;
 
+                    let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
 
+                    marker = L.marker([latitude, longitude]).
+                    addTo(map)
+                        .bindPopup(txtPopUp)
+                        .openPopup()
 
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        const result = data[0];
-                        const latitude = result.lat;
-                        const longitude = result.lon;
-
-                        // Aggiorna la mappa con le coordinate trovate
-                        map.setView([latitude, longitude], 12);
-                        if (marker) {
-                            map.removeLayer(marker);
-                        }
-
-                        marker = L.marker([latitude, longitude]).addTo(map)
-                            .bindPopup(`La posizione del tuo evento`).openPopup();
-
-
-                    } else {
-                        alert('Indirizzo non trovato.');
+                    function openPopup() {
+                        marker.openPopup();
                     }
-                });
-        }
+
+                    function closePopUp() {
+                        marker.closePopup();
+                    }
+
+                    marker.addEventListener("mouseover", openPopup);
+                    marker.addEventListener("mouseout", closePopUp);
+
+
+                    marker.addEventListener("click", function () {
+                        console.log("giusto");
+                        localStorage.setItem("evento", JSON.stringify(evento));
+                        location.href = "evento.html"
+                    })
+
+
+                })
+
+                // });//then
+                // });//4each
+            } //trova coordinate
     </script>
 
 
@@ -474,7 +490,7 @@
                 }
                 if (utente.tipo ==
                     'B' || utente.tipo === 'A'
-                    ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
                     let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
 
                     linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
@@ -562,12 +578,12 @@
                     function ingrandisciLink() {
                         item.style.transform = "scale(1.2)";
                     }
-    
+
                     function restringiLink() {
                         item.style.transform = "scale(1)";
                     }
                 });
-                
+
 
                 function ingrandisci() {
                     card.style.transform = "scale(1.1)";

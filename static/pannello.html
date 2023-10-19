@@ -318,7 +318,7 @@
             let utente = JSON.parse(localStorage.getItem("utente"));
 
             if (utente.tipo != 'A') {
-                location.href = "404.html";
+                location.href = "smarrito.html";
             }
         })
 
@@ -330,7 +330,7 @@
 
             let utente = JSON.parse(localStorage.getItem("utente"));
             if (utente == null || utente.tipo != "A") {
-                location.href = "404.html";
+                location.href = "smarrito.html";
             } else {
                 btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); 
                 btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
