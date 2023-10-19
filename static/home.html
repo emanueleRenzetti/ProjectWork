@@ -208,9 +208,10 @@
                     <div class="col-lg-6 d-flex flex-column align-items-center">
                         <h3 class="py-3">Cerca vicino a te..</h3>
                         <div id="map" class="rounded-5"></div>
-                        
-                        <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra Eventi</button>
-                      <!--  <div class="d-flex gap-3 justify-content-center">
+
+                        <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra
+                            Eventi</button>
+                        <!--  <div class="d-flex gap-3 justify-content-center">
 
                             <select class="form-select" id="selectEventi">
 
@@ -346,9 +347,9 @@
             4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' /*, {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        }*/).addTo(map);
 
 
         function trovaCoordinate() {
@@ -361,9 +362,12 @@
             // let mioEvent o = eventiRegistrati.find(evento => evento.id == selezionato);
 
             let arrEventi = JSON.parse(localStorage.getItem("eventiArrivoArray"));
+            let i=0;
+
             arrEventi.forEach(evento => {
                 let address = evento.luogo_evento;
                 let marker;
+                i++;
 
                 fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
                     .then(response => response.json())
@@ -379,13 +383,36 @@
                                 map.removeLayer(marker);
                             }
 
-                            marker = L.marker([latitude, longitude]).addTo(map)
-                                .bindPopup(`${evento.descrizione}`).openPopup();
-                        } 
-                          
-                    });
-            });
-        }
+                            let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
+
+                            marker = L.marker([latitude, longitude]).
+                                addTo(map)
+                                .bindPopup(txtPopUp)
+                                .openPopup()
+
+                                function openPopup(){
+                                    marker.openPopup();
+                                }
+                                function closePopUp(){
+                                    marker.closePopup();
+                                }
+
+                            marker.addEventListener("mouseover", openPopup);
+                            marker.addEventListener("mouseout", closePopUp);
+
+                            
+                            marker.addEventListener("click", function () {
+                                console.log("giusto");
+                                localStorage.setItem("evento", JSON.stringify(evento));
+                                location.href = "evento.html"
+                            })
+
+
+                        }
+
+                    });//then
+            });//4each
+        }//trova coordinate
     </script>
 
 
