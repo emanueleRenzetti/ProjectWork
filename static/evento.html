@@ -94,7 +94,7 @@
             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Il tuo carrello</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body" id="bodyCart">
             <p>Try scrolling the rest of the page to see this option in action.</p>
         </div>
     </div>
@@ -513,7 +513,13 @@
         function verificaArticoli(){
             let carrello = JSON.parse(localStorage.getItem("Carrello"));
             let nArticoli = document.querySelector("#nArticoli");
-            nArticoli.textContent=carrello.length;
+            if(carrello.length<=0){
+                nArticoli.textContent="";
+            }else{
+                nArticoli.textContent=carrello.length;
+            }
+            let bodyCart = document.querySelector("#bodyCart");
+
         }
         
         document.addEventListener("DOMContentLoaded", verificaArticoli);
