@@ -46,7 +46,7 @@
                                 href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
                                 <span
-                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary" id="nArticoli"></span>
                             </a>
                         </li>
 
@@ -98,18 +98,6 @@
             <p>Try scrolling the rest of the page to see this option in action.</p>
         </div>
     </div>
-
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <p>Try scrolling the rest of the page to see this option in action.</p>
-        </div>
-    </div>
-
 
 
     <main>
@@ -485,9 +473,9 @@
 
 
         function aggiungiCarrello() {
-            let carrelloUtente = localStorage.getItem("Carrello");
             let arrCarrello = [];
-            console.log(carrelloUtente);
+            let carrelloUtente = localStorage.getItem("Carrello");
+            // console.log(carrelloUtente);
 
             if (carrelloUtente == null) {
                 arrCarrello.push(evento);
@@ -495,11 +483,15 @@
 
             } else {
                 let altriArticoli = JSON.parse(carrelloUtente);
-                arrCarrello.push(altriArticoli);
+                // arrCarrello.push(altriArticoli);
+                altriArticoli.forEach(element => {
+                    arrCarrello.push(element);
+                });
                 arrCarrello.push(evento);
                 localStorage.setItem("Carrello", JSON.stringify(arrCarrello));
             }
 
+            verificaArticoli();
 
         }
 
@@ -518,7 +510,13 @@
             }
         });
 
-
+        function verificaArticoli(){
+            let carrello = JSON.parse(localStorage.getItem("Carrello"));
+            let nArticoli = document.querySelector("#nArticoli");
+            nArticoli.textContent=carrello.length;
+        }
+        
+        document.addEventListener("DOMContentLoaded", verificaArticoli);
         document.addEventListener("DOMContentLoaded", recuperaPosti);
     </script>
 </body>
