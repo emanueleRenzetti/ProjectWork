@@ -156,7 +156,7 @@
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="locandina">Locandina</label>
-                                                    <input type="text" id="locandina" name="locandina" class="form-control"/>
+                                                    <input type="text" id="locandina" name="locandina" class="form-control" required/>
                                                 </div>
                                     
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -234,7 +234,7 @@
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="locandinaUpdate">Locandina</label>
-                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control"/>
+                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control" required/>
                                                 </div>
                                     
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -520,11 +520,11 @@
             }else{
                 // se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
 
+                alert("Devi prima selezionare l'evento da modificare");
+
                 updateModal.addEventListener('show.bs.modal', function (event) {
                     event.preventDefault(); 
                 });
-            
-                alert("Devi prima selezionare l'evento da modificare");
             }
 
 
@@ -544,7 +544,11 @@
                     body: JSON.stringify(eventoDaModificare)
                 })
                 .then(data => {return data.json()})
-                .then(location.reload());
+                .then( () => {
+                    location.reload();
+                    localStorage.removeItem("idEventoSelezionato");
+                    localStorage.removeItem("eventoSelezionato");
+                });
             })
         }
         btnAggiorna.addEventListener("click", updateEvent);  
@@ -573,14 +577,15 @@
                     body: JSON.stringify(nuovoEvento)
                 })
                 .then(data => {return data.json()})
-                .then(location.reload())  // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito nel db
+                .then( () => {
+                    location.reload();
+                    localStorage.removeItem("idEventoSelezionato");
+                    localStorage.removeItem("eventoSelezionato");
+                });
             }
         }
-        formAddModal.addEventListener("submit", function(){
-            addEvent();
-            //location.reload(); lo abbiamo spostato alla riga 576 
+        formAddModal.addEventListener("submit", addEvent);
             
-        });
 
 
 
@@ -592,11 +597,11 @@
     
                 method: "DELETE"
             })
-            .then(() => {
+            .then( () => {
                 location.reload();
+                localStorage.removeItem("idEventoSelezionato");
+                localStorage.removeItem("eventoSelezionato");
             });
-
-            console.log(idDaEliminare);
         }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
