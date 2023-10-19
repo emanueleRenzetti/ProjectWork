@@ -156,7 +156,7 @@
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="locandina">Locandina</label>
-                                                    <input type="text" id="locandina" name="locandina" class="form-control"/>
+                                                    <input type="text" id="locandina" name="locandina" class="form-control" required/>
                                                 </div>
                                     
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -234,7 +234,7 @@
                                                 <!-- locandina -->
                                                 <div class="form-outline mb-4">
                                                     <label class="form-label" for="locandinaUpdate">Locandina</label>
-                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control"/>
+                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control" required/>
                                                 </div>
                                     
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
@@ -448,11 +448,14 @@
                 adminTable.append(TR);
             }))
             .then(() => {
-
                 recuperaRadio();
             });
         }
-        document.addEventListener("DOMContentLoaded", createAdminTable);
+        document.addEventListener("DOMContentLoaded", function(){
+            localStorage.removeItem("idEventoSelezionato");
+            localStorage.removeItem("eventoSelezionato");
+            createAdminTable();
+        });
         
 
         function recuperaRadio(){
@@ -518,33 +521,39 @@
                 data_eventoUpdate.value = eventoSelezionato.data_evento;
                 locandinaUpdate.value = eventoSelezionato.locandina;
             }else{
-                // se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
+                //se eventoSelezionato == null, deve apparire solo l'alert e non anche il modal 
+
+                alert("Devi prima selezionare l'evento da modificare");
 
                 updateModal.addEventListener('show.bs.modal', function (event) {
                     event.preventDefault(); 
                 });
-            
-                alert("Devi prima selezionare l'evento da modificare");
             }
-
 
             formUpdateModal.addEventListener("submit", function(){
 
                 let idEventoDaModificare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
-                // creo un oggetto con costruttore Evento2() con i valori attuali del form di modifica
-                let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogo_eventoUpdate.value, prezzoUpdate.value, postiUpdate.value, data_eventoUpdate.value, locandinaUpdate.value);
-                
-                fetch("http://localhost:9007/e/eventi", {
-    
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(eventoDaModificare)
-                })
-                .then(data => {return data.json()})
-                .then(location.reload());
+                if (idEventoDaModificare != null) {
+                    
+                    // creo un oggetto con costruttore Evento2() con i valori attuali del form di modifica
+                    let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogo_eventoUpdate.value, prezzoUpdate.value, postiUpdate.value, data_eventoUpdate.value, locandinaUpdate.value);
+                    
+                    fetch("http://localhost:9007/e/eventi", {
+        
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(eventoDaModificare)
+                    })
+                    .then(data => {return data.json()})
+                    .then( () => {
+                        localStorage.removeItem("idEventoSelezionato");
+                        localStorage.removeItem("eventoSelezionato");
+                        location.reload();
+                    });
+                }
             })
         }
         btnAggiorna.addEventListener("click", updateEvent);  
@@ -573,14 +582,15 @@
                     body: JSON.stringify(nuovoEvento)
                 })
                 .then(data => {return data.json()})
-                .then(location.reload())  // ricarico la pagina in modo da vedere nella tabella il nuovo evento inserito nel db
+                .then( () => {
+                    localStorage.removeItem("idEventoSelezionato");
+                    localStorage.removeItem("eventoSelezionato");
+                    location.reload();
+                });
             }
         }
-        formAddModal.addEventListener("submit", function(){
-            addEvent();
-            //location.reload(); lo abbiamo spostato alla riga 576 
+        formAddModal.addEventListener("submit", addEvent);
             
-        });
 
 
 
@@ -588,15 +598,20 @@
 
             let idDaEliminare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
-            fetch(`http://localhost:9007/e/eventi/` + idDaEliminare, {
-    
-                method: "DELETE"
-            })
-            .then(() => {
-                location.reload();
-            });
-
-            console.log(idDaEliminare);
+            if (idDaEliminare != null) {
+                
+                fetch(`http://localhost:9007/e/eventi/` + idDaEliminare, {
+        
+                    method: "DELETE"
+                })
+                .then( () => {
+                    localStorage.removeItem("idEventoSelezionato");
+                    localStorage.removeItem("eventoSelezionato");
+                    location.reload();
+                });
+            }else{
+                alert("Devi prima selezionare l'evento da eliminare");
+            }
         }
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
