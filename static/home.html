@@ -22,7 +22,7 @@
     <header class="mainHeader">
         <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
 
-            <div class="container-fluid">
+            <div class="container-fluid me-3">
 
                 <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
                 <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
@@ -47,7 +47,7 @@
                             <a class="nav-link text-accent" href="#">Prenotazioni</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item" id="liCarrello">
                             <a class="position-relative nav-link"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
                                 aria-controls="offcanvasWithBothOptions" href="#">
@@ -552,6 +552,22 @@
                 card.setAttribute("onclick", `vaiAllaPag(${idEvento})`)
                 card.addEventListener("mouseover", ingrandisci);
                 card.addEventListener("mouseout", restringi);
+
+                let navItems = document.querySelectorAll(".nav-link");
+
+                navItems.forEach(item => {
+                    item.addEventListener("mouseover", ingrandisciLink);
+                    item.addEventListener("mouseout", restringiLink);
+
+                    function ingrandisciLink() {
+                        item.style.transform = "scale(1.2)";
+                    }
+    
+                    function restringiLink() {
+                        item.style.transform = "scale(1)";
+                    }
+                });
+                
 
                 function ingrandisci() {
                     card.style.transform = "scale(1.1)";

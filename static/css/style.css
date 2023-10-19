@@ -12108,8 +12108,11 @@ main {
   min-height: calc(100vh - 350px);
 }
 
+.nav-link {
+  color: white !important;
+}
 .nav-link.active {
-  border-bottom: 3px solid #ffda33;
+  color: #ffda33 !important;
 }
 .nav-link i {
   font-size: 1.5rem;
@@ -12117,4 +12120,13 @@ main {
 }
 .nav-link .rounded-pill {
   top: 5px;
+}
+
+nav #liCarrello {
+  border-left: solid;
+  color: white;
+}
+nav #liCarrello a {
+  margin-left: 0.7rem;
+  margin-right: 1rem;
 }/*# sourceMappingURL=style.css.map */

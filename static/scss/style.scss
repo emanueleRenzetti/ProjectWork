@@ -313,8 +313,12 @@ main {
 }
 
 .nav-link {
+
+    color: white !important;
+
     &.active {
-        border-bottom: 3px solid $accent;
+        color: $accent !important;
+        // border-bottom: 3px solid $white;
     } 
 
     i {
@@ -328,3 +332,14 @@ main {
 
 }
 
+nav {
+    #liCarrello {
+        border-left: solid;
+        color: white;
+
+        a{
+            margin-left: 0.7rem;
+            margin-right: 1rem;
+        }
+    }
+}
