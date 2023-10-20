@@ -205,7 +205,7 @@
                 <div class="row pt-3">
 
 
-                    <div class="col-lg-6 d-flex flex-column align-items-center">
+                    <div class="col-6 d-flex flex-column align-items-center">
                         <h3 class="py-3">Cerca vicino a te..</h3>
                         <div id="map" class="rounded-5"></div>
 
@@ -219,45 +219,45 @@
 
                             <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra</button>
 
-                        </div>
-                    </div>
+                        </div> -->
+                    </div> 
 
 
-                    <div class="col-lg-6 d-flex flex-column align-items-center">
-                        <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
+                        <div class="col-6 d-flex flex-column align-items-center">
+                            <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
 
-                        <div class="month">
-                            <ul>
-                                <li class="prev" onclick="previousMonth()">&#10094;</li>
-                                <li id="month-year"></li>
-                                <li class="next" onclick="nextMonth()">&#10095;</li>
+                            <div class="month">
+                                <ul>
+                                    <li class="prev" onclick="previousMonth()">&#10094;</li>
+                                    <li id="month-year"></li>
+                                    <li class="next" onclick="nextMonth()">&#10095;</li>
+                                </ul>
+                            </div>
+
+                            <ul class="weekdays">
+                                <li>Lun</li>
+                                <li>Mar</li>
+                                <li>Mer</li>
+                                <li>Gio</li>
+                                <li>Ven</li>
+                                <li>Sab</li>
+                                <li>Dom</li>
                             </ul>
-                        </div>
 
-                        <ul class="weekdays">
-                            <li>Lun</li>
-                            <li>Mar</li>
-                            <li>Mer</li>
-                            <li>Gio</li>
-                            <li>Ven</li>
-                            <li>Sab</li>
-                            <li>Dom</li>
-                        </ul>
-
-                        <ul id="days" class="days">
-                        </ul>
+                            <ul id="days" class="days">
+                            </ul>
                             <p class="text-center">Clicca sulle disponibilità per più info</p>
+                        </div>
                     </div>
+
+
+
+
                 </div>
-
-
+                <!--row-->
 
 
             </div>
-            <!--row-->
-
-
-                    </div>
         </section>
         <!--mappeEventi-->
     </main>
@@ -375,44 +375,44 @@
             let i = 0;
 
             arrEventi.forEach(evento => {
-                    let address = evento.luogo_evento;
-                    let marker;
-                    i++;
+                let address = evento.luogo_evento;
+                let marker;
+                i++;
 
 
-                    // let address = mioEvento.luogo_evento;
+                // let address = mioEvento.luogo_evento;
 
-                    let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
+                let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
 
-                    marker = L.marker([latitude, longitude]).
+                marker = L.marker([latitude, longitude]).
                     addTo(map)
-                        .bindPopup(txtPopUp)
-                        .openPopup()
+                    .bindPopup(txtPopUp)
+                    .openPopup()
 
-                    function openPopup() {
-                        marker.openPopup();
-                    }
+                function openPopup() {
+                    marker.openPopup();
+                }
 
-                    function closePopUp() {
-                        marker.closePopup();
-                    }
+                function closePopUp() {
+                    marker.closePopup();
+                }
 
-                    marker.addEventListener("mouseover", openPopup);
-                    marker.addEventListener("mouseout", closePopUp);
-
-
-                    marker.addEventListener("click", function () {
-                        console.log("giusto");
-                        localStorage.setItem("evento", JSON.stringify(evento));
-                        location.href = "evento.html"
-                    })
+                marker.addEventListener("mouseover", openPopup);
+                marker.addEventListener("mouseout", closePopUp);
 
 
+                marker.addEventListener("click", function () {
+                    console.log("giusto");
+                    localStorage.setItem("evento", JSON.stringify(evento));
+                    location.href = "evento.html"
                 })
 
-                // });//then
-                // });//4each
-            } //trova coordinate
+
+            })
+
+            // });//then
+            // });//4each
+        } //trova coordinate
     </script>
 
 
@@ -611,7 +611,7 @@
                 let cardBody = document.createElement("div");
                 cardBody.classList.add("card-body");
                 cardBody.classList.add("shadow");
-                
+
 
                 let descrizione = document.createElement("div");
                 descrizione.classList.add("card-text");
