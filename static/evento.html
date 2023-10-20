@@ -117,7 +117,7 @@
         </div>
         <div class="offcanvas-footer">
             <button id="btnCompraTutto" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
-                class="btn btn-outline-primary m-3">Compra tutto</button>
+                class="btn btn-outline-primary m-3">Compra</button>
         </div>
     </div>
 
@@ -600,7 +600,7 @@
             let nome = `<h3 class="fw-bold">${evento.descrizione}</h3>`
             let caratteristiche = `${evento.caratteristiche}`
             data.innerHTML = `${evento.data_evento}`;
-            prezzo.innerHTML = `€ ${evento.prezzo}`;
+            prezzo.innerHTML = `€ ${(evento.prezzo).toFixed(2)}`;
             if (postiRimanenti <= 0) {
                 disponibilita.innerHTML = "Posti esauriti!";
                 let btnCompra = document.querySelector("#compra");
@@ -727,21 +727,24 @@
             let carrello = JSON.parse(localStorage.getItem("Carrello"));
             let nArticoli = document.querySelector("#nArticoli");
             let bodyCart = document.querySelector("#bodyCart");
+            let btnCompra = document.querySelector("#btnCompraTutto");
 
             if (carrello != null) {
 
                 if (carrello.length <= 0) {
                     nArticoli.textContent = "";
+                    btnCompra.setAttribute("disabled","");
+                    bodyCart.textContent="Il tuo carrello è vuoto";
                 } else {
                     nArticoli.textContent = carrello.length;
                     bodyCart.innerHTML = "";
-
+                    btnCompra.removeAttribute("disabled");
 
 
                     carrello.forEach(element => {
 
                         let quantita = Number(nPosti.value);
-                        let tot = element.prezzo * Number(nPosti.value);
+                        let tot = (element.prezzo * Number(nPosti.value)).toFixed(2);
 
                         bodyCart.innerHTML += `<div class="list-group list-group-flush border-bottom">
                                                     <div class="row w-100 align-items-center p-2">
@@ -750,9 +753,8 @@
                                                                 <div class="fw-semibold">Evento</div>
                                                                 <p id="" class="mb-0">${element.descrizione}</p>
                                                                 <p id="" class="mb-0">Posti: ${quantita}</p>
-                                                                <p><strong>PREZZO:</strong> ${tot}</p>
+                                                                <p><strong>PREZZO:</strong> ${tot} € </p>
                                                                 <button class="btn btn-outline-danger" onclick="eliminaEvento(${element.id})">Elimina</button>
-                                                                <button type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" class="btn btn-outline-primary" onclick="prenotaEvento(${element.id})">Compra</button>
                                                             </div>
                                                     </div>
                                                 </div>`;
@@ -765,6 +767,8 @@
                 }
             } else {
                 nArticoli.textContent = "";
+                btnCompra.setAttribute("disabled","");
+                bodyCart.textContent="carrello vuoto";
             }
         }
 
@@ -881,7 +885,7 @@
                         inputElement.setAttribute("placeholder", "1");
                         inputElement.setAttribute("readonly", "true");
 
-                        // Creazione di un elemento <p> con un ID
+                        // Creazione di un elemento <p> 
                         var pTotal = document.createElement("p");
                         // pTotal.textContent = totale;
 
