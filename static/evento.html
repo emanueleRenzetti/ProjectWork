@@ -11,7 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
-
         .formm {
             display: block;
             width: 100%;
@@ -24,10 +23,8 @@
             background-clip: padding-box;
             border: var(--bs-border-width) solid var(--bs-border-color);
             border-radius: var(--bs-border-radius);
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;                        
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
-
-
     </style>
 
 </head>
@@ -117,44 +114,49 @@
         </div>
         <div class="offcanvas-body" id="bodyCart">
             <hr>
-            <p>Try scrolling the rest of the page to see this option in action.</p>
+        </div>
+        <div class="offcanvas-footer">
+            <button id="btnCompraTutto" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                class="btn btn-outline-primary m-3">Compra tutto</button>
         </div>
     </div>
 
 
     <main>
-<div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                <div class="modal-dialog modal-fullscreen">
-                  <div class="modal-content">
+        <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="list-group list-group-flush border-bottom">
+                        <div class="list-group list-group-flush">
                             <div class="row w-100 align-items-center p-2">
-                                <img class="img-fluid" src="./img/${element.locandina}"></img>
-                                    <div class="d-flex flex-column justify-content-center col-6">
-                                        <div class="fw-semibold">Evento</div>
-                                        <p id="" class="mb-0"></p>
-                                        <p id="" class="mb-0"></p>
-                                        <p><strong>PREZZO:</strong></p>
-                                    </div>
+                                <img class="img-fluid" src=""></img>
+                                <div class="d-flex flex-column justify-content-center col-6">
+                                    <div id="carrelloModal" class="fw-semibold"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Vai al pagamento</button>
+                        <h5 id="h5Tot"></h5>
+                        <button id="btnAlPagamento" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                            data-bs-toggle="modal">Vai
+                            al pagamento</button>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog modal-fullscreen">
-                  <div class="modal-content">
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog modal-fullscreen">
+                <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-body-secondary">
                         <div class="container p-2 rounded-2 ms-auto me-auto w-50">
@@ -162,11 +164,13 @@
                             <form>
                                 <div class="form-group mb-3">
                                     <label class="form-label" for="cardholder">Titolare della Carta:</label>
-                                    <input class="form-control" type="text" id="cardholder" placeholder="Nome e Cognome">
+                                    <input class="form-control" type="text" id="cardholder"
+                                        placeholder="Nome e Cognome">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form-label" for="cardnumber">Numero della Carta:</label>
-                                    <input class="form-control" type="number" id="cardnumber" placeholder="Numero della Carta">
+                                    <input class="form-control" type="number" id="cardnumber"
+                                        placeholder="Numero della Carta">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form-label" for="expiration">Data di Scadenza:</label>
@@ -176,10 +180,10 @@
                                     <label class="form-label" for="cvv">CVV:</label>
                                     <input class="form-control" type="number" id="cvv" placeholder="CVV">
                                 </div>
-                                <div class="form-group mb-3">
+                                <!-- <div class="form-group mb-3">
                                     <label class="form-label" for="amount">Importo da Pagare:</label>
                                     <input class="form-control" type="number" id="amount" placeholder="Importo in Euro">
-                                </div>
+                                </div> -->
                                 <div class="form-group mb-3">
                                     <label class="form-label" for="payment-method">Metodo di Pagamento:</label>
                                     <select class="formm" id="payment-method">
@@ -188,20 +192,22 @@
                                         <option value="paypal">PayPal</option>
                                     </select>
                                 </div>
-                            
+
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">torna al riepilogo</button>
-                      <button class="btn btn-secondary ms-auto" type="submit">paga ora</button>
+                        <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">torna al riepilogo</button>
+                        <h5 id="h5Totale"></h5>
+                        <button id="pagaOra" class="btn btn-secondary ms-auto" type="submit">paga ora</button>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+        </div>
         <h1 class="text-center py-5 fw-bold" id="nomeEvento"></h1>
 
-        
+
 
         <section id="hero">
 
@@ -350,7 +356,7 @@
 
             </div>
 
-            
+
 
         </section>
 
@@ -403,7 +409,6 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-
         //pulire l'input della newsletter
         function pulisci() {
             let emailFake = document.querySelector("#emailFake");
@@ -637,17 +642,29 @@
 
         document.addEventListener("DOMContentLoaded", verificaCarrello);
 
+
         function Prenotazione(utenti_id, evento_id, posti) {
             this.utenti_id = utenti_id;
             this.evento_id = evento_id;
             this.posti = posti;
         }
+        
 
         function aggiungiCarrello() {
 
-            // let utenteOn = JSON.parse(localStorage.getItem("utente"));
-            // let prenotazione = new Prenotazione(utenteOn.id, evento.id, Number(nPosti.value));
-            // localStorage.setItem("prenotazione", JSON.stringify(prenotazione));
+            let arrPrenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+            let utenteOn = JSON.parse(localStorage.getItem("utente"));
+            let prenotazione = new Prenotazione(utenteOn.id, evento.id, Number(nPosti.value));
+
+            if (arrPrenotazioni != null) {
+                arrPrenotazioni.push(prenotazione);
+                localStorage.setItem("prenotazioni", JSON.stringify(arrPrenotazioni));
+            } else {
+                let newArrPrenotazioni = [];
+                newArrPrenotazioni.push(prenotazione);
+                localStorage.setItem("prenotazioni", JSON.stringify(newArrPrenotazioni));
+            }
+
 
 
             let arrCarrello = [];
@@ -719,12 +736,12 @@
                     nArticoli.textContent = carrello.length;
                     bodyCart.innerHTML = "";
 
-                    idInput = 0;
+
 
                     carrello.forEach(element => {
 
                         let quantita = Number(nPosti.value);
-                        let tot = element.prezzo* Number(nPosti.value);
+                        let tot = element.prezzo * Number(nPosti.value);
 
                         bodyCart.innerHTML += `<div class="list-group list-group-flush border-bottom">
                                                     <div class="row w-100 align-items-center p-2">
@@ -739,19 +756,10 @@
                                                             </div>
                                                     </div>
                                                 </div>`;
-                        // <div class="input-group mb-3">
-                        //                                                                     <div class="input-group-prepend">
-                        //                                                                     <button onclick="document.getElementById('quantita${idInput}').stepDown(1)" class="btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0">-</button>
-                        //                                                                     </div>
-                        //                                                                     <input value="${nPosti.value}" min="1" id="quantita${idInput}" type="number" class="form-control text-center" placeholder="1" readonly>
-                        //                                                                     <div class="input-group-append">
-                        //                                                                     <button onclick="document.getElementById('quantita${idInput}').stepUp(1)" class="btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4">+</button>
-                        //                                                                     </div>
-                        //                                                                     <p><strong>PREZZO:</strong> ${tot}</p>
-                        //                                                                 </div>
 
-                        // let inputPosti = document.querySelector(`#inputPosti${element.id}`);
-                        idInput++;
+
+                        let inputPosti = document.querySelector(`#inputPosti${element.id}`);
+
                     });
 
                 }
@@ -775,6 +783,17 @@
             bodyCart.innerHTML = "";
             verificaArticoli();
             verificaCarrello();
+
+            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+            if (prenotazioni != null) {
+                let miaPrenotazione = prenotazioni.find(function (pren) {
+                    return pren.evento_id == id;
+                }, id);
+                if (miaPrenotazione != undefined) {
+                    let nuovoArrPren = prenotazioni.filter(item => item !== miaPrenotazione);
+                    localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                }
+            }
         }
 
         let btnAdd = document.querySelector("#btnAdd");
@@ -787,6 +806,196 @@
         function removePosti() {
             nPosti.stepDown();
         }
+
+        let btnCompraTutto = document.querySelector("#btnCompraTutto");
+        let carrelloModal = document.querySelector("#carrelloModal");
+
+        function compraTutto() {
+            while (carrelloModal.firstChild) {
+                carrelloModal.removeChild(carrelloModal.firstChild);
+            }
+            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+            let idInput = 0;
+            let totDaPagare = 0;
+
+            prenotazioni.forEach(pren => {
+                fetch("http://localhost:9007/e/eventi/" + pren.evento_id).then(data => data.json())
+                    .then(res => {
+
+
+                        let h5Tot = document.querySelector("#h5Tot");
+
+                        let card = document.createElement("div");
+                        card.setAttribute("class", "card");
+
+                        let img = document.createElement("img");
+                        img.setAttribute("class", "card-img-top");
+                        img.setAttribute("src", "./img/" + res.locandina);
+                        card.appendChild(img);
+
+                        let cardBody = document.createElement("div");
+                        cardBody.setAttribute("class", "card-body");
+                        card.appendChild(cardBody);
+
+                        let totale = res.prezzo * pren.posti;
+
+                        // Creazione di un elemento <h5> con l'attributo class
+                        var h5Element = document.createElement("h5");
+                        h5Element.setAttribute("class", "card-title");
+                        h5Element.textContent = res.caratteristiche;
+
+                        // Creazione di un elemento <p> con l'attributo class
+                        var pElement = document.createElement("p");
+                        pElement.setAttribute("class", "card-text");
+                        pElement.textContent = res.descrizione;
+
+                        // Creazione di un elemento <div> con l'attributo class
+                        var divElement = document.createElement("div");
+                        divElement.setAttribute("class", "input-group mb-3");
+
+                        // Creazione dei bottoni "-" e "+"
+                        var buttonMinus = document.createElement("button");
+                        buttonMinus.setAttribute("onclick",
+                            `document.getElementById('quantita${idInput}').stepDown(1)`);
+                        buttonMinus.setAttribute("class",
+                            "btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0");
+                        buttonMinus.textContent = "-";
+
+                        var buttonPlus = document.createElement("button");
+                        buttonPlus.setAttribute("onclick",
+                            `document.getElementById('quantita${idInput}').stepUp(1)`);
+                        buttonPlus.setAttribute("class",
+                            "btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4");
+                        buttonPlus.textContent = "+";
+
+                        // Creazione dell'input
+                        var inputElement = document.createElement("input");
+                        inputElement.setAttribute("oninput", "stampaTot()");
+                        inputElement.setAttribute("value", pren.posti);
+                        inputElement.setAttribute("min", "1");
+                        inputElement.setAttribute("id", `quantita${idInput}`);
+                        inputElement.setAttribute("type", "number");
+                        inputElement.setAttribute("class", "form-control text-center");
+                        inputElement.setAttribute("placeholder", "1");
+                        inputElement.setAttribute("readonly", "true");
+
+                        // Creazione di un elemento <p> con un ID
+                        var pTotal = document.createElement("p");
+                        // pTotal.textContent = totale;
+
+                        divElement.appendChild(buttonMinus);
+                        divElement.appendChild(inputElement);
+                        divElement.appendChild(buttonPlus);
+                        divElement.appendChild(pTotal);
+
+                        cardBody.appendChild(h5Element);
+                        cardBody.appendChild(pElement);
+                        cardBody.appendChild(divElement);
+
+                        function disabilitaBtnMeno() {
+                            if (inputElement.value <= 1) {
+                                buttonMinus.setAttribute("disabled", "");
+                            } else {
+                                buttonMinus.removeAttribute("disabled");
+                            }
+                        }
+
+                        
+
+                        function setPrenotazionePiu() {
+                            numero++;
+                            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+
+                            let miaPrenotazione = prenotazioni.find(function (prenotazione) {
+                                return prenotazione.utenti_id == pren.utenti_id && prenotazione
+                                    .evento_id == pren.evento_id;
+                            }, pren);
+
+                            let nuovoArrPren = prenotazioni.filter(item => item !==
+                                miaPrenotazione);
+                            let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
+                            nuovoArrPren.push(prenModificata);
+                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                        }
+
+                        function setPrenotazioneMeno() {
+                            numero--;
+                            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+                            let miaPrenotazione = prenotazioni.find(function (prenotazione) {
+                                return prenotazione.utenti_id == pren.utenti_id && prenotazione
+                                    .evento_id == pren.evento_id
+                            }, pren);
+                            let nuovoArrPren = prenotazioni.filter(item => item !==
+                                miaPrenotazione);
+                            let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
+                            nuovoArrPren.push(prenModificata);
+                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                        }
+
+
+                        function stampaTot() {
+                            totDaPagare += Number(res.prezzo);
+                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                        }
+
+                        function stampaTotMeno() {
+                            totDaPagare -= Number(res.prezzo);
+                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                        }
+
+                        function stampaPrezzo() {
+                            let inp = document.querySelector(`#quantita${idInput}`);
+                            totale = res.prezzo * Number(inputElement.value);
+                            pTotal.textContent = "Totale: " + totale.toFixed(2) + " €";
+                        }
+
+                        function totAlCaricamento() {
+                            totDaPagare += totale;
+                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                        }
+
+                        function vaiAlPagamento() {
+                            let totDefinitivo = h5Tot.textContent;
+                            let h5Totale = document.querySelector("#h5Totale");
+                            h5Totale.textContent = totDefinitivo;
+
+
+                            //inserisci nella local un array di prenotazioni
+                        }
+
+                        let btnAlPagamento = document.querySelector("#btnAlPagamento");
+                        btnAlPagamento.addEventListener("click", vaiAlPagamento);
+
+                        stampaPrezzo();
+                        totAlCaricamento();
+
+
+                        carrelloModal.appendChild(card);
+                        buttonPlus.addEventListener("click", stampaTot);
+                        buttonMinus.addEventListener("click", stampaTotMeno);
+                        buttonPlus.addEventListener("click", stampaPrezzo);
+                        buttonMinus.addEventListener("click", stampaPrezzo);
+                        buttonPlus.addEventListener("click", disabilitaBtnMeno);
+                        buttonMinus.addEventListener("click", disabilitaBtnMeno);
+                        buttonPlus.addEventListener("click", setPrenotazionePiu);
+                        buttonMinus.addEventListener("click", setPrenotazioneMeno);
+                        idInput++;
+                    })
+            });
+
+
+        }
+
+        let btnPagaOra = document.querySelector("#pagaOra");
+
+        function pagaOra() {
+
+
+        }
+
+        btnPagaOra.addEventListener("click", pagaOra);
+
+        btnCompraTutto.addEventListener("click", compraTutto);
 
         btnRemove.addEventListener("click", removePosti);
         btnAdd.addEventListener("click", addPosti);
