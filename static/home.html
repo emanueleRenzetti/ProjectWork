@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -110,6 +111,7 @@
         </div>
     </div>
 
+    <div id="alert"></div>
 
     <main>
         <section id="hero" class="pb-5">
@@ -117,17 +119,14 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
 
+                    <div class="swiper-slide">
+                        <img class="img-fluid" src="./img/halloween.png" alt="Immagine 2">
+                    </div>
+                    <!--Fine slide-->
 
                     <!-- Slides -->
                     <div class="swiper-slide">
                         <img class="img-fluid" src="./img/concerto.png" alt="Immagine 1">
-                    </div>
-                    <!--Fine slide-->
-
-
-
-                    <div class="swiper-slide">
-                        <img class="img-fluid" src="./img/halloween.png" alt="Immagine 2">
                     </div>
                     <!--Fine slide-->
 
@@ -343,6 +342,7 @@
 
     <!-- MAPPA - SWIPER -->
     <script>
+
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
             loop: true,
@@ -368,6 +368,24 @@
                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                    }*/
         ).addTo(map);
+
+        let immagine = document.querySelectorAll(".swiper-slide");
+
+        // function velato() {
+        //     immagine.classList.add("immagine");
+        // }
+
+        // function nonVelato() {
+        //     immagine.classList.remove("immagine");
+        // }
+
+        // immagine.addEventListener("mouseIn", velato);
+        // immagine.addEventListener("mouseOut", nonVelato);
+
+
+
+
+
 
         function trovaCoordinate() {
             let latitude = "";
@@ -435,6 +453,7 @@
         let btnLogout = document.querySelector("#btnLogOut");
         let btnLogIn = document.querySelector("#btnLogIn");
 
+
         let porta = location.port;
         let blockedURL = `http://127.0.0.1:${porta}/pannello.html`;
 
@@ -477,8 +496,8 @@
                         alert("password errata!");
                         event.preventDefault();
                     } else {
-                        alert("accesso effettuato!")
                         localStorage.setItem("utente", JSON.stringify(utente));
+                        alertAccesso();
                         //location.reload();
                     }
                 } else {
@@ -524,6 +543,18 @@
             }
 
 
+        }
+
+        let alert = document.querySelector("#alert");
+        function alertAccesso() {
+            console.log("Funziona");
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
 
 
@@ -820,7 +851,6 @@
                 }
             })
         }
-
 
         // Initial calendar generation
         updateCalendar();

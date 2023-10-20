@@ -177,16 +177,13 @@ body {
 
 #hero {
 
-    .swiper-slide {
+    .swiper-slide{
         position: relative;
-
-
+        
         img {
-
             object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
             height: calc(100vh - 4rem);
             width: 100%;
-
         }
 
         &::before {
@@ -194,22 +191,14 @@ body {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.074);
+            background: rgba(0, 0, 0, 0.121);
             pointer-events: none;
             z-index: 1; // memo : funziona come lo spazio cartesiano
         }
 
-        .slideInfo {
-            position: absolute;
-            z-index: 2;
-
-            h2 {
-
-                font-size: 2rem;
-            }
         }
     }
-}
+
 
 
 #cards {
