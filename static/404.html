@@ -77,8 +77,8 @@
 
             <div class="container-fluid">
 
-                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
+                <a href="home.html"><img src="./img/logo.svg" class="img-fluid me-2" id="logo"></a>
+                <a class="navbar-brand text-white" href="home.html"> Ticket<span class="text-accent">2</span>you</a>
 
                 <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -89,9 +89,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
 
@@ -163,7 +163,7 @@
                         Come sei arrivato qui è un mistero. Ma puoi fare clic sul pulsante qui sotto
                         per tornare alla home page.
                     </p>
-                    <button href="home.html" class="btn green" id="button">HOME</button>
+                    <button class="btn green" id="button">HOME</button>
                 </div>
         </div>
     </main>
@@ -199,7 +199,7 @@
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
                         <input class="form-control" type="email" id="emailFake">
-                        <button class="btn btn-primary" type="submit">Iscriviti</button>
+                        <button id="btnIscriviti" class="btn btn-primary" type="submit">Iscriviti</button>
                     </div>
                     <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi, sconti e
                         tanto altro!</label>
@@ -210,6 +210,16 @@
     </footer>
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- pulisci newsletter -->
+    <script>
+        function pulisci() {
+            let emailFake = document.querySelector("#emailFake");
+            emailFake.value = "";
+        }
+        let btnIscriviti = document.querySelector("#btnIscriviti");
+        btnIscriviti.addEventListener("click", pulisci)
+    </script>
 
 
     <script>

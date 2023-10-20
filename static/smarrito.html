@@ -186,7 +186,7 @@
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
                         <input class="form-control" type="email" id="emailFake">
-                        <button class="btn btn-primary" type="submit">Iscriviti</button>
+                        <button id="btnIscriviti" class="btn btn-primary" type="submit">Iscriviti</button>
                     </div>
                     <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi, sconti e
                         tanto altro!</label>
@@ -197,6 +197,16 @@
     </footer>
     
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- pulisci newsletter -->
+        <script>
+            function pulisci() {
+                let emailFake = document.querySelector("#emailFake");
+                emailFake.value = "";
+            }
+            let btnIscriviti = document.querySelector("#btnIscriviti");
+            btnIscriviti.addEventListener("click", pulisci)
+        </script>
 
 </body>
 </html>
