@@ -125,7 +125,7 @@
     
                                                 <!-- descrizione -->
                                                 <div class="form-outline mb-4">
-                                                    <label class="form-label" for="descrizione">Descrizione</label>
+                                                    <label class="form-label" for="descrizione">Nome</label>
                                                     <input type="text" id="descrizione" name="descrizione" class="form-control" required title="Inserisci la descrizione"/>
                                                 </div>
     
@@ -435,6 +435,7 @@
             .then(response => response.json())
             .then(data => data.forEach(evento => {
 
+                if (evento.caratteristiche != "Passato"){
                 let TR = document.createElement('tr'); // riga evento
 
                 const idEvento = document.createElement('td')
@@ -487,10 +488,12 @@
                 TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
 
                 adminTable.append(TR);
+                }
             }))
             .then(() => {
                 recuperaRadio();
             });
+        
         }
         document.addEventListener("DOMContentLoaded", function(){
             localStorage.removeItem("idEventoSelezionato");
