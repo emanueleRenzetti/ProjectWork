@@ -281,7 +281,12 @@ body {
   }
 
   .available{
-    background-color: rgb(86, 255, 109) !important;
+    background-color: $success !important;
+    color: white;
+  }
+
+  .notAvailable{
+    background-color: $red !important;
     color: white;
   }
 

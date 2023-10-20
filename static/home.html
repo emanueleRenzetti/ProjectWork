@@ -203,7 +203,7 @@
                         <div id="map" class="rounded-5"></div>
 
                         <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra
-                            Eventi</button>
+                            Eventi Disponibili</button>
                         <!--  <div class="d-flex gap-3 justify-content-center">
 
                             <select class="form-select" id="selectEventi">
@@ -239,7 +239,23 @@
 
                         <ul id="days" class="days">
                         </ul>
-                        <p class="text-center">Clicca sulle disponibilità per più info</p>
+
+
+                        <ul class="list-group text-center w-50 pt-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success rounded-pill"> </span>
+                                Disponibili
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="badge bg-red rounded-pill"> </span>
+                                Non disponibili
+                            </li>
+                        </ul>
+
+                        <!-- <ul class="d-flex gap-5">
+                                <li class="badge"><span class="text-success fs-5">Disponibile</span></li>
+                                <li class="badge"><span class="text-danger fs-5">Passato</span></li>
+                            </ul> -->
                     </div>
                 </div>
 
@@ -341,7 +357,7 @@
                 el: '.swiper-scrollbar',
             },
         });
-///////////////////////////////////////
+        ///////////////////////////////////////
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
             4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
@@ -364,43 +380,51 @@
             let i = 0;
 
             eventi.forEach(evento => {
+                console.log(evento);
                 let address = evento.luogo_evento;
                 let marker;
                 i++;
-
-
                 // let address = mioEvento.luogo_evento;
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            const result = data[0];
+                            const latitude = result.lat;
+                            const longitude = result.lon;
 
-                let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
+                            // Aggiorna la mappa con le coordinate trovate
+                            map.setView([latitude, longitude], 6);
+                            if (marker) {
+                                map.removeLayer(marker);
+                            }
 
-                marker = L.marker([latitude, longitude]).
-                    addTo(map)
-                    .bindPopup(txtPopUp)
-                    .openPopup()
+                            let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
 
-                function openPopup() {
-                    marker.openPopup();
-                }
+                            marker = L.marker([latitude, longitude]).
+                                addTo(map)
+                                .bindPopup(txtPopUp)
+                                .openPopup()
 
-                function closePopUp() {
-                    marker.closePopup();
-                }
+                            //
 
-                marker.addEventListener("mouseover", openPopup);
-                marker.addEventListener("mouseout", closePopUp);
-
-
-                marker.addEventListener("click", function () {
-                    localStorage.setItem("evento", JSON.stringify(evento));
-                    location.href = "evento.html"
-                })
-
-
-            })
-
-            // });//then
-            // });//4each
-        } //trova coordinate
+                            function openPopup() {
+                                marker.openPopup();
+                            }
+                            function closePopUp() {
+                                marker.closePopup();
+                            }
+                            marker.addEventListener("mouseover", openPopup);
+                            marker.addEventListener("mouseout", closePopUp);
+                            marker.addEventListener("click", function () {
+                                console.log("giusto");
+                                localStorage.setItem("evento", JSON.stringify(evento));
+                                location.href = "evento.html"
+                            })
+                        }
+                    });//then
+            });//4each
+        }//trova coordinate
     </script>
 
 
@@ -579,7 +603,7 @@
 
 
 
-<!--Cards-->
+    <!--Cards-->
     <script>
         let cards = document.querySelector("#cards");
         let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
@@ -593,17 +617,17 @@
                 let card = document.createElement("div");
                 card.classList.add("card", "h-100", "w-100");
                 //Card f
-                
-                if (evento.caratteristiche != "Passato"){
-                let idEvento = evento.id;
-                card.setAttribute("onclick", `vaiAllaPag(${idEvento})`);
-                card.addEventListener("mouseover", ingrandisci);
-                card.addEventListener("mouseout", restringi);
-                }else{
+
+                if (evento.caratteristiche != "Passato") {
+                    let idEvento = evento.id;
+                    card.setAttribute("onclick", `vaiAllaPag(${idEvento})`);
+                    card.addEventListener("mouseover", ingrandisci);
+                    card.addEventListener("mouseout", restringi);
+                } else {
                     card.classList.add("bg-red", "text-light")
                 }
 
-                
+
                 //Ingrandisci / rimpicciolisci
                 let navItems = document.querySelectorAll(".nav-link");
                 navItems.forEach(item => {
@@ -677,10 +701,9 @@
         let currentMonth = 9; // (0-based index)
         let currentYear = 2023;
 
-
         function generateCalendar() {
-            const daysUl = document.getElementById("days");
-            daysUl.innerHTML = ''; // Clear the previous month's days
+            let daysUl = document.getElementById("days");
+            daysUl.innerHTML = '';
 
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -702,8 +725,6 @@
                 daysUl.appendChild(dayLi);
             }
         }
-
-
 
         function previousMonth() {
             if (currentMonth === 0) {
@@ -730,11 +751,10 @@
         generateCalendar();
 
 
-
         //eventi su calendario
-
         function updateCalendar() {
             let eventiInArrivo = JSON.parse(localStorage.getItem("eventiInArrivo"));
+            let eventiPassati = JSON.parse(localStorage.getItem("eventiPassati"));
             const daysUl = document.getElementById("days");
             const mese = document.getElementById("month-year");
 
@@ -744,7 +764,6 @@
 
             // Highlight event dates
             eventiInArrivo.forEach((evento) => {
-
                 // Iterate through the date elements and compare with the event date
                 const dateElements = daysUl.getElementsByTagName("li");
                 for (let i = 0; i < dateElements.length; i++) {
@@ -762,7 +781,27 @@
                     }
                 }
             });
+
+
+
+            eventiPassati.forEach((evento) => {
+                // Iterate through the date elements and compare with the event date
+                const dateElements = daysUl.getElementsByTagName("li");
+                for (let i = 0; i < dateElements.length; i++) {
+
+                    const dateLi = dateElements[i];
+                    const day = parseInt(dateLi.textContent.trim(), 10);
+                    const month = currentMonth + 1;
+
+                    let eventDate = new Date(evento.data_evento);
+
+                    if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
+                        dateLi.classList.add("notAvailable");
+                    }
+                }
+            });
         }
+
 
 
         function creaPopUp(evento) {
