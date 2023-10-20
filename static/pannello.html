@@ -356,21 +356,14 @@
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!--Log-In // Check-->
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            let utente = JSON.parse(localStorage.getItem("utente"));
-
-            if (utente.tipo != 'A') {
-                location.href = "smarrito.html";
-            }
-        })
-
+        document.addEventListener("DOMContentLoaded", controllaUtente);
+        
         let btnLogIn = document.querySelector("#btnLogIn");
         let btnLogOut = document.querySelector("#btnLogOut");
         
-
         function controllaUtente() {
-
             let utente = JSON.parse(localStorage.getItem("utente"));
             if (utente == null || utente.tipo != "A") {
                 location.href = "smarrito.html";
@@ -379,7 +372,6 @@
                 btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
             }
         }
-        window.addEventListener("DOMContentLoaded", controllaUtente);
         
         
         function logOut() {
@@ -388,10 +380,10 @@
             location.href = "home.html";
         }
         btnLogOut.addEventListener("click", logOut);
+ </script>       
         
         
-        
-
+    <script>  
         // COSTRUTTORE SENZA ID - DA USARE PER LA POST
         function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
             this.tipologia = tipologia;
