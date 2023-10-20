@@ -812,6 +812,11 @@
 
                     if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
+                        dateLi.addEventListener("mouseover", toggle);
+                        dateLi.addEventListener("mouseout", toggle);
+                        function toggle(){
+                            dateLi.classList.toggle("zoom");   
+                        }
                         dateLi.addEventListener("click", () => creaPopUp(evento))
                     }
                 }
