@@ -191,9 +191,7 @@
         let eventi_trascorsi = document.querySelector("#eventi_trascorsi");
 
         function separaEventi(){  // funzione che separa gli eventi trascorsi dagli eventi in arrivo e li piazza in due array diversi
-
-            let eventi = JSON.parse(localStorage.getItem("eventiRegistrati"));
-
+            let eventi = JSON.parse(localStorage.getItem("eventiDB"));
             let fullDate = new Date();
 
             let giorno = fullDate.getDate(); 
@@ -209,29 +207,23 @@
             eventi.forEach(evento => {
 
                 if (dataCorrente > evento.data_evento) {
-                    
                     eventiTrascorsiArray.push(evento);
-
-                }else if (dataCorrente <= evento.data_evento) {
                     
+                }else if (dataCorrente <= evento.data_evento) {
                     eventiArrivoArray.push(evento);
                 }
-            })
 
+            })
             localStorage.setItem("eventiArrivoArray", JSON.stringify(eventiArrivoArray));
             localStorage.setItem("eventiTrascorsiArray", JSON.stringify(eventiTrascorsiArray));
         }
 
 
         function createRow() {
-
             // POPOLO LA TABELLA DEGLI EVENTI IN ARRIVO
-
             let eventiInArrivo = JSON.parse(localStorage.getItem("eventiArrivoArray"));
             let eventiTrascorsi = JSON.parse(localStorage.getItem("eventiTrascorsiArray"));
-
             // ordino l'array di eventi in arrivo sulla base della data evento
-
             eventiInArrivo.sort(function (evenoA, eventoB) {
                 return eventoB.data - evenoA.data;
             })
@@ -298,16 +290,16 @@
 
                 // TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
 
-                let btnEvento2 = document.createElement("button");
-                btnEvento2.textContent = "Vai alla pagina evento";
-                btnEvento2.setAttribute("class", "btn btn-outline-secondary"); 
+                // let btnEvento2 = document.createElement("button");
+                // btnEvento2.textContent = "Vai alla pagina evento";
+                // btnEvento2.setAttribute("class", "btn btn-outline-secondary"); 
 
-                btnEvento2.addEventListener("click", function(){
-                    localStorage.setItem("evento", JSON.stringify(evento));
-                    location.href = "evento.html";
-                })
+                // btnEvento2.addEventListener("click", function(){
+                //     localStorage.setItem("evento", JSON.stringify(evento));
+                //     location.href = "evento.html";
+                // })
 
-                TD5.append(btnEvento2);
+                //TD5.append(btnEvento2);
 
                 TR.append(TD1, TD2, TD3, TD4, TD5)
 
@@ -381,8 +373,6 @@
             //             eventi_arrivo.append(TR)
             //         });
             //     })
-        
-
     </script>
 </body>
 
