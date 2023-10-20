@@ -92,10 +92,10 @@
 
 
         </nav>
-
-
-
     </header>
+
+
+
 
 
 
@@ -127,13 +127,7 @@
 
 
                     <div class="swiper-slide">
-                        <img class="img-fluid" src="./img/highway.png" alt="Immagine 2">
-                    </div>
-                    <!--Fine slide-->
-
-
-                    <div class="swiper-slide">
-                        <img class="img-fluid" src="./img/rassegna.png" alt="Immagine 2">
+                        <img class="img-fluid" src="./img/halloween.png" alt="Immagine 2">
                     </div>
                     <!--Fine slide-->
 
@@ -172,10 +166,9 @@
             <!--idea Eventi Passati - zac-->
             <div class="container">
                 <div class="text-center pb-5">
-                    <h2 class="fw-bold">Più info</h2>
+                    <h2 class="fw-bold">Eventi organizzati da noi</h2>
                 </div>
-                <div class="row g-5 py-3" id="cards">
-
+                <div class="row row-cols-3 g-5 py-3" id="cards">
                 </div>
             </div>
         </section>
@@ -220,41 +213,41 @@
                             <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra</button>
 
                         </div> -->
-                    </div> 
-
-
-                        <div class="col-6 d-flex flex-column align-items-center">
-                            <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
-
-                            <div class="month">
-                                <ul>
-                                    <li class="prev" onclick="previousMonth()">&#10094;</li>
-                                    <li id="month-year"></li>
-                                    <li class="next" onclick="nextMonth()">&#10095;</li>
-                                </ul>
-                            </div>
-
-                            <ul class="weekdays">
-                                <li>Lun</li>
-                                <li>Mar</li>
-                                <li>Mer</li>
-                                <li>Gio</li>
-                                <li>Ven</li>
-                                <li>Sab</li>
-                                <li>Dom</li>
-                            </ul>
-
-                            <ul id="days" class="days">
-                            </ul>
-                            <p class="text-center">Clicca sulle disponibilità per più info</p>
-                        </div>
                     </div>
 
 
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <h3 class="text-center py-3">o in base alle tue disponibilità</h3>
 
+                        <div class="month">
+                            <ul>
+                                <li class="prev" onclick="previousMonth()">&#10094;</li>
+                                <li id="month-year"></li>
+                                <li class="next" onclick="nextMonth()">&#10095;</li>
+                            </ul>
+                        </div>
 
+                        <ul class="weekdays">
+                            <li>Lun</li>
+                            <li>Mar</li>
+                            <li>Mer</li>
+                            <li>Gio</li>
+                            <li>Ven</li>
+                            <li>Sab</li>
+                            <li>Dom</li>
+                        </ul>
+
+                        <ul id="days" class="days">
+                        </ul>
+                        <p class="text-center">Clicca sulle disponibilità per più info</p>
+                    </div>
                 </div>
-                <!--row-->
+
+
+
+
+            </div>
+            <!--row-->
 
 
             </div>
@@ -331,7 +324,8 @@
     </script>
 
 
-    <!-- MAPPA  -->
+
+    <!-- MAPPA - SWIPER -->
     <script>
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
@@ -347,10 +341,7 @@
                 el: '.swiper-scrollbar',
             },
         });
-
-
-        var marker; // Dichiarazione globale della variabile marker
-
+///////////////////////////////////////
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
             4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
@@ -362,19 +353,17 @@
                    }*/
         ).addTo(map);
 
-
         function trovaCoordinate() {
             let latitude = "";
             let longitude = "";
+            //let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
+            // let selectEventi = document.querySelector("#selectEventi");
+            // let selezionato = selectEventi.value;
 
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-           // let selectEventi = document.querySelector("#selectEventi");
-           // let selezionato = selectEventi.value;
-
-            let arrEventi = JSON.parse(localStorage.getItem("eventiArrivoArray"));
+            let eventi = JSON.parse(localStorage.getItem("eventiInArrivo"));
             let i = 0;
 
-            arrEventi.forEach(evento => {
+            eventi.forEach(evento => {
                 let address = evento.luogo_evento;
                 let marker;
                 i++;
@@ -402,7 +391,6 @@
 
 
                 marker.addEventListener("click", function () {
-                    console.log("giusto");
                     localStorage.setItem("evento", JSON.stringify(evento));
                     location.href = "evento.html"
                 })
@@ -541,44 +529,83 @@
             location.reload();
             location.href = "home.html";
         }
+        document.addEventListener("DOMContentLoaded", getUtenti);
+        document.addEventListener("DOMContentLoaded", verificaLog);
+        form.addEventListener("submit", accedi);
+        btnLogout.addEventListener("click", logOut);
+    </script>
 
-        function getCards() {
+
+
+
+    <!--Eventi-->
+    <script>
+        function getEventi() {
             let URL = "http://localhost:9007/e/eventi";
             fetch(URL).then(data => data.json())
                 .then(res => {
+                    // Creo arr Eventi
                     let eventiDB = [];
-
                     res.forEach(evento => {
                         eventiDB.push(evento);
                     });
                     console.log(eventiDB);
-                    localStorage.setItem("eventiRegistrati", JSON.stringify(eventiDB));
+                    localStorage.setItem("eventiDB", JSON.stringify(eventiDB));
+
+
+                    //Creo arr Eventi Passati
+                    let eventiPassati = [];
+                    eventiDB.forEach(evento => {
+                        if (evento.caratteristiche == "Passato") {
+                            eventiPassati.push(evento);
+                        }
+                    });
+                    localStorage.setItem("eventiPassati", JSON.stringify(eventiPassati));
+
+
+                    //EventiInArrivo
+                    let eventiInArrivo = [];
+                    eventiDB.forEach(evento => {
+                        if (evento.caratteristiche != "Passato") {
+                            eventiInArrivo.push(evento);
+                        }
+                    });
+                    localStorage.setItem("eventiInArrivo", JSON.stringify(eventiInArrivo));
+
                 })
         }
+        document.addEventListener("DOMContentLoaded", getEventi);
+    </script>
 
 
 
-
+<!--Cards-->
+    <script>
         let cards = document.querySelector("#cards");
+        let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
 
         function creaCards() {
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-
-
-            eventiRegistrati.forEach(evento => {
-
+            eventiDB.forEach(evento => {
+                //creo COL
                 let col = document.createElement("div");
                 col.classList.add("col");
-
+                //card Prop
                 let card = document.createElement("div");
-                card.classList.add("card", "h-100");
+                card.classList.add("card", "h-100", "w-100");
+                //Card f
+                
+                if (evento.caratteristiche != "Passato"){
                 let idEvento = evento.id;
-                card.setAttribute("onclick", `vaiAllaPag(${idEvento})`)
+                card.setAttribute("onclick", `vaiAllaPag(${idEvento})`);
                 card.addEventListener("mouseover", ingrandisci);
                 card.addEventListener("mouseout", restringi);
+                }else{
+                    card.classList.add("bg-red", "text-light")
+                }
 
+                
+                //Ingrandisci / rimpicciolisci
                 let navItems = document.querySelectorAll(".nav-link");
-
                 navItems.forEach(item => {
                     item.addEventListener("mouseover", ingrandisciLink);
                     item.addEventListener("mouseout", restringiLink);
@@ -590,9 +617,8 @@
                     function restringiLink() {
                         item.style.transform = "scale(1)";
                     }
+
                 });
-
-
                 function ingrandisci() {
                     card.style.transform = "scale(1.2)";
                 }
@@ -600,24 +626,21 @@
                 function restringi() {
                     card.style.transform = "scale(1)";
                 }
-
+                //Fine
                 let img = document.createElement("img");
                 img.classList.add("card-img-top");
                 img.setAttribute("src", "./img/" + evento.locandina);
-
 
                 let cardBody = document.createElement("div");
                 cardBody.classList.add("card-body");
                 cardBody.classList.add("shadow");
 
-
                 let descrizione = document.createElement("div");
                 descrizione.classList.add("card-text");
                 descrizione.innerHTML = `<h3 class="fw-bold">${evento.descrizione}</h3>
                     <p class="fw-bold">${evento.tipologia}</p>
-                    <p>${evento.caratteristiche}</p>
+                    <p class="fw-bold">${evento.caratteristiche}</p>
                     <p>${evento.data_evento}</p>`
-
 
                 cardBody.appendChild(descrizione);
                 card.appendChild(img);
@@ -626,47 +649,30 @@
                 cards.appendChild(col);
 
             });
-
         }
 
-
         function vaiAllaPag(id) {
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-            let mioEvento = eventiRegistrati.find(function (res) {
+            let mioEvento = eventiDB.find(function (res) {
                 return res.id == id;
             }, id);
             localStorage.setItem("evento", JSON.stringify(mioEvento));
             location.href = "evento.html";
         }
+        // function getSelect() {
 
-        let selectEventi = document.querySelector("#selectEventi");
+        //     eventiDB.forEach(evento => {
+        //         let option = document.createElement("option");
 
-        let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-
-        function getSelect() {
-
-            eventiRegistrati.forEach(evento => {
-                let option = document.createElement("option");
-
-                option.textContent = evento.descrizione;
-                option.value = evento.id;
-                selectEventi.appendChild(option);
-            })
-        }
-
-
-
-        document.addEventListener("DOMContentLoaded", getSelect);
-        document.addEventListener("DOMContentLoaded", getCards);
+        //         option.textContent = evento.descrizione;
+        //         option.value = evento.id;
+        //         selectEventi.appendChild(option);
+        //     })
+        // }
         document.addEventListener("DOMContentLoaded", creaCards);
-        document.addEventListener("DOMContentLoaded", getUtenti);
-        document.addEventListener("DOMContentLoaded", verificaLog);
-        form.addEventListener("submit", accedi);
-        btnLogout.addEventListener("click", logOut);
+    </script>
 
-
-
-
+    <!--Calendario-->
+    <script>
         //calendario
         let currentMonth = 9; // (0-based index)
         let currentYear = 2023;
@@ -728,7 +734,7 @@
         //eventi su calendario
 
         function updateCalendar() {
-            let eventiInArrivo = JSON.parse(localStorage.getItem("eventiArrivoArray"));
+            let eventiInArrivo = JSON.parse(localStorage.getItem("eventiInArrivo"));
             const daysUl = document.getElementById("days");
             const mese = document.getElementById("month-year");
 
@@ -749,7 +755,7 @@
 
 
                     let eventDate = new Date(evento.data_evento);
-                    
+
                     if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
                         dateLi.addEventListener("click", () => creaPopUp(evento))
