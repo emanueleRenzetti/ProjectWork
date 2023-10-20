@@ -368,8 +368,8 @@
             let longitude = "";
 
             let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-            let selectEventi = document.querySelector("#selectEventi");
-            let selezionato = selectEventi.value;
+           // let selectEventi = document.querySelector("#selectEventi");
+           // let selezionato = selectEventi.value;
 
             let arrEventi = JSON.parse(localStorage.getItem("eventiArrivoArray"));
             let i = 0;
@@ -491,8 +491,6 @@
                     liPannello.setAttribute("class", "nav-item linkPannello");
 
                     let linkPannello = liPannello.querySelector("a");
-
-                    console.log(linkPannello);
 
                     linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
@@ -750,9 +748,8 @@
                     const month = currentMonth + 1;
 
 
-
                     let eventDate = new Date(evento.data_evento);
-                    console.log(eventDate);
+                    
                     if (day === eventDate.getDate() && month === eventDate.getMonth() + 1) {
                         dateLi.classList.add("available");
                         dateLi.addEventListener("click", () => creaPopUp(evento))
