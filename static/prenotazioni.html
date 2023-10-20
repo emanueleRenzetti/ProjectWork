@@ -255,8 +255,10 @@
             prenotazioniRegistrate.forEach(prenotazione => {
 
                 let evento = eventiRegistrati.find(function (res) {
-                    return res.id == this.evento_id
+                    return res.id == this.evento_id;
                 }, prenotazione);
+
+                console.log(evento);
 
                 let ul = document.querySelector("#ul");
 
