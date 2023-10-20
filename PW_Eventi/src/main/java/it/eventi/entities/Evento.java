@@ -25,7 +25,6 @@ public class Evento {
 	private int disponibilita;
 	private LocalDate data_evento;
 	private String locandina;
-	private int utenti_id;
 	
 	
 	public int getId() {
@@ -82,12 +81,7 @@ public class Evento {
 	public void setLocandina(String locandina) {
 		this.locandina = locandina;
 	}
-	public int getUtenti_id() {
-		return utenti_id;
-	}
-	public void setUtenti_id(int utenti_id) {
-		this.utenti_id = utenti_id;
-	}
+
 	
 	
 	
