@@ -346,3 +346,9 @@ nav {
 .cardDisabled{
     background: rgba(49, 49, 49, 0.451);
 }
+
+#cards{
+    .card{
+        transition: all 0.2s ease-in-out;
+    }
+}
