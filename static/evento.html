@@ -817,11 +817,14 @@
             let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
             let idInput = 0;
             let totDaPagare = 0;
-
+            let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
+            
             prenotazioni.forEach(pren => {
-                fetch("http://localhost:9007/e/eventi/" + pren.evento_id).then(data => data.json())
-                    .then(res => {
-
+                // fetch("http://localhost:9007/e/eventi/" + pren.evento_id).then(data => data.json())
+                //     .then(res => {
+                        let res = eventiDB.find(function (evento) {
+                                return evento.id == this.evento_id;
+                            }, pren);
 
                         let h5Tot = document.querySelector("#h5Tot");
 
@@ -870,7 +873,6 @@
 
                         // Creazione dell'input
                         var inputElement = document.createElement("input");
-                        inputElement.setAttribute("oninput", "stampaTot()");
                         inputElement.setAttribute("value", pren.posti);
                         inputElement.setAttribute("min", "1");
                         inputElement.setAttribute("id", `quantita${idInput}`);
@@ -898,39 +900,51 @@
                             } else {
                                 buttonMinus.removeAttribute("disabled");
                             }
+
                         }
 
+                        function setPrenotazione(){
+                            let nuovoArrPren = prenotazioni.filter(item => item !== pren);
+                            pren.posti=Number(inputElement.value);
+                            nuovoArrPren.push(pren);
+                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                            console.log(nuovoArrPren);
+                        }
                         
 
-                        function setPrenotazionePiu() {
-                            numero++;
-                            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
-
-                            let miaPrenotazione = prenotazioni.find(function (prenotazione) {
-                                return prenotazione.utenti_id == pren.utenti_id && prenotazione
-                                    .evento_id == pren.evento_id;
-                            }, pren);
-
-                            let nuovoArrPren = prenotazioni.filter(item => item !==
-                                miaPrenotazione);
-                            let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
-                            nuovoArrPren.push(prenModificata);
-                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                        function attivaEvento(){
+                            var inputEvent = new Event("input", { bubbles: true });
+                            inputElement.dispatchEvent(inputEvent);
                         }
+                        // function setPrenotazionePiu() {
+                        //     numero++;
+                        //     let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
 
-                        function setPrenotazioneMeno() {
-                            numero--;
-                            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
-                            let miaPrenotazione = prenotazioni.find(function (prenotazione) {
-                                return prenotazione.utenti_id == pren.utenti_id && prenotazione
-                                    .evento_id == pren.evento_id
-                            }, pren);
-                            let nuovoArrPren = prenotazioni.filter(item => item !==
-                                miaPrenotazione);
-                            let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
-                            nuovoArrPren.push(prenModificata);
-                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
-                        }
+                        //     let miaPrenotazione = prenotazioni.find(function (prenotazione) {
+                        //         return prenotazione.utenti_id == pren.utenti_id && prenotazione
+                        //             .evento_id == pren.evento_id;
+                        //     }, pren);
+
+                        //     let nuovoArrPren = prenotazioni.filter(item => item !==
+                        //         miaPrenotazione);
+                        //     let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
+                        //     nuovoArrPren.push(prenModificata);
+                        //     localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                        // }
+
+                        // function setPrenotazioneMeno() {
+                        //     numero--;
+                        //     let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+                        //     let miaPrenotazione = prenotazioni.find(function (prenotazione) {
+                        //         return prenotazione.utenti_id == pren.utenti_id && prenotazione
+                        //             .evento_id == pren.evento_id
+                        //     }, pren);
+                        //     let nuovoArrPren = prenotazioni.filter(item => item !==
+                        //         miaPrenotazione);
+                        //     let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
+                        //     nuovoArrPren.push(prenModificata);
+                        //     localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                        // }
 
 
                         function stampaTot() {
@@ -971,17 +985,32 @@
 
 
                         carrelloModal.appendChild(card);
-                        buttonPlus.addEventListener("click", stampaTot);
-                        buttonMinus.addEventListener("click", stampaTotMeno);
-                        buttonPlus.addEventListener("click", stampaPrezzo);
-                        buttonMinus.addEventListener("click", stampaPrezzo);
-                        buttonPlus.addEventListener("click", disabilitaBtnMeno);
-                        buttonMinus.addEventListener("click", disabilitaBtnMeno);
-                        buttonPlus.addEventListener("click", setPrenotazionePiu);
-                        buttonMinus.addEventListener("click", setPrenotazioneMeno);
+
+                        buttonPlus.addEventListener("click", function(){
+                            attivaEvento();
+                            disabilitaBtnMeno();
+                            stampaPrezzo();
+                            stampaTot()
+                        })
+
+                        buttonMinus.addEventListener("click", function(){
+                            attivaEvento();
+                            disabilitaBtnMeno();
+                            stampaPrezzo();
+                            stampaTotMeno();
+                        })
+                            // buttonPlus.addEventListener("click", stampaTot);
+                            // buttonMinus.addEventListener("click", stampaTotMeno);
+                            // buttonPlus.addEventListener("click", stampaPrezzo);
+                            // buttonMinus.addEventListener("click", stampaPrezzo);
+                            // buttonPlus.addEventListener("click", disabilitaBtnMeno);
+                            // buttonMinus.addEventListener("click", disabilitaBtnMeno);
+                            // buttonPlus.addEventListener("click", attivaEvento);
+                            // buttonMinus.addEventListener("click", attivaEvento);
+                        inputElement.addEventListener("input", setPrenotazione);
                         idInput++;
-                    })
-            });
+                   // })//then
+            });//foreach
 
 
         }
@@ -989,8 +1018,17 @@
         let btnPagaOra = document.querySelector("#pagaOra");
 
         function pagaOra() {
-
-
+            alert("PAGAMENTO RIUSCITO")
+            let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+            prenotazioni.forEach(element => {
+                fetch("http://localhost:9007/p/prenotazioni",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(element)
+                }).then(data => data.json())
+            });
         }
 
         btnPagaOra.addEventListener("click", pagaOra);
