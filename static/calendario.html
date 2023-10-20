@@ -14,12 +14,12 @@
 <body>
 
     <header class="mainHeader">
-        <nav class="navbar navbar-expand-lg bg-secondary">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
 
-            <div class="container-fluid">
+            <div class="container-fluid me-3">
 
-                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
+                <a href="home.html"><img src="./img/logo.svg" class="img-fluid me-2" id="logo"></a>
+                <a class="navbar-brand text-white" href="home.html"> Ticket<span class="text-accent">2</span>you</a>
 
                 <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -34,23 +34,38 @@
                             <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
+                                admin</a></li>
 
-                        
+                        <li class="nav-item d-none linkPrenotazioni">
+                            <a class="nav-link text-accent" href="#">Prenotazioni</a>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link text-accent" href="calendario.html">Lista Eventi</a></li>
+
+                        <li class="nav-item" id="liCarrello">
+                            <a class="position-relative nav-link" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+                                href="#">
+                                <i class="bi bi-cart3 text-accent"></i>
+                                <span
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
+                            </a>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
                                 type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
-                            <button class="btn btn-outline-danger text-decoration-none d-none" type="button"
+                            <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
 
                             <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="form-control login" type="text" placeholder="E-mail" id="email"
-                                            required /><br>
-                                        <input class="form-control login" type="password" placeholder="Password"
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail"
+                                            id="email" required /><br>
+                                        <input class="shadow form-control login" type="password" placeholder="Password"
                                             id="password" required />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
@@ -58,8 +73,8 @@
                                         <div class="mt-3 d-flex justify-content-between">
                                             <input class=" btn btn-outline-primary" type="submit" name="submit"
                                                 value="Log-in" />
-                                            <button class="btn btn-outline-primary"><a href="registrati.html"
-                                                    class="text-decoration-none">Registrati</a></button>
+                                            <button class="btn btn-primary"><a href="registrati.html"
+                                                    class="text-decoration-none text-light">Registrati</a></button>
                                         </div>
                                     </form>
                                 </li>
@@ -70,6 +85,8 @@
                     </ul>
                 </div>
             </div>
+
+
         </nav>
     </header>
 
@@ -87,11 +104,13 @@
             <table class="table bg-white">
                 <thead class="bg-dark text-light">
                     <tr>
-                        <th>Tipologia</th>
-                        <th>Descrizione</th>
-                        <th>Luogo</th>
-                        <th>Data</th>
-                        <th>Pagina evento</th>
+                        <div class="row">
+                        <th class="col-2">Tipologia</th>
+                        <th class="col-3">Descrizione</th>
+                        <th class="col-3">Luogo</th>
+                        <th class="col-2">Data</th>
+                        <th class="col-2">Pagina Evento</th>
+                    </div>
                     </tr>
                 </thead>
                 <tbody id="eventi_arrivo">
@@ -107,11 +126,13 @@
             <table class="table">
                 <thead class="bg-dark text-light">
                     <tr>
-                        <th>Tipologia</th>
-                        <th>Descrizione</th>
-                        <th>Luogo</th>
-                        <th>Data</th>
-                        <th>Pagina evento</th>
+                        <div class="row">
+                        <th class="col-2">Tipologia</th>
+                        <th class="col-3">Descrizione</th>
+                        <th class="col-3">Luogo</th>
+                        <th class="col-2">Data</th>
+                        <th class="col-2"> </th>
+                    </div>
                     </tr>
                 </thead>
                 <tbody id="eventi_trascorsi">
@@ -184,6 +205,148 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 
+
+        <script>
+            let form = document.querySelector("#form");
+            let btnLogout = document.querySelector("#btnLogOut");
+            let btnLogIn = document.querySelector("#btnLogIn");
+    
+    
+            let porta = location.port;
+            let blockedURL = `http://127.0.0.1:${porta}/pannello.html`;
+    
+            function utenteObj(email, password) {
+                this.email = email;
+                this.password = password;
+            }
+    
+            function getUtenti() {
+                let URL = "http://localhost:9007/u/utenti";
+                fetch(URL).then(data => data.json())
+                    .then(res => {
+                        let utentiDB = [];
+                        res.forEach(utente => {
+                            utentiDB.push(utente);
+                        });
+                        localStorage.setItem("utentiRegistrati", JSON.stringify(utentiDB));
+                    })
+            }
+    
+            function accedi() {
+                let email = document.querySelector("#email").value;
+                let password = document.querySelector("#password").value;
+                if (email.trim() == "" && password.trim() == "") {
+                    alert("Non hai inserito nulla!");
+                    event.preventDefault();
+                } else if (email.trim() == "" || password.trim() == "") {
+                    alert("Hai dimenticato di compilare qualcosa!");
+                    event.preventDefault();
+                } else {
+                    let utenteForm = new utenteObj(email, password);
+                    let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
+                    // console.log(utentiDB);
+                    let utente = utentiDB.find(function (res) {
+                        return res.email == this.email;
+                    }, utenteForm);
+                    // console.log(utente);
+                    if (utente != undefined) {
+                        if (utente.password != utenteForm.password) {
+                            alert("password errata!");
+                            event.preventDefault();
+                        } else {
+                            localStorage.setItem("utente", JSON.stringify(utente));
+                            alertAccesso();
+                            //location.reload();
+                        }
+                    } else {
+                        alert("utente non trovato");
+                        event.preventDefault();
+                    }
+                }
+            }
+    
+    
+            function verificaLog() {
+                let utente = JSON.parse(localStorage.getItem("utente"));
+    
+    
+                if (utente != undefined) {
+                    btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none ms-2");
+                    btnLogout.setAttribute("class", "btn btn-outline-primary text-decoration-none ms-2");
+    
+                    if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
+                        let liPannello = document.querySelector(".linkPannello");
+    
+                        liPannello.setAttribute("class", "nav-item linkPannello");
+    
+                        let linkPannello = liPannello.querySelector("a");
+    
+                        linkPannello.addEventListener("click", function () {
+                            location.href = "pannello.html";
+                        });
+                    }
+                    if (utente.tipo ==
+                        'B' || utente.tipo === 'A'
+                    ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                        let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+    
+                        linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+    
+                        let liPrenotazioni = linkPrenotazioni.querySelector("a");
+    
+                        liPrenotazioni.addEventListener("click", function () {
+                            location.href = "prenotazioni.html";
+                        });
+                    }
+                }
+    
+    
+            }
+    
+            let alert = document.querySelector("#alert");
+            function alertAccesso() {
+                console.log("Funziona");
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+    
+    
+            function controllaURL() {
+                console.log("l'URL è stato cambiato manualmente");
+    
+                let utente = JSON.parse(localStorage.getItem("utente"));
+    
+                if (utente != null) {
+                    if (utente.tipo == 'B' || utente.tipo == 'C') {
+    
+                        let currentURL = window.location.href;
+    
+                        if (currentURL === blockedURL) {
+                            location.href = "404.html";
+                        }
+                    }
+                    // la pagina di errore deve avere messaggio che dice che l’utente non ha i diritti sufficienti alla modifica
+                }
+            }
+            window.addEventListener("popstate", controllaURL);
+    
+    
+    
+            function logOut() {
+                localStorage.removeItem("utente");
+                location.reload();
+                location.href = "home.html";
+            }
+            document.addEventListener("DOMContentLoaded", getUtenti);
+            document.addEventListener("DOMContentLoaded", verificaLog);
+            form.addEventListener("submit", accedi);
+            btnLogout.addEventListener("click", logOut);
+        </script>
 
     <script>
         // recupero i <tbody> delle 2 tabelle
@@ -286,7 +449,11 @@
                 const TD4 = document.createElement('td')
                 TD4.textContent = evento.data_evento
 
+                console.log(evento);
+                console.log(evento.data_evento);
+
                 const TD5 = document.createElement('td')
+                TD5.textContent = " ";
 
                 // TD5.innerHTML = `<a href="http://localhost:9007/e/eventi/${evento.id}">Vai alla pagina evento</a>`;
 

@@ -50,6 +50,8 @@
                             <a class="nav-link text-accent" href="#">Prenotazioni</a>
                         </li>
 
+                        <li class="nav-item"><a class="nav-link text-accent" href="calendario.html">Lista Eventi</a></li>
+
                         <li class="nav-item" id="liCarrello">
                             <a class="position-relative nav-link" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
@@ -201,9 +203,9 @@
 
                     <div class="col-6 d-flex flex-column align-items-center">
                         <h3 class="py-3">Cerca vicino a te..</h3>
-                        <div id="map" class="rounded-5"></div>
+                        <div id="map" class="rounded-5 img-fluid"></div>
 
-                        <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Mostra
+                        <button type="button" class="btn btn-secondary py-2 mt-auto" onclick="trovaCoordinate()">Mostra
                             Eventi Disponibili</button>
                         <!--  <div class="d-flex gap-3 justify-content-center">
 
@@ -317,8 +319,8 @@
             </div>
 
         </div>
-
-
+        <hr class="text-accent">
+        
         <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
     </footer>
 
@@ -362,7 +364,7 @@
         ///////////////////////////////////////
         // Creazione della mappa
         var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
-            4); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+            5.5); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
