@@ -211,7 +211,7 @@
 
 
         <section id="hero" class="pb-5">
-            <div class="swiper">
+            <div class="swiper mySwiper">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
 
@@ -241,8 +241,8 @@
                 <div class="swiper-button-prev text-accent"></div>
                 <div class="swiper-button-next text-accent"></div>
 
-                <!-- If we need scrollbar -->
-                <div class="swiper-scrollbar"></div>
+                <!-- If we need scrollbar
+                <div class="swiper-scrollbar"></div> -->
             </div>
 
         </section> <!-- HERO -->
@@ -415,6 +415,29 @@
 
         <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+          centeredSlides: true,
+          effect: "fade",
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      </script>
+
+   
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
