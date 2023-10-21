@@ -652,47 +652,23 @@
 
         //////////////ZOOM NAVBAR//////////
         let navItems = document.querySelectorAll(".nav-link");
-
+        
         navItems.forEach(item => {
             item.addEventListener("mouseover", ingrandisciLink);
             item.addEventListener("mouseout", restringiLink);
-
+            
             function ingrandisciLink() {
                 item.style.transform = "scale(1.2)";
             }
-
+            
             function restringiLink() {
                 item.style.transform = "scale(1)";
             }
         });
         /////////////////////////////
-
-        ///////////////SCRIPT PER IL CARRELLO////////////////7
-        function verificaCarrello() {
-            let carrelloUtente = localStorage.getItem("Carrello");
-            // console.log(carrelloUtente);
-            let btnCompra = document.querySelector("#compra");
-
-            if (carrelloUtente != null) {
-                let oggettoNelCarrello = JSON.parse(carrelloUtente).find(function (res) {
-                    return res.id == this.id;
-                }, evento);
-                // console.log(oggettoNelCarrello);
-                if (oggettoNelCarrello != undefined) {
-                    btnCompra.setAttribute("disabled", "");
-                    btnCompra.textContent = "Già nel carrello!";
-                } else {
-                    btnCompra.removeAttribute("disabled");
-                    btnCompra.textContent = "Aggiungi al carrello";
-                }
-            } else {
-                btnCompra.removeAttribute("disabled");
-                btnCompra.textContent = "Aggiungi al carrello";
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", verificaCarrello);
-
+        
+        
+        
         //////////////////AGGIUNGI AL CARRELO: SOLO DA PAGINA EVENTO///////////
 
         function Prenotazione(utenti_id, evento_id, posti) {
@@ -757,6 +733,33 @@
             verificaArticoli();
             verificaCarrello();
         }//////////////////////////////////////FINE FUNZIONE
+
+        ///////////////SCRIPT PER IL CARRELLO////////////////
+        function verificaCarrello() {
+            let carrelloUtente = localStorage.getItem("Carrello");
+            // console.log(carrelloUtente);
+            let btnCompra = document.querySelector("#compra");
+
+            if (carrelloUtente != null) {
+                let oggettoNelCarrello = JSON.parse(carrelloUtente).find(function (res) {
+                    return res.id == this.id;
+                }, evento);
+                // console.log(oggettoNelCarrello);
+                if (oggettoNelCarrello != undefined) {
+                    btnCompra.setAttribute("disabled", "");
+                    btnCompra.textContent = "Già nel carrello!";
+                } else {
+                    btnCompra.removeAttribute("disabled");
+                    btnCompra.textContent = "Aggiungi al carrello";
+                }
+            } else {
+                btnCompra.removeAttribute("disabled");
+                btnCompra.textContent = "Aggiungi al carrello";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", verificaCarrello);
+
 
 
         function verificaArticoli() {
@@ -1032,6 +1035,11 @@
                     },
                     body: JSON.stringify(element)
                 }).then(data => data.json())
+                .then(res =>{
+                    localStorage.removeItem("Carrello");
+                    localStorage.removeItem("prenotazioni");
+                    location.href="home.html";
+                })
             });
         }
 
