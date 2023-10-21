@@ -204,10 +204,11 @@
         }
 
         btnLogOut.addEventListener("click", logOut);
+        
+        let utente = JSON.parse(localStorage.getItem("utente"));
 
         function controllaUtente() {
 
-            let utente = JSON.parse(localStorage.getItem("utente"));
             if (utente == null) {
                 location.href = "404.html";
             } else {
@@ -218,7 +219,7 @@
         window.addEventListener("DOMContentLoaded", controllaUtente);
 
         function getPrenotazioni() {
-            let URL = "http://localhost:9007/p/prenotazioni";
+            let URL = "http://localhost:9007/p/prenotazioni/utente/" + utente.id;
             fetch(URL)
                 .then(data => data.json())
                 .then(res => {
@@ -258,7 +259,7 @@
                     return res.id == this.evento_id;
                 }, prenotazione);
 
-                console.log(evento);
+                
 
                 let ul = document.querySelector("#ul");
 
