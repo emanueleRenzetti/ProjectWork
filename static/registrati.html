@@ -2,108 +2,161 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-   
+
   <header class="mainHeader">
     <nav class="navbar navbar-expand-lg bg-secondary">
 
-        <div class="container-fluid">
+      <div class="container-fluid">
 
-            <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-            <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
+        <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
+        <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
 
-            <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
-                    <li class="nav-item">
-                        <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
-                    </li>
+            <li class="nav-item">
+              <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
+            </li>
 
-                </ul>
-            </div>
+          </ul>
         </div>
+      </div>
     </nav>
-</header>
+  </header>
 
 
 
 
-    <section  id="formR" class="mt-5">
-        
-        <div class="container p-3 bg-body-tertiary rounded-2 ms-auto me-auto w-25">
-            <h1 class="fs-4 fw-bolder py-4">Crea un account</h1>    
+  <section id="formR" class="mt-5">
 
-        <form>
+    <div class="container p-3 bg-body-tertiary rounded-2 ms-auto me-auto w-25">
+      <h1 class="fs-4 fw-bolder py-4">Crea un account</h1>
 
-            <div class="mb-3">
-                <label for="nomeReg" class="form-label">Nome</label>
-                <input type="text" class="form-control border-0 shadow" id="nomeReg" required>
-              </div>
+      <form>
 
-              <div class="mb-3">
-                <label for="cognomeReg" class="form-label">Cognome</label>
-                <input type="text" class="form-control border-0 shadow" id="cognomeReg" required>
-              </div>
-
-
-            <div class="mb-3">
-              <label for="emailReg" class="form-label">Email</label>
-              <input type="email" class="form-control border-0 shadow" id="emailReg" aria-describedby="emailHelp" required>
-
-              <div id="emailHelp" class="form-text">Non condivideremo mai la tua e-mail con nessuno.</div>
-            </div>
-
-
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control border-0 shadow" id="passwordReg" required>
-            </div>
-
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input shadow" id="checkLetter">
-              <label class="form-check-label mb-2" for="checkLetter">Non perderti le nostre offerte. <br> Iscriviti alla newsletter!</label>
-            </div>
-
-
-            <button type="submit" class="btn btn-primary float-end" id="btnSignIn">Registrati</button>
-          </form>
-
+        <div class="mb-3">
+          <label for="nomeReg" class="form-label">Nome</label>
+          <input type="text" class="form-control border-0 shadow" id="nomeReg" required>
         </div>
-        
 
-        <div class="container text-center mt-5">
-            <p class="fw-light">Effettuando l'accesso o creando un account accetti i Termini e le Condizioni e l’Informativa sulla Privacy</p>
-            <hr>
-            <p class="fw-light">Tutti i diritti riservati</p>
+        <div class="mb-3">
+          <label for="cognomeReg" class="form-label">Cognome</label>
+          <input type="text" class="form-control border-0 shadow" id="cognomeReg" required>
         </div>
-        
-    </section>
-
-<script>
-  let btnSignIn = document.querySelector("#btnSignIn");
 
 
-  function registrati(){
-    window.red
-  }
+        <div class="mb-3">
+          <label for="emailReg" class="form-label">Email</label>
+          <input type="email" class="form-control border-0 shadow" id="emailReg" aria-describedby="emailHelp" required>
 
-  btnSignIn.addEventListener("click", registrati);
+          <div id="emailHelp" class="form-text">Non condivideremo mai la tua e-mail con nessuno.</div>
+        </div>
 
-</script>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control border-0 shadow" id="passwordReg" required>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input shadow" id="checkLetter">
+          <label class="form-check-label mb-2" for="checkLetter">Non perderti le nostre offerte. <br> Iscriviti alla
+            newsletter!</label>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary float-end" id="btnSignIn">Registrati</button>
+      </form>
+
+    </div>
+
+
+    <div class="container text-center mt-5">
+      <p class="fw-light">Effettuando l'accesso o creando un account accetti i Termini e le Condizioni e l’Informativa
+        sulla Privacy</p>
+      <hr>
+      <p class="fw-light">Tutti i diritti riservati</p>
+    </div>
+
+  </section>
+
+  <script>
+    //form
+    let btnSignIn = document.querySelector("#btnSignIn");
+    let nomeReg = document.querySelector("#nomeReg");
+    let cognomeReg = document.querySelector("#cognomeReg");
+    let emailReg = document.querySelector("#emailReg");
+    let passwordReg = document.querySelector("#passwordReg");
+
+    //obj Utente
+    function Utente(cognome, nome, data_iscrizione, email, firma, tipo, password, nascita) {
+      data = new Date();
+      
+      this.cognome = cognome;
+      this.nome = nome;
+      this.data_iscrizione = data;
+      this.email = email;
+      this.firma = firma;
+      this.tipo = tipo;
+      this.password = password;
+      this.nascita = nascita;
+    }
+
+    //evento
+    function registrati() {
+      event.preventDefault();
+
+      let nome = nomeReg.value;
+      let cognome = cognomeReg.value;
+      let email = emailReg.value;
+      let password = passwordReg.value;
+      
+
+      let iscrizione = new Utente(cognome, nome, "", "", email, "", "", password, "");
+
+
+
+    }
+
+    btnSignIn.addEventListener("click", registrati);
+
+
+   /* function iscriviti() {
+            if (emailFake.value.trim() == "") {
+                emailFake.value = "";
+                emailFake.setAttribute("placeholder", "Inserisci una mail valida");
+            } else {
+                let miaEmail = new Email(emailFake.value);
+                fetch("http://localhost:9007/em/email", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(miaEmail)
+                    }).then(data => data.json())
+                    .then(res => {
+                        emailFake.value = "";
+                        emailFake.setAttribute("placeholder", "Iscritto correttamente!");
+                    })
+            }
+        }*/
+
+  </script>
 
 
 </body>
