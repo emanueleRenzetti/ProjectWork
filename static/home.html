@@ -105,21 +105,111 @@
 
 
 
-
+<!-- OFFCANVAS AGGIORNATO -->
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
         aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Il tuo carrello</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <p>Try scrolling the rest of the page to see this option in action.</p>
+        <div class="offcanvas-body" id="bodyCart">
+            <hr>
+        </div>
+        <div class="offcanvas-footer">
+            <button id="btnCompraTutto" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                class="btn btn-outline-primary m-3">Compra</button>
         </div>
     </div>
 
     <div id="alert"></div>
 
     <main>
+
+        <!-- MODAL PER IL CARRELLO/PAGAMENTO -->
+        <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group list-group-flush">
+                            <div class="row w-100 align-items-center p-2">
+                                <img class="img-fluid" src=""></img>
+                                <div class="d-flex flex-column justify-content-center col-6">
+                                    <div id="carrelloModal" class="fw-semibold"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <h5 id="h5Tot"></h5>
+                        <button id="btnAlPagamento" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                            data-bs-toggle="modal">Vai
+                            al pagamento</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-body-secondary">
+                        <div class="container p-2 rounded-2 ms-auto me-auto w-50">
+                            <h1 class="fs-4 fw-bolder text-center">Pagina di Pagamento</h1>
+                            <form>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardholder">Titolare della Carta:</label>
+                                    <input class="form-control" type="text" id="cardholder"
+                                        placeholder="Nome e Cognome">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardnumber">Numero della Carta:</label>
+                                    <input class="form-control" type="number" id="cardnumber"
+                                        placeholder="Numero della Carta">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="expiration">Data di Scadenza:</label>
+                                    <input class="form-control" type="text" id="expiration" placeholder="MM/AA">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cvv">CVV:</label>
+                                    <input class="form-control" type="number" id="cvv" placeholder="CVV">
+                                </div>
+                                <!-- <div class="form-group mb-3">
+                                    <label class="form-label" for="amount">Importo da Pagare:</label>
+                                    <input class="form-control" type="number" id="amount" placeholder="Importo in Euro">
+                                </div> -->
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="payment-method">Metodo di Pagamento:</label>
+                                    <select class="formm" id="payment-method">
+                                        <option value="visa">Carta di Credito Visa</option>
+                                        <option value="mastercard">Carta di Credito MasterCard</option>
+                                        <option value="paypal">PayPal</option>
+                                    </select>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">torna al riepilogo</button>
+                        <h5 id="h5Totale"></h5>
+                        <button id="pagaOra" class="btn btn-secondary ms-auto" type="submit">paga ora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
         <section id="hero" class="pb-5">
             <div class="swiper">
                 <!-- Additional required wrapper -->

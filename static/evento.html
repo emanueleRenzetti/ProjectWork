@@ -409,14 +409,45 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        //pulire l'input della newsletter
-        function pulisci() {
-            let emailFake = document.querySelector("#emailFake");
-            emailFake.value = "";
-        }
-        let btnIscriviti = document.querySelector("#btnIscriviti");
-        btnIscriviti.addEventListener("click", pulisci)
+        // SCRIPT PER LA NEWSLETTER
+        //input della newsletter
+        let emailFake = document.querySelector("#emailFake");
 
+        //COSTRUTTORE di email con recupero di data al momento della creazione
+        function Email(email) {
+            data = new Date();
+            this.iscrizione = data;
+            this.email = email;
+        }
+
+        //al click su btnIscriviti controllo che il campo input non sia vuoto e registro la nuova email nel DB
+        function iscriviti() {
+            if (emailFake.value.trim() == "") {
+                emailFake.value = "";
+                emailFake.setAttribute("placeholder", "Inserisci una mail valida");
+            } else {
+                let miaEmail = new Email(emailFake.value);
+                fetch("http://localhost:9007/em/email", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(miaEmail)
+                    }).then(data => data.json())
+                    .then(res => {
+                        emailFake.value = "";
+                        emailFake.setAttribute("placeholder", "Iscritto correttamente!");
+                    })
+            }
+        }
+
+        let btnIscriviti = document.querySelector("#btnIscriviti");
+        btnIscriviti.addEventListener("click", iscriviti);
+        ////////////////////////////////////////////////
+
+
+
+        //////////////////SCRIPT PER LA MAP///////////////////
         var marker; // Dichiarazione globale della variabile marker
 
         // Creazione della mappa
@@ -461,6 +492,7 @@
     </script>
 
     <script>
+        //////////CONTROLLI PER L'UTENTE, LOGIN, LOGOUT/////////////////
         let form = document.querySelector("#form");
         let btnLogout = document.querySelector("#btnLogOut");
         let btnLogIn = document.querySelector("#btnLogIn");
@@ -564,6 +596,7 @@
     </script>
 
     <script>
+        /////////////SCRIPT PER LA PAGINA EVENTO////////////
         let evento = JSON.parse(localStorage.getItem("evento"));
         let nPosti = document.querySelector("#nPosti");
         let postiPrenotati = 0;
@@ -617,6 +650,24 @@
         }
 
 
+        //////////////ZOOM NAVBAR//////////
+        let navItems = document.querySelectorAll(".nav-link");
+
+        navItems.forEach(item => {
+            item.addEventListener("mouseover", ingrandisciLink);
+            item.addEventListener("mouseout", restringiLink);
+
+            function ingrandisciLink() {
+                item.style.transform = "scale(1.2)";
+            }
+
+            function restringiLink() {
+                item.style.transform = "scale(1)";
+            }
+        });
+        /////////////////////////////
+
+        ///////////////SCRIPT PER IL CARRELLO////////////////7
         function verificaCarrello() {
             let carrelloUtente = localStorage.getItem("Carrello");
             // console.log(carrelloUtente);
@@ -642,13 +693,13 @@
 
         document.addEventListener("DOMContentLoaded", verificaCarrello);
 
+        //////////////////AGGIUNGI AL CARRELO: SOLO DA PAGINA EVENTO///////////
 
         function Prenotazione(utenti_id, evento_id, posti) {
             this.utenti_id = utenti_id;
             this.evento_id = evento_id;
             this.posti = posti;
         }
-        
 
         function aggiungiCarrello() {
 
@@ -705,22 +756,8 @@
 
             verificaArticoli();
             verificaCarrello();
-        }
+        }//////////////////////////////////////FINE FUNZIONE
 
-        let navItems = document.querySelectorAll(".nav-link");
-
-        navItems.forEach(item => {
-            item.addEventListener("mouseover", ingrandisciLink);
-            item.addEventListener("mouseout", restringiLink);
-
-            function ingrandisciLink() {
-                item.style.transform = "scale(1.2)";
-            }
-
-            function restringiLink() {
-                item.style.transform = "scale(1)";
-            }
-        });
 
         function verificaArticoli() {
             // bodyCart.innerHTML="";
@@ -733,8 +770,8 @@
 
                 if (carrello.length <= 0) {
                     nArticoli.textContent = "";
-                    btnCompra.setAttribute("disabled","");
-                    bodyCart.textContent="Il tuo carrello è vuoto";
+                    btnCompra.setAttribute("disabled", "");
+                    bodyCart.textContent = "Il tuo carrello è vuoto";
                 } else {
                     nArticoli.textContent = carrello.length;
                     bodyCart.innerHTML = "";
@@ -767,8 +804,8 @@
                 }
             } else {
                 nArticoli.textContent = "";
-                btnCompra.setAttribute("disabled","");
-                bodyCart.textContent="carrello vuoto";
+                btnCompra.setAttribute("disabled", "");
+                bodyCart.textContent = "carrello vuoto";
             }
         }
 
@@ -822,201 +859,164 @@
             let idInput = 0;
             let totDaPagare = 0;
             let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
-            
+
             prenotazioni.forEach(pren => {
                 // fetch("http://localhost:9007/e/eventi/" + pren.evento_id).then(data => data.json())
                 //     .then(res => {
-                        let res = eventiDB.find(function (evento) {
-                                return evento.id == this.evento_id;
-                            }, pren);
+                let res = eventiDB.find(function (evento) {
+                    return evento.id == this.evento_id;
+                }, pren);
 
-                        let h5Tot = document.querySelector("#h5Tot");
+                let h5Tot = document.querySelector("#h5Tot");
 
-                        let card = document.createElement("div");
-                        card.setAttribute("class", "card");
+                let card = document.createElement("div");
+                card.setAttribute("class", "card");
 
-                        let img = document.createElement("img");
-                        img.setAttribute("class", "card-img-top");
-                        img.setAttribute("src", "./img/" + res.locandina);
-                        card.appendChild(img);
+                let img = document.createElement("img");
+                img.setAttribute("class", "card-img-top");
+                img.setAttribute("src", "./img/" + res.locandina);
+                card.appendChild(img);
 
-                        let cardBody = document.createElement("div");
-                        cardBody.setAttribute("class", "card-body");
-                        card.appendChild(cardBody);
+                let cardBody = document.createElement("div");
+                cardBody.setAttribute("class", "card-body");
+                card.appendChild(cardBody);
 
-                        let totale = res.prezzo * pren.posti;
+                let totale = res.prezzo * pren.posti;
 
-                        // Creazione di un elemento <h5> con l'attributo class
-                        var h5Element = document.createElement("h5");
-                        h5Element.setAttribute("class", "card-title");
-                        h5Element.textContent = res.caratteristiche;
+                // Creazione di un elemento <h5> con l'attributo class
+                var h5Element = document.createElement("h5");
+                h5Element.setAttribute("class", "card-title");
+                h5Element.textContent = res.caratteristiche;
 
-                        // Creazione di un elemento <p> con l'attributo class
-                        var pElement = document.createElement("p");
-                        pElement.setAttribute("class", "card-text");
-                        pElement.textContent = res.descrizione;
+                // Creazione di un elemento <p> con l'attributo class
+                var pElement = document.createElement("p");
+                pElement.setAttribute("class", "card-text");
+                pElement.textContent = res.descrizione;
 
-                        // Creazione di un elemento <div> con l'attributo class
-                        var divElement = document.createElement("div");
-                        divElement.setAttribute("class", "input-group mb-3");
+                // Creazione di un elemento <div> con l'attributo class
+                var divElement = document.createElement("div");
+                divElement.setAttribute("class", "input-group mb-3");
 
-                        // Creazione dei bottoni "-" e "+"
-                        var buttonMinus = document.createElement("button");
-                        buttonMinus.setAttribute("onclick",
-                            `document.getElementById('quantita${idInput}').stepDown(1)`);
-                        buttonMinus.setAttribute("class",
-                            "btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0");
-                        buttonMinus.textContent = "-";
+                // Creazione dei bottoni "-" e "+"
+                var buttonMinus = document.createElement("button");
+                buttonMinus.setAttribute("onclick",
+                    `document.getElementById('quantita${idInput}').stepDown(1)`);
+                buttonMinus.setAttribute("class",
+                    "btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0");
+                buttonMinus.textContent = "-";
 
-                        var buttonPlus = document.createElement("button");
-                        buttonPlus.setAttribute("onclick",
-                            `document.getElementById('quantita${idInput}').stepUp(1)`);
-                        buttonPlus.setAttribute("class",
-                            "btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4");
-                        buttonPlus.textContent = "+";
+                var buttonPlus = document.createElement("button");
+                buttonPlus.setAttribute("onclick",
+                    `document.getElementById('quantita${idInput}').stepUp(1)`);
+                buttonPlus.setAttribute("class",
+                    "btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4");
+                buttonPlus.textContent = "+";
 
-                        // Creazione dell'input
-                        var inputElement = document.createElement("input");
-                        inputElement.setAttribute("value", pren.posti);
-                        inputElement.setAttribute("min", "1");
-                        inputElement.setAttribute("id", `quantita${idInput}`);
-                        inputElement.setAttribute("type", "number");
-                        inputElement.setAttribute("class", "form-control text-center");
-                        inputElement.setAttribute("placeholder", "1");
-                        inputElement.setAttribute("readonly", "true");
+                // Creazione dell'input
+                var inputElement = document.createElement("input");
+                inputElement.setAttribute("value", pren.posti);
+                inputElement.setAttribute("min", "1");
+                inputElement.setAttribute("id", `quantita${idInput}`);
+                inputElement.setAttribute("type", "number");
+                inputElement.setAttribute("class", "form-control text-center");
+                inputElement.setAttribute("placeholder", "1");
+                inputElement.setAttribute("readonly", "true");
 
-                        // Creazione di un elemento <p> 
-                        var pTotal = document.createElement("p");
-                        // pTotal.textContent = totale;
+                // Creazione di un elemento <p> 
+                var pTotal = document.createElement("p");
+                // pTotal.textContent = totale;
 
-                        divElement.appendChild(buttonMinus);
-                        divElement.appendChild(inputElement);
-                        divElement.appendChild(buttonPlus);
-                        divElement.appendChild(pTotal);
+                divElement.appendChild(buttonMinus);
+                divElement.appendChild(inputElement);
+                divElement.appendChild(buttonPlus);
+                divElement.appendChild(pTotal);
 
-                        cardBody.appendChild(h5Element);
-                        cardBody.appendChild(pElement);
-                        cardBody.appendChild(divElement);
+                cardBody.appendChild(h5Element);
+                cardBody.appendChild(pElement);
+                cardBody.appendChild(divElement);
 
-                        function disabilitaBtnMeno() {
-                            if (inputElement.value <= 1) {
-                                buttonMinus.setAttribute("disabled", "");
-                            } else {
-                                buttonMinus.removeAttribute("disabled");
-                            }
+                function disabilitaBtnMeno() {
+                    if (inputElement.value <= 1) {
+                        buttonMinus.setAttribute("disabled", "");
+                    } else {
+                        buttonMinus.removeAttribute("disabled");
+                    }
 
-                        }
+                }
 
-                        function setPrenotazione(){
-                            let nuovoArrPren = prenotazioni.filter(item => item !== pren);
-                            pren.posti=Number(inputElement.value);
-                            nuovoArrPren.push(pren);
-                            localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
-                            console.log(nuovoArrPren);
-                        }
-                        
-
-                        function attivaEvento(){
-                            var inputEvent = new Event("input", { bubbles: true });
-                            inputElement.dispatchEvent(inputEvent);
-                        }
-                        // function setPrenotazionePiu() {
-                        //     numero++;
-                        //     let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
-
-                        //     let miaPrenotazione = prenotazioni.find(function (prenotazione) {
-                        //         return prenotazione.utenti_id == pren.utenti_id && prenotazione
-                        //             .evento_id == pren.evento_id;
-                        //     }, pren);
-
-                        //     let nuovoArrPren = prenotazioni.filter(item => item !==
-                        //         miaPrenotazione);
-                        //     let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
-                        //     nuovoArrPren.push(prenModificata);
-                        //     localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
-                        // }
-
-                        // function setPrenotazioneMeno() {
-                        //     numero--;
-                        //     let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
-                        //     let miaPrenotazione = prenotazioni.find(function (prenotazione) {
-                        //         return prenotazione.utenti_id == pren.utenti_id && prenotazione
-                        //             .evento_id == pren.evento_id
-                        //     }, pren);
-                        //     let nuovoArrPren = prenotazioni.filter(item => item !==
-                        //         miaPrenotazione);
-                        //     let prenModificata = new Prenotazione(pren.utenti_id, pren.evento_id, numero);
-                        //     nuovoArrPren.push(prenModificata);
-                        //     localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
-                        // }
+                function setPrenotazione() {
+                    let nuovoArrPren = prenotazioni.filter(item => item !== pren);
+                    pren.posti = Number(inputElement.value);
+                    nuovoArrPren.push(pren);
+                    localStorage.setItem("prenotazioni", JSON.stringify(nuovoArrPren));
+                    console.log(nuovoArrPren);
+                }
 
 
-                        function stampaTot() {
-                            totDaPagare += Number(res.prezzo);
-                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
-                        }
+                function attivaEvento() {
+                    var inputEvent = new Event("input", {
+                        bubbles: true
+                    });
+                    inputElement.dispatchEvent(inputEvent);
+                }
 
-                        function stampaTotMeno() {
-                            totDaPagare -= Number(res.prezzo);
-                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
-                        }
+                function stampaTot() {
+                    totDaPagare += Number(res.prezzo);
+                    h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                }
 
-                        function stampaPrezzo() {
-                            let inp = document.querySelector(`#quantita${idInput}`);
-                            totale = res.prezzo * Number(inputElement.value);
-                            pTotal.textContent = "Totale: " + totale.toFixed(2) + " €";
-                        }
+                function stampaTotMeno() {
+                    totDaPagare -= Number(res.prezzo);
+                    h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                }
 
-                        function totAlCaricamento() {
-                            totDaPagare += totale;
-                            h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
-                        }
+                function stampaPrezzo() {
+                    let inp = document.querySelector(`#quantita${idInput}`);
+                    totale = res.prezzo * Number(inputElement.value);
+                    pTotal.textContent = "Totale: " + totale.toFixed(2) + " €";
+                }
 
-                        function vaiAlPagamento() {
-                            let totDefinitivo = h5Tot.textContent;
-                            let h5Totale = document.querySelector("#h5Totale");
-                            h5Totale.textContent = totDefinitivo;
+                function totAlCaricamento() {
+                    totDaPagare += totale;
+                    h5Tot.textContent = "Totale: " + totDaPagare.toFixed(2) + " €";
+                }
 
-
-                            //inserisci nella local un array di prenotazioni
-                        }
-
-                        let btnAlPagamento = document.querySelector("#btnAlPagamento");
-                        btnAlPagamento.addEventListener("click", vaiAlPagamento);
-
-                        stampaPrezzo();
-                        totAlCaricamento();
+                function vaiAlPagamento() {
+                    let totDefinitivo = h5Tot.textContent;
+                    let h5Totale = document.querySelector("#h5Totale");
+                    h5Totale.textContent = totDefinitivo;
 
 
-                        carrelloModal.appendChild(card);
+                    //inserisci nella local un array di prenotazioni
+                }
 
-                        buttonPlus.addEventListener("click", function(){
-                            attivaEvento();
-                            disabilitaBtnMeno();
-                            stampaPrezzo();
-                            stampaTot()
-                        })
+                let btnAlPagamento = document.querySelector("#btnAlPagamento");
+                btnAlPagamento.addEventListener("click", vaiAlPagamento);
 
-                        buttonMinus.addEventListener("click", function(){
-                            attivaEvento();
-                            disabilitaBtnMeno();
-                            stampaPrezzo();
-                            stampaTotMeno();
-                        })
-                            // buttonPlus.addEventListener("click", stampaTot);
-                            // buttonMinus.addEventListener("click", stampaTotMeno);
-                            // buttonPlus.addEventListener("click", stampaPrezzo);
-                            // buttonMinus.addEventListener("click", stampaPrezzo);
-                            // buttonPlus.addEventListener("click", disabilitaBtnMeno);
-                            // buttonMinus.addEventListener("click", disabilitaBtnMeno);
-                            // buttonPlus.addEventListener("click", attivaEvento);
-                            // buttonMinus.addEventListener("click", attivaEvento);
-                        inputElement.addEventListener("input", setPrenotazione);
-                        idInput++;
-                   // })//then
-            });//foreach
+                stampaPrezzo();
+                totAlCaricamento();
 
 
+                carrelloModal.appendChild(card);
+
+                buttonPlus.addEventListener("click", function () {
+                    attivaEvento();
+                    disabilitaBtnMeno();
+                    stampaPrezzo();
+                    stampaTot()
+                })
+
+                buttonMinus.addEventListener("click", function () {
+                    attivaEvento();
+                    disabilitaBtnMeno();
+                    stampaPrezzo();
+                    stampaTotMeno();
+                })
+
+                inputElement.addEventListener("input", setPrenotazione);
+                idInput++;
+
+            }); //foreach
         }
 
         let btnPagaOra = document.querySelector("#pagaOra");
@@ -1025,7 +1025,7 @@
             alert("PAGAMENTO RIUSCITO")
             let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
             prenotazioni.forEach(element => {
-                fetch("http://localhost:9007/p/prenotazioni",{
+                fetch("http://localhost:9007/p/prenotazioni", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
