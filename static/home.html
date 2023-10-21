@@ -46,6 +46,8 @@
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
                                 admin</a></li>
 
+                        <li class="nav-item d-none linkEmails"><a class="nav-link text-accent" href="#">Gestione e-mail</a></li>
+
                         <li class="nav-item d-none linkPrenotazioni">
                             <a class="nav-link text-accent" href="#">Prenotazioni</a>
                         </li>
@@ -98,8 +100,6 @@
 
         </nav>
     </header>
-
-
 
 
 
@@ -522,15 +522,20 @@
 
                 if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                     let liPannello = document.querySelector(".linkPannello");
-
                     liPannello.setAttribute("class", "nav-item linkPannello");
-
                     let linkPannello = liPannello.querySelector("a");
-
                     linkPannello.addEventListener("click", function () {
                         location.href = "pannello.html";
                     });
+
+                    let liEmails = document.querySelector(".linkEmails");
+                    liEmails.setAttribute("class", "nav-item linkEmails");
+                    let linkEmails = liEmails.querySelector("a");
+                    linkEmails.addEventListener("click", function () {
+                        location.href = "gestione_newsletter.html";
+                    });
                 }
+
                 if (utente.tipo ==
                     'B' || utente.tipo === 'A'
                 ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni

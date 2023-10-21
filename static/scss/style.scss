@@ -147,12 +147,62 @@ body {
     color: $gray-900;
 }
 
+main {
+    min-height: calc(100vh - 350px);
+}
 
-
+/*********  HEADER   *******/
 
 #logo {
     width: 3rem;
     height: auto;
+}
+
+.nav-link {
+
+    color: white !important;
+
+    &.active {
+        color: $accent !important;
+        // border-bottom: 3px solid $white;
+    } 
+
+    i {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .rounded-pill {
+        top: 5px;
+    }
+    
+}
+
+nav {
+    #liCarrello {
+        border-left: solid;
+        color: white;
+
+        a{
+            margin-left: 0.7rem;
+            margin-right: 1rem;
+        }
+    }
+}
+
+.cardDisabled{
+    background: rgba(49, 49, 49, 0.451);
+}
+
+#cards{
+    .card{
+        transition: all 0.2s ease-in-out;
+    }
+}
+
+.zoom{
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
 }
 
 
@@ -174,6 +224,8 @@ body {
 
 }
 
+
+/*********  HERO HOME   *******/
 
 #hero {
 
@@ -200,6 +252,7 @@ body {
     }
 
 
+    /*********  SERVICE   *******/
 
 #cards {
     div {
@@ -207,17 +260,17 @@ body {
             background-color: $white;
             width: 200px; /* Imposta la larghezza desiderata */
             height: 300px; /* Imposta l'altezza desiderata */
-            border: 1px solid #ccc;
+            border: 0;
             
         }
     }
 }
 
-// hero
+/*********  FONDO HOME   *******/
 
 #mappeEventi{
     #map{
-    height: 80%;
+    height: 75%;
     width: 85%;
     }
 
@@ -280,7 +333,7 @@ body {
 
 }
 
-
+/*********  EVENTO   *******/
 
 #hero {
     #map {
@@ -298,6 +351,8 @@ body {
     margin: 2rem;
 }
 
+/*********  FOOTER   *******/
+
 #fine {
     #socials {
         button {
@@ -306,53 +361,9 @@ body {
     }
 }
 
-main {
-    min-height: calc(100vh - 350px);
-}
 
-.nav-link {
-
-    color: white !important;
-
-    &.active {
-        color: $accent !important;
-        // border-bottom: 3px solid $white;
-    } 
-
-    i {
-        font-size: 1.5rem;
-        line-height: 1;
-    }
-
-    .rounded-pill {
-        top: 5px;
-    }
-    
-}
-
-nav {
-    #liCarrello {
-        border-left: solid;
-        color: white;
-
-        a{
-            margin-left: 0.7rem;
-            margin-right: 1rem;
-        }
-    }
-}
-
-.cardDisabled{
-    background: rgba(49, 49, 49, 0.451);
-}
-
-#cards{
-    .card{
-        transition: all 0.2s ease-in-out;
-    }
-}
-
-.zoom{
-    transform: scale(1.1);
-    transition: all 0.2s ease-in-out;
+/*********  NRWSLETTER   *******/
+#inputMsg{
+    height: 10vh;
+    width: 100%;
 }

@@ -429,8 +429,8 @@
             btnElimina.removeAttribute("disabled");
         }
 
+        
         function createAdminTable(){
-
             fetch("http://localhost:9007/e/eventi")
             .then(response => response.json())
             .then(data => data.forEach(evento => {
