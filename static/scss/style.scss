@@ -344,11 +344,11 @@ nav {
     width: 100%;
     z-index: 0;
 
-    position: absolute; 
+    position: relative; //relative = ai genitori
    
 
     img {
-        position: relative; 
+        position: absolute; //absolute = ai figli
         height: 100%;
         width: 100%;
         object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80% 
