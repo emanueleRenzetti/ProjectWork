@@ -152,49 +152,51 @@
             </div>
         </div>
         <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-body-secondary">
-                        <div class="container p-2 rounded-2 ms-auto me-auto w-50">
-                            <h1 class="fs-4 fw-bolder text-center">Pagina di Pagamento</h1>
-                            <form>
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="cardholder">Titolare della Carta:</label>
-                                    <input class="form-control" type="text" id="cardholder"
-                                        placeholder="Nome e Cognome">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="cardnumber">Numero della Carta:</label>
-                                    <input class="form-control" type="number" id="cardnumber"
-                                        placeholder="Numero della Carta">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="expiration">Data di Scadenza:</label>
-                                    <input class="form-control" type="text" id="expiration" placeholder="MM/AA">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="cvv">CVV:</label>
-                                    <input class="form-control" type="number" id="cvv" placeholder="CVV">
-                                </div>
-                                <!-- <div class="form-group mb-3">
-                                    <label class="form-label" for="amount">Importo da Pagare:</label>
-                                    <input class="form-control" type="number" id="amount" placeholder="Importo in Euro">
-                                </div> -->
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-body-secondary">
+                    <div class="container p-2 rounded-2 ms-auto me-auto w-50 pt-5">
+                        <h1 class="fs-4 fw-bolder text-center m-3">Pagina di Pagamento</h1>
+                        <form>
                                 <div class="form-group mb-3">
                                     <label class="form-label" for="payment-method">Metodo di Pagamento:</label>
-                                    <select class="formm" id="payment-method">
+                                    <select class="formm" id="payment-method" required>
                                         <option value="visa">Carta di Credito Visa</option>
                                         <option value="mastercard">Carta di Credito MasterCard</option>
                                         <option value="paypal">PayPal</option>
                                     </select>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardholder">Titolare della Carta:</label>
+                                    <input class="form-control" type="text" id="cardholder"
+                                        placeholder="Nome e Cognome" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardnumber">Numero della Carta:</label>
+                                    <input class="form-control" type="number" id="cardnumber"
+                                        placeholder="Numero della Carta" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="expiration">Data di Scadenza:</label>
+                                    <input class="form-control" type="text" id="expiration" placeholder="MM/AA" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cvv">CVV:</label>
+                                    <input class="form-control" type="number" id="cvv" placeholder="CVV" required>
+                                </div>
+                                <!-- <div class="form-group mb-3">
+                                    <label class="form-label" for="amount">Importo da Pagare:</label>
+                                    <input class="form-control" type="number" id="amount" placeholder="Importo in Euro">
+                                </div> -->
 
                             </form>
+                            <hr>
+                            <p>Confermando il tuo ordine accetti integralmente le nostre <a href="">Condizioni generali di uso e vendita</a>. L'acquisto sarà completato solo con la conferma di spedizione. Prendi visione della nostra <a href="">Informativa sulla privacy</a>, della nostra <a href="">Informativa sui Cookie</a> e della nostra <a href="">Informativa sulla Pubblicità definita in base agli interessi</a>.</p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -407,6 +409,7 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="./js/newsletter.js"></script>
     <script src="js/mapPagEvento.js"></script>

@@ -77,15 +77,15 @@
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
                                         <input class="shadow form-control login" type="text" placeholder="E-mail"
-                                            id="email" required /><br>
+                                            id="email"/><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
-                                            id="password" required />
+                                            id="password"/>
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
                                         <div class="mt-3 d-flex justify-content-between">
-                                            <input class=" btn btn-outline-primary" type="submit" name="submit"
-                                                value="Log-in" />
+                                            <button id="buttonID"  class=" btn btn-outline-primary" type="button" name="submit"
+                                                value="Log-in">Log-in</button>
                                             <button class="btn btn-primary"><a href="registrati.html"
                                                     class="text-decoration-none text-light">Registrati</a></button>
                                         </div>
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div id="alert"></div>
+    <!-- <div id="alert"></div> -->
 
     <main>
 
@@ -628,11 +628,13 @@
             let email = document.querySelector("#email").value;
             let password = document.querySelector("#password").value;
             if (email.trim() == "" && password.trim() == "") {
+                //console.log(event);
+                event.preventDefault();
                 alert("Non hai inserito nulla!");
-                event.preventDefault();
+                
             } else if (email.trim() == "" || password.trim() == "") {
-                alert("Hai dimenticato di compilare qualcosa!");
                 event.preventDefault();
+                alert("Hai dimenticato di compilare qualcosa!");
             } else {
                 let utenteForm = new utenteObj(email, password);
                 let utentiDB = JSON.parse(localStorage.getItem("utentiRegistrati"));
@@ -643,16 +645,18 @@
                 // console.log(utente);
                 if (utente != undefined) {
                     if (utente.password != utenteForm.password) {
-                        alert("password errata!");
                         event.preventDefault();
+                        alert("password errata!");
                     } else {
                         localStorage.setItem("utente", JSON.stringify(utente));
                         alertAccesso();
-                        //location.reload();
+                        setInterval(()=>{
+                            location.reload();
+                        }, 1950);
                     }
                 } else {
-                    alert("utente non trovato");
                     event.preventDefault();
+                    alert("utente non trovato");
                 }
             }
         }
@@ -700,16 +704,21 @@
 
         }
 
-        let alert = document.querySelector("#alert");
+        //let divAlert = document.querySelector("#alert");
+
+        let buttonID = document.querySelector("#buttonID")
+
+
+
 
         function alertAccesso() {
             console.log("Funziona");
             Swal.fire({
-                position: 'top-end',
+                position: 'top',
                 icon: 'success',
-                title: 'Your work has been saved',
+                title: 'Log-in effettuato',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1900
             })
         }
 
@@ -742,7 +751,7 @@
         }
         document.addEventListener("DOMContentLoaded", getUtenti);
         document.addEventListener("DOMContentLoaded", verificaLog);
-        form.addEventListener("submit", accedi);
+        buttonID.addEventListener("click", accedi);
         btnLogout.addEventListener("click", logOut);
     </script>
 
