@@ -46,13 +46,15 @@
                         <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
                                 admin</a></li>
 
-                        <li class="nav-item d-none linkEmails"><a class="nav-link text-accent" href="#">Gestione e-mail</a></li>
+                        <li class="nav-item d-none linkEmails"><a class="nav-link text-accent" href="#">Gestione
+                                e-mail</a></li>
 
                         <li class="nav-item d-none linkPrenotazioni">
                             <a class="nav-link text-accent" href="#">Prenotazioni</a>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link text-accent" href="calendario.html">Lista Eventi</a></li>
+                        <li class="nav-item"><a class="nav-link text-accent" href="calendario.html">Lista Eventi</a>
+                        </li>
 
                         <li class="nav-item" id="liCarrello">
                             <a class="position-relative nav-link" data-bs-toggle="offcanvas"
@@ -310,7 +312,7 @@
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
                         <input class="form-control" type="email" id="emailFake">
-                        <button id="btnIscriviti" class="btn btn-primary text-light" type="submit">Iscriviti</button>
+                        <button id="btnIscriviti" class="btn btn-primary text-light" type="">Iscriviti</button>
                     </div>
                     <label for="emailFake" class="fs-6 fw-light py-2">Iscriverti per non perdere i prossimi eventi,
                         sconti e tanto altro!</label>
@@ -320,7 +322,7 @@
 
         </div>
         <hr class="text-accent">
-        
+
         <p id="copyright" class="mb-0 py-3 text-center">© Copyright Ticket2you</p>
     </footer>
 
@@ -332,21 +334,50 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- pulisci newsletter -->
+    <!-- newsletter -->
     <script>
-        function pulisci() {
-            let emailFake = document.querySelector("#emailFake");
-            emailFake.value = "";
+        let emailFake = document.querySelector("#emailFake");
+
+        // function pulisci() {
+        //     emailFake.value = "";
+        // }
+
+        //COSTRUTTORE di email con recupero di data al momento della creazione
+        function Email(email) {
+            data = new Date();
+            this.iscrizione = data;
+            this.email = email;
         }
+
+        //al click su btnIscriviti controllo che il campo input non sia vuoto e registro la nuova email nel DB
+        function iscriviti() {
+            if (emailFake.value.trim() == "") {
+                emailFake.value = "";
+                emailFake.setAttribute("placeholder", "Inserisci una mail valida");
+            } else {
+                let miaEmail = new Email(emailFake.value);
+                fetch("http://localhost:9007/em/email", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(miaEmail)
+                    }).then(data => data.json())
+                    .then(res => {
+                        emailFake.value = "";
+                        emailFake.setAttribute("placeholder", "Iscritto correttamente!");
+                    })
+            }
+        }
+
         let btnIscriviti = document.querySelector("#btnIscriviti");
-        btnIscriviti.addEventListener("click", pulisci)
+        btnIscriviti.addEventListener("click", iscriviti);
     </script>
 
 
 
     <!-- MAPPA - SWIPER -->
     <script>
-
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
             loop: true,
@@ -421,10 +452,11 @@
                                 map.removeLayer(marker);
                             }
 
-                            let txtPopUp = `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
+                            let txtPopUp =
+                                `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
 
                             marker = L.marker([latitude, longitude]).
-                                addTo(map)
+                            addTo(map)
                                 .bindPopup(txtPopUp)
                                 .openPopup()
 
@@ -433,6 +465,7 @@
                             function openPopup() {
                                 marker.openPopup();
                             }
+
                             function closePopUp() {
                                 marker.closePopup();
                             }
@@ -444,9 +477,9 @@
                                 location.href = "evento.html"
                             })
                         }
-                    });//then
-            });//4each
-        }//trova coordinate
+                    }); //then
+            }); //4each
+        } //trova coordinate
     </script>
 
 
@@ -555,6 +588,7 @@
         }
 
         let alert = document.querySelector("#alert");
+
         function alertAccesso() {
             console.log("Funziona");
             Swal.fire({
@@ -683,6 +717,7 @@
                     }
 
                 });
+
                 function ingrandisci() {
                     card.style.transform = "scale(1.1)";
                 }
@@ -819,8 +854,9 @@
                         dateLi.classList.add("available");
                         dateLi.addEventListener("mouseover", toggle);
                         dateLi.addEventListener("mouseout", toggle);
-                        function toggle(){
-                            dateLi.classList.toggle("zoom");   
+
+                        function toggle() {
+                            dateLi.classList.toggle("zoom");
                         }
                         dateLi.addEventListener("click", () => creaPopUp(evento))
                     }
