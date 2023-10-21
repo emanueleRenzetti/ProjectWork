@@ -96,15 +96,17 @@
                             </ul>
                         </li>
 
-
+                        
                     </ul>
                 </div>
             </div>
-
-
+            
+            
         </nav>
-
+        
     </header>
+    
+    <main>
 
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
         aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -122,7 +124,6 @@
     </div>
 
 
-    <main>
         <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
             tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
@@ -205,8 +206,9 @@
                 </div>
             </div>
         </div>
-        <h1 class="text-center py-5 fw-bold" id="nomeEvento"></h1>
+        
 
+        <section id="fotoHeader" class="mb-5"></section>
 
 
         <section id="hero">
@@ -214,141 +216,139 @@
 
 
             <div class="mb-5">
-                <div class="row gx-0">
+                <div class="container">
+                    <div class="row">
 
-                    <div class="col-1"></div>
-                    <div class="col-6 d-flex align-content-center">
-                        <img id="imgEvento" class="img-fluid shadow rounded-2" src="" alt="">
-                        <!-- <div>
+
+                        <div class="col-8 d-flex align-content-center ps-0 pe-5">
+                            <img id="imgEvento" class="img-fluid shadow rounded-2" src="" alt="">
+                            <!-- <div>
                                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
                                     <button type="button" class="btn btn-secondary" onclick="trovaCoordinate()">Trova Coordinate</button>
                                 </div> -->
 
-                    </div>
-
-
-
-
-
-
-                    <div class="col-1"></div>
-
-
-                    <!--side menu-->
-                    <div
-                        class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary col-3 mt-0 shadow float-end">
-
-                        <p class="d-flex align-items-center flex-shrink-0 p-3 border-bottom fs-5 fw-semibold">
-                            Dettagli evento
-                        </p>
-
-
-
-                        <div class="list-group list-group-flush border-bottom">
-                            <div class="row w-100 align-items-center p-2">
-
-                                <i class="bi bi-map fw-bolder fs-2 col-3"></i>
-
-                                <div class="d-flex flex-column justify-content-center col-6">
-                                    <div class="fw-semibold">Città</div>
-                                    <p id="citta" class="mb-0"></p>
-                                </div>
-                            </div>
                         </div>
 
 
 
-                        <div class="list-group list-group-flush border-bottom p-2">
-                            <div class="row w-100 align-items-center">
-
-                                <i class="bi bi-calendar-day fs-1 col-3"></i>
-
-                                <div class="d-flex flex-column justify-content-center col-6">
-                                    <div class="fw-semibold">Data</div>
-                                    <p id="data" class="mb-0"></p>
-                                </div>
-                            </div>
-                        </div>
+                        <!--side menu-->
+                        <div class="col-4 ">
+                            <div
+                                class="d-flex flex-column align-items-stretch flex-shrink-0  bg-body-tertiary w-75  mt-0  shadow   ms-auto">
 
 
-                        <div class="list-group list-group-flush border-bottom p-2">
-                            <div class="row w-100 align-items-center">
+                                <p class="d-flex align-items-center flex-shrink-0 p-3 border-bottom fs-5 fw-semibold">
+                                    Dettagli evento
+                                </p>
 
 
-                                <i class="bi bi-people-fill fs-1 col-3"></i>
 
-                                <div class="d-flex flex-column justify-content-center col-9">
-                                    <div class="fw-semibold">Posti rimasti</div>
-                                    <p id="disponibilita" class="mb-0"></p>
-                                </div>
-                            </div>
-                        </div>
+                                <div class="list-group list-group-flush border-bottom">
+                                    <div class="row w-100 align-items-center p-2">
 
+                                        <i class="bi bi-map fw-bolder fs-2 col-3"></i>
 
-                        <div class="list-group list-group-flush border-bottom p-2">
-                            <div class="row w-100 align-items-center">
-
-                                <i class="bi bi-tag fs-1 col-3"></i>
-
-                                <div class="d-flex flex-column justify-content-center col-9">
-                                    <div class="fw-semibold">Prezzo</div>
-                                    <p id="prezzo" class="mb-0"></p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="list-group list-group-flush border-bottom p-2">
-                            <div class="row w-100 align-items-center">
-
-                                <div class="col-3">
-                                    <i class="bi bi-cart3 fs-1"></i>
-                                </div>
-
-                                <div class="col-9">
-                                    <p>
-                                        <button class="btn btn-primary mt-3" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseWidthExample" aria-expanded="false"
-                                            aria-controls="collapseWidthExample">
-                                            Seleziona i posti
-                                        </button>
-                                    </p>
-                                </div>
-                                <div style="min-height: 120px;">
-                                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                                        <div class="card card-body" style="width: 300px;">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <button id="btnRemove"
-                                                        class="btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0">-</button>
-                                                </div>
-                                                <input min="1" id="nPosti" type="number"
-                                                    class="form-control text-center" value="1" readonly>
-                                                <div class="input-group-append">
-                                                    <button id="btnAdd"
-                                                        class="btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4">+</button>
-                                                </div>
-                                            </div>
-                                            <button id="compra" class="btn btn-accent rounded-2 "
-                                                data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
-                                                aria-expanded="false" aria-controls="collapseWidthExample"
-                                                onclick="aggiungiCarrello()">Aggiungi al
-                                                Carrello</button>
+                                        <div class="d-flex flex-column justify-content-center col-6">
+                                            <div class="fw-semibold">Città</div>
+                                            <p id="citta" class="mb-0"></p>
                                         </div>
                                     </div>
-
                                 </div>
+
+
+
+                                <div class="list-group list-group-flush border-bottom p-2">
+                                    <div class="row w-100 align-items-center">
+
+                                        <i class="bi bi-calendar-day fs-1 col-3"></i>
+
+                                        <div class="d-flex flex-column justify-content-center col-6">
+                                            <div class="fw-semibold">Data</div>
+                                            <p id="data" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="list-group list-group-flush border-bottom p-2">
+                                    <div class="row w-100 align-items-center">
+
+
+                                        <i class="bi bi-people-fill fs-1 col-3"></i>
+
+                                        <div class="d-flex flex-column justify-content-center col-9">
+                                            <div class="fw-semibold">Posti rimasti</div>
+                                            <p id="disponibilita" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="list-group list-group-flush border-bottom p-2">
+                                    <div class="row w-100 align-items-center">
+
+                                        <i class="bi bi-tag fs-1 col-3"></i>
+
+                                        <div class="d-flex flex-column justify-content-center col-9">
+                                            <div class="fw-semibold">Prezzo</div>
+                                            <p id="prezzo" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="list-group list-group-flush border-bottom p-2">
+                                    <div class="row w-100 align-items-center">
+
+                                        <div class="col-3">
+                                            <i class="bi bi-cart3 fs-1"></i>
+                                        </div>
+
+                                        <div class="col-9">
+                                            <p>
+                                                <button class="btn btn-primary mt-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                                    aria-expanded="false" aria-controls="collapseWidthExample">
+                                                    Seleziona i posti
+                                                </button>
+                                            </p>
+                                        </div>
+                                        <div style="min-height: 120px;">
+                                            <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                                <div class="card card-body" style="width: 300px;">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <button id="btnRemove"
+                                                                class="btn btn-outline-secondary border-0 rounded-start-4 rounded-end-0">-</button>
+                                                        </div>
+                                                        <input min="1" id="nPosti" type="number"
+                                                            class="form-control text-center" value="1" readonly>
+                                                        <div class="input-group-append">
+                                                            <button id="btnAdd"
+                                                                class="btn btn-outline-secondary border-0 rounded-start-0 rounded-end-4">+</button>
+                                                        </div>
+                                                    </div>
+                                                    <button id="compra" class="btn btn-accent rounded-2 "
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                                        aria-expanded="false" aria-controls="collapseWidthExample"
+                                                        onclick="aggiungiCarrello()">Aggiungi al
+                                                        Carrello</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
 
                             </div>
                         </div>
-
+                        <!--side menu-->
 
 
                     </div>
-                    <!--lareale-->
-
-
-
                 </div>
                 <!--row-->
 
@@ -526,6 +526,55 @@
         document.addEventListener("DOMContentLoaded", verificaLog);
         form.addEventListener("submit", accedi);
         btnLogout.addEventListener("click", logOut);
+    </script>
+
+    <!-- FOTO HEADER-->
+    <script>
+        //
+        let fotoHeader = document.querySelector("#fotoHeader");
+        let eventoH = JSON.parse(localStorage.getItem("evento"));
+        let foto = document.createElement("img");
+        let titolo = document.createElement("h1");
+        let p = document.createElement("p");
+        let testo = document.createElement("div");
+
+        //Prende l'img del tipo
+        function scegliHeader() {
+            if (eventoH.tipologia == "Cinema") {
+                foto.setAttribute("src", "./img/popcorn.png");
+                p.textContent = `Sezione ${eventoH.tipologia}`
+                appendiHeader()
+            } else if (eventoH.tipologia == "Concerto") {
+                foto.setAttribute("src", "./img/concerti.png");
+                p.textContent = `Sezione ${eventoH.tipologia}`
+                appendiHeader()
+            } else if (eventoH.tipologia == "Culturale") {
+                foto.setAttribute("src", "./img/libri.png");
+                p.textContent = `Sezione ${eventoH.tipologia}`
+                appendiHeader()
+            }
+        }
+
+
+        //applica elementi costanti
+        function appendiHeader() {
+
+            titolo.textContent = `${eventoH.descrizione}`;
+            titolo.classList.add("text-light", "d-flex", "align-items-center", "ps-5", "fw-semibold", "fs-1");
+            p.classList.add("text-accent", "d-flex", "align-items-center", "ps-5", "fw-semibold");
+            foto.classList.add("img-fluid");
+            fotoHeader.classList.add("mb-5");
+
+
+            testo.classList.add("titoloHeader");
+            testo.appendChild(titolo);
+            testo.appendChild(p);
+            fotoHeader.appendChild(testo);
+            fotoHeader.appendChild(foto);
+        };
+
+        document.addEventListener("DOMContentLoaded", scegliHeader);
+
     </script>
 </body>
 

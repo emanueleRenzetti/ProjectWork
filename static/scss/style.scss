@@ -165,7 +165,7 @@ main {
     &.active {
         color: $accent !important;
         // border-bottom: 3px solid $white;
-    } 
+    }
 
     i {
         font-size: 1.5rem;
@@ -175,7 +175,7 @@ main {
     .rounded-pill {
         top: 5px;
     }
-    
+
 }
 
 nav {
@@ -183,24 +183,24 @@ nav {
         border-left: solid;
         color: white;
 
-        a{
+        a {
             margin-left: 0.7rem;
             margin-right: 1rem;
         }
     }
 }
 
-.cardDisabled{
+.cardDisabled {
     background: rgba(49, 49, 49, 0.451);
 }
 
-#cards{
-    .card{
+#cards {
+    .card {
         transition: all 0.2s ease-in-out;
     }
 }
 
-.zoom{
+.zoom {
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;
 }
@@ -229,9 +229,9 @@ nav {
 
 #hero {
 
-    .swiper-slide{
+    .swiper-slide {
         position: relative;
-        
+
         img {
             object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
             height: calc(100vh - 4rem);
@@ -248,122 +248,164 @@ nav {
             z-index: 1; // memo : funziona come lo spazio cartesiano
         }
 
-        }
     }
+}
 
 
-    /*********  SERVICE   *******/
+/*********  SERVICE   *******/
 
 #cards {
     div {
         .card {
             background-color: $white;
-            width: 200px; /* Imposta la larghezza desiderata */
-            height: 300px; /* Imposta l'altezza desiderata */
+            width: 200px;
+            /* Imposta la larghezza desiderata */
+            height: 300px;
+            /* Imposta l'altezza desiderata */
             border: 0;
-            
+
         }
     }
 }
 
 /*********  FONDO HOME   *******/
 
-#mappeEventi{
-    #map{
-    height: 75%;
-    width: 85%;
+#mappeEventi {
+    #map {
+        height: 75%;
+        width: 85%;
     }
 
-.month ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: $secondary;
-    color: white;
-    padding: 0.3rem;
-    list-style: none;
-  }
+    .month ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $secondary;
+        color: white;
+        padding: 0.3rem;
+        list-style: none;
+    }
 
-  .month ul li {
-    cursor: pointer;
-  }
+    .month ul li {
+        cursor: pointer;
+    }
 
-  .weekdays {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    background-color: #f0f0f0;
-    padding: 5px;
-  }
+    .weekdays {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        background-color: #f0f0f0;
+        padding: 5px;
+    }
 
-  .weekdays li {
-    padding: 5px;
-  }
+    .weekdays li {
+        padding: 5px;
+    }
 
-  .days {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    padding: 5px;
-  }
+    .days {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        padding: 5px;
+    }
 
-  .days li {
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-  }
+    .days li {
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
 
-  .prev, .next {
-    font-size: 20px;
-    cursor: pointer;
-    padding: 3rem;
-  }
+    .prev,
+    .next {
+        font-size: 20px;
+        cursor: pointer;
+        padding: 3rem;
+    }
 
-  .available{
-    background-color: $success !important;
-    color: white;
-  }
+    .available {
+        background-color: $success !important;
+        color: white;
+    }
 
-  .notAvailable{
-    background-color: $red !important;
-    color: white;
-  }
+    .notAvailable {
+        background-color: $red !important;
+        color: white;
+    }
 
 }
 
 /*********  EVENTO   *******/
 
-#hero {
-    #map {
-        height: 70vh;
+#fotoHeader {
+    // padding-top: 1.5rem;
+    height: 35vh !important;
+    width: 100%;
+    z-index: 0;
+
+    position: absolute; 
+   
+
+    img {
+        position: relative; 
+        height: 100%;
         width: 100%;
+        object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80% 
+        margin: 0;
+        padding: 0;
     }
-    i{
-        color: $secondary;
+
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.518);
+        pointer-events: none;
+        z-index: 1; // memo : funziona come lo spazio cartesiano
+    }
+
+
+    .titoloHeader {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
     }
 }
 
-#calendarIcon {
-    height: 40vh;
-    width: auto;
-    margin: 2rem;
-}
+    #hero {
+        #map {
+            height: 70vh;
+            width: 100%;
+        }
 
-/*********  FOOTER   *******/
-
-#fine {
-    #socials {
-        button {
-            color: $accent;
+        i {
+            color: $secondary;
         }
     }
-}
+
+    #calendarIcon {
+        height: 40vh;
+        width: auto;
+        margin: 2rem;
+    }
+
+    /*********  FOOTER   *******/
+
+    #fine {
+        #socials {
+            button {
+                color: $accent;
+            }
+        }
+    }
 
 
-/*********  NRWSLETTER   *******/
-#inputMsg{
-    height: 10vh;
-    width: 100%;
-}
+    /*********  NRWSLETTER   *******/
+    #inputMsg {
+        height: 10vh;
+        width: 100%;
+    }
