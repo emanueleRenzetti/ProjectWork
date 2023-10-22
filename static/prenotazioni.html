@@ -202,11 +202,11 @@
             location.reload();
             location.href = "home.html";
         }
-
         btnLogOut.addEventListener("click", logOut);
+
+        
         
         let utente = JSON.parse(localStorage.getItem("utente"));
-
         function controllaUtente() {
 
             if (utente == null) {
@@ -217,6 +217,7 @@
             }
         }
         window.addEventListener("DOMContentLoaded", controllaUtente);
+
 
         function getPrenotazioni() {
             let URL = "http://localhost:9007/p/prenotazioni/utente/" + utente.id;
@@ -237,29 +238,23 @@
 
 
         function Prenotazione(posti, utenti_id, evento_id, prezzo) {
-
-            
             this.posti = posti;
             this.utenti_id = utenti_id;
             this.evento_id = evento_id;
             this.prezzo = prezzo;
         }
-
+        
+        
+        
+        let eventiDB = JSON.parse(localStorage.getItem("eventiDB"));
+        
         function creaLista() {
-
             let prenotazioniRegistrate = JSON.parse(localStorage.getItem("prenotazioniRegistrate"));
-
-            let eventiRegistrati = JSON.parse(localStorage.getItem("eventiRegistrati"));
-
-
-
             prenotazioniRegistrate.forEach(prenotazione => {
 
-                let evento = eventiRegistrati.find(function (res) {
+                let evento = eventiDB.find(function (res) {
                     return res.id == this.evento_id;
                 }, prenotazione);
-
-                
 
                 let ul = document.querySelector("#ul");
 

@@ -137,32 +137,33 @@ function compraTutto() {
         let h5Tot = document.querySelector("#h5Tot");
 
         let card = document.createElement("div");
-        card.setAttribute("class", "card");
+        card.setAttribute("class", "card col-4");
 
         let img = document.createElement("img");
         img.setAttribute("class", "card-img-top");
         img.setAttribute("src", "./img/" + res.locandina);
         card.appendChild(img);
 
+        
         let cardBody = document.createElement("div");
-        cardBody.setAttribute("class", "card-body");
+        cardBody.setAttribute("class", "card-body row");
         card.appendChild(cardBody);
 
         let totale = res.prezzo * pren.posti;
 
         // Creazione di un elemento <h5> con l'attributo class
         var h5Element = document.createElement("h5");
-        h5Element.setAttribute("class", "card-title");
-        h5Element.textContent = res.caratteristiche;
+        h5Element.setAttribute("class", "card-title col-12");
+        h5Element.textContent =  res.descrizione;
 
         // Creazione di un elemento <p> con l'attributo class
         var pElement = document.createElement("p");
-        pElement.setAttribute("class", "card-text");
-        pElement.textContent = res.descrizione;
+        pElement.setAttribute("class", "card-text col-12");
+        pElement.textContent = res.caratteristiche;
 
         // Creazione di un elemento <div> con l'attributo class
         var divElement = document.createElement("div");
-        divElement.setAttribute("class", "input-group mb-3");
+        divElement.setAttribute("class", "input-group mb-3 col-12");
 
         // Creazione dei bottoni "-" e "+"
         var buttonMinus = document.createElement("button");
@@ -189,18 +190,21 @@ function compraTutto() {
         inputElement.setAttribute("placeholder", "1");
         inputElement.setAttribute("readonly", "true");
 
+    
         // Creazione di un elemento <p> 
         var pTotal = document.createElement("p");
+        pTotal.classList.add("text-center");
         // pTotal.textContent = totale;
 
         divElement.appendChild(buttonMinus);
         divElement.appendChild(inputElement);
         divElement.appendChild(buttonPlus);
-        divElement.appendChild(pTotal);
 
+        
         cardBody.appendChild(h5Element);
         cardBody.appendChild(pElement);
         cardBody.appendChild(divElement);
+        cardBody.appendChild(pTotal);
 
         function disabilitaBtnMeno() {
             if (inputElement.value <= 1) {
@@ -262,9 +266,9 @@ function compraTutto() {
 
         stampaPrezzo();
         totAlCaricamento();
-
-
+        
         carrelloModal.appendChild(card);
+
 
         buttonPlus.addEventListener("click", function () {
             attivaEvento();

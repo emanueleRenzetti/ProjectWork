@@ -77,15 +77,15 @@
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
                                         <input class="shadow form-control login" type="text" placeholder="E-mail"
-                                            id="email"/><br>
+                                            id="email" /><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
-                                            id="password"/>
+                                            id="password" />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
                                         <div class="mt-3 d-flex justify-content-between">
-                                            <button id="buttonID"  class=" btn btn-outline-primary" type="button" name="submit"
-                                                value="Log-in">Log-in</button>
+                                            <button id="buttonID" class=" btn btn-outline-primary" type="button"
+                                                name="submit" value="Log-in">Log-in</button>
                                             <button class="btn btn-primary"><a href="registrati.html"
                                                     class="text-decoration-none text-light">Registrati</a></button>
                                         </div>
@@ -105,7 +105,7 @@
 
 
 
-<!-- OFFCANVAS AGGIORNATO -->
+    <!-- OFFCANVAS AGGIORNATO -->
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
         aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
@@ -292,7 +292,6 @@
 
                 <div class="row pt-3">
 
-
                     <div class="col-6 d-flex flex-column align-items-center">
                         <h3 class="py-3">Cerca vicino a te..</h3>
                         <div id="map" class="rounded-5 img-fluid"></div>
@@ -420,26 +419,27 @@
 
     <script>
         var swiper = new Swiper(".mySwiper", {
-          centeredSlides: true,
-          effect: "fade",
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
+            centeredSlides: true,
+            effect: "fade",
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
         });
-      </script>
+    </script>
 
-   
-<!-- Leaflet JavaScript -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -450,11 +450,9 @@
     <!-- newsletter -->
     <script>
         let emailFake = document.querySelector("#emailFake");
-
         // function pulisci() {
         //     emailFake.value = "";
         // }
-
         //COSTRUTTORE di email con recupero di data al momento della creazione
         function Email(email) {
             data = new Date();
@@ -470,12 +468,12 @@
             } else {
                 let miaEmail = new Email(emailFake.value);
                 fetch("http://localhost:9007/em/email", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(miaEmail)
-                    }).then(data => data.json())
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(miaEmail)
+                }).then(data => data.json())
                     .then(res => {
                         emailFake.value = "";
                         emailFake.setAttribute("placeholder", "Iscritto correttamente!");
@@ -489,8 +487,8 @@
 
 
 
-    <!-- MAPPA - SWIPER -->
-    <script>
+    <!--- SWIPER-->
+   <!-- <script>
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
             loop: true,
@@ -506,21 +504,18 @@
             },
         });
 
+    </script> -->
 
 
-        ///////////////////////////////////////
+
+<!-- MAPPA  -->
+    <script>
+        /////   //////////////////////////////////
         // Creazione della mappa
-        var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
-            5); // Sostituisci con le tue coordinate e il livello di zoom desiderato
 
         // Aggiungi una mappa di base
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            /*, {
-                       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                   }*/
-        ).addTo(map);
 
-       // let immagine = document.querySelectorAll(".swiper-slide");
+        // let immagine = document.querySelectorAll(".swiper-slide");
 
         // function velato() {
         //     immagine.classList.add("immagine");
@@ -529,10 +524,16 @@
         // function nonVelato() {
         //     immagine.classList.remove("immagine");
         // }
-
         // immagine.addEventListener("mouseIn", velato);
         // immagine.addEventListener("mouseOut", nonVelato);
 
+        var map = L.map('map').setView([43.178865128124244, 12.310475342504484],
+            5); // Sostituisci con le tue coordinate e il livello di zoom desiderato
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        /*, {
+                   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+               }*/
         function trovaCoordinate() {
             let latitude = "";
             let longitude = "";
@@ -541,6 +542,7 @@
             // let selezionato = selectEventi.value;
             let eventi = JSON.parse(localStorage.getItem("eventiInArrivo"));
             let i = 0;
+
             eventi.forEach(evento => {
                 let address = evento.luogo_evento;
                 let marker;
@@ -565,7 +567,7 @@
                                 `<p class="text-center"><strong>${evento.descrizione}</strong></p>`;
 
                             marker = L.marker([latitude, longitude]).
-                            addTo(map)
+                                addTo(map)
                                 .bindPopup(txtPopUp)
                                 .openPopup()
                             //
@@ -587,6 +589,7 @@
                     }); //then
             }); //4each
         } //trova coordinate
+       
     </script>
 
 
@@ -625,7 +628,7 @@
                 //console.log(event);
                 event.preventDefault();
                 alert("Non hai inserito nulla!");
-                
+
             } else if (email.trim() == "" || password.trim() == "") {
                 event.preventDefault();
                 alert("Hai dimenticato di compilare qualcosa!");
@@ -644,7 +647,7 @@
                     } else {
                         localStorage.setItem("utente", JSON.stringify(utente));
                         alertAccesso();
-                        setInterval(()=>{
+                        setInterval(() => {
                             location.reload();
                         }, 1950);
                     }
