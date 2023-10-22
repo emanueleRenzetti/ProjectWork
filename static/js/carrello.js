@@ -1,3 +1,4 @@
+
 ///////////////SCRIPT PER IL CARRELLO////////////////
 function verificaCarrello() {
     let carrelloUtente = localStorage.getItem("Carrello");
@@ -137,7 +138,7 @@ function compraTutto() {
         let h5Tot = document.querySelector("#h5Tot");
 
         let card = document.createElement("div");
-        card.setAttribute("class", "card col-4");
+        card.setAttribute("class", "card");
 
         let img = document.createElement("img");
         img.setAttribute("class", "card-img-top");

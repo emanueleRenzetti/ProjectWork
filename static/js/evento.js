@@ -20,10 +20,10 @@
                 })
         }
 
-        function trovaEvento() {
 
+        
+        function trovaEvento() {
             let imgTag = document.querySelector("#imgEvento");
-            let nomeEvento = document.querySelector("#nomeEvento");
             let citta = document.querySelector("#citta");
             let data = document.querySelector("#data");
             let disponibilita = document.querySelector("#disponibilita");
@@ -47,7 +47,6 @@
                 disponibilita.innerHTML = `Ancora ${postiRimanenti} posti rimasti!`;
             }
             citta.innerHTML = `${evento.luogo_evento}`;
-            nomeEvento.innerHTML = nome;
         }
         
         //////////////////AGGIUNGI AL CARRELLO: SOLO DA PAGINA EVENTO///////////

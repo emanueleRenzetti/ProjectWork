@@ -345,7 +345,7 @@ nav {
     z-index: 0;
 
     position: relative; //relative = ai genitori
-   
+
 
     img {
         position: absolute; //absolute = ai figli
@@ -373,39 +373,58 @@ nav {
         width: 100%;
         height: 100%;
         z-index: 2;
+        padding-left: 9rem;
+        padding-top: 4rem;
     }
 }
 
-    #hero {
-        #map {
-            height: 70vh;
-            width: 100%;
-        }
 
-        i {
-            color: $secondary;
-        }
-    }
-
-    #calendarIcon {
-        height: 40vh;
-        width: auto;
-        margin: 2rem;
-    }
-
-    /*********  FOOTER   *******/
-
-    #fine {
-        #socials {
-            button {
-                color: $accent;
-            }
-        }
-    }
-
-
-    /*********  NRWSLETTER   *******/
-    #inputMsg {
-        height: 10vh;
+#hero {
+    #map {
+        height: 70vh;
         width: 100%;
     }
+
+    i {
+        color: $secondary;
+    }
+
+    #bodyEvento {
+        height: 80vh;
+        position: relative;
+
+        #copertinaEvento {
+            height: 75vh;
+        }
+
+        #sideBar {
+            height: 75vh;
+        }
+    }
+
+}
+
+
+
+#calendarIcon {
+    height: 40vh;
+    width: auto;
+    margin: 2rem;
+}
+
+/*********  FOOTER   *******/
+
+#fine {
+    #socials {
+        button {
+            color: $accent;
+        }
+    }
+}
+
+
+/*********  NRWSLETTER   *******/
+#inputMsg {
+    height: 10vh;
+    width: 100%;
+}
