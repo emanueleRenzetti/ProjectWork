@@ -178,6 +178,28 @@ main {
 
 }
 
+
+
+.nav-item {
+
+    color: white !important;
+
+    &.active {
+        color: $accent !important;
+        // border-bottom: 3px solid $white;
+    }
+
+    i {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .rounded-pill {
+        top: 5px;
+    }
+
+}
+
 nav {
     #liCarrello {
         border-left: solid;
@@ -389,19 +411,18 @@ nav {
         color: $secondary;
     }
 
-    #bodyEvento {
-        height: 80vh;
-        position: relative;
-
-        #copertinaEvento {
-            height: 75vh;
+       /* #copertinaEvento {
+            height: 592px;
+            #imgEvento{
+                object-fit: cover; // memo: occupa tutto lo spazio possibile (mantenendo la ratio originale), sotto il vincolo h = 80%
+                height: 100%;
+                width: 100%;
+            }
         }
-
         #sideBar {
-            height: 75vh;
-        }
-    }
-
+            height: 592px !important;
+        }*/
+   
 }
 
 

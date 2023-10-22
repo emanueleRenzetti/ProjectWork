@@ -227,10 +227,10 @@
 
             <div class="mb-5">
                 <div class="container">
-                    <div class="row" id="bodyEvento">
+                    <div class="row d-flex" id="bodyEvento">
 
 
-                        <div class="col-9 d-flex align-content-center ps-0" id="copertinaEvento">
+                        <div class="col-8 d-flex align-content-center ps-0" id="copertinaEvento">
                             <img  class="img-fluid shadow rounded-2" src="" id="imgEvento">
                             <!-- <div>
                                     <input type="text" id="indirizzo" class="form-control mb-2" placeholder="Inserisci l'indirizzo">
@@ -239,7 +239,7 @@
                             </div>
 
 
-
+                            <div class="col-1"></div>
 
                         <!--side menu-->
                         <div class="col-3" id="sideBar">
@@ -585,6 +585,13 @@
 
         document.addEventListener("DOMContentLoaded", scegliHeader);
 
+        $(document).ready(function() {
+  // Get the height of the sideBar
+  var sideBarHeight = $("#sideBar").height();
+
+  // Set the max-height of the img equal to the sideBar's height
+  $("#imgEvento").css("max-height", sideBarHeight);
+});
     </script>
 </body>
 

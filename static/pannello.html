@@ -9,24 +9,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/style.css">
     <style>
-        #btnElimina:hover, #btnAggiungi:hover, #btnAggiorna:hover {
+        #btnElimina:hover,
+        #btnAggiungi:hover,
+        #btnAggiorna:hover {
             color: #fff;
         }
 
-        .table-striped #adminTable tr td{
+        .table-striped #adminTable tr td {
             white-space: nowrap;
         }
     </style>
 </head>
 
 <body>
-    <header class="mb-5">
-        <nav class="navbar navbar-expand-lg bg-secondary">
+    <header class="mainHeader mb-5">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
 
-            <div class="container-fluid">
+            <div class="container-fluid me-3">
 
-                <img src="./img/logo.svg" class="img-fluid me-2" id="logo">
-                <a class="navbar-brand text-white" href="#"> Ticket<span class="text-accent">2</span>you</a>
+                <a href="home.html"><img src="./img/logo.svg" class="img-fluid me-2" id="logo"></a>
+                <a class="navbar-brand text-white" href="home.html"> Ticket<span class="text-accent">2</span>you</a>
 
                 <button class="navbar-toggler btn bg-accent " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -38,14 +40,35 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link text-accent" href="home.html">Home</a>
+                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item linkPannello"><a class="nav-link active text-accent" aria-current="page" href="#">Pannello admin</a></li>
+                        <li class="nav-item d-none linkPannello"><a class="nav-link active" href="#">Pannello
+                                admin</a></li>
+
+                        <li class="nav-item d-none linkEmails"><a class="nav-link" href="#">Gestione
+                                e-mail</a></li>
+
+                        <li class="nav-item d-none linkPrenotazioni">
+                            <a class="nav-link" href="#">Prenotazioni</a>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="calendario.html">Lista Eventi</a>
+                        </li>
+
+                        <li class="nav-item" id="liCarrello">
+                            <a class="position-relative nav-link" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+                                href="#">
+                                <i class="bi bi-cart3 text-accent"></i>
+                                <span
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary"></span>
+                            </a>
+                        </li>
 
                         <li class="nav-item dropdown">
-                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown" type="button"
-                                id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
+                            <button class="btn btn-secondary text-decoration-none" data-bs-toggle="dropdown"
+                                type="button" id="btnLogIn"><i class="bi bi-person-circle"></i> Accedi</button>
 
                             <button class="btn btn-outline-primary text-decoration-none d-none" type="button"
                                 id="btnLogOut"><i class="bi bi-box-arrow-in-left"></i> Esci</button>
@@ -53,18 +76,18 @@
                             <ul class="dropdown-menu dropdown-menu-end bg-" id="formLogIn">
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
-                                        <input class="shadow form-control login" type="text" placeholder="E-mail" id="email"
-                                            required /><br>
+                                        <input class="shadow form-control login" type="text" placeholder="E-mail"
+                                            id="email" /><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
-                                            id="password" required />
+                                            id="password" />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
                                         <div class="mt-3 d-flex justify-content-between">
-                                            <input class=" btn btn-outline-primary" type="submit" name="submit"
-                                                value="Log-in" />
-                                            <button class="btn btn-outline-primary"><a href="registrati.html"
-                                                    class="text-decoration-none">Registrati</a></button>
+                                            <button id="buttonID" class=" btn btn-outline-primary" type="button"
+                                                name="submit" value="Log-in">Log-in</button>
+                                            <button class="btn btn-primary"><a href="registrati.html"
+                                                    class="text-decoration-none text-light">Registrati</a></button>
                                         </div>
                                     </form>
                                 </li>
@@ -75,6 +98,8 @@
                     </ul>
                 </div>
             </div>
+
+
         </nav>
     </header>
 
@@ -82,204 +107,255 @@
 
     <main>
         <div class="container">
-    
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-wrapper">
-    
+
                         <div class="table-title">
                             <div class="row">
-                            <h4 class="ms-lg-3 fs-2">Gestisci eventi</h4><hr>
-                                <div class="col-lg-6 col-6 p-0 d-flex justify-content-lg-start justify-content-center mb-3">
-                                    
+                                <h4 class="ms-lg-3 fs-2">Gestisci eventi</h4>
+                                <hr>
+                                <div
+                                    class="col-lg-6 col-6 p-0 d-flex justify-content-lg-start justify-content-center mb-3">
+
                                 </div>
-    
+
                                 <div class="col-lg-2 col-2 py-3 d-flex justify-content-lg-end justify-content-center">
-                                    <button type="button" id="btnAggiungi" class="btn btn-outline-success border-0 fs-5" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <button type="button" id="btnAggiungi" class="btn btn-outline-success border-0 fs-5"
+                                        data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="bi bi-calendar2-plus"></i>
                                         <span class="ms-1">Aggiungi</span>
                                     </button>
-    
+
                                     <!-- MODAL AGGIUNGI EVENTO -->
-                                    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel"
+                                        aria-hidden="true">
                                         <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-4 text-success" id="addModalLabel">Aggiungi un nuovo evento</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-4 text-success" id="addModalLabel">
+                                                        Aggiungi un nuovo evento</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+
+                                                    <form>
+                                                        <!-- tipo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="tipo">Tipo</label>
+                                                            <input type="text" id="tipo" name="tipo"
+                                                                class="form-control" required
+                                                                title="Inserisci la tipologia evento" />
+                                                        </div>
+
+                                                        <!-- caratteristiche -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="caratteristiche">Caratteristiche</label>
+                                                            <input type="text" id="caratteristiche"
+                                                                name="caratteristiche" class="form-control" required
+                                                                title="Inserisci le caratteristiche" />
+                                                        </div>
+
+                                                        <!-- descrizione -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="descrizione">Nome</label>
+                                                            <input type="text" id="descrizione" name="descrizione"
+                                                                class="form-control" required
+                                                                title="Inserisci la descrizione" />
+                                                        </div>
+
+                                                        <!-- luogo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="luogo_evento">Luogo</label>
+                                                            <input type="text" id="luogo_evento" name="luogo_evento"
+                                                                class="form-control" required
+                                                                title="Inserisci l'indirizzo evento" />
+                                                        </div>
+
+                                                        <!-- prezzo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="prezzo">Prezzo</label>
+                                                            <input type="number" step="0.01" id="prezzo" name="prezzo"
+                                                                class="form-control" required />
+                                                        </div>
+
+                                                        <!-- posti disponibili-->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="posti">Posti</label>
+                                                            <input type="number" id="posti" name="posti"
+                                                                class="form-control" required />
+                                                        </div>
+
+                                                        <!-- data evento -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="data_evento">Data</label>
+                                                            <input type="date" id="data_evento" name="data_evento"
+                                                                class="form-control" required />
+                                                        </div>
+
+                                                        <!-- locandina -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="locandina">Locandina</label>
+                                                            <input type="text" id="locandina" name="locandina"
+                                                                class="form-control" required />
+                                                        </div>
+
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-dismiss="modal">Annulla</button>
+
+                                                        <!-- Submit button -->
+                                                        <button type="submit" id="btnAddEvent"
+                                                            class="btn btn-outline-success">Aggiungi</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <div class="modal-body p-4">
-                                    
-                                            <form>
-                                                <!-- tipo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="tipo">Tipo</label>
-                                                    <input type="text" id="tipo" name="tipo" class="form-control" required title="Inserisci la tipologia evento"/>
-                                                </div>
-                                    
-                                                <!-- caratteristiche -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="caratteristiche">Caratteristiche</label>
-                                                    <input type="text" id="caratteristiche" name="caratteristiche" class="form-control" required title="Inserisci le caratteristiche"/>
-                                                </div>
-    
-                                                <!-- descrizione -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="descrizione">Nome</label>
-                                                    <input type="text" id="descrizione" name="descrizione" class="form-control" required title="Inserisci la descrizione"/>
-                                                </div>
-    
-                                                <!-- luogo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="luogo_evento">Luogo</label>
-                                                    <input type="text" id="luogo_evento" name="luogo_evento" class="form-control" required title="Inserisci l'indirizzo evento"/>
-                                                </div>
-    
-                                                <!-- prezzo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="prezzo">Prezzo</label>
-                                                    <input type="number" step="0.01" id="prezzo" name="prezzo" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- posti disponibili-->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="posti">Posti</label>
-                                                    <input type="number" id="posti" name="posti" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- data evento -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="data_evento">Data</label>
-                                                    <input type="date" id="data_evento" name="data_evento" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- locandina -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="locandina">Locandina</label>
-                                                    <input type="text" id="locandina" name="locandina" class="form-control" required/>
-                                                </div>
-                                    
-                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
-                                    
-                                                <!-- Submit button -->
-                                                <button type="submit" id="btnAddEvent" class="btn btn-outline-success">Aggiungi</button>
-                                            </form>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
-    
-                                
-                                
+
+
+
                                 <div class="col-lg-2 col-2 py-3 d-flex justify-content-lg-end justify-content-center">
-                                    <button id="btnAggiorna" class="btn btn-outline-secondary border-0 fs-5" data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
+                                    <button id="btnAggiorna" class="btn btn-outline-secondary border-0 fs-5"
+                                        data-bs-toggle="modal" data-bs-target="#updateModal" disabled>
                                         <i class="bi bi-pen"></i>
                                         <span class="ms-1">Modifica</span>
                                     </button>
 
                                     <!-- MODAL MODIFICA EVENTO -->
-                                    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="updateModal" tabindex="-1"
+                                        aria-labelledby="updateModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-4 text-secondary" id="updateModalLabel">Modifica evento</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-4 text-secondary" id="updateModalLabel">
+                                                        Modifica evento</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-4">
+
+                                                    <form>
+                                                        <!-- tipo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="tipoUpdate">Tipo</label>
+                                                            <input type="text" id="tipoUpdate" name="tipoUpdate"
+                                                                class="form-control" required
+                                                                title="Inserisci la tipologia evento" />
+                                                        </div>
+
+                                                        <!-- caratteristiche -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="caratteristicheUpdate">Caratteristiche</label>
+                                                            <input type="text" id="caratteristicheUpdate"
+                                                                name="caratteristicheUpdate" class="form-control"
+                                                                required title="Inserisci le caratteristiche" />
+                                                        </div>
+
+                                                        <!-- descrizione -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="descrizioneUpdate">Descrizione</label>
+                                                            <input type="text" id="descrizioneUpdate"
+                                                                name="descrizioneUpdate" class="form-control" required
+                                                                title="Inserisci la descrizione" />
+                                                        </div>
+
+                                                        <!-- luogo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="luogo_eventoUpdate">Luogo</label>
+                                                            <input type="text" id="luogo_eventoUpdate"
+                                                                name="luogo_eventoUpdate" class="form-control" required
+                                                                title="Inserisci l'indirizzo evento" />
+                                                        </div>
+
+                                                        <!-- prezzo -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="prezzoUpdate">Prezzo</label>
+                                                            <input type="number" step="0.01" id="prezzoUpdate"
+                                                                name="prezzoUpdate" class="form-control" required />
+                                                        </div>
+
+                                                        <!-- posti disponibili-->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label" for="postiUpdate">Posti</label>
+                                                            <input type="number" id="postiUpdate" name="postiUpdate"
+                                                                class="form-control" required />
+                                                        </div>
+
+                                                        <!-- data evento -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="data_eventoUpdate">Data</label>
+                                                            <input type="date" id="data_eventoUpdate"
+                                                                name="data_eventoUpdate" class="form-control"
+                                                                required />
+                                                        </div>
+
+                                                        <!-- locandina -->
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label"
+                                                                for="locandinaUpdate">Locandina</label>
+                                                            <input type="text" id="locandinaUpdate"
+                                                                name="locandinaUpdate" class="form-control" required />
+                                                        </div>
+
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-dismiss="modal">Annulla</button>
+
+                                                        <!-- Submit button -->
+                                                        <button type="submit" id="btnUpdateEvent"
+                                                            class="btn btn-outline-success">Modifica</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <div class="modal-body p-4">
-                                    
-                                            <form>
-                                                <!-- tipo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="tipoUpdate">Tipo</label>
-                                                    <input type="text" id="tipoUpdate" name="tipoUpdate" class="form-control" required title="Inserisci la tipologia evento"/>
-                                                </div>
-                                    
-                                                <!-- caratteristiche -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="caratteristicheUpdate">Caratteristiche</label>
-                                                    <input type="text" id="caratteristicheUpdate" name="caratteristicheUpdate" class="form-control" required title="Inserisci le caratteristiche"/>
-                                                </div>
-    
-                                                <!-- descrizione -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="descrizioneUpdate">Descrizione</label>
-                                                    <input type="text" id="descrizioneUpdate" name="descrizioneUpdate" class="form-control" required title="Inserisci la descrizione"/>
-                                                </div>
-    
-                                                <!-- luogo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="luogo_eventoUpdate">Luogo</label>
-                                                    <input type="text" id="luogo_eventoUpdate" name="luogo_eventoUpdate" class="form-control" required title="Inserisci l'indirizzo evento"/>
-                                                </div>
-    
-                                                <!-- prezzo -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="prezzoUpdate">Prezzo</label>
-                                                    <input type="number" step="0.01" id="prezzoUpdate" name="prezzoUpdate" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- posti disponibili-->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="postiUpdate">Posti</label>
-                                                    <input type="number" id="postiUpdate" name="postiUpdate" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- data evento -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="data_eventoUpdate">Data</label>
-                                                    <input type="date" id="data_eventoUpdate" name="data_eventoUpdate" class="form-control" required/>
-                                                </div>
-    
-                                                <!-- locandina -->
-                                                <div class="form-outline mb-4">
-                                                    <label class="form-label" for="locandinaUpdate">Locandina</label>
-                                                    <input type="text" id="locandinaUpdate" name="locandinaUpdate" class="form-control" required/>
-                                                </div>
-                                    
-                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
-                                    
-                                                <!-- Submit button -->
-                                                <button type="submit" id="btnUpdateEvent" class="btn btn-outline-success">Modifica</button>
-                                            </form>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
-    
+
 
 
 
                                 <div class="col-lg-2 col-2 py-3 d-flex justify-content-lg-end justify-content-center">
-                                    <button id="btnElimina" class="btn btn-outline-danger btn-lg border-0 fs-5" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
+                                    <button id="btnElimina" class="btn btn-outline-danger btn-lg border-0 fs-5"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
                                         <i class="bi bi-trash"></i>
                                         <span class="ms-1">Elimina</span>
                                     </button>
 
                                     <!-- MODAL ELIMINA EVENTO -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal" tabindex="-1"
+                                        aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title text-danger" id="deleteModalLabel">Cancella evento</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-danger" id="deleteModalLabel">Cancella
+                                                        evento</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Sei sicuro di voler cancellare l'evento ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-dismiss="modal">Annulla</button>
+                                                    <button type="button" id="btnDeleteEvent"
+                                                        class="btn btn-outline-danger">Elimina definitivamente</button>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <p>Sei sicuro di voler cancellare l'evento ?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
-                                                <button type="button" id="btnDeleteEvent" class="btn btn-outline-danger">Elimina definitivamente</button>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>  <!-- chiusura row -->
-                        </div>  <!-- chiusura table-title -->
-    
+                            </div> <!-- chiusura row -->
+                        </div> <!-- chiusura table-title -->
+
 
 
                         <table class="table table-striped table-hover">
@@ -297,18 +373,18 @@
                                     <th scope="col" class="text-primary text-center">seleziona evento</th>
                                 </tr>
                             </thead>
-    
+
                             <tbody id="adminTable">
                                 <!-- righe generate dinamicamente -->
                             </tbody>
                         </table>
-    
+
                     </div>
                 </div>
             </div>
         </div>
-      </main>
-      <footer class="bg-secondary text-light mt-5" id="fine">
+    </main>
+    <footer class="bg-secondary text-light mt-5" id="fine">
         <div class="container">
             <div class="row">
 
@@ -359,33 +435,60 @@
     <!--Log-In // Check-->
     <script>
         document.addEventListener("DOMContentLoaded", controllaUtente);
-        
+        let utente = JSON.parse(localStorage.getItem("utente"));
+
         let btnLogIn = document.querySelector("#btnLogIn");
         let btnLogOut = document.querySelector("#btnLogOut");
-        
+
         function controllaUtente() {
-            let utente = JSON.parse(localStorage.getItem("utente"));
             if (utente == null || utente.tipo != "A") {
                 location.href = "smarrito.html";
             } else {
-                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none"); 
+                btnLogIn.setAttribute("class", "btn btn-link text-decoration-none d-none");
                 btnLogOut.setAttribute("class", "btn btn-outline-primary text-decoration-none");
+
+                let liPannello = document.querySelector(".linkPannello");
+                liPannello.setAttribute("class", "nav-item linkPannello");
+                let linkPannello = liPannello.querySelector("a");
+                linkPannello.addEventListener("click", function () {
+                    location.href = "pannello.html";
+                });
+
+                let liEmails = document.querySelector(".linkEmails");
+                liEmails.setAttribute("class", "nav-item linkEmails");
+                let linkEmails = liEmails.querySelector("a");
+                linkEmails.addEventListener("click", function () {
+                    location.href = "gestione_newsletter.html";
+                    let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+
+                    linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+
+                    let liPrenotazioni = linkPrenotazioni.querySelector("a");
+
+                    liPrenotazioni.addEventListener("click", function () {
+                        location.href = "prenotazioni.html";
+                    })
+                })
             }
         }
-        
-        
+
+
+
+
+
         function logOut() {
             localStorage.removeItem("utente");
             location.reload();
             location.href = "home.html";
         }
         btnLogOut.addEventListener("click", logOut);
-         </script>       
-        
-        
-    <script>  
+
+    </script>
+
+
+    <script>
         // COSTRUTTORE SENZA ID - DA USARE PER LA POST
-        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
+        function Evento(tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina) {
             this.tipologia = tipologia;
             this.caratteristiche = caratteristiche;
             this.descrizione = descrizione;
@@ -398,7 +501,7 @@
 
 
         // COSTRUTTORE CON ID - DA USARE PER LA PATCH
-        function Evento2(id, tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina){
+        function Evento2(id, tipologia, caratteristiche, descrizione, luogo_evento, prezzo, disponibilita, data_evento, locandina) {
             this.id = id;
             this.tipologia = tipologia;
             this.caratteristiche = caratteristiche;
@@ -424,91 +527,91 @@
 
         let adminTable = document.querySelector("#adminTable"); // tbody tabella admin
 
-        function cambiaAttributo(){
+        function cambiaAttributo() {
             btnAggiorna.removeAttribute("disabled");
             btnElimina.removeAttribute("disabled");
         }
 
-        
-        function createAdminTable(){
+
+        function createAdminTable() {
             fetch("http://localhost:9007/e/eventi")
-            .then(response => response.json())
-            .then(data => data.forEach(evento => {
+                .then(response => response.json())
+                .then(data => data.forEach(evento => {
 
-                if (evento.caratteristiche != "Passato"){
-                let TR = document.createElement('tr'); // riga evento
+                    if (evento.caratteristiche != "Passato") {
+                        let TR = document.createElement('tr'); // riga evento
 
-                const idEvento = document.createElement('td')
-                idEvento.textContent = evento.id;
-                idEvento.setAttribute("class", "tdIdEvento")
+                        const idEvento = document.createElement('td')
+                        idEvento.textContent = evento.id;
+                        idEvento.setAttribute("class", "tdIdEvento")
 
-                let tipoEvento = document.createElement('td')
-                tipoEvento.textContent = evento.tipologia
-                tipoEvento.setAttribute("class", "tdTipoEvento")                
+                        let tipoEvento = document.createElement('td')
+                        tipoEvento.textContent = evento.tipologia
+                        tipoEvento.setAttribute("class", "tdTipoEvento")
 
-                let caratteristicheEvento = document.createElement('td')
-                caratteristicheEvento.textContent = evento.caratteristiche
-                caratteristicheEvento.setAttribute("class", "tdCaratteristicheEvento")
+                        let caratteristicheEvento = document.createElement('td')
+                        caratteristicheEvento.textContent = evento.caratteristiche
+                        caratteristicheEvento.setAttribute("class", "tdCaratteristicheEvento")
 
-                let descrizioneEvento = document.createElement('td')
-                descrizioneEvento.textContent = evento.descrizione
-                descrizioneEvento.setAttribute("class", "tdDescrizioneEvento")
+                        let descrizioneEvento = document.createElement('td')
+                        descrizioneEvento.textContent = evento.descrizione
+                        descrizioneEvento.setAttribute("class", "tdDescrizioneEvento")
 
-                let luogoEvento = document.createElement('td')
-                luogoEvento.textContent = evento.luogo_evento
-                luogoEvento.setAttribute("class", "tdLuogoEvento")
-                
-                let postiEvento = document.createElement('td')
-                postiEvento.textContent = evento.disponibilita
-                postiEvento.setAttribute("class", "tdPostiEvento")
-                
-                let dataEvento = document.createElement('td')
-                dataEvento.textContent = evento.data_evento
-                dataEvento.setAttribute("class", "tdDataEvento")
-                
-                let locandinaEvento = document.createElement('td')
-                locandinaEvento.textContent = evento.locandina
-                locandinaEvento.setAttribute("class", "tdLocandinaEvento")
+                        let luogoEvento = document.createElement('td')
+                        luogoEvento.textContent = evento.luogo_evento
+                        luogoEvento.setAttribute("class", "tdLuogoEvento")
 
-                let prezzoEvento = document.createElement('td')
-                prezzoEvento.textContent = evento.prezzo
-                prezzoEvento.setAttribute("class", "tdPrezzoEvento")
+                        let postiEvento = document.createElement('td')
+                        postiEvento.textContent = evento.disponibilita
+                        postiEvento.setAttribute("class", "tdPostiEvento")
 
-                let tdRadioEvento = document.createElement('td')
+                        let dataEvento = document.createElement('td')
+                        dataEvento.textContent = evento.data_evento
+                        dataEvento.setAttribute("class", "tdDataEvento")
 
-                // let radio = document.createElement("input");
-                // radio.setAttribute("class", "form-check-input radioButton");
-                // radio.setAttribute("type", "radio");
-                // radio.setAttribute("name", "flexRadioDefault");
+                        let locandinaEvento = document.createElement('td')
+                        locandinaEvento.textContent = evento.locandina
+                        locandinaEvento.setAttribute("class", "tdLocandinaEvento")
 
-                let radioStructure = `<input id=${evento.id} onclick="cambiaAttributo()" class="form-check-input radioButton" type="radio" name="flexRadioDefault">`;
-                tdRadioEvento.innerHTML = radioStructure;
-                tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
+                        let prezzoEvento = document.createElement('td')
+                        prezzoEvento.textContent = evento.prezzo
+                        prezzoEvento.setAttribute("class", "tdPrezzoEvento")
 
-                TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
+                        let tdRadioEvento = document.createElement('td')
 
-                adminTable.append(TR);
-                }
-            }))
-            .then(() => {
-                recuperaRadio();
-            });
-        
+                        // let radio = document.createElement("input");
+                        // radio.setAttribute("class", "form-check-input radioButton");
+                        // radio.setAttribute("type", "radio");
+                        // radio.setAttribute("name", "flexRadioDefault");
+
+                        let radioStructure = `<input id=${evento.id} onclick="cambiaAttributo()" class="form-check-input radioButton" type="radio" name="flexRadioDefault">`;
+                        tdRadioEvento.innerHTML = radioStructure;
+                        tdRadioEvento.setAttribute("class", "p-lg-2 text-center");
+
+                        TR.append(idEvento, tipoEvento, caratteristicheEvento, descrizioneEvento, luogoEvento, postiEvento, dataEvento, locandinaEvento, prezzoEvento, tdRadioEvento);
+
+                        adminTable.append(TR);
+                    }
+                }))
+                .then(() => {
+                    recuperaRadio();
+                });
+
         }
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function () {
             localStorage.removeItem("idEventoSelezionato");
             localStorage.removeItem("eventoSelezionato");
             createAdminTable();
         });
-        
 
-        function recuperaRadio(){
+
+        function recuperaRadio() {
             let radioButtons = adminTable.querySelectorAll('.radioButton');
             console.log(radioButtons);
-            
+
             [...radioButtons].forEach(radio => {
-                radio.addEventListener("click", function(){
-                    if(this.checked) {
+                radio.addEventListener("click", function () {
+                    if (this.checked) {
 
                         // l'id del radio button corrisponde all'id dell'evento
                         let idEventoSelezionato = radio.id;
@@ -518,7 +621,7 @@
 
                         tdRadio = radio.parentElement;
                         trEvento = tdRadio.parentElement;  // tr del singolo evento
-                        console.log(trEvento);  
+                        console.log(trEvento);
 
                         let tdIdEvento = trEvento.querySelector(".tdIdEvento").textContent;
                         let tdTipoEvento = trEvento.querySelector(".tdTipoEvento").textContent;
@@ -529,7 +632,7 @@
                         let tdDataEvento = trEvento.querySelector(".tdDataEvento").textContent;
                         let tdLocandinaEvento = trEvento.querySelector(".tdLocandinaEvento").textContent;
                         let tdPrezzoEvento = trEvento.querySelector(".tdPrezzoEvento").textContent;
-                        
+
                         let eventoSelezionato = new Evento(tdTipoEvento, tdCaratteristicheEvento, tdDescrizioneEvento, tdLuogoEvento, tdPrezzoEvento, tdPostiEvento, tdDataEvento, tdLocandinaEvento);
 
                         localStorage.setItem("eventoSelezionato", JSON.stringify(eventoSelezionato));
@@ -537,10 +640,10 @@
                 });
             })
         }
-        
-        
-        
-        function updateEvent(event){
+
+
+
+        function updateEvent(event) {
             let eventoSelezionato = JSON.parse(localStorage.getItem("eventoSelezionato"));
 
             let tipoUpdate = formUpdateModal.querySelector("#tipoUpdate");
@@ -553,9 +656,9 @@
             let locandinaUpdate = formUpdateModal.querySelector("#locandinaUpdate");
 
             if (eventoSelezionato != null) {
-                
+
                 // per settare i campi del form di modifica con le info dell'evento selezionato
-                
+
                 tipoUpdate.value = eventoSelezionato.tipologia;
                 caratteristicheUpdate.value = eventoSelezionato.caratteristiche;
                 descrizioneUpdate.value = eventoSelezionato.descrizione;
@@ -566,85 +669,85 @@
                 locandinaUpdate.value = eventoSelezionato.locandina;
             }
 
-            formUpdateModal.addEventListener("submit", function(){
+            formUpdateModal.addEventListener("submit", function () {
 
                 let idEventoDaModificare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
                 if (idEventoDaModificare != null) {
-                    
+
                     // creo un oggetto con costruttore Evento2() con i valori attuali del form di modifica
                     let eventoDaModificare = new Evento2(idEventoDaModificare, tipoUpdate.value, caratteristicheUpdate.value, descrizioneUpdate.value, luogo_eventoUpdate.value, prezzoUpdate.value, postiUpdate.value, data_eventoUpdate.value, locandinaUpdate.value);
-                    
+
                     fetch("http://localhost:9007/e/eventi", {
-        
+
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(eventoDaModificare)
                     })
-                    .then(data => {return data.json()})
-                    .then( () => {
-                        localStorage.removeItem("idEventoSelezionato");
-                        localStorage.removeItem("eventoSelezionato");
-                        location.reload();
-                    });
+                        .then(data => { return data.json() })
+                        .then(() => {
+                            localStorage.removeItem("idEventoSelezionato");
+                            localStorage.removeItem("eventoSelezionato");
+                            location.reload();
+                        });
                 }
             })
         }
-        btnAggiorna.addEventListener("click", updateEvent);  
-        
-        
+        btnAggiorna.addEventListener("click", updateEvent);
 
-        function addEvent(){
+
+
+        function addEvent() {
             if (formAddModal.tipo.value.trim() != "" &&
-            formAddModal.caratteristiche.value.trim() != "" && 
-            formAddModal.descrizione.value.trim() != "" &&
-            formAddModal.luogo_evento.value.trim() != "" &&
-            formAddModal.prezzo.value.trim() != "" &&
-            formAddModal.posti.value.trim() != "" &&
-            formAddModal.data_evento.value.trim() != "" && 
-            formAddModal.locandina.value.trim() != "") {
+                formAddModal.caratteristiche.value.trim() != "" &&
+                formAddModal.descrizione.value.trim() != "" &&
+                formAddModal.luogo_evento.value.trim() != "" &&
+                formAddModal.prezzo.value.trim() != "" &&
+                formAddModal.posti.value.trim() != "" &&
+                formAddModal.data_evento.value.trim() != "" &&
+                formAddModal.locandina.value.trim() != "") {
 
 
                 let nuovoEvento = new Evento(formAddModal.tipo.value, formAddModal.caratteristiche.value, formAddModal.descrizione.value, formAddModal.luogo_evento.value, formAddModal.prezzo.value, formAddModal.posti.value, formAddModal.data_evento.value, formAddModal.locandina.value);
 
                 fetch("http://localhost:9007/e/eventi", {
-    
+
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(nuovoEvento)
                 })
-                .then(data => {return data.json()})
-                .then( () => {
-                    localStorage.removeItem("idEventoSelezionato");
-                    localStorage.removeItem("eventoSelezionato");
-                    location.reload();
-                });
+                    .then(data => { return data.json() })
+                    .then(() => {
+                        localStorage.removeItem("idEventoSelezionato");
+                        localStorage.removeItem("eventoSelezionato");
+                        location.reload();
+                    });
             }
         }
         formAddModal.addEventListener("submit", addEvent);
-            
 
 
 
-        function deleteEvent(){  
+
+        function deleteEvent() {
 
             let idDaEliminare = JSON.parse(localStorage.getItem("idEventoSelezionato"));
 
             if (idDaEliminare != null) {
-                
+
                 fetch(`http://localhost:9007/e/eventi/` + idDaEliminare, {
-        
+
                     method: "DELETE"
                 })
-                .then( () => {
-                    localStorage.removeItem("idEventoSelezionato");
-                    localStorage.removeItem("eventoSelezionato");
-                    location.reload();
-                });
+                    .then(() => {
+                        localStorage.removeItem("idEventoSelezionato");
+                        localStorage.removeItem("eventoSelezionato");
+                        location.reload();
+                    });
             }
         }
         btnDeleteEvent.addEventListener("click", deleteEvent);
