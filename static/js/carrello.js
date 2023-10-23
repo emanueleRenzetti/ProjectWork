@@ -77,10 +77,6 @@ function verificaArticoli() {
     }
 }
 
-function prenotaEvento() {
-    console.log("funzione vuota");
-}
-
 function eliminaEvento(id) {
     let carrello = JSON.parse(localStorage.getItem("Carrello"));
     let element = carrello.find(function (res) {
