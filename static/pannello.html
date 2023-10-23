@@ -454,23 +454,26 @@
                     location.href = "pannello.html";
                 });
 
+
                 let liEmails = document.querySelector(".linkEmails");
                 liEmails.setAttribute("class", "nav-item linkEmails");
                 let linkEmails = liEmails.querySelector("a");
                 linkEmails.addEventListener("click", function () {
-                    location.href = "gestione_newsletter.html";
-                    let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+                 location.href = "gestione_newsletter.html";
+                });
 
-                    linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
-
-                    let liPrenotazioni = linkPrenotazioni.querySelector("a");
-
-                    liPrenotazioni.addEventListener("click", function () {
-                        location.href = "prenotazioni.html";
-                    })
-                })
+                let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+                linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+                let liPrenotazioni = linkPrenotazioni.querySelector("a");
+                liPrenotazioni.addEventListener("click", function () {
+                    location.href = "prenotazioni.html";
+                });
             }
         }
+
+
+
+               
 
 
 
@@ -753,6 +756,25 @@
         btnDeleteEvent.addEventListener("click", deleteEvent);
 
     </script>
+
+<script>
+    let navItems = document.querySelectorAll(".nav-link");
+           navItems.forEach(item => {
+               item.addEventListener("mouseover", ingrandisciLink);
+               item.addEventListener("mouseout", restringiLink);
+
+               function ingrandisciLink() {
+                   item.style.transform = "scale(1.2)";
+               }
+
+               function restringiLink() {
+                   item.style.transform = "scale(1)";
+               }
+
+           });
+</script>
+
+
 </body>
 
 </html>

@@ -31,17 +31,21 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 me-lg-0 ms-lg-auto gap-3">
 
                         <li class="nav-item">
-                            <a class="nav-link active text-accent" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
                         </li>
 
-                        <li class="nav-item d-none linkPannello"><a class="nav-link text-accent" href="#">Pannello
+                        <li class="nav-item d-none linkPannello"><a class="nav-link" href="#">Pannello
                                 admin</a></li>
 
+                        <li class="nav-item d-none linkEmails"><a class="nav-link" href="#">Gestione
+                                e-mail</a></li>
+
                         <li class="nav-item d-none linkPrenotazioni">
-                            <a class="nav-link text-accent" href="#">Prenotazioni</a>
+                            <a class="nav-link" href="#">Prenotazioni</a>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link text-accent" href="calendario.html">Lista Eventi</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="calendario.html">Lista Eventi</a>
+                        </li>
 
                         <li class="nav-item" id="liCarrello">
                             <a class="position-relative nav-link" data-bs-toggle="offcanvas"
@@ -49,7 +53,7 @@
                                 href="#">
                                 <i class="bi bi-cart3 text-accent"></i>
                                 <span
-                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary">?</span>
+                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-primary"></span>
                             </a>
                         </li>
 
@@ -64,15 +68,15 @@
                                 <li>
                                     <form id="form" class="form" accept-charset="UTF-8">
                                         <input class="shadow form-control login" type="text" placeholder="E-mail"
-                                            id="email" required /><br>
+                                            id="email" /><br>
                                         <input class="shadow form-control login" type="password" placeholder="Password"
-                                            id="password" required />
+                                            id="password" />
                                         <label for="password"><a href="#" class="text-decoration-none">Hai dimenticato
                                                 la password?</a></label> <br>
 
                                         <div class="mt-3 d-flex justify-content-between">
-                                            <input class=" btn btn-outline-primary" type="submit" name="submit"
-                                                value="Log-in" />
+                                            <button id="buttonID" class=" btn btn-outline-primary" type="button"
+                                                name="submit" value="Log-in">Log-in</button>
                                             <button class="btn btn-primary"><a href="registrati.html"
                                                     class="text-decoration-none text-light">Registrati</a></button>
                                         </div>
@@ -276,32 +280,42 @@
     
                     if (utente.tipo == 'A') { // se l'utente loggato è admin, rendo visibile il link al pannello lavoro
                         let liPannello = document.querySelector(".linkPannello");
-    
                         liPannello.setAttribute("class", "nav-item linkPannello");
-    
                         let linkPannello = liPannello.querySelector("a");
-    
                         linkPannello.addEventListener("click", function () {
                             location.href = "pannello.html";
                         });
-                    }
-                    if (utente.tipo ==
-                        'B' || utente.tipo === 'A'
-                    ) { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
-                        let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
-    
+
+                        let liEmails = document.querySelector(".linkEmails");
+                    liEmails.setAttribute("class", "nav-item linkEmails");
+                    let linkEmails = liEmails.querySelector("a");
+                    linkEmails.addEventListener("click", function () {
+                        location.href = "gestione_newsletter.html";
+                    });
+                    let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
                         linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
-    
                         let liPrenotazioni = linkPrenotazioni.querySelector("a");
-    
+                        liPrenotazioni.addEventListener("click", function () {
+                            location.href = "prenotazioni.html";
+                        })
+
+
+                    }else if (utente.tipo ==
+                        'B') { // se l'utente loggato è utente B, rendo visibile il link all'elenco eventi e prenotazioni
+                        let linkPrenotazioni = document.querySelector(".linkPrenotazioni");
+                        linkPrenotazioni.setAttribute("class", "nav-item linkPrenotazioni");
+                        let liPrenotazioni = linkPrenotazioni.querySelector("a");
                         liPrenotazioni.addEventListener("click", function () {
                             location.href = "prenotazioni.html";
                         });
                     }
                 }
-    
-    
             }
+        
+    
+    
+    
+    
     
             let alert = document.querySelector("#alert");
             function alertAccesso() {
@@ -541,6 +555,23 @@
             //         });
             //     })
     </script>
+
+<script>
+    let navItems = document.querySelectorAll(".nav-link");
+           navItems.forEach(item => {
+               item.addEventListener("mouseover", ingrandisciLink);
+               item.addEventListener("mouseout", restringiLink);
+
+               function ingrandisciLink() {
+                   item.style.transform = "scale(1.2)";
+               }
+
+               function restringiLink() {
+                   item.style.transform = "scale(1)";
+               }
+
+           });
+</script>
 </body>
 
 </html>

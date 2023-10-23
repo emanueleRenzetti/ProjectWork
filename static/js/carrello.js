@@ -119,7 +119,13 @@ function removePosti() {
 let btnCompraTutto = document.querySelector("#btnCompraTutto");
 let carrelloModal = document.querySelector("#carrelloModal");
 
+
 function compraTutto() {
+    let utente = JSON.parse(localStorage.getItem("utente"));
+    if (utente == undefined){
+        location.href = "registrati.html";
+    }else{
+
     while (carrelloModal.firstChild) {
         carrelloModal.removeChild(carrelloModal.firstChild);
     }
@@ -290,40 +296,42 @@ function compraTutto() {
 
     }); //foreach
 }
+}
 
 let btnPagaOra = document.querySelector("#pagaOra");
 
+
+
+
 function pagaOra() {
-
     
-
-  
-
-    let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
-    prenotazioni.forEach(element => {
-        fetch("http://localhost:9007/p/prenotazioni", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(element)
-            }).then(data => data.json())
-            .then(res => {
-                localStorage.removeItem("Carrello");
-                localStorage.removeItem("prenotazioni");
-                alertPagamento();  
-                setInterval(()=>{
-                    pagamentoAvvenuto();
-                }, 2100);
-                
-                setInterval(()=>{
-                    location.href = "home.html";
+        let prenotazioni = JSON.parse(localStorage.getItem("prenotazioni"));
+        prenotazioni.forEach(element => {
+            fetch("http://localhost:9007/p/prenotazioni", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(element)
+                }).then(data => data.json())
+                .then(res => {
+                    localStorage.removeItem("Carrello");
+                    localStorage.removeItem("prenotazioni");
+                    alertPagamento();  
+                    setInterval(()=>{
+                        pagamentoAvvenuto();
+                    }, 2100);
                     
-                }, 3700);
+                    setInterval(()=>{
+                        location.href = "home.html";
+                        
+                    }, 3700);
+    
+                })
+        });
+    }
 
-            })
-    });
-}
+
 
 function pagamentoAvvenuto() {
     
