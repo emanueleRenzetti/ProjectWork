@@ -106,122 +106,123 @@
 
 
     <!-- OFFCANVAS AGGIORNATO -->
-    
+
 
     <!-- <div id="alert"></div> -->
 
     <main>
         <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Il tuo carrello</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Il tuo carrello</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" id="bodyCart">
+                <hr>
+            </div>
+            <div class="offcanvas-footer">
+                <button id="btnCompraTutto" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                    class="btn btn-outline-primary m-3">Compra</button>
+            </div>
         </div>
-        <div class="offcanvas-body" id="bodyCart">
-            <hr>
-        </div>
-        <div class="offcanvas-footer">
-            <button id="btnCompraTutto" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
-                class="btn btn-outline-primary m-3">Compra</button>
-        </div>
-    </div>
 
 
-    <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
+        <div class="modal fade " id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
 
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Riepilogo ordine</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
-                    
+                    <div class="modal-body">
+
                         <div class="container p-2">
                             <div id="carrelloModal" class="row row-cols-3 g-5 py-3">
                             </div>
                         </div>
-                
-                </div>
 
-                <div class="modal-footer">
-                    <h5 id="h5Tot"></h5>
-                    <button id="btnAlPagamento" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal">Vai
-                        al pagamento</button>
-                </div>
+                    </div>
 
+                    <div class="modal-footer">
+                        <h5 id="h5Tot"></h5>
+                        <button id="btnAlPagamento" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                            data-bs-toggle="modal">Vai
+                            al pagamento</button>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body row align-items-center bg-body-secondary">
-                    <div class="container p-2 rounded-2 ms-auto me-auto w-50">
-                        <h1 class="fs-4 fw-bolder text-center m-3 mt-0">Pagina di Pagamento</h1>
-                        <form>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="payment-method">Metodo di Pagamento:</label>
-                                <select class="formm" id="payment-method" required>
-                                    <option value="visa">Carta di Credito Visa</option>
-                                    <option value="mastercard">Carta di Credito MasterCard</option>
-                                    <option value="paypal">PayPal</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="cardholder">Titolare della Carta:</label>
-                                <input class="form-control" type="text" id="cardholder" placeholder="Nome e Cognome"
-                                    required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="cardnumber">Numero della Carta:</label>
-                                <input class="form-control" type="number" id="cardnumber"
-                                    placeholder="Numero della Carta" required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="expiration">Data di Scadenza:</label>
-                                <input class="form-control" type="text" id="expiration" placeholder="MM/AA"
-                                    required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="cvv">CVV:</label>
-                                <input class="form-control" type="number" id="cvv" placeholder="CVV" required>
-                            </div>
-                            <!-- <div class="form-group mb-3">
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body row align-items-center bg-body-secondary">
+                        <div class="container p-2 rounded-2 ms-auto me-auto w-50">
+                            <h1 class="fs-4 fw-bolder text-center m-3 mt-0">Pagina di Pagamento</h1>
+                            <form>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="payment-method">Metodo di Pagamento:</label>
+                                    <select class="formm" id="payment-method" required>
+                                        <option value="visa">Carta di Credito Visa</option>
+                                        <option value="mastercard">Carta di Credito MasterCard</option>
+                                        <option value="paypal">PayPal</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardholder">Titolare della Carta:</label>
+                                    <input class="form-control" type="text" id="cardholder" placeholder="Nome e Cognome"
+                                        required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cardnumber">Numero della Carta:</label>
+                                    <input class="form-control" type="number" id="cardnumber"
+                                        placeholder="Numero della Carta" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="expiration">Data di Scadenza:</label>
+                                    <input class="form-control" type="text" id="expiration" placeholder="MM/AA"
+                                        required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label" for="cvv">CVV:</label>
+                                    <input class="form-control" type="number" id="cvv" placeholder="CVV" required>
+                                </div>
+                                <!-- <div class="form-group mb-3">
                                 <label class="form-label" for="amount">Importo da Pagare:</label>
                                 <input class="form-control" type="number" id="amount" placeholder="Importo in Euro">
                             </div> -->
 
-                        </form>
-                        <hr>
-                        <p id="informativa">Confermando il tuo ordine accetti integralmente le nostre <a href="">Condizioni generali
-                                di uso e vendita</a>. L'acquisto sarà completato solo con la conferma di spedizione.
-                            Prendi visione della nostra <a href="">Informativa sulla privacy</a>, della nostra <a
-                                href="">Informativa sui Cookie</a> e della nostra <a href="">Informativa sulla
-                                Pubblicità definita in base agli interessi</a>.</p>
+                            </form>
+                            <hr>
+                            <p id="informativa">Confermando il tuo ordine accetti integralmente le nostre <a
+                                    href="">Condizioni generali
+                                    di uso e vendita</a>. L'acquisto sarà completato solo con la conferma di spedizione.
+                                Prendi visione della nostra <a href="">Informativa sulla privacy</a>, della nostra <a
+                                    href="">Informativa sui Cookie</a> e della nostra <a href="">Informativa sulla
+                                    Pubblicità definita in base agli interessi</a>.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle"
-                        data-bs-toggle="modal">torna al riepilogo</button>
-                    <h5 id="h5Totale"></h5>
-                    <button id="pagaOra" class="btn btn-secondary ms-auto" type="submit">paga ora</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary me-auto" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">torna al riepilogo</button>
+                        <h5 id="h5Totale"></h5>
+                        <button id="pagaOra" class="btn btn-secondary ms-auto" type="submit">paga ora</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
         <!-- MODAL PER IL CARRELLO/PAGAMENTO -->
-      
+
 
 
         <section id="hero" class="pb-5">
@@ -389,9 +390,9 @@
         <div class="container">
             <div class="row">
 
-                <div class="py-4 col-lg-8">
-                    <h3><strong>Napoli</strong></h3>
-                    <p>Via S.Domenico 18</p>
+                <div class="p-4 col-lg-4 ps-5">
+                    <h3 class="py-2"><strong>Contatti</strong></h3>
+                    <p>Via S.Domenico 18, Napoli</p>
                     <p><strong>Telefono: </strong> 081 718 4444</p>
                     <p><strong>Email: </strong>Ticket2you@gmail.com</p>
                     <div id="socials" class="d-flex">
@@ -410,7 +411,17 @@
 
 
 
-                <div class="py-4 col-lg-4">
+                <div class="col-lg-4 py-4 ps-6">
+                    <p><strong>Cookie Policy</strong></p>
+                    <p>Questo sito web utilizza i cookie per migliorare la tua esperienza di navigazione.</p>
+                    <p> Continuando a utilizzare questo sito, acconsenti all'uso dei cookie
+                        in conformità con la nostra
+                    <a href="#">Cookie Policy</a>.</p>
+                </div>
+
+
+
+                <div class="col-lg-4 ps-auto py-4 ps-7">
 
                     <p><strong>La nostra newsletter</strong></p>
                     <div class="d-flex gap-3">
@@ -499,11 +510,11 @@
         btnIscriviti.addEventListener("click", iscriviti);
     </script>
 
-<script src="js/carrello.js"></script>
+    <script src="js/carrello.js"></script>
 
 
     <!--- SWIPER-->
-   <!-- <script>
+    <!-- <script>
         var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
             loop: true,
@@ -523,7 +534,7 @@
 
 
 
-<!-- MAPPA  -->
+    <!-- MAPPA  -->
     <script>
         /////   //////////////////////////////////
         // Creazione della mappa
@@ -604,7 +615,7 @@
                     }); //then
             }); //4each
         } //trova coordinate
-       
+
     </script>
 
 
